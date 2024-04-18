@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             x:Class="MovilBusiness.Views.Components.ListItemRows.RowConsultaEntregasRepartidor">
+    <Frame HorizontalOptions="FillAndExpand" Padding="10,0" BackgroundColor="White" CornerRadius="4" Margin="0,0,0,5">
+        <Frame.HasShadow>
+            <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+        </Frame.HasShadow>
+
+        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Column="0" Spacing="0" VerticalOptions="Center">
+                <Label FontAttributes="Bold">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding ProCodigo}" />
+                            <Span Text=" - " />
+                            <Span Text="{Binding ProDescripcion}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Grid HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Text="{x:Static resources:AppResource.PriceLabel}" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" />
+                    <Label Text="{Binding PrecioBruto, StringFormat='{0:N2}'}" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+                    <Label Text="Itbis: " FontAttributes="Bold" Grid.Row="0" Grid.Column="2" />
+                    <Label Text="{Binding Itbis, StringFormat='{0:N0}%'}" Grid.Row="0" Grid.Column="3" HorizontalOptions="FillAndExpand" />
+                    <Label Text="{x:Static resources:AppResource.DiscLabel}" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" />
+                    <Label Text="{Binding Descuento, StringFormat='{0:N2}'}" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+                    <Label Text="{x:Static resources:AppResource.NetLabel}" FontAttributes="Bold" Grid.Row="1" Grid.Column="2" />
+                    <Label Text="{Binding PrecioNeto, StringFormat='{0:N2}'}" Grid.Row="1" Grid.Column="3"  HorizontalOptions="FillAndExpand"/>
+                </Grid>
+
+                <Label IsVisible="{Binding TraIndicadorOferta}" HorizontalOptions="End" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White" Margin="0,0,0,3">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="  **" />
+                            <Span Text="{x:Static resources:AppResource.Offer}" />
+                            <Span Text= "{Binding ShowProIDoferta}" />
+                            <Span Text="**  " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+            </StackLayout>
+
+            <BoxView Grid.Column="1" VerticalOptions="FillAndExpand" Margin="5" HorizontalOptions="End" WidthRequest="1" Color="LightGray" />
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="End" Grid.Column="2" Spacing="0" VerticalOptions="Center">
+                <Label Text="{x:Static resources:AppResource.Quantity}" HorizontalOptions="Center" />
+                <Label HorizontalOptions="Center" Text="{Binding Cantidad}" FontAttributes="Bold" />
+            </StackLayout>
+
+        </Grid>
+    </Frame>
+</ViewCell>

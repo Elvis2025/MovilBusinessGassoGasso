@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Frame xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.ListItemRows.RowProductos9"
+       xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Padding="0" Margin="2,2,2,5">
+  <ContentView.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="7" Spacing="0">
+            
+            <Label Text="{Binding Descripcion}" HorizontalOptions="FillAndExpand" LineBreakMode="WordWrap" FontAttributes="Bold" />
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                <Label Text="{x:Static resources:AppResource.CodeLabel}" WidthRequest="51" MinimumWidthRequest="51"/>
+                <Label Text="{Binding ProCodigo}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0"/>
+                <Label Text="Itbis: " Margin="5,0,0,0" IsVisible="{Binding isnotCompra}"/>
+                <Label Text="{Binding Itbis, StringFormat='{0:N2} %'}" IsVisible="{Binding isnotCompra}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                <Label Text="{x:Static resources:AppResource.PackagePriceLabel}" />
+                <Label Text="{Binding PrecioCaja, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+                <Label Text="{x:Static resources:AppResource.NetPricePackLabel}" Margin="5,0,0,0" />
+                <Label Text="{Binding PrecioCajaNeto, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                <Label Text="{x:Static resources:AppResource.UnitPriceLabel}" />
+                <Label Text="{Binding PrecioBruto, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+                <Label Text="{x:Static resources:AppResource.NetPriceUnitLabel}" Margin="5,0,0,0" />
+                <Label Text="{Binding PrecioNeto, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                <Label Text="{Static resources:AppResource.InvoicedQuantityLabel}" IsVisible="{Binding ShowCantidadConfirmada}" Margin="0,0,0,0" />
+                <Label Text="{Binding CantidadConfirmada}" IsVisible="{Binding ShowCantidadConfirmada}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+            </StackLayout>
+
+            <Label HorizontalOptions="Start">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{x:Static resources:AppResource.BoxesUnitsLabel}" />
+                        <Span Text="{Binding CajasUnidades}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="15">
+                <Label HorizontalOptions="End" BackgroundColor="{StaticResource ColorPrimary}" IsVisible="{Binding IndicadorPromocion}" TextColor="White">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="  **" />
+                            <Span Text="{x:Static resources:AppResource.Promotion}" />
+                            <Span Text="**  " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                
+                <Label HorizontalOptions="End" BackgroundColor="{StaticResource ColorPrimary}" IsVisible="{Binding IndicadorDescuento}" TextColor="White">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="  **" />
+                            <Span Text="{x:Static resources:AppResource.Discount}" />
+                            <Span Text="**  " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="End" BackgroundColor="{StaticResource ColorPrimary}" IsVisible="{Binding IndicadorOferta}" TextColor="White">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="  **" />
+                            <Span Text="{x:Static resources:AppResource.Offer}" />
+                            <Span Text="**  " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            
+            
+        </StackLayout>
+    </ContentView.Content>
+</Frame>

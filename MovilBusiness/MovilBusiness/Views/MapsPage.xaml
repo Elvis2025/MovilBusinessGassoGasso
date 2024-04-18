@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.MapsPage"
+             Title="MovilBusiness"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:views="clr-namespace:MovilBusiness.Views.Components.Views"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
+    <ContentPage.Content>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+           <!-- <maps:Map Grid.Row="0"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand"
+                    x:Name="mapView"
+                    IsShowingUser="True"
+                    MapType="Street"/>-->
+            <views:MDMap
+                Grid.Row="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="mapView"
+                IsShowingUser="True"
+                MapType="Street" />
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="15" Grid.Row="0" VerticalOptions="End" BackgroundColor="White">
+
+                <Slider x:Name="slider" MinimumTrackColor="{StaticResource ColorPrimary}" MaximumTrackColor="{StaticResource ColorPrimary}" ThumbColor="{StaticResource ColorPrimary}" HorizontalOptions="FillAndExpand" Maximum="18" Minimum="1" Value="16" ValueChanged="OnZoomValueChanged" />
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                    <Button FontAttributes="Bold" x:Name="btnStreet" BackgroundColor="Transparent" TextColor="{StaticResource ColorPrimary}" Text="{x:Static resources:AppResource.Street}" HorizontalOptions="FillAndExpand" Clicked="MapStreet" />
+                    <Button x:Name="btnHybrid" BackgroundColor="Transparent" TextColor="#42A5F5" Text="{x:Static resources:AppResource.Hybrid}" HorizontalOptions="FillAndExpand" Clicked="MapHybrid"/>
+                    <Button x:Name="btnSatellite" BackgroundColor="Transparent" TextColor="#42A5F5" Text="Satélite" HorizontalOptions="FillAndExpand" Clicked="MapSatellite"/>
+
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Button x:Name="btnShare" BackgroundColor="Transparent" TextColor="#42A5F5" Text="{x:Static resources:AppResource.OpenWith}" HorizontalOptions="CenterAndExpand" Clicked="Openwith"/>
+                </StackLayout>
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

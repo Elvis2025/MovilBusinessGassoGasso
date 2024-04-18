@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.TareasPage"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Tasks}"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Icon="ic_done_white_24dp" Order="Primary" Command="{Binding SaveClaimCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content  VerticalOptions="StartAndExpand" >
+            <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                    <StackLayout.Padding>
+                        <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,30,15,15" />
+                    </StackLayout.Padding>
+                    <ContentView VerticalOptions="CenterAndExpand" Padding="15,0,0,0">
+                        <Image Source="ic_close_white" VerticalOptions="Center" />
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Dismiss" />
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
+
+                    <Label Text="{x:Static resources:AppResource.Tasks}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="18" />
+
+                </StackLayout>
+                <ListView HorizontalOptions="Fill" 
+                  VerticalOptions="Fill" 
+                  Grid.Row="0"
+                  x:Name="ListaTareas"
+                  ItemSelected="OnTareaTap"
+                  Margin="10,10,10,10" 
+                  BackgroundColor="Transparent" 
+                  SeparatorVisibility="None"
+                  HasUnevenRows="True"
+                  ItemsSource="{Binding TaskSource}">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Padding="10" Margin="1,1,1,7" HasShadow="False" BackgroundColor="white">
+                                    <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+
+                                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                            <Label Text="{Binding TarAsunto}" FontAttributes="Bold" />
+                                            <Label Text="{Binding TarEstadoDescripcion}" HorizontalOptions="Start" />
+                                        </StackLayout>
+
+                                      <Image Source="{Binding IndicadorCompleto}" Margin="10,0,0,0" />
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <controls:ProgressIndicator IsVisible="{Binding IsBusy}" Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+            </StackLayout>
+        </Grid>
+
+        </ContentPage.Content>
+</ContentPage>

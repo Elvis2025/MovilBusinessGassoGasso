@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="ColorPrimary">#1976D2</Color>
+            <Color x:Key="ColorPrimaryDark">#0D47A1</Color>
+            <Color x:Key="ColorAccent">#1E88E5</Color>
+            <Color x:Key="WindowBackground">#ECEFF1</Color>
+            <Color x:Key="PlaceholderColor">#607D8B</Color>
+
+
+            <!-- STD -->
+
+            <x:String x:Key="WebServiceUrl"></x:String>
+            <x:String x:Key="Dominio"></x:String>
+            <x:String x:Key="updateUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">Prevendedores</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+            <x:String x:Key="CargaInicialStandarizada">1</x:String>
+            <x:String x:Key="ModelsIos">iPhone6,1/iPhone6,2/iPhone7,1/iPhone7,2/iPhone8,1/iPhone8,2/iPhone8,4/iPhone9,1/iPhone9,2/iPhone9,3/iPhone9,4/iPhone10,1/iPhone10,2/iPhone10,4/iPhone10,5</x:String>
+            <!-- 1 y 0 (Activado, desactivado)-->
+
+            <!-- Carga inicial standarizada sin V7 -->
+
+            <!--<x:String x:Key="WebServiceUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/eMovilBusiness/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">Prevendedores</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+            <x:String x:Key="CargaInicialStandarizada">1</x:String>-->
+
+
+
+            <!-- STD DLS-->
+<!--
+            <x:String x:Key="WebServiceUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApiDLS/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/eMovilBusiness/MovilBusinessApiDLS/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApiDLS/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+-->
+
+            <!-- STD Pharmatech-->
+<!--
+            <x:String x:Key="WebServiceUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApiPharmatech/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/eMovilBusiness/MovilBusinessApiPharmatech/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApiPharmatech/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">Prevendedores</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+            
+            <!-- Pharmatech-->
+<!--
+            <x:String x:Key="WebServiceUrl">http://186.150.97.55/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://186.150.97.55/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness5</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+-->
+            <!-- STD Aldereca -->
+<!--
+            <x:String x:Key="WebServiceUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApiAldereca/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/eMovilBusiness/MovilBusinessApiAldereca/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApiAldereca/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+            <!-- AM Comercial-->
+<!--
+            <x:String x:Key="WebServiceUrl">http://amco01.no-ip.org:86/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://amco01.no-ip.org:86/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness5</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+-->
+            <!-- MDSOFT-->
+            
+            <!--<x:String x:Key="WebServiceUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApiMdsoft/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/eMovilBusiness/MovilBusinessApiMdsoft/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApiMdsoft/update/autoupdate_info.txt</x:String> 
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+            <!-- UyC -->
+<!--
+            <x:String x:Key="WebServiceUrl">http://148.103.9.92/MovilBusinessAPIPre/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/MovilBusinessAPIPre/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://148.103.9.92/MovilBusinessApiPre/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness5</x:String>
+             <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+            <!-- UyC Test-->
+<!--
+            <x:String x:Key="WebServiceUrl">http://148.103.9.92/MovilBusinessAPIPreTest/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/MovilBusinessAPIPreTest/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessAPIPreTest/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness5</x:String>
+             <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+            <!-- LAM Mercaderistas-->
+<!--
+            <x:String x:Key="WebServiceUrl">http://lam.homeip.net:8088/MovilBusinessMAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/MovilBusinessMAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://lam.homeip.net:8088/MovilBusinessMApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusinessSTDM</x:String>
+             <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+
+            <!-- LAM DEVOLUCIONES-->
+            <!--
+            <x:String x:Key="WebServiceUrl">http://lam.homeip.net:8088/MovilBusinessAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/MovilBusinessAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://lam.homeip.net:8088/MovilBusinessAPI/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">Devoluciones</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+-->
+
+            <!-- Sanofi Test -->
+<!--
+            <x:String x:Key="WebServiceUrl">http://dorssqlbi01.pharma.aventis.com/MovilBusinessApiTest/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/MovilBusinessApiTest/api/ReplicacionesSusriptores/</x:String>
+            <x:String x:Key="updateUrl">http://dorssqlbi01.pharma.aventis.com/MovilBusinessApiTest/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness5STD</x:String>
+             <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+
+            <!-- Sanofi Produccion -->
+     <!--
+            <x:String x:Key="WebServiceUrl">http://dorssqlbi01.pharma.aventis.com/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/MovilBusinessApiTest/api/ReplicacionesSusriptores/</x:String>
+            <x:String x:Key="updateUrl">http://dorssqlbi01.pharma.aventis.com/MovilBusinessApiTest/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness5STD</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+    -->
+            <!-- LE Betances -->
+<!--
+            <x:String x:Key="WebServiceUrl">http://lbetances.dyndns.org:8082/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://lbetances.dyndns.org:8082/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+-->
+
+            <!-- Block Khoury -->
+
+            <!--<x:String x:Key="WebServiceUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApiBlockKhoury/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/eMovilBusiness/MovilBusinessApiBlockKhoury/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApiBlockKhoury/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness5</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+            <!-- Block Khoury TEST -->
+<!--
+            <x:String x:Key="WebServiceUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApiBlockKhouryTest/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/eMovilBusiness/MovilBusinessApiBlockKhouryTest/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApiBlockKhouryTest/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness5</x:String>
+             <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+            <!-- Cano Ind -->
+
+            <!--<x:String x:Key="WebServiceUrl">https://66.98.56.215/wsMovilbusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">https://@Dominio/wsMovilBusinesApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">https://66.98.56.215/wsMovilbussinesApi//update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+            <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+            <!-- Acromax -->
+
+            <!--<x:String x:Key="WebServiceUrl">http://186.149.198.251:8087/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://186.149.198.251:8087/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+            <!-- GASSO Mercaderistas -->
+
+            <!--<x:String x:Key="WebServiceUrl">http://190.122.97.182:8083/MovilBusinessAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://190.122.97.182:8083/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+            <!-- M A U -->
+<!--
+            <x:String x:Key="WebServiceUrl">http://190.6.139.227:8081/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://190.6.139.227:8081/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+            <!-- SUPLIMED -->
+<!--
+            <x:String x:Key="WebServiceUrl">http://suplimed.ddns.net:8082/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://suplimed.ddns.net:8082/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+-->
+
+            <!-- LA FAMOSA PRODUCCION-->
+
+            <!--<x:String x:Key="WebServiceUrl">http://200.26.175.12:8084/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://200.26.175.12:8084/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+            <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+
+            <!-- LA FAMOSA QA-->
+<!--
+            <x:String x:Key="WebServiceUrl">http://200.26.175.12:8084/MovilBusinessQAAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessQAAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://200.26.175.12:8084/MovilBusinessQAAPI/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+            <x:String x:Key="CargaInicialStandarizada">0</x:String>
+            -->
+
+            <!--MAXIMO GOMEZ P-->
+
+            <!--<x:String x:Key="WebServiceUrl">http://mb.empresasnajri.com:85/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://mb.empresasnajri.com:85/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+            <!--Indukern -->
+
+            <!--<x:String x:Key="WebServiceUrl">http://186.150.207.67:8084/MovilBusinessAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://186.150.207.67:8084/MovilBusinessAPI/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String> 
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+
+            <!--DINAFA -->
+<!--
+            <x:String x:Key="WebServiceUrl">http://dinafamdsoft.dyndns.org:8082/MovilBusinessAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://dinafamdsoft.dyndns.org:8082/MovilBusinessAPI/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+-->
+            <!--GRUPO ARMENTERO -->
+<!--
+            <x:String x:Key="WebServiceUrl">http://garmenteros.dynu.com:82/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://garmenteros.dynu.com:82/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+            <!--GRUPO AVANT -->
+<!--
+            <x:String x:Key="WebServiceUrl">http://op4.grupobonanza.com.do:8084/MovilBusinessAPI_GAV/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://op4.grupobonanza.com.do:8082/MovilBusinessAPI_GAV/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+-->
+            
+            <!--INDUSTRIAS TUCAN-->
+
+            <!--<x:String x:Key="WebServiceUrl">http://186.149.243.70:8084/MovilBussinessAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://186.149.243.70:8084/MovilBussinessAPI/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+            <!--Grupo Empresarial Herpa SRL.-->
+<!--
+            <x:String x:Key="WebServiceUrl">http://herpa.ddns.net:8082/MovilBusinessAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://herpa.ddns.net:8082/MovilBusinessAPI/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+
+-->
+
+
+            <!--INFALAB.-->
+            
+      <!--
+            <x:String x:Key="WebServiceUrl">http://infalab.ddns.net:82/MovilBusinessAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://infalab.ddns.net:82/MovilBusinessAPI/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+            -->
+
+
+
+            <!--Compañia Comercial Del Caribe(CCC)-->
+<!--
+            <x:String x:Key="WebServiceUrl">http://190.106.116.165:8084/MovilBusinessAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://190.106.116.165:8084/MovilBusinessAPI/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+            <!--FERZUAZ-->
+            <!--
+            <x:String x:Key="WebServiceUrl">http://ferzuaz.ddns.net:8082/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://ferzuaz.ddns.net:8082/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+           -->
+
+            <!--FELTREX-->
+
+            <!--<x:String x:Key="WebServiceUrl">http://148.103.1.146:82/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://148.103.1.146:82/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+     
+
+
+
+            <!--LAANED-->
+ <!--     
+            <x:String x:Key="WebServiceUrl">http://200.88.67.44/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@Dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://200.88.67.44/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+          -->
+
+            <!-- CHUPETIN -->
+<!--
+            <x:String x:Key="WebServiceUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApIgrf/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/eMovilBusiness/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://movilbusiness.com.do/eMovilBusiness/MovilBusinessApIgrf/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+-->
+
+
+            <!-- ESPALSA -->
+ <!--
+            <x:String x:Key="WebServiceUrl">http://espalsa.ddns.net/MovilBusinessApI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/eMovilBusiness/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://espalsa.ddns.net/MovilBusinessApI/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>
+-->
+            <!-- SUED -->
+
+
+            <!--<x:String x:Key="WebServiceUrl">http://10.1.0.7:3004/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/eMovilBusiness/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://10.1.0.7:3004/MovilBusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+             <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+            <!-- LA TABACALERA -->
+<!--
+        
+            <x:String x:Key="WebServiceUrl">http://194.24.2.68/movilbusinessApipre/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl"> http://194.24.2.68/movilbusinessApipre/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+            <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+
+            <!-- DISFARMACOS -->
+            <!--<x:String x:Key="WebServiceUrl">http://152.166.103.163:8084/MovilBusinessAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/eMovilBusiness/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl"> http://152.166.103.163:8084/movilbusinessApi/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">V7</x:String>
+            <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+            <!-- Lab San Luis -->
+            <!--<x:String x:Key="WebServiceUrl">http://lsanluis.myq-see.com:82/MovilBusinessAPI/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="Dominio">http://@dominio/eMovilBusiness/MovilBusinessApi/api/ReplicacionesSuscriptores/</x:String>
+            <x:String x:Key="updateUrl">http://lsanluis.myq-see.com:82/MovilBusinessAPI/update/autoupdate_info.txt</x:String>
+            <x:String x:Key="Replicacion">MovilBusiness</x:String>
+            <x:String x:Key="VersionReplicacion">Standard</x:String>
+            <x:String x:Key="CargaInicialStandarizada">0</x:String>-->
+
+            <x:String x:Key="AppName">MovilBusiness</x:String>
+            <x:Int32 x:Key="CantidadDatos">500</x:Int32>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

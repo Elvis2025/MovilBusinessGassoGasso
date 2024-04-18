@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.ProductosFaltantesEntregasModal"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}"
+             Title="Productos faltantes">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,30,15,15" />
+                </StackLayout.Padding>
+                <ContentView VerticalOptions="CenterAndExpand" Padding="15,0,0,0">
+                    <Image Source="ic_close_white" VerticalOptions="Center" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+
+                <Label Text="{x:Static resources:AppResource.MissingProducts}" HorizontalTextAlignment="Center" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="18" />
+
+                <ContentView VerticalOptions="FillAndExpand" HorizontalOptions="End">
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Continuar" />
+                    </ContentView.GestureRecognizers>
+                    <Image Source="ic_arrow_forward_white_24dp" VerticalOptions="Center" HorizontalOptions="End" />
+                </ContentView>
+            </StackLayout>
+
+            <ListView
+                    x:Name="list"
+                Margin="10"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    CachingStrategy="RecycleElement"
+                    BackgroundColor="Transparent"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="True"
+                    SelectionMode="None"
+                    ItemsSource="{Binding ProductosConFaltantes}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame HorizontalOptions="FillAndExpand" Padding="10,0" BackgroundColor="White" CornerRadius="4" Margin="0,0,0,5">
+                                <Frame.HasShadow>
+                                    <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+                                </Frame.HasShadow>
+
+                                <Grid HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Column="0" Spacing="0" VerticalOptions="Center">
+                                        <Label FontAttributes="Bold">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding ProCodigo}" />
+                                                    <Span Text=" - " />
+                                                    <Span Text="{Binding ProDescripcion}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <StackLayout Margin="0,3,0,0" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding UsaLote}">
+                                            <Label Text="{x:Static resources:AppResource.LotLabel}" />
+                                            <Label IsVisible="{Binding LoteIsSet}" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding Lote}" />
+                                                        <Span Text=" " />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+
+                                        <Label IsVisible="{Binding TraIndicadorOferta}" HorizontalOptions="End" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White" Margin="0,0,0,3">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="  " />
+                                                    <Span Text="{x:Static resources:AppResource.OfferIndicator}" />
+                                                    <Span Text="  " />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+
+                                    <BoxView Grid.Column="1" VerticalOptions="FillAndExpand" Margin="5" HorizontalOptions="End" WidthRequest="1" Color="LightGray" />
+
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="End" Grid.Column="2" Spacing="0" VerticalOptions="Center">
+                                        <Label Text="{x:Static resources:AppResource.Quantity}" HorizontalOptions="Center" />
+                                        <Label HorizontalOptions="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Cantidad}" FontAttributes="Bold" />
+                                                    <Span Text="/" />
+                                                    <Span Text="{Binding CantidadSolicitada}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

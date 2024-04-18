@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:ScrollableTabPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.AgregarProductosModal"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior"
+             BackgroundColor="{StaticResource WindowBackground}"    
+                         xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:modals="clr-namespace:MovilBusiness.Views.Components.Views"
+             xmlns:views="clr-namespace:MovilBusiness.Views.Components.Views"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:pinch="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             iOS:Page.UseSafeArea="true"
+             Title="Detalle Producto">
+
+    <views:ScrollableTabPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" 
+                     Order="Primary" 
+                     Icon="ic_done_white_24dp"
+                     Clicked="AttempAddProduct"/>
+    </views:ScrollableTabPage.ToolbarItems>
+    
+    <ContentPage Title="{x:Static resources:AppResource.AddProduct}">
+
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" x:Name="mainContainer" Spacing="0">
+
+                        <Label x:Name="lblDescripcion" Text="{Binding CurrentProduct.Descripcion}" FontAttributes="Bold" FontSize="18" HorizontalOptions="FillAndExpand">
+                            <Label.Margin>
+                                <OnIdiom x:TypeArguments="Thickness" Phone="20,5,20,5" Tablet="50,5,50,10" />
+                            </Label.Margin>
+                        </Label>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"  IsVisible="{Binding ShowProDescripcion3}">
+                            <Label>
+                                <Label.Margin>
+                                    <OnIdiom x:TypeArguments="Thickness" Phone="20,5,20,5" Tablet="50,5,50,10" />
+                                </Label.Margin>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Equivalencia: " FontAttributes="Bold"></Span>
+                                        <Span Text="{Binding CurrentProduct.ProDescripcion3}"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout x:Name="imagenProducto" 
+                                     IsVisible="false">
+                            <pinch:PinchZoom>
+                                <pinch:PinchZoom.Content>
+                                    <ffimageloading:CachedImage
+                                        WidthRequest="450"
+                                        HeightRequest="450"
+                                        BackgroundColor="Black"
+                                        Aspect="Fill"
+                                        DownsampleUseDipUnits="False" 
+                                        CacheType="None"
+	    					            LoadingPlaceholder="image_loading" 
+                                        ErrorPlaceholder="image_not_available"
+                                        Source="{Binding CurrentProduct.ProImage}" />
+                                </pinch:PinchZoom.Content>
+                            </pinch:PinchZoom>
+                        </StackLayout>
+
+                        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="DarkGray" />
+
+                        <Frame HasShadow="False" Padding="0" BackgroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="0">
+                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                <Grid.Margin>
+                                    <OnIdiom x:TypeArguments="Thickness" Phone="20,0,20,20" Tablet="50,0,50,50" />
+                                </Grid.Margin>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <!--<StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="layoutPresencia" Margin="0,5,0,0">
+                                    <Label Text="{x:Static resources:AppResource.PresenceLabel}" VerticalOptions="Center" />
+                                    <Switch x:Name="switchPresencia" />
+                                </StackLayout>-->
+
+
+                                <Label Text="Area: " x:Name="lblInvArea" VerticalOptions="Center" Grid.Row="0" Grid.Column="0" />
+                                <Picker Title="{x:Static resources:AppResource.SelectArea}" x:Name="comboInvArea" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" ItemsSource="{Binding InvAreas}" SelectedIndexChanged="comboInvArea_SelectedIndexChanged" ItemDisplayBinding="{Binding Descripcion}" />
+                                <Label Text="{x:Static resources:AppResource.InvoiceLabel}" IsVisible="False" x:Name="lblFacturaCompra" VerticalOptions="Center" Grid.Column="0" Grid.Row="1" />
+                                <Entry Grid.Row="1" IsVisible="False" x:Name="editFacturaCompra" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+
+
+                                <Label Text="{x:Static resources:AppResource.InventoryQuantityLabel}" VerticalOptions="Center" x:Name="lblinvcantidad" Grid.Row="1" Grid.Column="0" Margin="0" IsVisible="False" />
+                                <Label  HorizontalOptions="FillAndExpand" x:Name="lblcantidadinventario" Grid.Row="1" Grid.Column="1" Margin="0" IsVisible="False"/>
+
+                                <Label Text="{x:Static resources:AppResource.SalePriceLabel}" x:Name="lblPrecio" VerticalOptions="Center"  Grid.Column="0" Grid.Row="2" />
+                                <Entry Grid.Row="2" x:Name="editPrecio" Grid.Column="1" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
+                                
+                                <Label Text="Precio Oferta: " x:Name="lblPrecioOferta" VerticalOptions="Center"  Grid.Column="0" Grid.Row="3" IsVisible="false" />
+                                <Entry Grid.Row="3" x:Name="editPrecioOferta" Grid.Column="1" HorizontalOptions="FillAndExpand" Keyboard="Numeric" IsVisible="false" />
+                                
+                                <StackLayout Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="layoutPresencia" Margin="0,5,0,0">
+                                    <Label Text="{x:Static resources:AppResource.PresenceLabel}" VerticalOptions="Center" />
+                                    <Switch x:Name="switchPresencia" Toggled="switchPresencia_Toggled" />
+                                </StackLayout>
+
+                                <Label Text="Caras: " x:Name="lblCaras" VerticalOptions="Center"  Grid.Column="0" Grid.Row="6" IsVisible="false"/>
+                                <Entry Grid.Row="6" x:Name="editCaras" Grid.Column="1" HorizontalOptions="FillAndExpand" Keyboard="Numeric" IsVisible="false" IsEnabled="{Binding CarasHablitada}">
+                                    <Entry.Behaviors>
+                                        <behaviors:NumericValidation />
+                                    </Entry.Behaviors>
+                                </Entry>
+
+                                <Label x:Name="lblCantidad" Text="{x:Static resources:AppResource.QuantityLabel}" VerticalOptions="Center"  Grid.Row="4" Grid.Column="0" Margin="0" />
+                                <Entry x:Name="editCantidad" HorizontalOptions="FillAndExpand" Grid.Row="4" Grid.Column="1"  Keyboard="Numeric" Unfocused="editCantidad_Unfocused" Focused="EditCantidad_Focused" />
+                                <!--<controls:AutoFocusEntry HorizontalOptions="FillAndExpand" Grid.Row="4" Grid.Column="1"  Keyboard="Numeric" x:Name="editCantidad" />-->
+
+                                <Label Text="{x:Static resources:AppResource.DistributionCenterLabel}"  VerticalOptions="Center" Grid.Row="5" Grid.Column="0" IsVisible="{Binding ShowCentrosDistribucion}" Margin="0" />
+                                <Picker x:Name="comboCentroDistribucion" Grid.Row="5" Grid.Column="1" IsVisible="{Binding ShowCentrosDistribucion}" Title="{x:Static resources:AppResource.ChooseDistributionCenter}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding CentrosDistribucion, Mode=TwoWay}" SelectedIndexChanged="comboCentroDistribucion_SelectedIndexChanged" SelectedItem="{Binding CurrentCentrosDistribucion}"  ItemDisplayBinding="{Binding CedDescripcion}" TextColor="Gray"  />
+
+                                <Label x:Name="lblReferencia" IsVisible="{Binding UseColorAndSize}" Text="{x:Static resources:AppResource.ReferenceLabel}" VerticalOptions="Center" Grid.Row="3" Grid.Column="0" Margin="0" />
+                                <Entry HorizontalOptions="FillAndExpand" IsVisible="{Binding UseColorAndSize}" Grid.Row="3" Grid.Column="1" Keyboard="Default" x:Name="editReferencia" ReturnType="Search" />
+
+                                <Label x:Name="lblCantidadPiezas" Text="{x:Static resources:AppResource.PartsLabel}" VerticalOptions="Center" Grid.Row="5" Grid.Column="0" Margin="0" />
+                                <Entry HorizontalOptions="FillAndExpand" Grid.Row="5" Grid.Column="1" Keyboard="Numeric" x:Name="editCantidadPiezas">
+                                    <Entry.Behaviors>
+                                        <behaviors:NumericValidation />
+                                    </Entry.Behaviors>
+                                </Entry>
+
+                                <Label Text="{x:Static resources:AppResource.UnitsLabel}" x:Name="lblUnidades" IsVisible="false" VerticalOptions="Center"  Grid.Row="6" Grid.Column="0" />
+                                <Entry Grid.Row="6" Grid.Column="1" IsVisible="false" HorizontalOptions="FillAndExpand" Keyboard="Numeric" x:Name="editUnidades">
+                                    <Entry.Behaviors>
+                                        <behaviors:NumericValidation />
+                                    </Entry.Behaviors>
+                                </Entry>
+
+                                <Label Text="{Binding TipoDescuento, Mode=TwoWay}" IsVisible="False" x:Name="lblDescuento" VerticalOptions="Center" Grid.Row="7" Grid.Column="0"  />
+                                <StackLayout Grid.Row="7" Grid.Column="1" HorizontalOptions="FillAndExpand" IsVisible="False" x:Name="layoutPorcDescuento">
+                                    <Entry Keyboard="Numeric" IsVisible="False" HorizontalOptions="FillAndExpand" x:Name="editDescuento" Margin="0,5,0,0"/>
+                                    <StackLayout Orientation="Horizontal" Grid.Row="6" Grid.Column="1" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{x:Static resources:AppResource.DiscountTypesLeyend}"  IsVisible="False"  x:Name="lblTiposDescuentos"/>
+                                        <Switch IsToggled="{Binding IsCambioTipoDescuento, Mode=TwoWay}" Toggled="OnToggled" IsVisible="False" x:Name="swtDescuento"/>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <Label Text="{x:Static resources:AppResource.QtyOfferLabel}" IsVisible="False" x:Name="lblofertamanual" VerticalOptions="Center" Grid.Row="8" Grid.Column="0" />
+                                <Entry Keyboard="Numeric" IsVisible="False" Grid.Row="8" HorizontalOptions="FillAndExpand" Grid.Column="1" x:Name="editofertamanual" />
+
+                                <ContentView x:Name="ofertaManualContainer" IsVisible="False" HorizontalOptions="FillAndExpand" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9" />
+
+                                <Label Text="{x:Static resources:AppResource.RevenueLabel}" x:Name="lblRevenimiento" IsVisible="False" VerticalOptions="Center"  Grid.Column="0" Grid.Row="10" />
+                                <Entry Grid.Row="10" IsVisible="False" x:Name="editRevenimiento" Grid.Column="1" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
+
+                                <StackLayout IsVisible="False" Orientation="Horizontal" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" x:Name="promocionContainer">
+                                    <Label Text="{x:Static resources:AppResource.PromotionLabel}" x:Name="lblPromocion" VerticalOptions="Center" IsVisible="False" />
+                                    <Switch x:Name="checkPromocion" IsVisible="False" HorizontalOptions="Start" Margin="0,0,10,0" />
+
+                                    <Label Margin="0,0,0,0" Text="{x:Static resources:AppResource.DozensLabel}" VerticalOptions="Center" IsVisible="False" x:Name="lblDocenas"/>
+                                    <Switch x:Name="checkDocenas" IsVisible="False" HorizontalOptions="Start" IsToggled="False" />
+                                </StackLayout>
+
+                                <Label Text="{x:Static resources:AppResource.LotLabel}" x:Name="lblLote" VerticalOptions="Center" Grid.Column="0" Grid.Row="12" IsVisible="False" />
+                                <Picker x:Name="comboLote" Grid.Row="12" Grid.Column="1" IsVisible="False" HorizontalOptions="FillAndExpand" ItemsSource="{Binding Lotes}" SelectedItem="{Binding CurrentLote, Mode=TwoWay}" />
+                                <Entry x:Name="editLote" Grid.Row="12" Grid.Column="1" IsVisible="False" HorizontalOptions="FillAndExpand" />
+
+                                <Grid x:Name="layoutColorAndSize" RowSpacing="0" HorizontalOptions="FillAndExpand" Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding UseColorAndSize}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Text="Color: " VerticalOptions="Center" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" />
+                                    <Button Grid.Row="0" HorizontalOptions="Start" Grid.Column="1" x:Name="btnColor" Command="{Binding ChangeColorAndSize}" CommandParameter="1" Text="{x:Static resources:AppResource.Select}" />
+
+                                    <Label IsVisible="False" x:Name="lblSizes" Grid.Row="1" Grid.Column="0" Text="{x:Static resources:AppResource.Sizes}" HorizontalOptions="Center" FontAttributes="Bold" Margin="0,10,0,0" FontSize="18"/>
+
+                                    <ScrollView Grid.Row="2" Margin="10" Grid.Column="0" Grid.ColumnSpan="2" WidthRequest="100" HorizontalScrollBarVisibility="Never" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                        <Grid>
+                                            <StackLayout Orientation="Horizontal" x:Name="sizeContainer"/>
+                                        </Grid>
+                                    </ScrollView>
+
+                                </Grid>
+
+                                <Label IsVisible="False" x:Name="lblund" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="{x:Static resources:AppResource.Units}" HorizontalOptions="Center" FontAttributes="Bold" Margin="0,10,0,0" FontSize="18"/>
+
+                                <ScrollView IsVisible="false" HorizontalScrollBarVisibility="Never"
+                                            Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                                            HorizontalOptions="FillAndExpand" Orientation="Horizontal"
+                                            x:Name="scrollContaiter">
+                                    <StackLayout Orientation="Horizontal" x:Name="undContainer" Margin="5"/>
+                                </ScrollView>
+
+                                <Label Text="{x:Static resources:AppResource.ReasonLabel}" x:Name="lblMotivo" VerticalOptions="Center" Grid.Column="0" Grid.Row="13" IsVisible="False" />
+                                <Picker x:Name="comboMotivo" IsVisible="False" Grid.Column="1" Grid.Row="13" HorizontalOptions="FillAndExpand" Title="{x:Static resources:AppResource.Select}" SelectedItem="{Binding CurrentMotivo, Mode=TwoWay}" />
+
+                                <Label Text="{x:Static resources:AppResource.DeliverDateLabel}" x:Name="lblFechaEntrega" VerticalOptions="Center" Grid.Column="0" Grid.Row="14" IsVisible="False" />
+                                <DatePicker x:Name="pickerFechaEntrega" IsVisible="False" Grid.Column="1" Grid.Row="14" HorizontalOptions="FillAndExpand" Format="dd/MM/yyyy" />
+
+                                <Label Text="Facing: " x:Name="lblFacing" VerticalOptions="Center" Grid.Column="0" Grid.Row="15" IsVisible="False" />
+                                <Entry HorizontalOptions="FillAndExpand" Keyboard="Numeric" ReturnType="Done" x:Name="editFacing" Grid.Column="1" Grid.Row="15" IsVisible="False">
+                                    <Entry.Behaviors>
+                                        <behaviors:NumericValidation />
+                                    </Entry.Behaviors>
+                                </Entry>
+
+                                <Label Text="{Static resources:AppResource.Attribute1}" VerticalOptions="Center" Grid.Column="0" Grid.Row="16" IsVisible="{Binding CurrentProduct.UseAttribute1}" />
+                                <Picker x:Name="comboAttribute1" Title="{Static resources:AppResource.Select}" Grid.Column="1" Grid.Row="16" HorizontalOptions="FillAndExpand" IsVisible="{Binding CurrentProduct.UseAttribute1}" />
+
+                                <Label Text="{Static resources:AppResource.Attribute2}" Grid.Column="0" VerticalOptions="Center" Grid.Row="17" IsVisible="{Binding CurrentProduct.UseAttribute2}" />
+                                <Picker x:Name="comboAttribute2" Title="{Static resources:AppResource.Select}" Grid.Column="1" Grid.Row="17" HorizontalOptions="FillAndExpand" IsVisible="{Binding CurrentProduct.UseAttribute2}" />
+
+                                <controls:SegmentedControl x:Name="controlTipoCambio" 
+                                    OnSegmentSelected="controlTipoCambio_OnSegmentSelected" 
+                                    BackgroundColor="{StaticResource ColorPrimary}"
+                                    HorizontalOptions="Start"
+                                    WidthRequest="190"
+                                    MinimumWidthRequest="190"
+                                    SelectedColor="White"     
+                                    IsVisible="False"              
+                                    Grid.Row="17"                                   
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2">
+                                    <controls:SegmentedControl.Children>
+                                        <controls:SegmentedControlOption Text="{x:Static resources:AppResource.Receiving}"/>
+                                        <controls:SegmentedControlOption Text="{x:Static resources:AppResource.GivingOut}"/>
+                                    </controls:SegmentedControl.Children>
+                                </controls:SegmentedControl>
+
+                                <Button Clicked="btnConsultarVencimiento_Clicked" IsVisible="False" x:Name="btnConsultarVencimiento" Text="{x:Static resources:AppResource.CheckExpiration}" HorizontalOptions="Center" Grid.Row="18" Grid.Column="0" Grid.ColumnSpan="2" />
+
+                                <StackLayout Orientation="Horizontal" IsVisible="False" Grid.Column="0" Grid.Row="19" Grid.ColumnSpan="2" HorizontalOptions="End" Margin="0,10,0,0">
+                                    <Button Text="{x:Static resources:AppResource.Cancel}" BackgroundColor="Transparent" HeightRequest="40" TextColor="{StaticResource ColorPrimary}" Margin="0,0,15,0" Clicked="Dismiss" />
+                                    <Button Text="{x:Static resources:AppResource.Remove}" BackgroundColor="Transparent" HeightRequest="40" TextColor="{StaticResource ColorPrimary}" Margin="0,0,15,0" Clicked="Eliminar" IsVisible="{Binding ShowEliminar}" />
+                                    <Button Text="{x:Static resources:AppResource.Aceptar}" BackgroundColor="{StaticResource ColorPrimary}" HeightRequest="40" TextColor="White" Clicked="AttempAddProduct" WidthRequest="100" />
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+
+                        <StackLayout x:Name="tabBodyContainer" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <modals:OfertasInfoView HorizontalOptions="FillAndExpand" x:Name="detalleOfertasView1" IsVisible="False" VerticalOptions="Start">
+                                <modals:OfertasInfoView.Margin>
+                                    <OnIdiom x:TypeArguments="Thickness" Phone="10,0" Tablet="40,0" />
+                                </modals:OfertasInfoView.Margin>
+                            </modals:OfertasInfoView>
+                            <modals:OfertasUndInfoView HorizontalOptions="FillAndExpand" x:Name="detalleOfertasUndView1" IsVisible="False" VerticalOptions="Start">
+                                <modals:OfertasUndInfoView.Margin>
+                                    <OnIdiom x:TypeArguments="Thickness" Phone="10,0" Tablet="40,0" />
+                                </modals:OfertasUndInfoView.Margin>
+                            </modals:OfertasUndInfoView>
+
+                            <views:DescuentosInfoView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False" x:Name="descuentosView1">
+                                <views:DescuentosInfoView.Margin>
+                                    <OnIdiom x:TypeArguments="Thickness" Phone="10,0" Tablet="40,0" />
+                                </views:DescuentosInfoView.Margin>
+                            </views:DescuentosInfoView>
+                            <views:DescuentosUndInfoView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False" x:Name="descuentosUndView1">
+                                <views:DescuentosUndInfoView.Margin>
+                                    <OnIdiom x:TypeArguments="Thickness" Phone="10,0" Tablet="40,0" />
+                                </views:DescuentosUndInfoView.Margin>
+                            </views:DescuentosUndInfoView>
+                        </StackLayout>
+
+                    </StackLayout>
+                </ScrollView>
+
+            </Grid>
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage>
+
+    <ContentPage Title="{x:Static resources:AppResource.Offers}">
+        <StackLayout Orientation="Vertical"
+                     HorizontalOptions="FillAndExpand" 
+                     VerticalOptions="FillAndExpand">
+                <modals:OfertasInfoView HorizontalOptions="FillAndExpand"
+                                        x:Name="detalleOfertasView"
+                                        IsVisible="False"
+                                        VerticalOptions="Start">
+                    <modals:OfertasInfoView.Margin>
+                        <OnIdiom x:TypeArguments="Thickness" Phone="10,0" Tablet="40,0" />
+                    </modals:OfertasInfoView.Margin>
+                </modals:OfertasInfoView>
+                <modals:OfertasUndInfoView HorizontalOptions="FillAndExpand"
+                                           x:Name="detalleOfertasUndView"
+                                           IsVisible="False" 
+                                           VerticalOptions="Start">
+                    <modals:OfertasUndInfoView.Margin>
+                        <OnIdiom x:TypeArguments="Thickness" Phone="10,0" Tablet="40,0" />
+                    </modals:OfertasUndInfoView.Margin>
+                </modals:OfertasUndInfoView>
+            </StackLayout>
+    </ContentPage>
+
+    <ContentPage Title="{x:Static resources:AppResource.Discounts}">
+        <StackLayout Orientation="Vertical" 
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
+            <views:DescuentosInfoView 
+                HorizontalOptions="FillAndExpand" 
+                VerticalOptions="FillAndExpand"
+                IsVisible="False" 
+                x:Name="descuentosView">
+                <views:DescuentosInfoView.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="10,0" Tablet="40,0" />
+                </views:DescuentosInfoView.Margin>
+            </views:DescuentosInfoView>
+            <views:DescuentosUndInfoView HorizontalOptions="FillAndExpand" 
+                                         VerticalOptions="FillAndExpand"
+                                         IsVisible="False"
+                                         x:Name="descuentosUndView">
+                <views:DescuentosUndInfoView.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="10,0" Tablet="40,0" />
+                </views:DescuentosUndInfoView.Margin>
+            </views:DescuentosUndInfoView>
+        </StackLayout>
+    </ContentPage>
+
+</views:ScrollableTabPage>

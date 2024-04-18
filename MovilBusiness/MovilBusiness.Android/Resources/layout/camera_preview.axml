@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextureView
+            android:id="@+id/Surface"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        </FrameLayout>
+    <!--android:background="@android:color/darker_gray"-->
+    <ImageButton
+        android:id="@+id/btnSelectedFlashMode"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginEnd="21dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@null"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/baseline_flash_auto_white_24" />
+    <FrameLayout
+        android:id="@+id/layoutFlash"
+        android:layout_below="@id/btnSelectedFlashMode"
+        android:layout_width="46dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_black_round"
+            android:alpha="0.3" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:gravity="center_vertical">
+            <ImageButton
+                android:id="@+id/flashModeAuto"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/baseline_flash_auto_white_24"
+                android:background="@null"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp" />
+            <ImageButton
+                android:id="@+id/flashModeOn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"
+                android:layout_below="@id/flashModeAuto"
+                android:src="@drawable/baseline_flash_on_white_24"
+                android:background="@null"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp" />
+            <ImageButton
+                android:id="@+id/flashModeOff"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="3dp"
+                android:contentDescription="@null"
+                android:layout_marginRight="3dp"
+                android:layout_below="@id/flashModeOn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/baseline_flash_off_white_24"
+                android:background="@null" />
+        </RelativeLayout>
+    </FrameLayout>
+    <RelativeLayout
+        android:id="@+id/btnContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#263238"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+        <ImageButton
+            android:id="@+id/btnTakePicture"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@null"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/baseline_adjust_white_48" />
+        <ImageButton
+            android:id="@+id/preview"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            android:background="@null"
+            android:layout_toLeftOf="@id/btnTakePicture"
+            android:layout_toStartOf="@id/btnTakePicture"
+            android:layout_marginRight="45dp"
+            android:layout_marginEnd="45dp" />
+        <Button
+            android:id="@+id/btnGuardar"
+            android:text="Guardar"
+            android:textColor="@android:color/white"
+            android:background="@null"
+            android:layout_toRightOf="@id/btnTakePicture"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/btnTakePicture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_above="@id/btnContainer"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btnZoomIn"
+            android:background="@null"
+            android:contentDescription="@null"
+            android:src="@drawable/outline_zoom_in_white_24"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitXY"
+            android:layout_marginBottom="15dp"/>
+
+        <ImageButton
+            android:id="@+id/btnZoomOut"
+            android:background="@null"
+            android:contentDescription="@null"
+            android:src="@drawable/outline_zoom_out_white_24"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitXY"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lblCapturing"
+        android:background="#1976D2"
+        android:textColor="@android:color/white"
+        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:visibility="gone"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Capturando...no te muevas" />
+</RelativeLayout>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.NCFModal"
+             BackgroundColor="{StaticResource WindowBackground}"
+              NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+            <Grid.Margin>
+                <OnIdiom x:TypeArguments="Thickness" Phone="25,0" Tablet="50,0" />
+            </Grid.Margin>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Text="NCF" FontAttributes="Bold" FontSize="18" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,15" />
+
+            <Label Text="Serie:" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" />
+            <Label Text="{x:Static resources:AppResource.TypeOfReceiptLabel}" Grid.Row="2" Grid.Column="0" VerticalOptions="Center" />
+            <Label Text="NCF:" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" />
+            <Label Text="{x:Static resources:AppResource.ExpirationDateLabel}" Grid.Row="4" Grid.Column="0" VerticalOptions="Center" />
+
+            <Picker x:Name="comboSerie" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="1" />
+            <Picker x:Name="comboTipoNcf" HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.Column="1"/>
+
+            <Entry Keyboard="Numeric" MaxLength="8" HorizontalOptions="FillAndExpand" Grid.Row="3" Grid.Column="1" x:Name="editNcf" ReturnType="Done">
+                <Entry.Behaviors>
+                    <behaviors:NumericValidation />
+                </Entry.Behaviors>
+            </Entry>
+            <Picker HorizontalOptions="FillAndExpand" Grid.Row="4" Grid.Column="1" x:Name="pickerVencimiento"/>
+
+            <StackLayout Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="End" Margin="0,15,0,0">
+                <Button Text="{x:Static resources:AppResource.Cancel}" Margin="0,0,10,0" TextColor="{StaticResource ColorPrimary}" BackgroundColor="Transparent" Clicked="Dismiss"/>
+                <Button Text="{x:Static resources:AppResource.Aceptar}" HeightRequest="35" TextColor="White" BackgroundColor="{StaticResource ColorPrimary}" Clicked="AceptarNcf">
+                    <Button.Padding>
+                        <OnPlatform x:TypeArguments="Thickness" Android="0" iOS="7,0" />
+                    </Button.Padding>
+                </Button>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

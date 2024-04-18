@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.DetalleMuestrasModal"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,30,15,15" />
+                </StackLayout.Padding>
+                <ContentView VerticalOptions="CenterAndExpand" Padding="15,0,0,0">
+                    <Image Source="ic_close_white" VerticalOptions="Center" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+
+                <Label Text="{x:Static resources:AppResource.SurveyDetails}" HorizontalTextAlignment="Center" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="18" />
+
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15">
+                <Label HorizontalOptions="FillAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Static resources:AppResource.Survey}" />
+                            <Span Text=": " />
+                            <Span Text="{Binding CurrentMuestra.EstNombre}" FontAttributes="Bold" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="FillAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Static resources:AppResource.Customer}" />
+                            <Span Text=": " />
+                            <Span Text="{Binding CurrentMuestra.CliNombre}" FontAttributes="Bold" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="FillAndExpand" FontAttributes="Bold">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Static resources:AppResource.Capture}" />
+                            <Span Text=": #" />
+                            <Span Text="{Binding CurrentMuestra.MueSecuencia}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+
+                <Label Text="{Static resources:AppResource.Answers}" Margin="0,25,0,0" FontAttributes="Bold" />
+
+                <ListView
+                    x:Name="list"
+                    Margin="0,0,0,0"
+                    SelectionMode="None"
+                    CachingStrategy="RecycleElement"
+                    HasUnevenRows="True"
+                    ItemsSource="{Binding Respuestas}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    SeparatorVisibility="None">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame HorizontalOptions="FillAndExpand" BackgroundColor="White" HasShadow="{OnPlatform True, iOS=False}" Padding="15,10">
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="1">
+                                        <Label Text="{Binding PreDescripcion}" HorizontalOptions="FillAndExpand" FontAttributes="Bold" />
+                                        <Label Text="{Binding ResRespuesta}" HorizontalOptions="FillAndExpand" />
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+
+            </StackLayout>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

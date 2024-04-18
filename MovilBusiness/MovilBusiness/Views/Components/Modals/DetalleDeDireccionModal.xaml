@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.DetalleDeDireccionModal"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx">
+
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>        
+
+            <Frame Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="Center" HasShadow="False" Padding="0">
+                <Frame.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="20" Tablet="50" />
+                </Frame.Margin>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Grid.Row="0" x:Name="layout">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}" Padding="15, 12">
+                        <Label Text="{x:Static resources:AppResource.AddressDetails}" FontSize="17" TextColor="White" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+                        <Image Source="ic_close_white" HorizontalOptions="End" VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Dimiss" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                     
+
+                    </StackLayout>
+
+                    <Grid HorizontalOptions="FillAndExpand" Padding="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+
+                        </Grid.RowDefinitions>
+
+                        
+                        <Label Text="{x:Static resources:AppResource.StreetLabel}" FontAttributes="Bold" FontSize="16" Grid.Row="0" Grid.Column="0" />
+                        <Label Text="{Binding ClientesDireccionesDetalle.CldCalle}" Grid.Row="0" Grid.Column="1"  />
+                        <Label Text="{x:Static resources:AppResource.HouseLabel}" FontAttributes="Bold" FontSize="16" Grid.Row="1" Grid.Column="0" />
+                        <Label Text="{Binding ClientesDireccionesDetalle.CldCasa}" Grid.Row="1" Grid.Column="1"  />
+                        <Label Text="{x:Static resources:AppResource.ContactLabel}" FontAttributes="Bold" FontSize="16" Grid.Row="2" Grid.Column="0" />
+                        <Label Text="{Binding ClientesDireccionesDetalle.CldContacto}" Grid.Row="2" Grid.Column="1"  />
+                        <Label Text="Sector:" FontAttributes="Bold" FontSize="16" Grid.Row="3" Grid.Column="0" />
+                        <Label Text="{Binding ClientesDireccionesDetalle.CldSector}" Grid.Row="3" Grid.Column="1"  />
+                        <Label Text="{x:Static resources:AppResource.TelephoneLabel}" FontAttributes="Bold" FontSize="16" Grid.Row="4" Grid.Column="0" VerticalOptions="Center" />
+                        <Label Text="{Binding ClientesDireccionesDetalle.CldTelefono}"  Grid.Row="4" Grid.Column="1"/>
+
+
+                    </Grid>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+
+
+</ContentPage>

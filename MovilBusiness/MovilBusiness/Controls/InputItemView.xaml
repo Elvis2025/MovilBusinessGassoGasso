@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Orientation="Vertical"
+             x:Class="MovilBusiness.Controls.InputItemView"
+             BackgroundColor="Black"
+             Margin="5"
+             Padding="2">
+
+    <StackLayout Orientation="Vertical" BackgroundColor="White">
+        <Label Text="" x:Name="lblDescription" HorizontalOptions="Center" FontAttributes="Bold" />
+
+        <Entry ReturnType="Done" Keyboard="Numeric" WidthRequest="60" x:Name="edittext" HorizontalOptions="Center" />
+
+    </StackLayout>
+
+</StackLayout>

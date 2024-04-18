@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.TemplateSelector.Reportes.FacturasAVencerDelMesTemplateRow">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Text="{Binding Cliente}" FontAttributes="{Binding FontAttribute}"/>
+        <Label Text="{Binding Nombre}" FontAttributes="{Binding FontAttribute}" Grid.Column="1"/>
+        <Label Text="{Binding Factura}" FontAttributes="{Binding FontAttribute}"/>
+        <Label Text="{Binding FechaFact}" FontAttributes="{Binding FontAttribute}" Grid.Column="1"/>
+        <Label Text="{Binding FechaVenc}" FontAttributes="{Binding FontAttribute}" Grid.Column="2"/>
+        <Label Text="{Binding diasCredito}" HorizontalOptions="End" FontAttributes="{Binding FontAttribute}" Grid.Column="3"/>
+        <Label Text="{Binding Balance, StringFormat='{0:C}'}" FontAttributes="{Binding FontAttribute}" Grid.Column="4" HorizontalOptions="End"/>
+    </Grid>
+</Grid>

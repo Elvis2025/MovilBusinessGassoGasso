@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+         xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             x:Class="MovilBusiness.Views.Components.ListItemRows.RowAuditoriaMercado1">
+  <ViewCell.View>
+        <Frame Padding="10" Margin="5,0,5,5" HasShadow="False">
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="0">
+
+                <Label Text="{Binding Ca1Descripcion}" HorizontalOptions="FillAndExpand" FontAttributes="Bold"/>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="{x:Static resources:AppResource.PackageLabel}" />
+                    <Label Text="{Binding AudEmpaqueDescripcion}" HorizontalOptions="FillAndExpand" />
+                    <Label Text="{x:Static resources:AppResource.UntMeasureLabel}" />
+                    <Label Text="{Binding UnmCodigoDescripcion}" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="{x:Static resources:AppResource.CapacityLabel}" />
+                    <Label Text="{Binding AudCapacidad}" HorizontalOptions="FillAndExpand" />
+                    <Label Text="{x:Static resources:AppResource.InventoryLabel}" />
+                    <Label Text="{Binding InvCantidad}" HorizontalOptions="FillAndExpand"  />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="{x:Static resources:AppResource.PurchasePriceLabel}" />
+                    <Label Text="{Binding AudPrecioCompra}" HorizontalOptions="FillAndExpand" />
+                    <Label Text="{x:Static resources:AppResource.SalePriceLabel}" />
+                    <Label Text="{Binding AudPrecioPublico}" HorizontalOptions="FillAndExpand"  />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="{x:Static resources:AppResource.PresentationLabel}"/>
+                    <Label Text="{Binding AudPresentacionDescripcion}" HorizontalOptions="FillAndExpand"  />
+                </StackLayout>
+
+            </StackLayout>
+        </Frame>
+    </ViewCell.View>
+</ViewCell>

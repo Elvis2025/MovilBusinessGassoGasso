@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.ConsultaRecibosModal"
+             BackgroundColor="{StaticResource WindowBackground}"
+            xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.ReceiptDetail}">
+
+    <ContentPage Title="{x:Static resources:AppResource.Documents}" Padding="0,10">
+        <ContentPage.Content>
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <Label HorizontalOptions="FillAndExpand" Margin="10,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static resources:AppResource.CustomerLabel}" FontAttributes="Bold" />
+                            <Span Text="{Binding CliNombre}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label HorizontalOptions="FillAndExpand" Margin="10,0,10,5">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static resources:AppResource.ReceiptNumberLabel}" FontAttributes="Bold" />
+                            <Span Text="{Binding RecSecuencia}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
+                    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="0">
+
+                        <StackLayout Orientation="Horizontal" BackgroundColor="#37474F" Padding="10,0" HeightRequest="30" Spacing="0">
+                            <Label Text="{x:Static resources:AppResource.Document}" TextColor="White" VerticalOptions="Center" WidthRequest="105" />
+                            <Label Text="{x:Static resources:AppResource.Initials}" TextColor="White" WidthRequest="50" VerticalOptions="Center"  />
+                            <Label Text="Saldo" TextColor="White" WidthRequest="50" VerticalOptions="Center"  />
+                            <Label Text="{x:Static resources:AppResource.Applied}" TextColor="White" WidthRequest="100" VerticalOptions="Center"  />
+                            <Label Text="{x:Static resources:AppResource.Discount}" TextColor="White" WidthRequest="100" VerticalOptions="Center" />
+                            <Label Text="Balance" TextColor="White" WidthRequest="100" VerticalOptions="Center" />
+                            <Label Text="{x:Static resources:AppResource.AmountWithoutItbis}" WidthRequest="130" TextColor="White" VerticalOptions="Center" />
+                            <Label Text="{x:Static resources:AppResource.Reference}" WidthRequest="100" TextColor="White" VerticalOptions="Center" />
+                            <Label Text="{x:Static resources:AppResource.DiscPercent}" WidthRequest="130" TextColor="White" VerticalOptions="Center" />                            
+                        </StackLayout>
+
+                        <ScrollView VerticalOptions="FillAndExpand" Orientation="Both">
+                            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0,0" Spacing="0">
+                                <ListView
+                                    x:Name="listaFacturas"
+                                    HasUnevenRows="True"
+                                    CachingStrategy="RecycleElement"
+                                    BackgroundColor="Transparent"
+                                    SeparatorVisibility="None"
+                                    ItemsSource="{Binding Documentos}"
+                                    VerticalOptions="FillAndExpand"
+                                    Margin="0,0,0,5">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Grid ColumnSpacing="0" BackgroundColor="White" HeightRequest="28" Padding="9,0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="105" />
+                                                        <ColumnDefinition Width="50" />
+                                                        <ColumnDefinition Width="50" />
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="130" />
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="130" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Label Text="{Binding CxCDocumento}" VerticalOptions="Center" Grid.Column="0" />
+                                                    <Label Text="{Binding CxcSigla}" VerticalOptions="Center" Grid.Column="1" />
+                                                    <Label Text="{Binding Saldo}" VerticalOptions="Center" Grid.Column="2" />
+                                                    <Label Text="{Binding RecValor, StringFormat='{0:N2}'}}" VerticalOptions="Center" Grid.Column="3" />
+                                                    <Label Text="{Binding RecDescuento, StringFormat='{0:N2}'}}" VerticalOptions="Center"  Grid.Column="4" />
+                                                    <Label Text="{Binding CxcBalance, StringFormat='{0:N2}'}}" VerticalOptions="Center" Grid.Column="5" />
+                                                    <Label Text="{Binding RecValorSinImpuesto, StringFormat='{0:N2}'}}" VerticalOptions="Center" Grid.Column="6" />
+                                                    <Label Text="{Binding CXCReferencia}" VerticalOptions="Center"  Grid.Column="7" />
+                                                    <Label VerticalOptions="Center" Grid.Column="8">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding RecPorcDescuento}" />
+                                                                <Span Text="%" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Grid>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </ContentPage.Content>
+    </ContentPage>
+
+    <ContentPage Title="{x:Static resources:AppResource.Paymentways}" Padding="0,10">
+        <ContentPage.Content>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <Label HorizontalOptions="FillAndExpand" Margin="10,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static resources:AppResource.CustomerLabel}" FontAttributes="Bold" />
+                            <Span Text="{Binding CliNombre}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label HorizontalOptions="FillAndExpand" Margin="10,0,10,5">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static resources:AppResource.ReceiptNumberLabel}" FontAttributes="Bold" />
+                            <Span Text="{Binding RecSecuencia}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                                
+                <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
+                    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="0">
+
+                        <StackLayout Orientation="Horizontal" BackgroundColor="#37474F" Spacing="0" Padding="10,0" HeightRequest="30">
+                            <Label Text="{x:Static resources:AppResource.Paymentway}" TextColor="White" VerticalOptions="Center" WidthRequest="120" />
+                            <Label Text="{x:Static resources:AppResource.Bank}" TextColor="White" VerticalOptions="Center" WidthRequest="130" />
+                            <Label Text="No.Cheque" TextColor="White" VerticalOptions="Center"  WidthRequest="85" />
+                            <Label Text="{x:Static resources:AppResource.Futuristic}" TextColor="White" VerticalOptions="Center" WidthRequest="80" />
+                            <Label Text="{x:Static resources:AppResource.Date}" TextColor="White" VerticalOptions="Center" WidthRequest="80" />
+                            <Label Text="{x:Static resources:AppResource.Value}" TextColor="White" VerticalOptions="Center" WidthRequest="80" />
+                            <Label Text="{x:Static resources:AppResource.Rate}" TextColor="White" VerticalOptions="Center" WidthRequest="80" />
+                            <Label Text="{x:Static resources:AppResource.Premium}" TextColor="White" VerticalOptions="Center"  WidthRequest="80" />
+                        </StackLayout>
+
+                        <ListView
+                                      x:Name="listaFormasPago"
+                                      VerticalOptions="FillAndExpand" 
+                                      Margin="0,0,0,5"
+                                      ItemsSource="{Binding FormasPago}" 
+                                      SeparatorVisibility="None"
+                                      HasUnevenRows="True"
+                                      CachingStrategy="RecycleElement"
+                                      BackgroundColor="Transparent">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid HeightRequest="30" Padding="9,0" ColumnSpacing="0" BackgroundColor="White">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="120" />
+                                                <ColumnDefinition Width="130" />
+                                                <ColumnDefinition Width="85" />
+                                                <ColumnDefinition Width="80" />
+                                                <ColumnDefinition Width="80" />
+                                                <ColumnDefinition Width="80" />
+                                                <ColumnDefinition Width="80" />
+                                                <ColumnDefinition Width="80" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Text="{Binding FormaPago}" VerticalOptions="Center" Grid.Column="0" />
+                                            <Label Text="{Binding BanNombre}" VerticalOptions="Center" Grid.Column="1" LineBreakMode="TailTruncation" />
+                                            <Label Text="{Binding RefNumeroCheque}" VerticalOptions="Center" Grid.Column="2" />
+                                            <Label Text="{Binding Futurista}" VerticalOptions="Center" Grid.Column="3" />
+                                            <Label Text="{Binding RefFecha}" VerticalOptions="Center" Grid.Column="4" />
+                                            <Label Text="{Binding RefValor, StringFormat='{0:N2}'}" VerticalOptions="Center" Grid.Column="5" />
+                                            <Label Text="{Binding RecTasa, StringFormat='{0:N2}'}" VerticalOptions="Center" Grid.Column="6" />
+                                            <Label Text="{Binding RecPrima, StringFormat='{0:N2}'}" VerticalOptions="Center" Grid.Column="7" />
+
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout> 
+            
+        </ContentPage.Content>
+    </ContentPage>
+
+    <ContentPage Title="{x:Static resources:AppResource.Summary}" Padding="0,10">
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <Label HorizontalOptions="FillAndExpand" Margin="10,0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{x:Static resources:AppResource.CustomerLabel}" FontAttributes="Bold" />
+                        <Span Text="{Binding CliNombre}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label HorizontalOptions="FillAndExpand" Margin="10,0,10,5">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{x:Static resources:AppResource.ReceiptNumberLabel}" FontAttributes="Bold" />
+                        <Span Text="{Binding RecSecuencia}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Margin="10">
+                    <Frame HorizontalOptions="FillAndExpand" Padding="25,10" HasShadow="False">
+                        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image Source="ic_assignment_return_black_24dp" Opacity="0.6" Grid.Column="0" VerticalOptions="Center" Grid.Row="0" Grid.RowSpan="2" />
+
+                            <BoxView VerticalOptions="FillAndExpand" Color="Black" Opacity="0.3" Grid.Column="1" WidthRequest="1" Margin="20,0" Grid.Row="0" Grid.RowSpan="2" />
+
+                            <Label Text="{x:Static resources:AppResource.SurplusUpper}" FontSize="15" Grid.Column="2" Grid.Row="0" VerticalOptions="End"/>
+                            <Label Text="{Binding Resumen.Sobrante, StringFormat='{}{0:N2}'}" VerticalOptions="Start" Grid.Column="2" Grid.Row="1" FontSize="15" TextColor="{StaticResource ColorPrimary}" />
+
+                        </Grid>
+                    </Frame>
+
+                    <Frame HorizontalOptions="FillAndExpand" Padding="25,10" HasShadow="False">
+                        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image Source="ic_account_balance_wallet_black_24dp" Opacity="0.6" Grid.Column="0" VerticalOptions="Center"  Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <BoxView VerticalOptions="FillAndExpand" Color="Black" Opacity="0.3" Grid.Column="1" WidthRequest="1"  Margin="20,0" Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <Label Text="{x:Static resources:AppResource.CashUpper}" FontSize="15" Grid.Row="0" Grid.Column="2" VerticalOptions="End" />
+                            <Label Text="{Binding Resumen.Efectivo, StringFormat='{0:N2}'}" VerticalOptions="Start" Grid.Column="2" Grid.Row="1" FontSize="15" TextColor="{StaticResource ColorPrimary}" />
+
+                        </Grid>
+                    </Frame>
+
+                    <Frame HorizontalOptions="FillAndExpand" Padding="25,10" HasShadow="False">
+                        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image Source="ic_account_balance_black_24dp" Opacity="0.6" Grid.Column="0" VerticalOptions="Center" Grid.Row="0" Grid.RowSpan="2" />
+
+                            <BoxView VerticalOptions="FillAndExpand" Color="Black" Opacity="0.3" Grid.Column="1" WidthRequest="1"  Margin="20,0"  Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <Label Text="{x:Static resources:AppResource.CheckUpper}" FontSize="15" Grid.Row="0" Grid.Column="2" VerticalOptions="End" />
+                            <Label Text="{Binding Resumen.Cheques, StringFormat='{0:N2}'}" VerticalOptions="Start" Grid.Column="2" Grid.Row="1" FontSize="15" TextColor="{StaticResource ColorPrimary}" />
+
+                        </Grid>
+                    </Frame>
+
+                    <Frame HorizontalOptions="FillAndExpand" Padding="25,10" HasShadow="False">
+                        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image Source="ic_sync_black_24dp" Opacity="0.6" Grid.Column="0" VerticalOptions="Center" Grid.Row="0" Grid.RowSpan="2" />
+
+                            <BoxView VerticalOptions="FillAndExpand" Color="Black" Opacity="0.3" Grid.Column="1" WidthRequest="1"  Margin="20,0" Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <Label Text="{x:Static resources:AppResource.BankTransferUpper}" FontSize="15" Grid.Row="0" Grid.Column="2" VerticalOptions="End" />
+                            <Label Text="{Binding Resumen.Transferencias, StringFormat='{}{0:N2}'}" VerticalOptions="Start" Grid.Column="2" Grid.Row="1" FontSize="15" TextColor="{StaticResource ColorPrimary}" />
+
+                        </Grid>
+                    </Frame>
+
+                    <Frame HorizontalOptions="FillAndExpand" Padding="25,10" HasShadow="False">
+                        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image Source="ic_event_busy_black_24dp" Opacity="0.6" Grid.Column="0" VerticalOptions="Center" Grid.Row="0" Grid.RowSpan="2" />
+
+                            <BoxView VerticalOptions="FillAndExpand" Color="Black" Opacity="0.3" Grid.Column="1" WidthRequest="1" Margin="20,0" Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <Label Text="{x:Static resources:AppResource.RetentionUpper}" FontSize="15"  Grid.Row="0" Grid.Column="2" VerticalOptions="End" />
+                            <Label Text="{Binding Resumen.Retencion, StringFormat='{0:N2}'}" VerticalOptions="Start" Grid.Column="2" Grid.Row="1" FontSize="15" TextColor="{StaticResource ColorPrimary}" />
+
+                        </Grid>
+                    </Frame>
+
+                    <Frame HorizontalOptions="FillAndExpand" Padding="25,10" HasShadow="False">
+                        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image Source="ic_credit_card_black_24dp" Opacity="0.6" Grid.Column="0" VerticalOptions="Center" Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <BoxView VerticalOptions="FillAndExpand" Color="Black" Opacity="0.3" Grid.Column="1" WidthRequest="1"  Margin="20,0" Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <Label Text="{x:Static resources:AppResource.CreditCardUpper}" FontSize="15" Grid.Row="0" Grid.Column="2" VerticalOptions="End" />
+                            <Label Text="{Binding Resumen.TarjCredito, StringFormat='{0:N2}'}" VerticalOptions="Start" Grid.Column="2" Grid.Row="1" FontSize="15" TextColor="{StaticResource ColorPrimary}" />
+
+                        </Grid>
+                    </Frame>
+
+                    <!--ORDEN DE PAGO-->
+                    <Frame HorizontalOptions="FillAndExpand" Padding="25,10" HasShadow="False">
+                        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image Source="ic_coop_black" Opacity="0.6" Grid.Column="0" VerticalOptions="Center" Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <BoxView VerticalOptions="FillAndExpand" Color="Black" Opacity="0.3" Grid.Column="1" WidthRequest="1"  Margin="20,0" Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <Label Text="{x:Static resources:AppResource.PaymentOrderUpper}" FontSize="15" Grid.Row="0" Grid.Column="2" VerticalOptions="End" />
+                            <Label Text="{Binding Resumen.OrdenPago, StringFormat='{}{0:N2}'}" VerticalOptions="Start" Grid.Column="2" Grid.Row="1" FontSize="15" TextColor="{StaticResource ColorPrimary}" />
+
+                        </Grid>
+                    </Frame>
+
+                    <Frame HorizontalOptions="FillAndExpand" Padding="25,10" HasShadow="False">
+                        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image Source="ic_receipt_black_24dp" Opacity="0.6" Grid.Column="0" VerticalOptions="Center" Grid.Row="0" Grid.RowSpan="2" />
+
+                            <BoxView VerticalOptions="FillAndExpand" Color="Black" Opacity="0.3" Grid.Column="1" WidthRequest="1" Margin="20,0" Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <Label Text="{x:Static resources:AppResource.InvoicesUpper}" FontSize="15" Grid.Row="0" Grid.Column="2" VerticalOptions="End" />
+                            <Label Text="{Binding Resumen.Facturas, StringFormat='{0:N2}'}" VerticalOptions="Start" Grid.Column="2" Grid.Row="1" FontSize="15" TextColor="{StaticResource ColorPrimary}" />
+
+                        </Grid>
+                    </Frame>
+
+                    <Frame HorizontalOptions="FillAndExpand" Padding="25,10" HasShadow="False">
+                        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image Source="baseline_list_alt_black_24" Opacity="0.6" Grid.Column="0" VerticalOptions="Center" Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <BoxView VerticalOptions="FillAndExpand" Color="Black" Opacity="0.3" Grid.Column="1" WidthRequest="1" Margin="20,0" Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <Label Text="{x:Static resources:AppResource.CreditNotesUpper}" FontSize="15" Grid.Row="0" Grid.Column="2" VerticalOptions="End" />
+                            <Label Text="{Binding Resumen.NotasCredito, StringFormat='{0:N2}'}" VerticalOptions="Start" Grid.Column="2" Grid.Row="1" FontSize="15" TextColor="{StaticResource ColorPrimary}" />
+
+                        </Grid>
+                    </Frame>
+
+                    <Frame HorizontalOptions="FillAndExpand" Padding="25,10" HasShadow="False">
+                        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image Source="ic_monetization_on_black_24dp" Opacity="0.6" Grid.Column="0" VerticalOptions="Center"  Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <BoxView VerticalOptions="FillAndExpand" Color="Black" Opacity="0.3" Grid.Column="1" WidthRequest="1" Margin="20,0" Grid.Row="0" Grid.RowSpan="2"/>
+
+                            <Label Text="{x:Static resources:AppResource.DiscountsUpper}" FontSize="15" Grid.Row="0" Grid.Column="2" VerticalOptions="End" />
+                            <Label Text="{Binding Resumen.Descuentos, StringFormat='{0:N2}'}" VerticalOptions="Start" Grid.Column="2" Grid.Row="1" FontSize="15" TextColor="{StaticResource ColorPrimary}" />
+
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+
+    </ContentPage>
+    
+</TabbedPage>

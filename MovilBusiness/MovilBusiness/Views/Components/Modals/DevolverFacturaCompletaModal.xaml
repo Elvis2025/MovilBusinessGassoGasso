@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.DevolverFacturaCompletaModal"
+             BackgroundColor="{StaticResource WindowBackground}"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:configuration="clr-namespace:MovilBusiness.Configuration">
+    <ContentPage.Content>
+
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="15" iOS="15,30,15,15" />
+                </StackLayout.Padding>
+
+                <Image HorizontalOptions="Start" Source="ic_close_white" VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnClickCommand}" CommandParameter="0" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="{x:Static resources:AppResource.InvoiceProducts}" Margin="10,0" FontAttributes="Bold" FontSize="17" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="White" />
+
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10,2,10,10">
+
+                <Label Text="{Binding CurrentClient.CliNombreLabel, Source={x:Static configuration:Arguments.Values}}" FontSize="16" />
+
+                <Picker Title="{x:Static resources:AppResource.SelectReason}" ItemsSource="{Binding MotivosDevoluciones}" ItemDisplayBinding="{Binding MotDescripcion}" 
+                                    SelectedItem="{Binding CurrentMotivo}" x:Name="comboMotivoDevFact" Grid.Column="1" Margin="0,10,0,0" 
+                                    SelectedIndexChanged="ComboMotivo_SelectedIndexChanged" />
+
+                <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="200" Padding="0" HasShadow="False">
+                    <ScrollView VerticalOptions="FillAndExpand" Orientation="Horizontal">
+                        <StackLayout Orientation="Vertical" Spacing="0">
+                            <StackLayout Orientation="Horizontal" BackgroundColor="#37474F" Padding="10,5" Spacing="0">
+
+                                <Label Text="{x:Static resources:AppResource.Reference}" x:Name="lblReferencia" WidthRequest="95" TextColor="White"/>
+                                <Label Text="{x:Static resources:AppResource.Document}" x:Name="lblDocumento" WidthRequest="110" TextColor="White"/>
+                                <Label Text="{x:Static resources:AppResource.Date}" WidthRequest="90" TextColor="White"/>
+                                <Label Text="{x:Static resources:AppResource.Amount}" x:Name="lblMonto" WidthRequest="100" TextColor="White"/>
+
+                            </StackLayout>
+
+                            <ScrollView VerticalOptions="FillAndExpand" Orientation="Both">
+                                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0,0" Spacing="0">
+                                    <ListView VerticalOptions="FillAndExpand"
+                                          HasUnevenRows="True"
+                                          x:Name="list"
+                                          CachingStrategy="RecycleElement"
+                                          SeparatorVisibility="None"
+                                          BackgroundColor="Transparent"
+                                          ItemsSource="{Binding Documentos}"
+                                          ItemSelected="List_ItemSelected">
+
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell>
+                                                    <Grid ColumnSpacing="0" VerticalOptions="FillAndExpand" Padding="10,5">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="95" />
+                                                            <ColumnDefinition Width="110" />
+                                                            <ColumnDefinition Width="90" />
+                                                            <ColumnDefinition Width="100" />
+
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Label Text="{Binding CxcReferencia}" Grid.Column="0" LineBreakMode="TailTruncation" />
+                                                        <Label Text="{Binding CxcDocumento}" Grid.Column="1" LineBreakMode="TailTruncation"/>
+                                                        <Label Text="{Binding CxcFecha}" Grid.Column="2" LineBreakMode="TailTruncation"/>
+                                                        <Label Text="{Binding CxcMontoTotal, StringFormat='{0:N2}'}" Grid.Column="3" WidthRequest="200"/>
+
+                                                    </Grid>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+
+                                    </ListView>
+                                </StackLayout>
+                            </ScrollView>
+                        </StackLayout>
+                    </ScrollView>
+                </Frame>
+
+                <Label Text="{x:Static resources:AppResource.Detail}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Margin="0,15,0,0"/>
+
+                <Frame HorizontalOptions="FillAndExpand" HasShadow="False" Padding="0">
+
+                    <ScrollView VerticalOptions="FillAndExpand" Orientation="Horizontal">
+                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <StackLayout Orientation="Horizontal" BackgroundColor="#37474F" Spacing="0" Padding="10,5">
+                                <Label Text="{x:Static resources:AppResource.Description}" WidthRequest="150" TextColor="White"/>
+                                <Label Text="{x:Static resources:AppResource.Qty}" WidthRequest="90" TextColor="White"/>
+                                <Label Text="{x:Static resources:AppResource.Lot}" WidthRequest="90" TextColor="White"/>
+                                <Label Text="{x:Static resources:AppResource.Price}" WidthRequest="90" TextColor="White"/>
+                                <Label Text="{x:Static resources:AppResource.Discount}" WidthRequest="90" TextColor="White"/>
+                                <Label Text="Itbis" WidthRequest="90" TextColor="White"/>
+                                <Label Text="Total" WidthRequest="100" TextColor="White"/>
+                            </StackLayout>
+
+                            <ScrollView VerticalOptions="FillAndExpand" Orientation="Both">
+                                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0,0" Spacing="0">
+                                    <ListView
+                                        VerticalOptions="FillAndExpand"
+                                        HasUnevenRows="True"
+                                        CachingStrategy="RecycleElement"
+                                        SeparatorVisibility="None"
+                                        x:Name="detailList"
+                                        SelectionMode="None"
+                                        ItemsSource="{Binding Productos}"
+                                        BackgroundColor="Transparent">
+
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell>
+                                                    <Grid Padding="10,5" ColumnSpacing="0" RowSpacing="0">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="150" />
+                                                            <ColumnDefinition Width="90" />
+                                                            <ColumnDefinition Width="90" />
+                                                            <ColumnDefinition Width="90" />
+                                                            <ColumnDefinition Width="90" />
+                                                            <ColumnDefinition Width="90" />
+                                                            <ColumnDefinition Width="100" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" />
+                                                        </Grid.RowDefinitions>
+
+                                                        <Label Text="{Binding ProDescripcion}" Grid.Row="0" Grid.Column="0" FontAttributes="Bold" />
+                                                        <Label Text="{Binding Cantidad}" Grid.Column="1" Grid.Row="0" HorizontalOptions="FillAndExpand"/>
+                                                        <Label Text="{Binding CxcLote}" Grid.Row="0" Grid.Column="2" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                                                        <Label Text="{Binding CxcPrecio, StringFormat='{0:N2}'}" Grid.Column="3" Grid.Row="0" HorizontalOptions="FillAndExpand"/>
+                                                        <Label Text="{Binding CxcDescuento, StringFormat='{0:N2}'}" Grid.Column="4" Grid.Row="0" HorizontalOptions="FillAndExpand"/>
+                                                        <Label Text="{Binding MontoItbis, StringFormat='{0:N2}'}" Grid.Column="5" Grid.Row="0" HorizontalOptions="FillAndExpand"/>
+                                                        <Label Text="{Binding MontoTotal, StringFormat='{0:N2}'}" Grid.Column="6" Grid.Row="0" HorizontalOptions="FillAndExpand"  />
+                                                    </Grid>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+
+                                    </ListView>
+                                </StackLayout>
+                            </ScrollView>
+                        </StackLayout>
+                    </ScrollView>
+                </Frame>
+
+                <Button Text="{x:Static resources:AppResource.Aceptar}" TextColor="{StaticResource ColorPrimary}" HorizontalOptions="End" VerticalOptions="End" BackgroundColor="Transparent" Margin="0" Command="{Binding OnClickCommand}" CommandParameter="1" />
+            </StackLayout>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

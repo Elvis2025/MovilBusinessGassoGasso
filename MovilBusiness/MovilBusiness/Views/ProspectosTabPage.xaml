@@ -1,0 +1,658 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:ScrollableTabPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ProspectosTabPage"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:views="clr-namespace:MovilBusiness.Views.Components.Views"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior"
+             xmlns:checkbox="clr-namespace:MovilBusiness.Controls"
+                         xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:fastEntry="clr-namespace:XamarinFastEntrySample.FastEntry;assembly=XamarinFastEntry.Behaviors"
+             Title="{x:Static resources:AppResource.Propects}">
+
+    <views:ScrollableTabPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Photo}" Icon="ic_photo_camera_white_24dp" Order="Primary" Command="{Binding OnClickCommand}" CommandParameter="0" />
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Order="Primary" Icon="ic_done_white_24dp" Command="{Binding OnClickCommand}" CommandParameter="1" />
+    </views:ScrollableTabPage.ToolbarItems>
+
+    <ContentPage Title="General">
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Padding="15,10">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" InputTransparent="{Binding ControlsEnabled}">
+
+                    <Label Text="{x:Static resources:AppResource.SalesChannel}" FontAttributes="Bold" IsVisible="{Binding ShowCanalVenta}"/>
+                    <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" IsVisible="{Binding ShowCanalVenta}">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessPicker ItemsSource="{Binding TiposDeCanales}" ItemDisplayBinding="{Binding CanDescripcion}"  SelectedItem="{Binding CurrentCanalVenta}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Label Margin="0,5,0,0" IsVisible="{Binding ShowTipoCliente}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.CustomerType}" FontAttributes="Bold" />
+                                <Span Text=" * " TextColor="Red" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" IsVisible="{Binding ShowTipoCliente}">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessPicker ItemsSource="{Binding TiposClientes}" SelectedItem="{Binding CurrentTipoCliente, Mode=TwoWay}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Label Text="{x:Static resources:AppResource.VenueType}" FontAttributes="Bold" IsVisible="{Binding ShowTipoLocales}"/>
+                    <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" IsVisible="{Binding ShowTipoLocales}">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessPicker ItemsSource="{Binding TiposLocales}" SelectedItem="{Binding CurrentTipoLocal}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Label FontAttributes="Bold">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.PaymentCondition}" FontAttributes="Bold" />
+                                <Span Text=" *" TextColor="Red" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessPicker ItemsSource="{Binding CondicionesPagos}" ItemDisplayBinding="{Binding ConDescripcion}" SelectedItem="{Binding CurrentCondicionPago}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Label Text="{x:Static resources:AppResource.Status}" FontAttributes="Bold" />
+                    <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessPicker x:Name="pickerEstClientes" ItemsSource="{Binding EstadosClientes}" SelectedItem="{Binding CurrentEstadoCliente, Mode=TwoWay}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Label FontAttributes="Bold">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.Name}" FontAttributes="Bold" />
+                                <Span Text=" *" TextColor="Red" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                        <controls:BorderlessEntry MaxLength="60" Text="{Binding CliNombre, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                    </ContentView>
+
+                    <Label FontAttributes="Bold">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="RNC/" FontAttributes="Bold" />
+                                <Span Text="{x:Static resources:AppResource.IdCard}" />
+                                <Span Text=" *" TextColor="Red" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                        <controls:BorderlessEntry x:Name="bebrnccedula" Text="{Binding CliRNC, Mode=TwoWay}"
+                                                  Unfocused="BorderlessEntry_Unfocused"
+                                                  Keyboard="Numeric"
+                                                  MaxLength="20" 
+                                                  HorizontalOptions="FillAndExpand"
+                                                  VerticalOptions="Center" 
+                                                  BackgroundColor="White"
+                                                  TextChanged="bebrnccedula_TextChanged">
+                        </controls:BorderlessEntry>
+                    </ContentView>
+
+
+                    <Label FontAttributes="Bold">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.Telephone}" FontAttributes="Bold" />
+                                <Span Text=" *" TextColor="Red"  />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                        <controls:BorderlessEntry Keyboard="Telephone" Text="{Binding CliTelefono, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White">
+                            <controls:BorderlessEntry.Behaviors>
+                                <fastEntry:XamarinFastEntryBehaviour Mask="###-###-####" MaxLength="19"/>
+                            </controls:BorderlessEntry.Behaviors>
+                        </controls:BorderlessEntry>
+                    </ContentView>
+
+                    <Label Text="Email" FontAttributes="Bold" IsVisible="{Binding ShowEmail}"/>
+                    <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray" IsVisible="{Binding ShowEmail}">
+                        <controls:BorderlessEntry MaxLength="50" Keyboard="Email" Text="{Binding CliCorreoElectronico, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                    </ContentView>
+
+                    <Label Text="Whatsapp" FontAttributes="Bold"/>
+                    <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                        <controls:BorderlessEntry Keyboard="Numeric" Text="{Binding CliFax, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White">
+                            <controls:BorderlessEntry.Behaviors>
+                                <fastEntry:XamarinFastEntryBehaviour Mask="###-###-####" MaxLength="19"/>
+                            </controls:BorderlessEntry.Behaviors>
+                        </controls:BorderlessEntry>
+                    </ContentView>
+
+                    <Label FontAttributes="Bold">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.Territory}" FontAttributes="Bold" />
+                                <Span Text=" *" TextColor="Red" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessPicker ItemsSource="{Binding Territorios}" SelectedItem="{Binding CurrentTerritorio}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Label Text="{x:Static resources:AppResource.Route}" FontAttributes="Bold" IsVisible="{Binding ShowRuta}"/>
+
+                    <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" IsVisible="{Binding ShowRuta}">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessPicker ItemsSource="{Binding Rutas}" SelectedItem="{Binding CurrentRuta, Mode=TwoWay}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Label FontAttributes="Bold">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.Province}" FontAttributes="Bold" />
+                                <Span Text=" *" TextColor="Red" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessPicker ItemsSource="{Binding Provincias}" SelectedItem="{Binding CurrentProvincia}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label FontAttributes="Bold" Grid.Column="0" Grid.Row="0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{x:Static resources:AppResource.Town}" FontAttributes="Bold" />
+                                    <Span Text=" *" TextColor="Red" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" Grid.Column="0" Grid.Row="1">
+                            <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                                <controls:BorderlessPicker ItemsSource="{Binding Municipios}" SelectedItem="{Binding CurrentMunicipio, Mode=TwoWay}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                                <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                            </StackLayout>
+                        </Frame>
+
+                        <Label FontAttributes="Bold" Grid.Column="1" Grid.Row="0" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Sector" FontAttributes="Bold" />
+                                    <Span Text=" *" TextColor="Red" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" Grid.Column="1" Grid.Row="1">
+                            <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                                <controls:BorderlessPicker ItemsSource="{Binding MunSectores}" IsVisible="{Binding IsVisiblePickerSector}" SelectedItem="{Binding CurrentMunSector, Mode=TwoWay}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                                <Image BackgroundColor="White" HorizontalOptions="End"  IsVisible="{Binding IsVisiblePickerSector}" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                                <controls:BorderlessEntry Text="{Binding CliSector, Mode=TwoWay}"  IsVisible="{Binding IsVisibleEntrySector}" MaxLength="50" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+
+
+                    <Label FontAttributes="Bold" >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.Street}" FontAttributes="Bold" />
+                                <Span Text=" *" TextColor="Red" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                        <controls:BorderlessEntry Text="{Binding CliCalle, Mode=TwoWay}" MaxLength="50" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                    </ContentView>
+
+
+                    <Label FontAttributes="Bold" >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.AddrNo}" FontAttributes="Bold" />
+                                <Span Text=" *" TextColor="Red" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                        <controls:BorderlessEntry Text="{Binding CliCasa, Mode=TwoWay}" MaxLength="50" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                    </ContentView>
+
+                    <Label Text="{x:Static resources:AppResource.Urbanization}" FontAttributes="Bold"/>
+                    <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                        <controls:BorderlessEntry Text="{Binding CliUrbanizacion, Mode=TwoWay}" MaxLength="50" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                    </ContentView>
+
+                    <Label FontAttributes="Bold" >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.Contact}" FontAttributes="Bold" />
+                                <Span Text=" *" TextColor="Red" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                        <controls:BorderlessEntry Text="{Binding CliContacto, Mode=TwoWay}" MaxLength="50" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                    </ContentView>
+
+                    <Label FontAttributes="Bold" >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.CellContact}" FontAttributes="Bold" />
+                                <Span Text=" *" TextColor="Red" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                        <controls:BorderlessEntry Text="{Binding CliContactoCelular, Mode=TwoWay}" Keyboard="Telephone" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White">
+                            <controls:BorderlessEntry.Behaviors>
+                                <fastEntry:XamarinFastEntryBehaviour Mask="###-###-####" MaxLength="19"/>
+                            </controls:BorderlessEntry.Behaviors>
+                        </controls:BorderlessEntry>
+                    </ContentView>
+
+                    <Label Text="{x:Static resources:AppResource.ReceiptType}" FontAttributes="Bold" IsVisible="{Binding ShowTipoComprobante}"/>
+                    <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" IsVisible="{Binding ShowTipoComprobante}">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessPicker Title="{x:Static resources:AppResource.Select}" ItemsSource="{Binding TiposComprobante}" SelectedItem="{Binding CurrentTipoComprobante, Mode=TwoWay}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Label Text="{x:Static resources:AppResource.CommertialRegistry}" FontAttributes="Bold" IsVisible="{Binding ShowRegMercantil}"/>
+                    <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray" IsVisible="{Binding ShowRegMercantil}">
+                        <controls:BorderlessEntry Text="{Binding CliRegMercantil, Mode=TwoWay}" MaxLength="50" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                    </ContentView>
+
+                    <Label FontAttributes="Bold" IsVisible="{Binding ShowTipoNegocio}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.BusinessType}" FontAttributes="Bold" />
+                                <Span Text=" *" TextColor="Red" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Frame HasShadow="False" Padding="1"  HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" IsVisible="{Binding ShowTipoNegocio}">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessPicker ItemsSource="{Binding TipNegocio}" ItemDisplayBinding="{Binding TinDescripcion}" SelectedItem="{Binding TipNombre, Mode=TwoWay}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" BackgroundColor="White" VerticalOptions="Center"/>
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Label Text="{x:Static resources:AppResource.Classification}" FontAttributes="Bold" IsVisible="{Binding ShowClasificacion}"/>
+                    <Frame HasShadow="False" Padding="1"  HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" IsVisible="{Binding ShowClasificacion}">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessPicker ItemsSource="{Binding Clasificacion}" SelectedItem="{Binding CurrentClasificacion, Mode=TwoWay}" ItemDisplayBinding="{Binding ClaDescripcion}" Title="{x:Static resources:AppResource.SelectClassification}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Label Text="{x:Static resources:AppResource.Geolocation}" Margin="0,10,0,0" FontAttributes="Bold" FontSize="18" IsVisible="{Binding HasGps}" />
+                    <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray" IsVisible="{Binding HasGps}" />
+                    <Label Text="{x:Static resources:AppResource.Latitude}" Margin="0,5,0,0" FontAttributes="Bold"  IsVisible="{Binding HasGps}"/>
+                    <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray" IsVisible="{Binding HasGps}">
+                        <controls:BorderlessEntry IsEnabled="False" Text="{Binding Latitud, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                    </ContentView>
+
+                    <Label Text="{x:Static resources:AppResource.Length}" FontAttributes="Bold"  IsVisible="{Binding HasGps}"/>
+                    <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray" IsVisible="{Binding HasGps}">
+                        <controls:BorderlessEntry IsEnabled="False" Text="{Binding Longitud}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                    </ContentView>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,10" IsVisible="{Binding HasGps}">
+                        <Button Text="{x:Static resources:AppResource.Test}" HorizontalOptions="Start" WidthRequest="120" Command="{Binding OnClickCommand}" CommandParameter="4" />
+                        <Button Text="{x:Static resources:AppResource.Refresh}" HorizontalOptions="FillAndExpand" Command="{Binding OnClickCommand}" CommandParameter="5"/>
+                    </StackLayout>
+
+                    <!-- poner el campo vista -->
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Fill" IsVisible="{Binding OrdenAVisitarEsVisible}">
+                        <StackLayout Orientation="Horizontal">
+                            <Label x:Name="lblantes" Text="{x:Static resources:AppResource.VisitBeforeLabel}" IsEnabled="{Binding IsAntesEnabled}" FontAttributes="Bold"/>
+                            <Switch IsToggled="{Binding IsToggledVisitar}"></Switch>
+                            <Label Text="{x:Static resources:AppResource.VisitAfterLabel}" IsEnabled="{Binding IsDespuesEnabled}" FontAttributes="Bold"/>
+                        </StackLayout>
+                        <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                                <Label  HeightRequest="30" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Text="{Binding CurrenClienteAVisitarDespuesDe.CliNombre}" TextColor="Black" FontSize="18"/>
+                                <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                            </StackLayout>
+                        </Frame>
+
+                        <Label Text="{x:Static resources:AppResource.VisitSequence}" FontAttributes="Bold" Margin="0,5,0,0" />
+                        <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                            <controls:BorderlessEntry Keyboard="Numeric" Text="{Binding CliRutPosiciones, Mode=TwoWay}" MaxLength="50" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                        </ContentView>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Fill" IsVisible="{Binding OrdenRutaEsVisible}">
+                        <Label Text="{x:Static resources:AppResource.RouteOrderSelectionLabel}" FontAttributes="Bold"/>
+                            <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                                <Label  HeightRequest="30" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Text="{Binding CurrenClienteAOrdenarDespuesDe.CliNombre}" TextColor="Black" FontSize="18"/>
+                                <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                            </StackLayout>
+                        </Frame>
+
+                        <Label Text="{x:Static resources:AppResource.RouteOrder}" FontAttributes="Bold" Margin="0,5,0,0" />
+                        <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                            <controls:BorderlessEntry Keyboard="Numeric" Text="{Binding CliOrdenRutas, Mode=TwoWay}" MaxLength="50" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                        </ContentView>
+
+                    </StackLayout>
+
+                    <Label Text="{x:Static resources:AppResource.VisitFrecuency}" FontAttributes="Bold"  Grid.Column="0" Grid.Row="4" VerticalOptions="Center"  IsVisible="{Binding ShowFrecuencia}"/>
+                    <Frame HasShadow="False"  Grid.Column="1" Grid.Row="4" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray"  IsVisible="{Binding ShowFrecuencia}">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessPicker x:Name="pickercheck" SelectedIndexChanged="BorderlessPicker_SelectedIndexChanged" ItemsSource="{Binding Frecuencias}" SelectedItem="{Binding CurrentFrecuencias, Mode=TwoWay}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <StackLayout x:Name="checkboxContainer" />
+                </StackLayout>
+            </ScrollView>
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" Grid.Row="0" />
+        </Grid>
+    </ContentPage>
+    <ContentPage Title="{x:Static resources:AppResource.Reference}" Padding="15,10">
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" InputTransparent="{Binding ControlsEnabled}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Text="{x:Static resources:AppResource.ReferenceType}" FontAttributes="Bold" Margin="0,5,0,0" Grid.Column="0" Grid.Row="0" VerticalOptions="Center"/>
+            <Frame HasShadow="False" Grid.Column="1" Grid.Row="0" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                    <controls:BorderlessPicker ItemsSource="{Binding TiposReferencia}" SelectedItem="{Binding CurrentTipoReferencia}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                    <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                </StackLayout>
+            </Frame>
+
+            <Label Text="{x:Static resources:AppResource.Name}" FontAttributes="Bold" Grid.Column="0" Grid.Row="1" VerticalOptions="Center"/>
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray" Grid.Column="1" Grid.Row="1">
+                <controls:BorderlessEntry Text="{Binding CliRefNombre, Mode=TwoWay}" MaxLength="50" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.Telephone}" FontAttributes="Bold" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray" Grid.Column="1" Grid.Row="2">
+                <controls:BorderlessEntry Keyboard="Telephone" Text="{Binding CliRefTelefono, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White">
+                    <controls:BorderlessEntry.Behaviors>
+                        <fastEntry:XamarinFastEntryBehaviour Mask="###-###-####" MaxLength="19"/>
+                    </controls:BorderlessEntry.Behaviors>
+                </controls:BorderlessEntry>
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.Account}" FontAttributes="Bold" Grid.Column="0" Grid.Row="3" VerticalOptions="Center"/>
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray" Grid.Column="1" Grid.Row="3">
+                <controls:BorderlessEntry HorizontalOptions="FillAndExpand" MaxLength="20" Text="{Binding CliRefCuenta, Mode=TwoWay}" VerticalOptions="Center" BackgroundColor="White" />
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.Bank}" FontAttributes="Bold"  Grid.Column="0" Grid.Row="4" VerticalOptions="Center"/>
+            <Frame HasShadow="False"  Grid.Column="1" Grid.Row="4" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                    <controls:BorderlessPicker IsEnabled="{Binding BancoEnable}" ItemsSource="{Binding Bancos}" SelectedItem="{Binding CurrentBanco, Mode=TwoWay}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                    <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                </StackLayout>
+            </Frame>
+
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+                <Button Text="{x:Static resources:AppResource.Add}" HorizontalOptions="FillAndExpand" Command="{Binding OnClickCommand}" CommandParameter="2" />
+                <Button Text="{x:Static resources:AppResource.DeleteAll}" HorizontalOptions="End" Command="{Binding OnClickCommand}" CommandParameter="3" />
+            </StackLayout>
+
+            <ListView Grid.Row="6" 
+                     CachingStrategy="RecycleElement"
+                      ItemsSource="{Binding ClientesReferencias}"
+                      x:Name="list"
+                      ItemSelected="List_ItemSelected"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand"
+                      Margin="0,10,0,0"
+                      HasUnevenRows="True"
+                      BackgroundColor="Transparent"
+                      SeparatorVisibility="None"
+                      Grid.Column="0" 
+                      Grid.ColumnSpan="2">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ContentView BackgroundColor="LightGray" Padding="1" HorizontalOptions="FillAndExpand">
+                                <Grid HorizontalOptions="FillAndExpand" Margin="0,0,0,3" BackgroundColor="White" Padding="10,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Text="{Binding CliRefCuenta, Mode=TwoWay}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0" />
+                                    <Label Text="{Binding RefTipoDesc, Mode=TwoWay}" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="0" />
+                                    <Label HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.Column="0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResource.NameLabel}" />
+                                                <Span Text="{Binding CliRefNombre, Mode=TwoWay}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label HorizontalOptions="FillAndExpand" Grid.Row="3" Grid.Column="0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResource.TelephoneLabel}" />
+                                                <Span Text="{Binding CliRefTelefono,Mode=TwoWay}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Image BindingContext="{Binding rowguid,Mode=TwoWay}" Source="ic_delete_black_24dp" Opacity="0.6" Grid.Row="0" Grid.RowSpan="4" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnItemDeleteListener" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </ContentView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </Grid>
+    </ContentPage>
+    <ContentPage Title="{x:Static resources:AppResource.Credits}" Padding="15,10">
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" InputTransparent="{Binding ControlsEnabled}">
+            <Label Text="{x:Static resources:AppResource.CheckIssuer}" FontAttributes="Bold" Margin="0,5,0,0" />
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Text="{Binding CliNombreEmisionCheques, Mode=TwoWay}" MaxLength="50" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.EstimatedPurchase}" FontAttributes="Bold" Margin="0,5,0,0" />
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Text="{Binding CliEstimadoCompras, Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.Inventory}" FontAttributes="Bold" Margin="0,5,0,0" />
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Text="{Binding CliInventario, Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White">
+                    <controls:BorderlessEntry.Behaviors>
+                        <behaviors:NumericValidation />
+                    </controls:BorderlessEntry.Behaviors>
+                </controls:BorderlessEntry>
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.RequestedCreditLimit}" FontAttributes="Bold" Margin="0,5,0,0" />
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Text="{Binding CliLimiteCreditoSolicitado, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Keyboard="Numeric" />
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.PriceList}" FontAttributes="Bold" Margin="0,5,0,0" />
+            <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                    <controls:BorderlessPicker ItemsSource="{Binding ListaPrecios}" SelectedItem="{Binding CurrentListaPrecios, Mode=TwoWay}" Title="{x:Static resources:AppResource.Select}" HeightRequest="45" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                    <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Title="{x:Static resources:AppResource.Owner}" Padding="15,10">
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" InputTransparent="{Binding ControlsEnabled}">
+            <Label Margin="0,5,0,0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span  Text="{x:Static resources:AppResource.Name}" FontAttributes="Bold" />
+                        <Span Text=" *" TextColor="Red" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Text="{Binding CliPropietario, Mode=TwoWay}" MaxLength="50" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.Home}" FontAttributes="Bold" Margin="0,5,0,0" />
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Text="{Binding CliPropietarioDireccion, Mode=TwoWay}" MaxLength="100" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+            </ContentView>
+
+            <Label Margin="0,5,0,0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{x:Static resources:AppResource.IdCard}" FontAttributes="Bold"/>
+                        <Span Text=" *" TextColor="Red" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Keyboard="Numeric" Text="{Binding CliCedulaPropietario, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White">
+                    <controls:BorderlessEntry.Behaviors>
+                        <fastEntry:XamarinFastEntryBehaviour Mask="###-#######-#" MaxLength="19"/>
+                    </controls:BorderlessEntry.Behaviors>
+                </controls:BorderlessEntry>
+            </ContentView>
+
+            <Label Margin="0,5,0,0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{x:Static resources:AppResource.Telephone}" FontAttributes="Bold"/>
+                        <Span Text=" *" TextColor="Red" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Text="{Binding CliPropietarioTelefono, Mode=TwoWay}" Keyboard="Telephone" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White">
+                    <controls:BorderlessEntry.Behaviors>
+                        <fastEntry:XamarinFastEntryBehaviour Mask="###-###-####" MaxLength="19"/>
+                    </controls:BorderlessEntry.Behaviors>
+                </controls:BorderlessEntry>
+            </ContentView>
+
+            <Label Margin="0,5,0,0" >
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span  Text="{x:Static resources:AppResource.CellPhone}" FontAttributes="Bold"/>
+                        <Span Text=" *" TextColor="Red" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Keyboard="Telephone" Text="{Binding CliPropietarioCelular, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White">
+                    <controls:BorderlessEntry.Behaviors>
+                        <fastEntry:XamarinFastEntryBehaviour Mask="###-###-####" MaxLength="19"/>
+                    </controls:BorderlessEntry.Behaviors>
+                </controls:BorderlessEntry>
+            </ContentView>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Title="{x:Static resources:AppResource.Family}" Padding="15,10">
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" InputTransparent="{Binding ControlsEnabled}">
+            <Label Text="{x:Static resources:AppResource.Name}" FontAttributes="Bold" Margin="0,5,0,0" />
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Text="{Binding CliFamiliarNombre, Mode=TwoWay}" MaxLength="50" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.Home}" FontAttributes="Bold" Margin="0,5,0,0" />
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Text="{Binding CliFamiliarDireccion, Mode=TwoWay}" MaxLength="100" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.IdCard}" FontAttributes="Bold" Margin="0,5,0,0"/>
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Text="{Binding CliFamiliarCedula, Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White">
+                    <controls:BorderlessEntry.Behaviors>
+                        <fastEntry:XamarinFastEntryBehaviour Mask="###-#######-#" MaxLength="19"/>
+                    </controls:BorderlessEntry.Behaviors>
+                </controls:BorderlessEntry>
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.Telephone}" FontAttributes="Bold" Margin="0,5,0,0"/>
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Text="{Binding CliFamiliarTelefono, Mode=TwoWay}" Keyboard="Telephone" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White">
+                    <controls:BorderlessEntry.Behaviors>
+                        <fastEntry:XamarinFastEntryBehaviour Mask="###-###-####" MaxLength="19"/>
+                    </controls:BorderlessEntry.Behaviors>
+                </controls:BorderlessEntry>
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.CellPhone}" FontAttributes="Bold" Margin="0,5,0,0" />
+            <ContentView Padding="1" HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="LightGray">
+                <controls:BorderlessEntry Text="{Binding CliFamiliarCelular, Mode=TwoWay}" Keyboard="Telephone" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White">
+                    <controls:BorderlessEntry.Behaviors>
+                        <fastEntry:XamarinFastEntryBehaviour Mask="###-###-####" MaxLength="19"/>
+                    </controls:BorderlessEntry.Behaviors>
+                </controls:BorderlessEntry>
+            </ContentView>
+        </StackLayout>
+    </ContentPage>
+</views:ScrollableTabPage>

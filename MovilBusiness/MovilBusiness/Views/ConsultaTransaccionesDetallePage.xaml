@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.ConsultaTransaccionesDetallePage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.CheckTransactions}"
+             xmlns:dialogs="clr-namespace:MovilBusiness.Views.Components.Dialogs"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15" Spacing="0" x:Name="container">
+
+                <Label Text="{Binding DatosTransaction.Title}" FontSize="20" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                <Label Text="{Binding DatosTransaction.Data.EstDescripcion}" FontSize="15" HorizontalOptions="FillAndExpand" />
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
+                    <Label Text="No. de &#x0a;Transacción:" HorizontalOptions="Start">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="No. de" />
+                                <Span Text="&#x0a;"/>
+                                <Span Text="{x:Static resources:AppResource.Transaction}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Entry HorizontalOptions="FillAndExpand" Keyboard="Numeric" Text="{Binding TraSecuencia}" ReturnCommand="{Binding SearchCommand}" ReturnType="Search">
+                        <Entry.Behaviors>
+                            <behaviors:NumericValidation />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <ContentView HorizontalOptions="End" WidthRequest="40" BackgroundColor="Green" Opacity="0.7" VerticalOptions="Center" HeightRequest="40">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SearchCommand}" />
+                        </ContentView.GestureRecognizers>
+                        <Image Source="ic_search_white_24dp" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </ContentView>
+                </StackLayout>
+                
+                <!-- campo para busqueda cambiante -->
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Row="0" x:Name="containerSearch2" BackgroundColor="{StaticResource ColorPrimary}">
+                    <controls:TransaccionesSearchView x:Name="search2" BackgroundColor="#1976D2" />
+                </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" x:Name="containerSearch1">
+                    <Label Text="{x:Static resources:AppResource.CustomerLabel}" VerticalOptions="Center" />
+                    <Picker HorizontalOptions="FillAndExpand" Title="{x:Static resources:AppResource.Select}" x:Name="Search1" ItemsSource="{Binding Clientes}" ItemDisplayBinding="{Binding CliNombre}" SelectedItem="{Binding CurrentClient}" />
+                    </StackLayout>
+                <!-- aqui termina-->
+              
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding UseSector}">
+                    <Label Text="Sector:" VerticalOptions="Center" />
+                    <Picker HorizontalOptions="FillAndExpand" Title="{x:Static resources:AppResource.Select}" ItemsSource="{Binding Sectores}" ItemDisplayBinding="{Binding SecDescripcion}" SelectedItem="{Binding CurrentSector}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
+                </StackLayout>
+
+                <!--<Frame HasShadow="False" Padding="10" Margin="0,5,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">-->
+                <ListView 
+                    x:Name="list"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Margin="0,10,0,0"
+                    HasUnevenRows="True"
+                    CachingStrategy="RecycleElement"
+                    SeparatorVisibility="None"
+                    BackgroundColor="Transparent"
+                    ItemsSource="{Binding Transacciones}"
+                    ItemTapped="ListView_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame HorizontalOptions="FillAndExpand" Margin="0,5,0,0" Padding="10" HasShadow="False">
+                                    <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <Label Text="{Binding TransacionDescripcion}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                                        <Label Text="{x:Static resources:AppResource.NumberOfDaysLabel}" Grid.Row="1" Grid.Column="0" />
+                                        <Label Text="{Binding CantidadDiasDesdeCreacion}" Grid.Column="1" Grid.Row="1" HorizontalOptions="FillAndExpand" />
+                                        <Label Text="RepCodigo: " Grid.Row="0" Grid.Column="2" />
+                                        <Label Text="{Binding RepCodigo}" Grid.Row="0" Grid.Column="3" />
+                                        <Label Text="Sector: " Grid.Row="1" Grid.Column="2" IsVisible="{Binding UseSector}" />
+                                        <Label Text="{Binding SecDescripcion}" Grid.Row="1" Grid.Column="3" HorizontalOptions="FillAndExpand" IsVisible="{Binding UseSector}" />
+                                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" IsVisible="{Binding ShowEstatus}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{x:Static resources:AppResource.StatusLabel}" FontAttributes="Bold" />
+                                                    <Span Text="{Binding EstatusDescripcion}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label Text="No. ERP : " Grid.Row="3" Grid.Column="0" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsPedConfirmados}" />
+                                        <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" IsVisible="{Binding IsPedConfirmados}" Text="{Binding NumeroERP}"/>
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!--</Frame>-->
+            </StackLayout>
+
+            <dialogs:DialogImpresion x:Name="dialogImpresion" Grid.Row="0" IsVisible="{Binding ShowPrinter}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" />
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Views.OfertasInfoView"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="FillAndExpand"
+             Padding="10"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="Transparent">
+    <ContentView.Content>
+        <ScrollView>
+            <Grid HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+
+                </Grid.RowDefinitions>
+
+
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                    <Label Text="{x:Static resources:AppResource.OfferLabel}"
+                       FontAttributes="Bold" 
+                       Margin="10,5,0,0" />
+                    <Label Text="{Binding CantidadOfertasShow}"
+                       FontAttributes="Bold" 
+                       Margin="10,5,0,0" />
+                </StackLayout>
+
+                <Picker x:Name="comboOferta" HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding CanSelectOferta}"
+                    ItemDisplayBinding="{Binding OfeDescripcion}" 
+                    ItemsSource="{Binding Ofertas}" 
+                    SelectedItem="{Binding CurrentOferta, Mode=TwoWay}"
+                    Grid.Row="0" Grid.Column="1" Title="{x:Static resources:AppResource.SelectOffer}" />
+
+                <Label Text="{x:Static resources:AppResource.TypeLabel}" Grid.Row="1" Grid.Column="0" Margin="10,0,0,0"/>
+                <Label Text="{Binding CurrentOferta.OfeTipoDescripcion}" Grid.Row="1" Grid.Column="1" />
+
+                <Label Text="Oferta Id:" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0"/>
+                <Label Text="{Binding CurrentOferta.OfeID}" Grid.Row="2" Grid.Column="1" />
+
+                <Label Text="{x:Static resources:AppResource.PaymentCondLabel}" Grid.Row="3" Grid.Column="0" Margin="10,0,0,0"/>
+                <Label Text="{Binding CurrentOferta.ConIdDescripcion}" Grid.Row="3" Grid.Column="1" />
+
+                <Label Text="{x:Static resources:AppResource.SeeProductsUpper}" Margin="10,10,0,0" TextColor="{StaticResource ColorPrimary}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" IsVisible="{Binding CurrentOferta.IsMancomunada}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding VerProductosDescuentoCommand}" CommandParameter="1"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Text="{x:Static resources:AppResource.SeeCustomers}" Margin="10,10,0,0" TextColor="{StaticResource ColorPrimary}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" IsVisible="{Binding CurrentOferta.isConsultaGeneral}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding VerClientesCommand}" CommandParameter="1"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Text="OFERTA VALIDA PARA TODOS LOS CLIENTES" Margin="10,10,0,0" TextColor="{StaticResource ColorPrimary}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" IsVisible="{Binding NotIsConsultaGeneral}"/>
+
+                <StackLayout HorizontalOptions="FillAndExpand" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,0,0,0">
+
+                    <Label Text="{x:Static resources:AppResource.ProductLabel}" IsVisible="{Binding PrductosValidos}"/>
+                    <Label Text="{Binding ProductoAplicar}"/>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{x:Static resources:AppResource.OfferMaxQuantityLabel}" />
+                        <Label HorizontalOptions="FillAndExpand" Text="{Binding CurrentOferta.OfeCantidadMax}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{x:Static resources:AppResource.OfferMaxTransactionQuantityLabel}" />
+                        <Label HorizontalOptions="FillAndExpand" Text="{Binding CurrentOferta.OfeCantidadMaximaTransaccion}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" IsVisible="{Binding CurrentOferta.IsOfertaAcumulada}">
+                        <Label Text="Ventas Acumuladas: " />
+                        <Label HorizontalOptions="FillAndExpand" Text="{Binding CurrentOferta.CantidadVentasAcumulada}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" IsVisible="{Binding CurrentOferta.IsOfertaAcumulada}">
+                        <Label Text="Ofertas Acumuladas:  " />
+                        <Label HorizontalOptions="FillAndExpand" Text="{Binding CurrentOferta.CantidadOfertasAcumulada}"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <Label Text="{x:Static resources:AppResource.Validity}"  FontAttributes="Bold" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,0,0,0">
+                    <Label Text="{x:Static resources:AppResource.SinceLabel}" />
+                    <Label HorizontalOptions="FillAndExpand" Text="{Binding CurrentOferta.FechaDesde}"/>
+                    <Label Text="{x:Static resources:AppResource.UntilLabel}" />
+                    <Label HorizontalOptions="FillAndExpand" Text="{Binding CurrentOferta.FechaHasta}" />
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="FillAndExpand" Padding="0" VerticalOptions="FillAndExpand" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" >
+                    <StackLayout Padding="10,5" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#37474F">
+                        <Label Text="{x:Static resources:AppResource.Quantity}" TextColor="White" WidthRequest="80" LineBreakMode="TailTruncation"/>
+                        <Label Text="{x:Static resources:AppResource.Reference}" TextColor="White" WidthRequest="80" LineBreakMode="TailTruncation"/>
+                        <Label Text="{x:Static resources:AppResource.Offer}" TextColor="White" WidthRequest="50" LineBreakMode="TailTruncation"/>
+                        <Label Text="{x:Static resources:AppResource.PercentPrice}" TextColor="White" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation"/>
+                    </StackLayout>
+
+                    <ListView HorizontalOptions="FillAndExpand"
+                          VerticalOptions="FillAndExpand"
+                          x:Name="list"
+                          HasUnevenRows="True"
+                          SeparatorVisibility="None"
+                          ItemsSource="{Binding OfertaDetalles}"
+                          CachingStrategy="RecycleElement"
+                          BackgroundColor="Transparent"
+                          SelectionMode="None">
+
+                        <ListView.HeightRequest>
+                            <OnIdiom x:TypeArguments="x:Double" Phone="75" Tablet="200" />
+                        </ListView.HeightRequest>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid HorizontalOptions="FillAndExpand" Padding="10,5" ColumnSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="50" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Text="{Binding OfeCantidad}" Grid.Column="0" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding ProDescripcion1}" Grid.Column="1" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding OfeCantidadOferta}" Grid.Column="2" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding ValorOferta}" Grid.Column="3" LineBreakMode="TailTruncation"/>
+
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

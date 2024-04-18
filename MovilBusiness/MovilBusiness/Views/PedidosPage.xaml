@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.PedidosPage"
+             NavigationPage.HasNavigationBar="False"
+                  xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:views="clr-namespace:MovilBusiness.views"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls">
+
+    <MasterDetailPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Resume}" Icon="baseline_shopping_cart_white_24" Order="Primary" Command="{Binding MenuItemCommand}" CommandParameter="1" />
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Icon="ic_arrow_forward_white_24dp" Order="Primary" Command="{Binding MenuItemCommand}" CommandParameter="2" />
+    </MasterDetailPage.ToolbarItems>
+    
+    <MasterDetailPage.Master>
+        <ContentPage Icon="ic_menu_white_24dp" Title="Menu"
+                 BackgroundColor="#e8e8e8">
+            <controls:DrawerLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+    <MasterDetailPage.Detail>
+        <NavigationPage BarTextColor="White" BarBackgroundColor="#1976D2">
+            <x:Arguments>
+                <TabbedPage>
+                    <views:PedidosProductosPage x:Name="productosTab">
+                        <views:PedidosProductosPage.Icon>
+                            <OnPlatform x:TypeArguments="FileImageSource" Android="" iOS="ic_shopping_basket_black_24dp" />
+                        </views:PedidosProductosPage.Icon>
+                    </views:PedidosProductosPage>
+                    <views:PedidosConfigurarPage x:Name="configurarTab">
+                        <views:PedidosConfigurarPage.Icon>
+                            <OnPlatform x:TypeArguments="FileImageSource" Android="" iOS="ic_build_black_24dp" />
+                        </views:PedidosConfigurarPage.Icon>
+                    </views:PedidosConfigurarPage>
+                </TabbedPage>
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>

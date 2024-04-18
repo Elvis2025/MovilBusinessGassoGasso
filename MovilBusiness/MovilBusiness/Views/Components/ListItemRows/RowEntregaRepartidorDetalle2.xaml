@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             x:Class="MovilBusiness.Views.Components.ListItemRows.RowEntregaRepartidorDetalle2">
+
+
+    <Frame HorizontalOptions="FillAndExpand" Padding="0" BackgroundColor="{Binding RowColor}" CornerRadius="4" Margin="0,0,0,5">
+        <Frame.HasShadow>
+            <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+        </Frame.HasShadow>
+
+        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0" BackgroundColor="White" ColumnSpacing="0" Padding="10,0" Margin="5,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Column="0" Spacing="0" VerticalOptions="Center">
+                <Label FontAttributes="Bold">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding ProCodigo}" />
+                            <Span Text=" - " />
+                            <Span Text="{Binding ProDescripcion}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <StackLayout Margin="0,3,0,0" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding UsaLote}">
+                    <Label Text="{x:Static resources:AppResource.LotLabel}" VerticalOptions="Center" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Lote, Mode=TwoWay}" ReturnType="Done" Completed="OnOkClicked"/>
+                </StackLayout>
+
+                <Label IsVisible="{Binding TraIndicadorOferta}" HorizontalOptions="End" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White" Margin="0,0,0,3">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="  **" />
+                            <Span Text="{x:Static resources:AppResource.Offer}" />
+                            <Span Text= "{Binding ShowProIDoferta}" />
+                            <Span Text="**  " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+            <BoxView Grid.Column="1" VerticalOptions="FillAndExpand" Margin="5" HorizontalOptions="End" WidthRequest="1" Color="LightGray" />
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="End" Grid.Column="2" Spacing="0" VerticalOptions="Center">
+                <Label Text="{x:Static resources:AppResource.Quantity}" HorizontalOptions="Center" />
+                <Entry HorizontalOptions="FillAndExpand" Completed="OnOkClicked" ReturnType="Done" Margin="0" Text="{Binding Cantidad, Mode=TwoWay}" Keyboard="Numeric" HorizontalTextAlignment="Center" />
+
+                <Label HorizontalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="/" />
+                            <Span Text="{Binding CantidadSolicitada}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+<!--
+                <Label Text="Aceptar" Margin="0,3,0,0" TextColor="{StaticResource ColorPrimary}" HorizontalOptions="Center" VerticalOptions="End">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnOkClicked" />
+                    </Label.GestureRecognizers>
+                </Label>-->
+            </StackLayout>
+
+        </Grid>
+    </Frame>
+
+</ViewCell>

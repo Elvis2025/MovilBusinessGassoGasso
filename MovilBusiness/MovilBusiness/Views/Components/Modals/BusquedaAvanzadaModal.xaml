@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.BusquedaAvanzadaModal"
+             Title="Busqueda avanzada"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+              NavigationPage.HasNavigationBar="False"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}" >
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="15" iOS="15,30,15,15" />
+                </StackLayout.Padding>
+
+                <Image HorizontalOptions="Start" Source="ic_close_white" VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="{x:Static resources:AppResource.AdvancedSearch}" Margin="10,0" FontAttributes="Bold" FontSize="17" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="White" />
+            </StackLayout>
+
+            <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                        <Grid HorizontalOptions="FillAndExpand" Padding="5" VerticalOptions="Center">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!--<Label Text="Desde:"    VerticalOptions="Center" FontAttributes="Bold" Grid.Column="0" Grid.Row="0"/>-->
+                            <!--<Entry x:Name="editDesde" IsVisible="{Binding Cat3IdEsVisible}" Keyboard="Numeric" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="0">-->
+                            <Label Text="{Binding Cat3Id}"   IsVisible="{Binding Cat3IdEsVisible}" VerticalOptions="Center" FontAttributes="Bold" Grid.Column="0" Grid.Row="0"/>
+                            <Entry x:Name="editCat3Id" IsVisible="{Binding Cat3IdEsVisible}" Keyboard="Numeric" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="0">
+                                <Entry.Behaviors>
+                                    <behaviors:NumericValidation />
+                                </Entry.Behaviors>
+                            </Entry>
+
+                            <!--<Label Text="Marca" FontAttributes="Bold" VerticalOptions="Center" Grid.Column="0" Grid.Row="1"/>-->
+                            <!--<Entry x:Name="editMarca" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="1"/>-->
+                            <Label Text="{Binding ProDescripcion1}" FontAttributes="Bold" VerticalOptions="Center" Grid.Column="0" Grid.Row="1"/>
+                            <Entry x:Name="editProDescripcion1" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="1"/>
+
+                            <!--<Label Text="Modelo" FontAttributes="Bold" VerticalOptions="Center"  Grid.Column="0" Grid.Row="2"/>-->
+                            <!--<Entry x:Name="editModelo" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="2"/>-->
+                            <Label Text="{Binding ProDescripcion2}" IsVisible="{Binding ProDescripcion2EsVisible}" FontAttributes="Bold" VerticalOptions="Center"  Grid.Column="0" Grid.Row="2"/>
+                            <Entry x:Name="editProDescripcion2" IsVisible="{Binding ProDescripcion2EsVisible}" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="2"/>
+
+                            <!--<Label Text="Codigo" FontAttributes="Bold" VerticalOptions="Center"  Grid.Column="0" Grid.Row="3"/>-->
+                            <!--<Entry x:Name="editCodigo" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="3"/>-->
+                            <Label Text="{Binding ProCodigo}" FontAttributes="Bold" VerticalOptions="Center"  Grid.Column="0" Grid.Row="3"/>
+                            <Entry x:Name="editProCodigo" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="3"/>
+
+                            <!--<Label Text="Articulo" FontAttributes="Bold" VerticalOptions="Center"  Grid.Column="0" Grid.Row="4"/>-->
+                            <!--<Entry x:Name="editArticulo" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="4"/>-->
+                            <Label Text="{Binding ProDescripcion}" FontAttributes="Bold" VerticalOptions="Center"  Grid.Column="0" Grid.Row="4"/>
+                            <Entry x:Name="editProDescripcion" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="4"/>
+
+                            <!--<Label Text="Texto" FontAttributes="Bold" VerticalOptions="Center" Grid.Column="0" Grid.Row="5"/>-->
+                            <!--<Entry x:Name="editTexto" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="5"/>-->
+                            <Label Text="{Binding ProDatos1}" FontAttributes="Bold" VerticalOptions="Center" Grid.Column="0" Grid.Row="5"/>
+                            <Entry x:Name="editProDatos1" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="5"/>
+
+                            <!--<Label Text="Marca del producto" FontAttributes="Bold" VerticalOptions="Center" Grid.Column="0" Grid.Row="6"/>-->
+                            <!--<Entry x:Name="editMarcaProducto" IsVisible="{Binding ProReferenciaEsVisible}" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="6"/>-->
+                            <Label Text="{Binding ProReferencia}" IsVisible="{Binding ProReferenciaEsVisible}" FontAttributes="Bold" VerticalOptions="Center" Grid.Column="0" Grid.Row="6"/>
+                            <Entry x:Name="editProReferencia" IsVisible="{Binding ProReferenciaEsVisible}" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="6"/>
+
+                            <Label Text="{Binding ProDescripcion3}"  IsVisible="{Binding ProDescripcion3EsVisible}" FontAttributes="Bold" VerticalOptions="Center" Grid.Column="0" Grid.Row="7"/>
+                            <Entry x:Name="editProDescripcion3"  IsVisible="{Binding ProDescripcion3EsVisible}" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="7"/>
+
+                            <Label Text="{Binding ProDatos2}"  IsVisible="{Binding ProDatos2EsVisible}" FontAttributes="Bold" VerticalOptions="Center" Grid.Column="0" Grid.Row="8"/>
+                            <Entry x:Name="editProDatos2"  IsVisible="{Binding ProDatos2EsVisible}" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="8"/>
+
+
+
+                            <Label Text="{Binding ProColor}"  IsVisible="{Binding ProColorEsVisible}" FontAttributes="Bold" VerticalOptions="Center" Grid.Column="0" Grid.Row="9"/>
+                            <Entry x:Name="editProColor"  IsVisible="{Binding ProColorEsVisible}" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="9"/>
+                            <Label Text="{Binding ProPaisOrigen}"  IsVisible="{Binding ProPaisOrigenEsVisible}" FontAttributes="Bold" VerticalOptions="Center" Grid.Column="0" Grid.Row="10"/>
+                            <Entry x:Name="editProPaisOrigen"  IsVisible="{Binding ProPaisOrigenEsVisible}" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="10"/>
+                            <Label Text="{Binding ProAnio}"  IsVisible="{Binding ProAnioEsVisible}" FontAttributes="Bold" VerticalOptions="Center" Grid.Column="0" Grid.Row="11"/>
+                            <Entry x:Name="editProAnio"  IsVisible="{Binding ProAnioEsVisible}" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="11"/>
+                            <Label Text="{Binding ProMedida}"  IsVisible="{Binding ProMedidaEsVisible}" FontAttributes="Bold" VerticalOptions="Center" Grid.Column="0" Grid.Row="12"/>
+                            <Entry x:Name="editProMedida"  IsVisible="{Binding ProMedidaEsVisible}" HorizontalOptions="FillAndExpand"  Grid.Column="1" Grid.Row="12"/>
+                        </Grid>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="5" Spacing="10"    >
+                            <Button Text="{x:Static resources:AppResource.Cancel}" Clicked="Dismiss" VerticalOptions="FillAndExpand" TextColor="{StaticResource ColorPrimary}" BackgroundColor="Transparent"  />
+                            <Button HorizontalOptions="End" Text="{x:Static resources:AppResource.Aceptar}" Clicked="AceptarFiltros" TextColor="White" BackgroundColor="{StaticResource ColorPrimary}" HeightRequest="35" WidthRequest="100" />
+                        </StackLayout>
+
+                    </StackLayout>
+                </ScrollView>
+            </ContentView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

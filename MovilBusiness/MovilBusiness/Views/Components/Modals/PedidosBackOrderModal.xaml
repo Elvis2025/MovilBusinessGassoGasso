@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.PedidosBackOrderModal"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HasShadow="False" Padding="0">
+                <Frame.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="10,50" Tablet="35,70" />
+                </Frame.Margin>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                    <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource ColorPrimary}" HorizontalOptions="FillAndExpand" HeightRequest="55">
+                        <ContentView VerticalOptions="FillAndExpand" HorizontalOptions="Start" Padding="10,0,0,0">
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Dismiss" />
+                            </ContentView.GestureRecognizers>
+                            <Image Source="ic_close_white" VerticalOptions="Center" />
+                        </ContentView>
+                        <Label Text="{x:Static resources:AppResource.BackOrders}" FontAttributes="Bold" FontSize="16" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="20,0,0,0" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="10,5" BackgroundColor="#37474F" Spacing="0">
+                        <Label Text="{x:Static resources:AppResource.Code}" TextColor="White" HorizontalOptions="Start" WidthRequest="70"/>
+                        <Label Text="{x:Static resources:AppResource.Description}" TextColor="White" HorizontalOptions="FillAndExpand" />
+                        <Label Text="{x:Static resources:AppResource.Quantity}" TextColor="White" HorizontalOptions="End" WidthRequest="70"/>
+                    </StackLayout>
+
+                    <ListView
+                        x:Name="list"
+                        HorizontalOptions="FillAndExpand" 
+                        VerticalOptions="FillAndExpand"
+                        ItemsSource="{Binding Productos}"
+                        HasUnevenRows="True"
+                        SeparatorVisibility="None"
+                        CachingStrategy="RecycleElement"
+                        BackgroundColor="Transparent"
+                        ItemSelected="OnList_ItemSelected">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid HorizontalOptions="FillAndExpand" Margin="10,5" ColumnSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="70" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Text="{Binding ProCodigo}" Grid.Column="0" HorizontalOptions="FillAndExpand" />
+                                        <Label Text="{Binding Descripcion}" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
+                                        <Label Text="{Binding Cantidad}" Grid.Column="2" HorizontalOptions="FillAndExpand"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </StackLayout>
+
+            </Frame>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

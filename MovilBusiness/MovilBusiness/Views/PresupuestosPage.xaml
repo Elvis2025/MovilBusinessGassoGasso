@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.PresupuestosPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Budgets}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:configuration="clr-namespace:MovilBusiness.Configuration"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Visualization}" Icon="baseline_remove_red_eye_white_24" Order="Primary" Command="{Binding ChangeVisualizationCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0">
+
+                <Grid HorizontalOptions="FillAndExpand" Padding="10" BackgroundColor="{StaticResource ColorPrimary}" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout IsClippedToBounds="True" Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10" Spacing="5">
+                        <Frame HasShadow="False" HorizontalOptions="FillAndExpand" BackgroundColor="White" Padding="0" IsVisible="{Binding RepIndicadorSupervisor, Source={x:Static configuration:Arguments.CurrentUser}}">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="45" IsClippedToBounds="True">
+                                <Label Text="{x:Static resources:AppResource.Representative}" Margin="5,0,0,0" VerticalOptions="Center">
+                                    <Label.WidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double" Android="90" iOS="110" />
+                                    </Label.WidthRequest>
+                                    <Label.MinimumWidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double" Android="90" iOS="110" />
+                                    </Label.MinimumWidthRequest>
+                                </Label>
+                                <BoxView VerticalOptions="Center" WidthRequest="1" Color="Gray" Opacity="0.8" HeightRequest="30" />
+                                <controls:BorderlessPicker HorizontalOptions="FillAndExpand" Title="{x:Static resources:AppResource.SelectRepresentative}" FontSize="14" ItemsSource="{Binding Representantes}" ItemDisplayBinding="{Binding RepNombre}" SelectedItem="{Binding CurrentRepresentante}" />
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame HasShadow="False" HorizontalOptions="FillAndExpand" BackgroundColor="White" Padding="0">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="45">
+                                <Label Text="{x:Static resources:AppResource.Budget}" Margin="5,0,0,0" VerticalOptions="Center">
+                                    <Label.WidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double" Android="90" iOS="100" />
+                                    </Label.WidthRequest>
+                                    <Label.MinimumWidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double" Android="90" iOS="100" />
+                                    </Label.MinimumWidthRequest>
+                                </Label>
+                                <BoxView VerticalOptions="Center" WidthRequest="1" Color="Gray" Opacity="0.8" HeightRequest="30" HorizontalOptions="Start" />
+                                <controls:BorderlessPicker HorizontalOptions="Fill" Title="{x:Static resources:AppResource.SelectBudget}" FontSize="14" ItemsSource="{Binding TiposPresupuestos}" ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding CurrentTipoPresupuesto}" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <Label Text="{x:Static resources:AppResource.Year}" TextColor="LightGray" Grid.Row="1" Grid.Column="0" Margin="10,0,0,0" />
+                    <Label Text="{x:Static resources:AppResource.Month}" TextColor="LightGray" Grid.Row="1" Grid.Column="1" Margin="0,0,10,0" />
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectAnyoCommand}" />
+                        </StackLayout.GestureRecognizers>
+                        <Label Text="{Binding CurrentAnyo.Value}" TextColor="White" FontSize="20"  />
+                        <BoxView HorizontalOptions="FillAndExpand" Margin="0,0,10,0" Color="White">
+                            <BoxView.HeightRequest>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="1" Tablet="2" />
+                            </BoxView.HeightRequest>
+                        </BoxView>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.Column="1" Margin="0,0,10,0" >
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectMesCommand}" />
+                        </StackLayout.GestureRecognizers>
+                        <Label Text="{Binding CurrentMes.Descripcion}" TextColor="White" FontSize="20" />
+                        <BoxView Color="White" Margin="0,0,10,0" HorizontalOptions="FillAndExpand">
+                            <BoxView.HeightRequest>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="1" Tablet="2" />
+                            </BoxView.HeightRequest>
+                        </BoxView>
+                    </StackLayout>
+                </Grid>
+                
+                <Grid HorizontalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />                       
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal" Grid.Column="3" Margin="10,0" HorizontalOptions="FillAndExpand">
+                    <Label Text="Online" VerticalOptions="Start"/>
+                    <Switch IsToggled="{Binding IsOnline, Mode=TwoWay}"/>
+                </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Column="0" Margin="10,0,0,0" >
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding FiltrarLogros}" />
+                        </StackLayout.GestureRecognizers>
+                        <Label Text="{x:Static resources:AppResource.FilterAchievements}" VerticalOptions="Start" FontSize="Default" TextColor="#1565C0"/>
+                 </StackLayout>
+                </Grid>
+
+                <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" HasShadow="False" Margin="10,0,10,10">
+                    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <microcharts:ChartView Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Chart="{Binding PresuChart}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
+                        <ScrollView Orientation="Horizontal" BackgroundColor="White" HorizontalOptions="FillAndExpand"  IsVisible="{Binding ShowTableView}" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                            <StackLayout Orientation="Vertical" Spacing="0">
+
+                                <StackLayout Orientation="Horizontal" Spacing="0" BackgroundColor="#37474F" Padding="10,5">
+                                    <Label Text="" TextColor="White" WidthRequest="30" />
+                                    <Label Text="{x:Static resources:AppResource.Description}" TextColor="White" WidthRequest="150" />
+                                    <Label Text="{x:Static resources:AppResource.Budget}" TextColor="White" WidthRequest="150" />
+                                    <Label Text="{x:Static resources:AppResource.Executed}" TextColor="White" WidthRequest="150" />
+                                    <Label Text="{x:Static resources:AppResource.Achievements}" TextColor="White" WidthRequest="150" />
+                                    <Label Text="Faltante" TextColor="White" WidthRequest="150" />
+                                </StackLayout>
+
+                                <ListView
+                                    HasUnevenRows="True"
+                                    VerticalOptions="FillAndExpand"
+                                    ItemsSource="{Binding Presupuestos}"
+                                    CachingStrategy="RecycleElement"
+                                    x:Name="tableList"
+                                    ItemTapped="OnListItemSelected"
+                                    SeparatorVisibility="None"
+                                    BackgroundColor="Transparent"
+                                    SelectionMode="None">
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Grid ColumnSpacing="0" Padding="10,5">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="30" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Source="ic_add_circle_outline_black_24dp" VerticalOptions="Center" IsVisible="{Binding isVisibleAdd}" Opacity="0.7" Grid.Column="0" Margin="0,0,0,0" />
+                                                    <Label Text="{Binding Descripcion}" Grid.Column="1" />
+                                                    <Label Text="{Binding PrePresupuestoString}" Grid.Column="2" />
+                                                    <Label Text="{Binding PreEjecutadoString}" Grid.Column="3" />
+                                                    <Label Text="{Binding CumplimientoString}" Grid.Column="4" />
+                                                    <Label Text="{Binding FaltanteString}" Grid.Column="5" />
+                                                </Grid>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+
+                                </ListView>
+
+                            </StackLayout>
+                        </ScrollView>
+                        <Label BackgroundColor="White" Text="{x:Static resources:AppResource.ViewNotAvailable}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding EmptyLabelVisible}" />
+                    </AbsoluteLayout>
+                </Frame>
+            </StackLayout>
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

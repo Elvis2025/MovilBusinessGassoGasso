@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.TemplateSelector.Reportes.GastosRow"
+             HorizontalOptions="FillAndExpand"
+      RowSpacing="0"
+             Padding="10,5">
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+
+    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Proveedor: " FontAttributes="Bold" />
+                <Span Text="{Binding GasNombreProveedor}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+    <Label Grid.Row="0" Grid.Column="2" HorizontalOptions="End">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="RNC: " FontAttributes="Bold" />
+                <Span Text="{Binding GasRNC}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+
+    <Label Grid.Column="0" Grid.Row="1" HorizontalOptions="Start">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Fecha: " FontAttributes="Bold" />
+                <Span Text="{Binding GasFecha}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+
+    <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="NCF: " FontAttributes="Bold" />
+                <Span Text="{Binding GasNCF}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+
+    <Label Grid.Column="0" Grid.Row="2" HorizontalOptions="StartAndExpand">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Tipo gasto: " FontAttributes="Bold" />
+                <Span Text="{Binding TipoGasto}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+    <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="EndAndExpand">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Factura: " FontAttributes="Bold" />
+                <Span Text="{Binding GasNoDocumento}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+
+    <Label Grid.Column="0" Grid.Row="3" HorizontalOptions="StartAndExpand">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Monto Suj. Itbis: " FontAttributes="Bold" />
+                <Span Text="$" />
+                <Span Text="{Binding GasBaseImponible, StringFormat='{0:N2}'}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+    <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="EndAndExpand">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Itbis: " FontAttributes="Bold" />
+                <Span Text="$" />
+                <Span Text="{Binding GasItebis, StringFormat='{0:N2}'}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+
+    <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="StartAndExpand">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Propina: " FontAttributes="Bold" />
+                <Span Text="$" />
+                <Span Text="{Binding GasPropina, StringFormat='{0:N2}'}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+
+    <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="EndAndExpand">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Monto: " FontAttributes="Bold" />
+                <Span Text="$" />
+                <Span Text="{Binding GasMontoTotal, StringFormat='{0:N2}'}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+
+    
+    
+</Grid>

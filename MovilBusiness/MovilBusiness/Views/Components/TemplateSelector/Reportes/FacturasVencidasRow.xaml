@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.TemplateSelector.Reportes.FacturasVencidasRow"
+             HorizontalOptions="FillAndExpand"
+      Padding="10,5">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+
+    <Label Grid.Row="0" Grid.Column="0" Text="{Binding CliNombre}" HorizontalOptions="FillAndExpand" />
+
+    <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsVisbleMoneda}">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Moneda: " FontAttributes="Bold" />
+                <Span Text="{Binding MonSigla}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+
+    <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="End">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Fecha: " FontAttributes="Bold" />
+                <Span Text="{Binding Fecha}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+
+    <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Factura: " FontAttributes="Bold" />
+                <Span Text="{Binding Factura}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+
+    <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="End">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Balance: " FontAttributes="Bold" />
+                <Span Text="$" />
+                <Span Text="{Binding Balance, StringFormat='{0:N2}'}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+    
+</Grid>

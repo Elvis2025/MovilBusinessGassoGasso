@@ -1,0 +1,1599 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{165C31AC-5434-4A1F-A99E-0C56A7B38513}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MovilBusiness.iOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>MovilBusiness.iOS</AssemblyName>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer: Milquiades Diaz Garcia (F2EL69NTVJ)</CodesignKey>
+    <CodesignProvision />
+    <CodesignExtraArgs />
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <CodesignResourceRules />
+    <CodesignEntitlements />
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignKey>iPhone Developer: Milka Diaz Cleto (42542H7DGQ)</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>MB Dev</CodesignProvision>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchFastDev>true</MtouchFastDev>
+    <MtouchSdkVersion>12.1</MtouchSdkVersion>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>ARM64</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>Apple Distribution: Movil Developer and Software, SRL (XPSMZ5H5VW)</CodesignKey>
+    <CodesignEntitlements>
+    </CodesignEntitlements>
+    <BuildIpa>false</BuildIpa>
+    <CodesignProvision>AdHocProfile</CodesignProvision>
+    <CodesignExtraArgs />
+    <CodesignResourceRules />
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchArch>ARM64</MtouchArch>
+    <BuildIpa>True</BuildIpa>
+    <CodesignProvision>
+    </CodesignProvision>
+    <CodesignKey>iPhone Developer: Milquiades Diaz Garcia (F2EL69NTVJ)</CodesignKey>
+    <CodesignEntitlements>
+    </CodesignEntitlements>
+    <CodesignExtraArgs />
+    <CodesignResourceRules />
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <MtouchSdkVersion>12.1</MtouchSdkVersion>
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\iPhone\AppStore</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\AppInfoManager.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Printers\ConnectionImpl.cs" />
+    <Compile Include="Printers\PrinterDiscoveryImpl.cs" />
+    <Compile Include="renders\BasePageRenderer.cs" />
+    <Compile Include="renders\BorderlessDatePickerRenderer.cs" />
+    <Compile Include="renders\BorderlessEntryRenderer.cs" />
+    <Compile Include="renders\BorderlessPickerRenderer.cs" />
+    <Compile Include="renders\CameraPreviewRenderer.cs" />
+    <Compile Include="renders\ContentViewGradientRenderer.cs" />
+    <Compile Include="renders\UserNotificationCenterDelegate.cs" />
+    <Compile Include="services\AppUpgraderImpl.cs" />
+    <Compile Include="services\DialerServiceiOS.cs" />
+    <Compile Include="services\ScreenManipulator.cs" />
+    <Compile Include="TouchEffect.cs" />
+    <Compile Include="TouchRecognizer.cs" />
+    <Compile Include="ui\DialogCargaInicialImpl.cs" />
+    <Compile Include="ui\DialogInputImpl.cs" />
+    <Compile Include="ui\DialogOpcionesVisitasiOS.cs" />
+    <Compile Include="ui\ShareDialogImpl.cs" />
+    <Compile Include="ui\ShoToastForCount.cs" />
+    <Compile Include="Utils\KeyboardHelperImpl.cs" />
+    <Compile Include="Utils\OfficeManagerImpl.cs" />
+    <Compile Include="Utils\PlatformImageConverterImpl.cs" />
+    <Compile Include="Web References\WebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <None Include="Entitlements.plist" />
+    <None Include="Info.plist">
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Web References\WebService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebService\Servicios.wsdl" />
+    <None Include="Web References\WebService\_EmpresasC.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\Default-Portrait.png" />
+    <BundleResource Include="Resources\Default-Portrait%402x.png" />
+    <BundleResource Include="Resources\Default.png" />
+    <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\Icon-60%402x.png" />
+    <BundleResource Include="Resources\Icon-60%403x.png" />
+    <BundleResource Include="Resources\Icon-76.png" />
+    <BundleResource Include="Resources\Icon-76%402x.png" />
+    <BundleResource Include="Resources\Icon-Small-40.png" />
+    <BundleResource Include="Resources\Icon-Small-40%402x.png" />
+    <BundleResource Include="Resources\Icon-Small-40%403x.png" />
+    <BundleResource Include="Resources\Icon-Small.png" />
+    <BundleResource Include="Resources\Icon-Small%402x.png" />
+    <BundleResource Include="Resources\Icon-Small%403x.png" />
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.EnterpriseServices, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DLToolkit.Forms.Controls.FlowListView">
+      <Version>2.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="ESCPOS_NET">
+      <Version>3.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="LinkOS_Xamarin_SDK">
+      <Version>1.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microcharts.Forms">
+      <Version>0.7.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp">
+      <Version>4.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Identity.Client">
+      <Version>4.46.2</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.BLE">
+      <Version>2.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.Fingerprint">
+      <Version>1.4.9</Version>
+    </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>1.1.4.168</Version>
+    </PackageReference>
+    <PackageReference Include="SkiaSharp.Views.Forms">
+      <Version>1.68.0</Version>
+    </PackageReference>
+    <PackageReference Include="sqlite-net-sqlcipher">
+      <Version>1.8.116</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.Connectivity">
+      <Version>3.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.Geolocator">
+      <Version>4.5.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugins.Notifier">
+      <Version>3.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>1.3.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Forms">
+      <Version>2.4.11.982</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.1180" />
+    <PackageReference Include="Xamarin.Forms.Maps">
+      <Version>4.4.0.991537</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms.PinchZoomImage">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="XamarinFastEntry.Behaviors">
+      <Version>1.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="ZXing.Net.Mobile">
+      <Version>2.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="ZXing.Net.Mobile.Forms">
+      <Version>2.4.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://movilbusiness.com.do/wsMovilbusiness1076/Servicios.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WebService\</RelPath>
+      <UpdateFromURL>http://movilbusiness.com.do/wsMovilbusiness1076/Servicios.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\WebService\Servicios.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_cliente.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_presupuesto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_productos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_ruta_visitas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_sync.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_close_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MovilBusiness\MovilBusiness.csproj">
+      <Project>{8c4d408d-d182-46eb-9e15-a7976e56229c}</Project>
+      <Name>MovilBusiness</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-1024.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-120.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-152.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-167.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-180.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-20.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-29.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-58.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-60.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-80.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-87.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_adjust_white_48.imageset\baseline_adjust_white_48pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_adjust_white_48.imageset\baseline_adjust_white_48pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_adjust_white_48.imageset\baseline_adjust_white_48pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_arrow_downward_black_24.imageset\baseline_arrow_downward_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_arrow_downward_black_24.imageset\baseline_arrow_downward_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_arrow_downward_black_24.imageset\baseline_arrow_downward_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_arrow_upward_black_24.imageset\baseline_arrow_upward_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_arrow_upward_black_24.imageset\baseline_arrow_upward_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_arrow_upward_black_24.imageset\baseline_arrow_upward_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_backup_black_24.imageset\baseline_backup_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_backup_black_24.imageset\baseline_backup_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_backup_black_24.imageset\baseline_backup_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_border_color_white_24.imageset\baseline_border_color_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_border_color_white_24.imageset\baseline_border_color_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_border_color_white_24.imageset\baseline_border_color_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_cancel_black_24.imageset\baseline_cancel_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_cancel_black_24.imageset\baseline_cancel_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_cancel_black_24.imageset\baseline_cancel_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_chevron_right_black_24.imageset\baseline_chevron_right_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_chevron_right_black_24.imageset\baseline_chevron_right_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_chevron_right_black_24.imageset\baseline_chevron_right_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_delete_sweep_black_24.imageset\baseline_delete_sweep_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_delete_sweep_black_24.imageset\baseline_delete_sweep_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_delete_sweep_black_24.imageset\baseline_delete_sweep_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_error_outline_black_24.imageset\baseline_error_outline_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_error_outline_black_24.imageset\baseline_error_outline_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_error_outline_black_24.imageset\baseline_error_outline_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_filter_list_black_24.imageset\baseline_filter_list_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_filter_list_black_24.imageset\baseline_filter_list_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_filter_list_black_24.imageset\baseline_filter_list_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_flash_auto_white_24.imageset\baseline_flash_auto_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_flash_auto_white_24.imageset\baseline_flash_auto_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_flash_auto_white_24.imageset\baseline_flash_auto_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_flash_off_white_24.imageset\baseline_flash_off_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_flash_off_white_24.imageset\baseline_flash_off_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_flash_off_white_24.imageset\baseline_flash_off_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_flash_on_white_24.imageset\baseline_flash_on_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_flash_on_white_24.imageset\baseline_flash_on_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_flash_on_white_24.imageset\baseline_flash_on_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_how_to_vote_black_24.imageset\baseline_how_to_vote_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_how_to_vote_black_24.imageset\baseline_how_to_vote_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_how_to_vote_black_24.imageset\baseline_how_to_vote_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_info_black_36.imageset\baseline_info_black_36pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_info_black_36.imageset\baseline_info_black_36pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_info_black_36.imageset\baseline_info_black_36pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_list_alt_black_24.imageset\baseline_list_alt_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_list_alt_black_24.imageset\baseline_list_alt_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_list_alt_black_24.imageset\baseline_list_alt_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_lock_black_24.imageset\baseline_lock_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_lock_black_24.imageset\baseline_lock_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_lock_black_24.imageset\baseline_lock_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_map_white_24.imageset\baseline_map_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_map_white_24.imageset\baseline_map_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_map_white_24.imageset\baseline_map_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_phonelink_lock_black_24.imageset\baseline_phonelink_lock_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_phonelink_lock_black_24.imageset\baseline_phonelink_lock_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_phonelink_lock_black_24.imageset\baseline_phonelink_lock_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_print_white_24.imageset\baseline_print_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_print_white_24.imageset\baseline_print_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_print_white_24.imageset\baseline_print_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_remove_red_eye_white_24.imageset\baseline_remove_red_eye_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_remove_red_eye_white_24.imageset\baseline_remove_red_eye_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_remove_red_eye_white_24.imageset\baseline_remove_red_eye_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_shopping_cart_white_24.imageset\baseline_shopping_cart_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_shopping_cart_white_24.imageset\baseline_shopping_cart_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_shopping_cart_white_24.imageset\baseline_shopping_cart_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_stay_current_portrait_black_24.imageset\baseline_stay_current_portrait_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_stay_current_portrait_black_24.imageset\baseline_stay_current_portrait_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_stay_current_portrait_black_24.imageset\baseline_stay_current_portrait_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_storage_black_24.imageset\baseline_storage_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_storage_black_24.imageset\baseline_storage_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_storage_black_24.imageset\baseline_storage_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_switch_camera_white_24.imageset\baseline_switch_camera_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_switch_camera_white_24.imageset\baseline_switch_camera_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_switch_camera_white_24.imageset\baseline_switch_camera_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\filter_list_white_24.imageset\baseline_filter_list_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\filter_list_white_24.imageset\baseline_filter_list_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\filter_list_white_24.imageset\baseline_filter_list_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_account_balance_black_24dp.imageset\ic_account_balance.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_account_balance_black_24dp.imageset\ic_account_balance_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_account_balance_black_24dp.imageset\ic_account_balance_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_account_balance_wallet_black_24dp.imageset\ic_account_balance_wallet.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_account_balance_wallet_black_24dp.imageset\ic_account_balance_wallet_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_account_balance_wallet_black_24dp.imageset\ic_account_balance_wallet_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_add_circle_outline_black_24dp.imageset\ic_add_circle_outline.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_add_circle_outline_black_24dp.imageset\ic_add_circle_outline_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_add_circle_outline_black_24dp.imageset\ic_add_circle_outline_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_add_shopping_cart_black_24dp.imageset\ic_add_shopping_cart.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_add_shopping_cart_black_24dp.imageset\ic_add_shopping_cart_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_add_shopping_cart_black_24dp.imageset\ic_add_shopping_cart_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_add_white_24dp.imageset\ic_add_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_add_white_24dp.imageset\ic_add_white_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_add_white_24dp.imageset\ic_add_white_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_android_black_24dp.imageset\ic_android.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_android_black_24dp.imageset\ic_android_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_android_black_24dp.imageset\ic_android_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_archive_black_24dp.imageset\ic_archive.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_archive_black_24dp.imageset\ic_archive_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_archive_black_24dp.imageset\ic_archive_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_back_black_24dp.imageset\ic_arrow_back.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_back_black_24dp.imageset\ic_arrow_back_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_back_black_24dp.imageset\ic_arrow_back_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_drop_down_black_24dp.imageset\ic_arrow_drop_down.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_drop_down_black_24dp.imageset\ic_arrow_drop_down_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_drop_down_black_24dp.imageset\ic_arrow_drop_down_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_forward_black_24dp.imageset\ic_arrow_forward.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_forward_black_24dp.imageset\ic_arrow_forward_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_forward_black_24dp.imageset\ic_arrow_forward_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_forward_white_24dp.imageset\ic_arrow_forward_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_forward_white_24dp.imageset\ic_arrow_forward_white_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_forward_white_24dp.imageset\ic_arrow_forward_white_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_assignment_black.imageset\ic_assignment.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_assignment_black.imageset\ic_assignment_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_assignment_black.imageset\ic_assignment_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_assignment_ind_black_24dp.imageset\ic_assignment_ind.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_assignment_ind_black_24dp.imageset\ic_assignment_ind_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_assignment_ind_black_24dp.imageset\ic_assignment_ind_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_assignment_return_black_24dp.imageset\baseline_assignment_return_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_assignment_return_black_24dp.imageset\baseline_assignment_return_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_assignment_return_black_24dp.imageset\baseline_assignment_return_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_build_black_24dp.imageset\ic_build.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_build_black_24dp.imageset\ic_build_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_build_black_24dp.imageset\ic_build_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_business_black_24dp.imageset\ic_business.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_business_black_24dp.imageset\ic_business_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_business_black_24dp.imageset\ic_business_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_card_membership_black_24dp.imageset\ic_card_membership.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_card_membership_black_24dp.imageset\ic_card_membership_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_card_membership_black_24dp.imageset\ic_card_membership_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_chrome_reader_mode_black_24dp.imageset\ic_chrome_reader_mode.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_chrome_reader_mode_black_24dp.imageset\ic_chrome_reader_mode_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_chrome_reader_mode_black_24dp.imageset\ic_chrome_reader_mode_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_close_black_24dp.imageset\ic_close.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_close_black_24dp.imageset\ic_close_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_close_black_24dp.imageset\ic_close_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_cloud_download_black_24dp.imageset\ic_cloud_download.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_cloud_download_black_24dp.imageset\ic_cloud_download_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_cloud_download_black_24dp.imageset\ic_cloud_download_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_credit_card_black_24dp.imageset\ic_credit_card.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_credit_card_black_24dp.imageset\ic_credit_card_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_credit_card_black_24dp.imageset\ic_credit_card_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_delete_black_24dp.imageset\ic_delete.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_delete_black_24dp.imageset\ic_delete_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_delete_black_24dp.imageset\ic_delete_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_done_white_24dp.imageset\ic_done_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_done_white_24dp.imageset\ic_done_white_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_done_white_24dp.imageset\ic_done_white_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_edit_black_24dp.imageset\ic_edit.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_edit_black_24dp.imageset\ic_edit_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_edit_black_24dp.imageset\ic_edit_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_event_black.imageset\ic_event.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_event_black.imageset\ic_event_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_event_black.imageset\ic_event_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_event_busy_black_24dp.imageset\ic_event_busy.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_event_busy_black_24dp.imageset\ic_event_busy_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_event_busy_black_24dp.imageset\ic_event_busy_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_exit_to_app_black.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_exit_to_app_black.imageset\ic_exit_to_app_black.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_exit_to_app_black.imageset\ic_exit_to_app_black_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_exit_to_app_black.imageset\ic_exit_to_app_black_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_face_black_24dp.imageset\ic_face.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_face_black_24dp.imageset\ic_face_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_face_black_24dp.imageset\ic_face_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_file_download_black_24dp.imageset\ic_file_download.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_file_download_black_24dp.imageset\ic_file_download_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_file_download_black_24dp.imageset\ic_file_download_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_folder_black_24dp.imageset\ic_folder.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_folder_black_24dp.imageset\ic_folder_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_folder_black_24dp.imageset\ic_folder_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_inbox_black_24dp.imageset\ic_inbox.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_inbox_black_24dp.imageset\ic_inbox_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_inbox_black_24dp.imageset\ic_inbox_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_local_shipping_black_24dp.imageset\ic_local_shipping.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_local_shipping_black_24dp.imageset\ic_local_shipping_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_local_shipping_black_24dp.imageset\ic_local_shipping_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_location_on_black_24dp.imageset\ic_location_on.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_location_on_black_24dp.imageset\ic_location_on_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_location_on_black_24dp.imageset\ic_location_on_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_map_black_24dp.imageset\ic_map.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_map_black_24dp.imageset\ic_map_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_map_black_24dp.imageset\ic_map_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_menu_black_24dp.imageset\ic_menu.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_menu_black_24dp.imageset\ic_menu_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_menu_black_24dp.imageset\ic_menu_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_menu_white_24dp.imageset\ic_menu_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_menu_white_24dp.imageset\ic_menu_white_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_menu_white_24dp.imageset\ic_menu_white_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_monetization_on_black_24dp.imageset\ic_monetization_on.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_monetization_on_black_24dp.imageset\ic_monetization_on_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_monetization_on_black_24dp.imageset\ic_monetization_on_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_photo_camera_black_24dp.imageset\ic_photo_camera.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_photo_camera_black_24dp.imageset\ic_photo_camera_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_photo_camera_black_24dp.imageset\ic_photo_camera_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_photo_camera_white_24dp.imageset\ic_photo_camera_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_photo_camera_white_24dp.imageset\ic_photo_camera_white_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_photo_camera_white_24dp.imageset\ic_photo_camera_white_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_print_black.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_event_black.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_assignment_black.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_chrome_reader_mode_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_print_black.imageset\ic_print.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_print_black.imageset\ic_print_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_print_black.imageset\ic_print_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_receipt_black_24dp.imageset\ic_receipt.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_receipt_black_24dp.imageset\ic_receipt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_receipt_black_24dp.imageset\ic_receipt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_remove_circle_outline_black_24dp.imageset\ic_remove_circle_outline.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_remove_circle_outline_black_24dp.imageset\ic_remove_circle_outline_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_remove_circle_outline_black_24dp.imageset\ic_remove_circle_outline_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_search_black_24dp.imageset\ic_search.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_search_black_24dp.imageset\ic_search_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_search_black_24dp.imageset\ic_search_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_search_white_24dp.imageset\ic_search_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_search_white_24dp.imageset\ic_search_white_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_search_white_24dp.imageset\ic_search_white_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_settings_remote_black_24dp.imageset\ic_settings_remote.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_settings_remote_black_24dp.imageset\ic_settings_remote_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_settings_remote_black_24dp.imageset\ic_settings_remote_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_shopping_basket_black_24dp.imageset\ic_shopping_basket.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_shopping_basket_black_24dp.imageset\ic_shopping_basket_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_shopping_basket_black_24dp.imageset\ic_shopping_basket_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_shopping_cart_black_24dp.imageset\ic_shopping_cart.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_shopping_cart_black_24dp.imageset\ic_shopping_cart_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_shopping_cart_black_24dp.imageset\ic_shopping_cart_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_sync_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_inbox_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_file_download_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_local_shipping_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_account_balance_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_add_shopping_cart_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_receipt_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_business_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_monetization_on_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_shopping_basket_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_card_membership_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_search_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_menu_white_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_cloud_download_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_sync_black_24dp.imageset\ic_sync.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_sync_black_24dp.imageset\ic_sync_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_sync_black_24dp.imageset\ic_sync_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_sync_white_24dp.imageset\ic_sync_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_sync_white_24dp.imageset\ic_sync_white_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_sync_white_24dp.imageset\ic_sync_white_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_system_update_black_24dp.imageset\ic_system_update.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_system_update_black_24dp.imageset\ic_system_update_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_system_update_black_24dp.imageset\ic_system_update_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_tune_black_24dp.imageset\ic_tune.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_tune_black_24dp.imageset\ic_tune_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_tune_black_24dp.imageset\ic_tune_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_tune_white_24dp.imageset\ic_tune_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_tune_white_24dp.imageset\ic_tune_white_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_tune_white_24dp.imageset\ic_tune_white_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_turned_in_not_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_system_update_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_build_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_settings_remote_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_turned_in_not_black_24dp.imageset\ic_turned_in_not.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_turned_in_not_black_24dp.imageset\ic_turned_in_not_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_turned_in_not_black_24dp.imageset\ic_turned_in_not_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_view_quilt_black_24dp.imageset\ic_view_quilt.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_view_quilt_black_24dp.imageset\ic_view_quilt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_view_quilt_black_24dp.imageset\ic_view_quilt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_work_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_event_busy_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_face_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_assignment_ind_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_location_on_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_search_white_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_tune_white_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_drop_down_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_shopping_cart_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_tune_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\filter_list_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_forward_white_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_menu_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_done_white_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_sync_white_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_assignment_return_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_account_balance_wallet_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_list_alt_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_credit_card_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_photo_camera_white_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_add_white_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_filter_list_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_close_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_add_circle_outline_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_remove_circle_outline_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_chevron_right_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_forward_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_shopping_cart_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_flash_on_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_flash_off_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_flash_auto_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_adjust_white_48.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_delete_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_edit_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_how_to_vote_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_view_quilt_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_map_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_archive_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_error_outline_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_lock_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_remove_red_eye_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_stay_current_portrait_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_android_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_folder_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_cancel_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_delete_sweep_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_arrow_back_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_backup_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_storage_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_phonelink_lock_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_map_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_switch_camera_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_photo_camera_black_24dp.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_work_black_24dp.imageset\ic_work.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_work_black_24dp.imageset\ic_work_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\ic_work_black_24dp.imageset\ic_work_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_info_black_36.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_print_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_arrow_downward_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_arrow_upward_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_filter_alt_white_24.imageset\baseline_filter_alt_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_filter_alt_white_24.imageset\baseline_filter_alt_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_filter_alt_white_24.imageset\baseline_filter_alt_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_filter_alt_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\baseline_border_color_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_out_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_in_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_language_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_language_black_24.imageset\outline_language_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_language_black_24.imageset\outline_language_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_language_black_24.imageset\outline_language_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_style_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_style_black_24.imageset\outline_style_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_style_black_24.imageset\outline_style_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_style_black_24.imageset\outline_style_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_style_white_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_style_white_24.imageset\outline_style_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_style_white_24.imageset\outline_style_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_style_white_24.imageset\outline_style_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_in_white_24.imageset\outline_zoom_in_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_in_white_24.imageset\outline_zoom_in_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_in_white_24.imageset\outline_zoom_in_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_out_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_in_black_24.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\LaunchImages.launchimage\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_in_black_24.imageset\outline_zoom_in_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_in_black_24.imageset\outline_zoom_in_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_in_black_24.imageset\outline_zoom_in_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_out_black_24.imageset\outline_zoom_out_black_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_out_black_24.imageset\outline_zoom_out_black_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_out_black_24.imageset\outline_zoom_out_black_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_out_white_24.imageset\outline_zoom_out_white_24pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_out_white_24.imageset\outline_zoom_out_white_24pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\outline_zoom_out_white_24.imageset\outline_zoom_out_white_24pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\light_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\light_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\light_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\light_yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_pedidos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_auditoria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_backorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_cobros.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_comentarios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_compras.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_cotizaciones.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_datos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_devoluciones.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_encuestas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_entrega_factura.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_foto_visita.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_inventario_fisico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_productos_prox_vencer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_reclamaciones.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_sac.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_ventas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\drawerheader.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btn_dashboard_cobertura.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\p_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\appicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iosbackarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\c_camera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\c_comment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\c_ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\c_printer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\c_share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\c_sign.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\image_not_available.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\image_loading.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_coop_black.png" />
+    <BundleResource Include="Resources\cxcentregadefactura.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cxcestadodecuenta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cxcrecibo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\visita_virtual.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\task_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_cargas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_cuadres.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_inventario_vendedor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_remove_shopping_cart_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_reporte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\products_Not_Sold.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_cambiomercancia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_complaint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_pesar_jaulas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\barcode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\promocar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\entregas_mercancias.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_artboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_remove_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Huella.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\BlueFaceid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_direction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\newspaper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\notice.png" />
+  </ItemGroup>
+</Project>

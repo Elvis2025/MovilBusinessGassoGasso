@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.CalculadoraNegociacionModal"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,30,15,15" />
+                </StackLayout.Padding>
+                <ContentView VerticalOptions="CenterAndExpand" Padding="15,0,0,0">
+                    <Image Source="ic_close_white" VerticalOptions="Center" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+
+                <Label Text="{x:Static resources:AppResource.TradingCalculator}" HorizontalTextAlignment="Center" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="18" />
+
+            </StackLayout>
+            
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label IsVisible="False" x:Name="lblTipoPedido" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="{x:Static resources:AppResource.CreditLimitLabel}" x:Name="lblLimiteCredito" Grid.Column="0" Grid.Row="1" VerticalOptions="Center" />
+                <Label Text="Balance:" Grid.Column="0" Grid.Row="2" VerticalOptions="Center" />
+                <Label Text="{x:Static resources:AppResource.AvailableLabel}" Grid.Column="0" Grid.Row="3" VerticalOptions="Center" />
+                <Label Text="{x:Static resources:AppResource.OrderAmount}" Grid.Column="0" Grid.Row="4" VerticalOptions="Center" />
+                <Label Text="{x:Static resources:AppResource.AbonoLabel}" x:Name="lblAbono" Grid.Column="0" Grid.Row="5" VerticalOptions="Center" />
+                <Label Text="{x:Static resources:AppResource.MaximunOrderAmountLabel}" Grid.Column="0" Grid.Row="6" VerticalOptions="Center" />
+
+                <Entry HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.Row="1" IsEnabled="False" Text="{Binding CliData.LimiteCredito, StringFormat='{0:N2}'}" />
+                <Entry HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.Row="2" IsEnabled="False" Text="{Binding CliData.Balance, StringFormat='{0:N2}'}"/>
+                <Entry HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.Row="3" IsEnabled="False" Text="{Binding CliData.CreditoDisponible, StringFormat='{0:N2}'}" />
+                <Entry HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.Row="4" IsEnabled="False" Text="{Binding DatosPedido.Total, StringFormat='{0:N2}'}" />
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="5" Grid.Column="1">
+                    <Entry HorizontalOptions="FillAndExpand" Keyboard="Numeric" x:Name="editAbono" ReturnType="Done" />
+                    <Image Source="ic_close_black_24dp" HorizontalOptions="End" VerticalOptions="Center" Opacity="0.6">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="LimpiarAbono" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="6" Grid.Column="1">
+                    <Entry HorizontalOptions="FillAndExpand" Grid.Column="1" Keyboard="Numeric" x:Name="editMontoPedidoMaximo" ReturnType="Done" />
+                    <Image Source="ic_close_black_24dp" HorizontalOptions="End" VerticalOptions="Center" Opacity="0.6">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="LimpiarPedidoMaximo" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+
+                <Button Text="{x:Static resources:AppResource.Calculate}" Clicked="Calcular" Margin="0,10,0,0" Grid.Row="7" Grid.Column="1" HorizontalOptions="End" HeightRequest="40" WidthRequest="110" TextColor="White" BackgroundColor="{StaticResource ColorPrimary}" />
+            </Grid>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

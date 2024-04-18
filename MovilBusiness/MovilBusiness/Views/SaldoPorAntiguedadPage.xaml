@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.SaldoPorAntiguedadPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.BalanceDueToSeniority}"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <Frame Padding="0" Margin="0,10" BackgroundColor="White" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Frame.HasShadow>
+                <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+            </Frame.HasShadow>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="0">
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="#37474F" Padding="10,0" HeightRequest="30">
+                    <Label Text="{x:Static resources:AppResource.From}" HorizontalOptions="FillAndExpand" TextColor="White" VerticalOptions="Center" />
+                    <Label Text="{x:Static resources:AppResource.To}" HorizontalOptions="FillAndExpand" TextColor="White" VerticalOptions="Center" />
+                    <Label Text="Balance" HorizontalOptions="FillAndExpand" TextColor="White" VerticalOptions="Center" />
+                </StackLayout>
+
+                <ListView
+                    x:Name="list"
+                    HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="FillAndExpand"
+                    ItemsSource="{Binding Documentos}"
+                    CachingStrategy="RecycleElement"
+                    HasUnevenRows="True"
+                    BackgroundColor="Transparent"
+                    SeparatorVisibility="None"
+                    SelectionMode="None"
+                    Margin="8,0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid HorizontalOptions="FillAndExpand" HeightRequest="30" ColumnSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding Desde}" Grid.Column="0" WidthRequest="100" VerticalOptions="Center" />
+                                    <Label Text="{Binding Hasta}" Grid.Column="1" WidthRequest="100" VerticalOptions="Center" />
+                                    <Label Text="{Binding Balance, StringFormat='{0:N2}'}" Grid.Column="2" WidthRequest="150" VerticalOptions="Center" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+            </StackLayout>
+            
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

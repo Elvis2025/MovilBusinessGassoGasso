@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.ListItemRows.RowProductosGrid2Columns"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             HorizontalOptions="FillAndExpand"
+             Padding="0,0,0,5"
+             BackgroundColor="White"
+             IsClippedToBounds="True"
+             RowSpacing="0"
+             Margin="5">
+    
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <ffimageloading:CachedImage Grid.Row="0" 
+                            Aspect="AspectFit" 
+                            DownsampleUseDipUnits="False" 
+                                DownsampleToViewSize="False"
+							LoadingPlaceholder="image_loading" 
+                            ErrorPlaceholder="image_not_available"
+							Source="{Binding ProImage}"
+                            Margin="3,3,3,0">
+        
+        <ffimageloading:CachedImage.HeightRequest>
+            <OnIdiom x:TypeArguments="x:Double" Phone="170" Tablet="240" />
+        </ffimageloading:CachedImage.HeightRequest>
+        
+        <ffimageloading:CachedImage.DownsampleHeight>
+            <OnIdiom x:TypeArguments="x:Double" Phone="170" Tablet="240" />
+        </ffimageloading:CachedImage.DownsampleHeight>
+        <ffimageloading:CachedImage.GestureRecognizers>
+            <TapGestureRecognizer Tapped="ShowDetalle" />
+        </ffimageloading:CachedImage.GestureRecognizers>
+    </ffimageloading:CachedImage>
+
+    <Label Text="{Binding Descripcion}" Grid.Row="1" HorizontalOptions="FillAndExpand" Margin="5,0" FontAttributes="Bold" LineBreakMode="TailTruncation"/>
+    <Label Text="{Binding ProCodigo}" Grid.Row="2" HorizontalOptions="FillAndExpand" Margin="5,0" LineBreakMode="TailTruncation" />
+
+    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="3" Padding="5,0" Spacing="5" VerticalOptions="Center" IsVisible="{Binding ShowCantidad}">
+
+        <Label Text="-" TextColor="White" x:Name="lblMenos" BindingContext="{Binding ProID}" FontSize="18" WidthRequest="30" BackgroundColor="#546E7A" HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="RestarCantidad" />
+            </Label.GestureRecognizers>
+        </Label>
+
+        <ContentView BackgroundColor="Gray" Padding="1" HorizontalOptions="FillAndExpand" >
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ShowDetalle" />
+            </ContentView.GestureRecognizers>
+            <Label Text="{Binding Cantidad}" BackgroundColor="White" VerticalOptions="Center" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+        </ContentView>
+
+        <Label Text="+" TextColor="White" FontSize="18" WidthRequest="30" BackgroundColor="#546E7A" HorizontalOptions="End" HorizontalTextAlignment="Center" VerticalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="AgregarCantidad" />
+            </Label.GestureRecognizers>
+        </Label>
+
+    </StackLayout>
+</Grid>

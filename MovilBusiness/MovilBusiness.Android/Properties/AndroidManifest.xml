@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.mdsoft.MovilBusinessGasso" android:installLocation="preferExternal" android:versionCode="729000476" android:versionName="7.12.76">
+	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="28" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES" />
+	<uses-permission android:name="android.permission.USE_FINGERPRINT" android:required="false" />
+	<uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" android:required="false" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.BLUETOOTH" />
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+	<uses-permission android:name="android.permission.FLASHLIGHT" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.INSTALL_PACKAGES" />
+	<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+	<uses-feature android:name="android.hardware.camera2.full" android:required="false" />
+	<application android:label="MovilBusinessGasso" android:logo="@drawable/appicon" android:largeHeap="true" android:hardwareAccelerated="true" android:persistent="true" android:allowBackup="false">
+		<!--
+		<uses-library android:name="org.apache.http.legacy" android:required="false" />-->
+		<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyC-jvEfOXHzIBjq07q3u3hjecHFIEuxNWU" />
+		<provider android:name="android.support.v4.content.FileProvider" android:authorities="com.mdsoft.MovilBusinessGasso.provider" android:exported="false" android:grantUriPermissions="true">
+			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths" />
+		</provider>
+	</application>
+</manifest>

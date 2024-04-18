@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.TemplateSelector.Reportes.DescripcionCantidadRow"
+             HorizontalOptions="FillAndExpand"
+      Padding="10,5">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="60" />
+        <ColumnDefinition Width="80" />
+    </Grid.ColumnDefinitions>
+
+    <Label Text="{Binding Name}" HorizontalOptions="FillAndExpand" Grid.Column="0" FontAttributes="{Binding FontAttribute}" />
+    <Label Text="{Binding QuantityFormated}" HorizontalOptions="End" Grid.Column="1" FontAttributes="{Binding FontAttribute}" />
+    <Label Text="{Binding AmountFormated, StringFormat='{0:N2}'}" HorizontalOptions="End" Grid.Column="2" FontAttributes="{Binding FontAttribute}"/>
+</Grid>

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.InventarioAlmacenesModal"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}"
+             Title="Inventario Almacenes">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,30,15,15" />
+                </StackLayout.Padding>
+                <ContentView VerticalOptions="CenterAndExpand" Padding="15,0,0,0">
+                    <Image Source="ic_close_white" VerticalOptions="Center" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+
+                <Label Text="{x:Static resources:AppResource.Warehouses}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="18" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="12,10,12,3">
+                <Label Text="{x:Static resources:AppResource.Warehouse}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                <Label Text="{x:Static resources:AppResource.QuantityUnits}" FontAttributes="Bold" HorizontalOptions="End" />
+              
+            </StackLayout>
+
+            <ListView
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Margin="12,0,12,12"
+                BackgroundColor="Transparent"
+                HasUnevenRows="True"
+                SeparatorVisibility="None"
+                SelectionMode="None"
+                ItemsSource="{Binding InventarioDisponible}"
+                CachingStrategy="RecycleElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Padding="10" HasShadow="{OnPlatform Android=True, iOS=False}" Margin="3">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding AlmDescripcion}" HorizontalOptions="FillAndExpand" FontAttributes="Bold" />
+                                    <Label Text="{Binding Cantidad}"  HorizontalOptions="End" Margin="40,0" />                                  
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="{x:Static resources:AppResource.Close}" BackgroundColor="Transparent" Margin="15,0,15,15" TextColor="{StaticResource ColorPrimary}" Clicked="Dismiss" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

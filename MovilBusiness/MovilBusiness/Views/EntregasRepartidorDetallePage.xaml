@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.EntregasRepartidorDetallePage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Delivery}"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:converters="clr-namespace:MovilBusiness.viewmodel.converters"
+             xmlns:configuration="clr-namespace:MovilBusiness.Configuration"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Summary}" Icon="baseline_shopping_cart_white_24" Order="Primary" Command="{Binding ResumeCommand}" />
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Order="Primary" Icon="ic_arrow_forward_white_24dp" Command="{Binding SaveCommand}" IsEnabled="{Binding IsUp}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="boolInverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10" Spacing="0">
+
+                    <Label HorizontalOptions="FillAndExpand">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.CustomerLabel}" FontAttributes="Bold" />
+                                <Span Text="{Binding CurrentClient.ClicodigoNombre, Source={x:Static configuration:Arguments.Values}}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label HorizontalOptions="FillAndExpand" x:Name="lblNumeroEntrega">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.DeliveryLabel}" FontAttributes="Bold" />
+                                <!--<Span Text="{Binding CurrentEntrega.EnrSecuencia}" />-->
+                                <Span Text="{Binding CurrentEntrega.venNumeroERPDocum}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <StackLayout Orientation="Horizontal" Spacing="0" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" Margin="0,10,0,0">
+                        <Frame HorizontalOptions="FillAndExpand" Padding="0" HasShadow="False">
+                            <Frame.HeightRequest>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="45" Tablet="55" />
+                            </Frame.HeightRequest>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" >
+                                <controls:BorderlessPicker ManualDefault="True" WidthRequest="95" Margin="5,0,5,0" ItemsSource="{Binding FiltrosSource}" SelectedItem="{Binding CurrentFilter}" ItemDisplayBinding="{Binding FilDescripcion}" Title="{x:Static resources:AppResource.ChooseFilterToUse}" TextColor="Gray" FontSize="14" />
+                                <BoxView VerticalOptions="FillAndExpand" Margin="0,7,0,7" WidthRequest="0.7" Color="Black" Opacity="0.3" />
+                                <controls:BorderlessEntry x:Name="editSearch" HorizontalOptions="FillAndExpand" Margin="5,0,3,0" FontSize="14" Command="{Binding SearchCommand}" IsVisible="{Binding ShowSecondFilter, Converter={StaticResource boolInverter}}" Placeholder="{x:Static resources:AppResource.FilterSearch}" VerticalOptions="Center" PlaceholderColor="Gray" Text="{Binding SearchValue, Mode=TwoWay}" />
+                                <controls:BorderlessPicker HorizontalOptions="FillAndExpand" Title="{x:Static resources:AppResource.Select}" IsVisible="{Binding ShowSecondFilter}" ItemsSource="{Binding SecondFiltroSource, Mode=TwoWay}" SelectedItem="{Binding CurrentSecondFiltro, Mode=TwoWay}" TextColor="Gray" FontSize="14" />
+                                <Image Source="ic_arrow_drop_down_black_24dp" VerticalOptions="Center" Opacity="0.7" IsVisible="{Binding ShowSecondFilter}" Margin="0,0,3,0" />
+                            </StackLayout>
+                        </Frame>
+
+                        <ContentView VerticalOptions="FillAndExpand" BackgroundColor="#009688" WidthRequest="45" IsVisible="{Binding ShowSecondFilter, Converter={StaticResource boolInverter}}">
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BtnSearchCommand}" />
+                            </ContentView.GestureRecognizers>
+                            <Image Source="{Binding BtnSearchLogo, Mode=TwoWay}" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </ContentView>
+                    </StackLayout>
+
+                    <Label Text="Productos" FontAttributes="Bold" Margin="2,10,0,0" />
+
+                    <ListView
+                        x:Name="list"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        CachingStrategy="RecycleElement"
+                        BackgroundColor="Transparent"
+                        SeparatorVisibility="None"
+                        HasUnevenRows="True"
+                        ItemsSource="{Binding Productos}"
+                        ItemSelected="ListView_ItemSelected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame HorizontalOptions="FillAndExpand" Padding="0" BackgroundColor="{Binding RowColor}" CornerRadius="4" Margin="0,0,0,5">
+                                        <Frame.HasShadow>
+                                            <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+                                        </Frame.HasShadow>
+
+                                        <Grid HorizontalOptions="FillAndExpand" BackgroundColor="White" RowSpacing="0" ColumnSpacing="0" Padding="10,0" Margin="5,0,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Column="0" Spacing="0" VerticalOptions="Center">
+                                                <Label FontAttributes="Bold">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding ProCodigo}" />
+                                                            <Span Text=" - " />
+                                                            <Span Text="{Binding ProDescripcion}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <StackLayout Margin="0,3,0,0" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding UsaLote}">
+                                                    <Label Text="{x:Static resources:AppResource.LotLabel}" />
+                                                    <Label IsVisible="{Binding LoteIsSet}" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text=" " />
+                                                                <Span Text="{Binding Lote}" />
+                                                                <Span Text=" " />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </StackLayout>
+
+                                                <Label IsVisible="{Binding TraIndicadorOferta}" HorizontalOptions="End" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White" Margin="0,0,0,3">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="  **" />
+                                                            <Span Text="{x:Static resources:AppResource.Offer}" />
+                                                            <Span Text= "{Binding ShowProIDoferta}" />
+                                                            <Span Text="**  " />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+
+                                            <BoxView Grid.Column="1" VerticalOptions="FillAndExpand" Margin="5" HorizontalOptions="End" WidthRequest="1" Color="LightGray" />
+
+                                            <StackLayout Orientation="Vertical" HorizontalOptions="End" Grid.Column="2" Spacing="0" VerticalOptions="Center">
+                                                <Label Text="{x:Static resources:AppResource.Quantity}" HorizontalOptions="Center" />
+                                                <Label HorizontalOptions="Center">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding Cantidad}" FontAttributes="Bold" />
+                                                            <Span Text="/" />
+                                                            <Span Text="{Binding CantidadSolicitada}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+
+                                        </Grid>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="White" Padding="7,0">
+                    <Label Text="#: " />
+                    <Label Text="{Binding Resumen.NumeroTransaccion}" HorizontalOptions="FillAndExpand" />
+                    <Label Text="{x:Static resources:AppResource.QtyLabel}" />
+                    <Label Text="{Binding Resumen.CantidadTotal}" HorizontalOptions="FillAndExpand" />
+                    <Label Text="Total: " IsVisible="{Binding ShowMontoTotal}" />
+                    <Label Text="{Binding Resumen.Total, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+            </StackLayout>
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

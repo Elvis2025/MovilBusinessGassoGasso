@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ConfigurationPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Setting}"
+             BackgroundColor="{StaticResource WindowBackground}"
+             Padding="15,10">
+    <ContentPage.Content>
+        <TableView Intent="Settings" HasUnevenRows="True" x:Name="table">
+            <TableRoot>
+                <TableSection Title="{x:Static resources:AppResource.ConnectionsOptions}">
+                    <ViewCell Tapped="Conexion_tapped">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5">
+                            <Image Source="ic_build_black_24dp" VerticalOptions="Center" Opacity="0.6" Margin="5,0"/>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="1">
+                                <Label Text="{x:Static resources:AppResource.Connection}" TextColor="Black" FontSize="16" />
+                                <Label Text="{x:Static resources:AppResource.ConnectionToCommunicateWebService}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell Tapped="Webservice_tapped">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5">
+                            <Image Source="ic_settings_remote_black_24dp" VerticalOptions="Center" Opacity="0.6" Margin="5,0"/>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="1">
+                                <Label Text="{x:Static resources:AppResource.WebServiceUrl}" TextColor="Black" FontSize="16" />
+                                <Label Text="{x:Static resources:AppResource.MovilBusinessBaseWebService}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+
+                    <ViewCell Tapped="Cantidad_tapped">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5" >
+                            <Image Source="ic_sync_black_24dp"  VerticalOptions="Center" Opacity="0.6" Margin="5,0"/>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="1">
+                                <Label Text="{x:Static resources:AppResource.DataPerCycle}" TextColor="Black" FontSize="16" />
+                                <Label Text="{x:Static resources:AppResource.AmountOfDataToObtainFromServer}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+
+                    <ViewCell Tapped="ContarRegistrosDb">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5">
+                            <Image Source="baseline_storage_black_24" VerticalOptions="Center" Opacity="0.6" Margin="5,0" />
+
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="1">
+                                <Label Text="{x:Static resources:AppResource.CountRecords}" TextColor="Black" FontSize="16" />
+                                <Label Text="{x:Static resources:AppResource.CountDatabaseRecordByTable}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+
+                    <ViewCell IsEnabled="False">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5">
+                            <Image Source="baseline_lock_black_24" VerticalOptions="Center" Opacity="0.6" Margin="5,0"/>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="1">
+                                <Label Text="{x:Static resources:AppResource.SubscriberID}" FontSize="16" />
+                                <Label Text="{Binding Suscriptor}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+
+                <TableSection Title="{x:Static resources:AppResource.SyncOptions}">
+                    <ViewCell Tapped="TestSync_Tapped">
+                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="5" Spacing="1">
+                            <Label Text="{x:Static resources:AppResource.SynchronizationForTests}" FontSize="16" TextColor="Black"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                <Label Text="{x:Static resources:AppResource.MbNotAffectSubscribersMessage}" />
+                                <Switch HorizontalOptions="End" IsToggled="{Binding SyncTest, Mode=TwoWay}" />
+                            </StackLayout>
+
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+
+                <!--<TableSection Title="{x:Static resources:AppResource.GeneralOptions}">
+                    <ViewCell Tapped="CambiarOrientacion">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5">
+                            <Image Source="outline_style_black_24" VerticalOptions="Center" Opacity="0.6" Margin="5,0" />
+
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="1">
+                                <Label Text="{x:Static resources:AppResource.ScreenOrientation}" TextColor="Black" FontSize="16" />
+                                <Label Text="{Binding Orientation}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>-->
+                
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

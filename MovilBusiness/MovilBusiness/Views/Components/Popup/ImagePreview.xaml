@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MovilBusiness.Views.Components.Popup.ImagePreview"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+
+        <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            DurationIn="500"
+            DurationOut="500"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8" />
+    </pages:PopupPage.Animation>
+
+        <Grid BackgroundColor="Transparent"
+          HorizontalOptions="Center"
+          VerticalOptions="Center"
+          HeightRequest="200">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <CollectionView HorizontalScrollBarVisibility="Never"  ItemsSource="{Binding CollImageView}" x:Name="collview">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Horizontal"
+                                 HorizontalItemSpacing="10"
+                                 ></GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Grid
+                        BackgroundColor="White"
+                        WidthRequest="200">
+
+                        <Image
+                            x:Name="imagenProducto"
+                            WidthRequest="200"
+                            Margin="3"
+                            BackgroundColor="Transparent"
+                            Aspect="Fill" 
+                            Source="{Binding .}">
+                        </Image>
+
+                        
+                        <Frame CornerRadius="15"
+                               WidthRequest="30"
+                               HeightRequest="30"
+                               VerticalOptions="Start"
+                               HorizontalOptions="End"
+                               BackgroundColor="#1976D2"
+                               Padding="0">
+                            <Label Text="X"
+                                   FontSize="Small"                                  
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   TextColor="White"></Label>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Frame.GestureRecognizers>
+
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
+</pages:PopupPage>

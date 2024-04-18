@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ProductosNoVendidosPage"          
+             Padding="10"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.UnSoldProducts}"
+             BackgroundColor="Transparent"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+          
+            <Grid HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />           
+                </Grid.RowDefinitions>
+
+                <Label Text="{x:Static resources:AppResource.ConnectionLabel}" Grid.Row="0" Grid.Column="0"   VerticalOptions="Center" IsVisible="{Binding IsOnline}" />
+                <Label Text="{x:Static resources:AppResource.SearchByLabel}" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="{x:Static resources:AppResource.FilterByLabel}" Grid.Row="2" Grid.Column="0" VerticalOptions="Center" />
+
+                <Picker x:Name="Comboconexion" HorizontalOptions="FillAndExpand"  Grid.Row="0" Grid.Column="1" Title="{x:Static resources:AppResource.Select}" IsVisible="{Binding IsOnline}" SelectedIndexChanged="ComboBuscarPor_SelectedIndexChangedAsync">
+                <Picker.Items>
+                    <x:String>Local</x:String>
+                    <x:String>Online</x:String>             
+                </Picker.Items>
+                </Picker>
+                <Picker x:Name="comboBuscarPor" HorizontalOptions="FillAndExpand"  Grid.Row="1" Grid.Column="1" Title="{x:Static resources:AppResource.Select}" SelectedIndexChanged="ComboBuscarPor_SelectedIndexChangedAsync" />
+                <Picker x:Name="comboFiltrar" HorizontalOptions="FillAndExpand"  Grid.Row="2" Grid.Column="1" Title="{x:Static resources:AppResource.Select}" SelectedIndexChanged="ComboBuscarPor_SelectedIndexChangedAsync" />
+
+                <Frame HorizontalOptions="FillAndExpand" Padding="0" HasShadow="False" VerticalOptions="FillAndExpand" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                    <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  >
+                        <StackLayout Padding="10,5" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#37474F">
+                            <Label Text="{x:Static resources:AppResource.Code}" Opacity="{Binding OpacityCode}" TextColor="White" WidthRequest="80" LineBreakMode="TailTruncation" >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OrderCommand}"  CommandParameter="0"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Text="{x:Static resources:AppResource.Products}" Opacity="{Binding OpacityProduct}" TextColor="White" WidthRequest="200" LineBreakMode="TailTruncation" x:Name="Descripcion" >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OrderCommand}" CommandParameter="1"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
+                     
+                        </StackLayout>
+
+                        <ListView HorizontalOptions="FillAndExpand"
+                              VerticalOptions="FillAndExpand"
+                              x:Name="listProductosNovendidos"
+                              HasUnevenRows="True"
+                              SeparatorVisibility="None"                        
+                              CachingStrategy="RecycleElement"
+                              BackgroundColor="Transparent"
+                              ItemsSource="{Binding ProductosNovendidos}"
+                              ItemTapped="ListProductosNovendidos_ItemTapped">
+
+                            <ListView.HeightRequest>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="130" Tablet="200" />
+                            </ListView.HeightRequest>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid HorizontalOptions="FillAndExpand" Padding="10,5" ColumnSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="80" />
+                                                <ColumnDefinition Width="200" />                                         
+                                            
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Text="{Binding ProCodigo}" Grid.Column="0" LineBreakMode="TailTruncation" WidthRequest="80" />
+                                            <Label Text="{Binding ProDescripcion}" Grid.Column="1" LineBreakMode="TailTruncation"  WidthRequest="200" />
+                           
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+
+                    </StackLayout>
+                </Frame>
+          
+            </Grid>
+          
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+        </Grid>
+
+    </ContentPage.Content>
+   
+</ContentPage>

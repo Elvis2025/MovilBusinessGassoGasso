@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.RecibosPushMoneyDocumentos"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Documents}"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls">
+    <ContentPage.Content>
+        <Grid
+            BackgroundColor="Transparent"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout
+                Grid.Row="0"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Vertical"
+                VerticalOptions="FillAndExpand">
+
+                <Label
+                        Margin="0,5,15,0"
+                        FontAttributes="Bold"
+                        FontSize="15"
+                        HorizontalOptions="End"
+                        Text="{Binding TotalAPagar, StringFormat='{0:N2}'}" />
+
+                <Frame
+                    Margin="0,0,0,15"
+                    Padding="0"
+                    BackgroundColor="White"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Frame.HasShadow>
+                        <OnPlatform
+                            x:TypeArguments="x:Boolean"
+                            Android="True"
+                            iOS="False" />
+                    </Frame.HasShadow>
+                    <ScrollView
+                        HorizontalOptions="FillAndExpand"
+                        Orientation="Horizontal"
+                        VerticalOptions="FillAndExpand">
+
+                        <StackLayout
+                            Orientation="Vertical"
+                            Spacing="0"
+                            VerticalOptions="FillAndExpand">
+
+                            <StackLayout
+                                Padding="10,0"
+                                BackgroundColor="#37474F"
+                                HeightRequest="30"
+                                Orientation="Horizontal"
+                                Spacing="0">
+                                <Label
+                                    Text="{x:Static resources:AppResource.Document}"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    WidthRequest="105" />
+                                <Label
+                                    Text="{x:Static resources:AppResource.Days}"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    WidthRequest="50" />
+                                <Label
+                                    Text="{x:Static resources:AppResource.Initials}"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    WidthRequest="50" />
+                                <Label
+                                    Text="{x:Static resources:AppResource.Pending}"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    WidthRequest="100" />
+                                <Label
+                                    Text="{x:Static resources:AppResource.Amount}"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    WidthRequest="100" />
+                                
+                                <Label
+                                    Text="{x:Static resources:AppResource.Date}"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    WidthRequest="85" />
+                                <Label
+                                    Text="Balance"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    WidthRequest="100" />
+                                <Label
+                                    Text="{x:Static resources:AppResource.AmountWithoutItbis}"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    WidthRequest="130" />
+                                <Label
+                                    Text="{x:Static resources:AppResource.ExpirationDate}"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    WidthRequest="145" />
+                                <Label
+                                    Text="{x:Static resources:AppResource.DeliveryDate}"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    WidthRequest="145" />
+                                <Label
+                                    Text="{x:Static resources:AppResource.Reference}"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    WidthRequest="100" />
+
+                                <Label
+                                    Text="NCF"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    WidthRequest="110" />
+                                <Label
+                                    Text="{x:Static resources:AppResource.Comment}"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    WidthRequest="120" />
+
+                            </StackLayout>
+
+                            <ScrollView Orientation="Both" VerticalOptions="FillAndExpand">
+                                <StackLayout
+                                    Padding="0,0"
+                                    HorizontalOptions="FillAndExpand"
+                                    Spacing="0"
+                                    VerticalOptions="FillAndExpand">
+                                    <ListView
+                                        x:Name="listaFacturas"
+                                        Margin="0,0,0,5"
+                                        BackgroundColor="Transparent"
+                                        CachingStrategy="RecycleElement"
+                                        HasUnevenRows="True"
+                                        ItemSelected="OnListItemSelected"
+                                        ItemsSource="{Binding Documentos}"
+                                        SeparatorVisibility="None"
+                                        VerticalOptions="FillAndExpand">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell>
+                                                    <Grid
+                                                        Padding="8,0"
+                                                        BackgroundColor="{Binding RowColor}"
+                                                        ColumnSpacing="0"
+                                                        HeightRequest="28">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="105" />
+                                                            <ColumnDefinition Width="50" />
+                                                            <ColumnDefinition Width="50" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="85" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="130" />
+                                                            <ColumnDefinition Width="145" />
+                                                            <ColumnDefinition Width="145" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="110" />
+                                                            <ColumnDefinition Width="120" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Label
+                                                            Grid.Column="0"
+                                                            Text="{Binding Documento}"
+                                                            VerticalOptions="Center" />
+                                                        <Label
+                                                            Grid.Column="1"
+                                                            Text="{Binding DiasChequeDif}"
+                                                            VerticalOptions="Center" />
+                                                        <Label
+                                                            Grid.Column="2"
+                                                            Text="{Binding Sigla}"
+                                                            VerticalOptions="Center" />
+                                                        <Label
+                                                            Grid.Column="3"
+                                                            Text="{Binding Pendiente, StringFormat='{0:N2}'}"
+                                                            VerticalOptions="Center" />
+                                                        <Label
+                                                            Grid.Column="4"
+                                                            Text="{Binding MontoTotal, StringFormat='{0:N2}'}"
+                                                            VerticalOptions="Center" />
+
+                                                        <Label
+                                                            Grid.Column="5"
+                                                            Text="{Binding Fecha}"
+                                                            VerticalOptions="Center" />
+                                                        <Label
+                                                            Grid.Column="6"
+                                                            Text="{Binding Balance, StringFormat='{0:N2}'}"
+                                                            VerticalOptions="Center" />
+                                                        <Label
+                                                            Grid.Column="7"
+                                                            Text="{Binding MontoSinItbis, StringFormat='{0:N2}'}"
+                                                            VerticalOptions="Center" />
+                                                        <Label
+                                                            Grid.Column="8"
+                                                            Text="{Binding FechaVencimiento}"
+                                                            VerticalOptions="Center" />
+                                                        <Label
+                                                            Grid.Column="9"
+                                                            Text="{Binding FechaEntrega}"
+                                                            VerticalOptions="Center" />
+                                                        <Label
+                                                            Grid.Column="10"
+                                                            Text="{Binding Referencia}"
+                                                            VerticalOptions="Center" />
+                                                        <Label
+                                                            Grid.Column="11"
+                                                            Text="{Binding CXCNCF}"
+                                                            VerticalOptions="Center" />
+                                                        <Label
+                                                            Grid.Column="12"
+                                                            Text="{Binding cxcComentario}"
+                                                            VerticalOptions="Center" />
+                                                    </Grid>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </StackLayout>
+                            </ScrollView>
+                        </StackLayout>
+                    </ScrollView>
+                </Frame>
+            </StackLayout>
+
+            <!--</Frame>-->
+
+            <controls:ProgressIndicator
+                Grid.Row="0"
+                HorizontalOptions="FillAndExpand"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="FillAndExpand" />
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

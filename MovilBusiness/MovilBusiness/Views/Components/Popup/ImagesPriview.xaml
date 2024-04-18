@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Popup.ImagesPriview"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+    
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            DurationIn="500"
+            DurationOut="500"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8" />
+    </pages:PopupPage.Animation>
+
+
+    <Grid BackgroundColor="#fff"
+          HorizontalOptions="Center"
+          VerticalOptions="Center"
+          WidthRequest="250"
+          HeightRequest="250">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <CarouselView ItemsSource="{Binding ImagePreview}" x:Name="collview">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+
+                    <Grid
+                        HeightRequest="250"
+                        VerticalOptions="Start"
+                        WidthRequest="250">
+
+                        <AbsoluteLayout>
+
+                            <Label Text="X" TextColor="Black" FontSize="Large" HorizontalOptions="EndAndExpand">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                            <ffimageloading:CachedImage
+                            x:Name="imagenProducto"
+                            AbsoluteLayout.LayoutBounds="1,1,1,1"
+                            AbsoluteLayout.LayoutFlags="All"
+                            BackgroundColor="Transparent"
+                            Aspect="AspectFit"
+                            DownsampleUseDipUnits="False" 
+							LoadingPlaceholder="image_loading" 
+                            ErrorPlaceholder="image_not_available"
+                            IsVisible="true" 
+                            Source="{Binding .}">
+                            </ffimageloading:CachedImage>
+                        </AbsoluteLayout>
+                    </Grid>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <Button Grid.Row="1" Text="{x:Static resources:AppResource.Aceptar}" Clicked="Button_Clicked" Margin="12" />
+
+    </Grid>
+
+</pages:PopupPage>

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.ListItemRows.RowEntregasRepartidor2">
+    <ViewCell.ContextActions>
+        <MenuItem Text="{Binding RechazarBtn}" IsDestructive="True" Clicked="MenuItem_Clicked" CommandParameter="{Binding rowguid}" />
+    </ViewCell.ContextActions>
+    <Frame HorizontalOptions="FillAndExpand" Padding="0,0,5,0" BackgroundColor="White" CornerRadius="4" Margin="0,0,0,5">
+        <Frame.HasShadow>
+            <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+        </Frame.HasShadow>
+
+        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0">
+            <!--<Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="GoDetalle" />
+            </Grid.GestureRecognizers>-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <BoxView WidthRequest="3" Color="{StaticResource ColorPrimary}" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="FillAndExpand" Grid.Row="0" Grid.RowSpan="2" />
+            <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="1" VerticalOptions="FillAndExpand" Grid.RowSpan="2" Margin="5,0,0,0">
+                <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="FillAndExpand" VerticalTextAlignment="End"> 
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding venNumeroERPDocum}" FontAttributes="Bold" />
+                            <Span Text="&#10;" />
+                            <Span Text="{x:Static resources:AppResource.Number}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label x:Name="lblVerDetalle" HorizontalOptions="Center" VerticalOptions="FillAndExpand" Margin="0,4,0,0" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" Text="{x:Static resources:AppResource.SeeDetail}" TextColor="{StaticResource ColorPrimary}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="VerDetalleTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </StackLayout>
+
+            <BoxView VerticalOptions="FillAndExpand" HorizontalOptions="Start" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" WidthRequest="1" Color="LightGray" Margin="8,5" />
+
+            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Padding="0,5" Spacing="0">
+                <Label Text="{Binding SecDescripcion}" HorizontalOptions="FillAndExpand" />
+                <Label Text="{Binding CliNombre}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="{Binding FormattedDate}" HorizontalOptions="FillAndExpand" />
+                    <Label TextColor="White" BackgroundColor="{StaticResource ColorPrimary}" HorizontalOptions="End">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text=" " />
+                                <Span Text="{Binding estatusDescripcion}" />
+                                <Span Text=" " />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+                <Label HorizontalOptions="FillAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Total: " FontAttributes="Bold" />
+                            <Span Text="{Binding EntMontoTotal, StringFormat='{0:N2}'}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="FillAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static resources:AppResource.SellerLabel}" />
+                            <Span Text="{Binding RepNombre}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding ShowTelefono}" BackgroundColor="Transparent" Margin="0,0,0,0">
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="StartCall" />
+                    </ContentView.GestureRecognizers>
+                    <Label Text="{Binding RepTelefono}" TextColor="{StaticResource ColorPrimary}" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                </ContentView>
+
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Spacing="0" Grid.Row="0" Grid.RowSpan="2" Grid.Column="4"  HorizontalOptions="End">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="GoDetalle" />
+                </StackLayout.GestureRecognizers>
+                <BoxView VerticalOptions="FillAndExpand" HorizontalOptions="End" Margin="5" WidthRequest="1" Color="LightGray" />
+
+                <Image Source="baseline_chevron_right_black_24" HorizontalOptions="End" Opacity="0.6" />
+            </StackLayout>
+           
+
+        </Grid>
+    </Frame>
+</ViewCell>

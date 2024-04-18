@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.ClientesPresentacionModal"
+             Title="Cliente presentacion"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior"
+             BackgroundColor="{StaticResource WindowBackground}"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,30,15,15" />
+                </StackLayout.Padding>
+                <ContentView VerticalOptions="CenterAndExpand" Padding="15,0,0,0">
+                    <Image Source="ic_close_white" VerticalOptions="Center" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+
+                <Label Text="{x:Static resources:AppResource.PresentationClient}" HorizontalTextAlignment="Center" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="18" />
+
+                <ContentView VerticalOptions="Center" HorizontalOptions="End">
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Guardar" />
+                    </ContentView.GestureRecognizers>
+                    <Label Text="{x:Static resources:AppResource.SaveUpper}" VerticalOptions="Center" HorizontalOptions="End" TextColor="White"/>
+                </ContentView>
+            </StackLayout>
+
+            <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="10">
+                    <Label Text="{x:Static resources:AppResource.Name}" FontAttributes="Bold" />
+                    <Entry HorizontalOptions="FillAndExpand" MaxLength="50" ReturnType="Next" x:Name="editNombre" Completed="FocusNextField" BindingContext="1" />
+
+                    <Label Text="{x:Static resources:AppResource.Owner}" FontAttributes="Bold" Margin="0,5,0,0" />
+                    <Entry HorizontalOptions="FillAndExpand" MaxLength="50" ReturnType="Next" x:Name="editPropietario" Completed="FocusNextField" BindingContext="2" />
+
+                    <Label Text="{x:Static resources:AppResource.Contact}" FontAttributes="Bold"  Margin="0,5,0,0"/>
+                    <Entry HorizontalOptions="FillAndExpand" MaxLength="50" ReturnType="Next" x:Name="editContacto" Completed="FocusNextField" BindingContext="3" />
+
+                    <Label Text="Email" FontAttributes="Bold"  Margin="0,5,0,0"/>
+                    <Entry HorizontalOptions="FillAndExpand" Keyboard="Email" MaxLength="50" ReturnType="Next" x:Name="editEmail" Completed="FocusNextField" BindingContext="4"/>
+
+                    <Label Text="{x:Static resources:AppResource.Street}" FontAttributes="Bold"  Margin="0,5,0,0"/>
+                    <Entry HorizontalOptions="FillAndExpand" MaxLength="50" ReturnType="Next" x:Name="editCalle" Completed="FocusNextField" BindingContext="5" />
+
+                    <Label Text="{x:Static resources:AppResource.City}" FontAttributes="Bold"  Margin="0,5,0,0"/>
+                    <Entry HorizontalOptions="FillAndExpand" MaxLength="50" ReturnType="Next" x:Name="editCiudad" Completed="FocusNextField" BindingContext="6" />
+
+                    <Label Text="{x:Static resources:AppResource.Telephone}" FontAttributes="Bold"  Margin="0,5,0,0"/>
+                    <Entry HorizontalOptions="FillAndExpand" MaxLength="50" ReturnType="Next" Keyboard="Telephone" x:Name="editTelefono" Completed="FocusNextField" BindingContext="7" />
+
+                    <Label Text="RNC" FontAttributes="Bold"  Margin="0,5,0,0"/>
+                    <Entry HorizontalOptions="FillAndExpand" MaxLength="20" Keyboard="Numeric" ReturnType="Done" x:Name="editRnc">
+                        <Entry.Behaviors>
+                            <behaviors:NumericValidation />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+
+            </ScrollView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

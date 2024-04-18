@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Controls.ClientesSearchView"
+             HorizontalOptions="FillAndExpand"
+             xmlns:converters="clr-namespace:MovilBusiness.viewmodel.converters"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Padding="5,0"
+             Margin="0">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="boolInverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Frame BackgroundColor="White" HorizontalOptions="FillAndExpand" HasShadow="False" Padding="5,0,10,0">
+        <StackLayout Orientation="Horizontal" Padding="0" VerticalOptions="FillAndExpand" Margin="0">
+            <controls:BorderlessPicker Opacity="0.7" FontSize="15" Margin="0" Title="{x:Static resources:AppResource.Select}" 
+                                    VerticalOptions="FillAndExpand"
+                                    x:Name="comboFiltro"
+                                    ManualDefault="True"
+                                    ItemsSource="{Binding FiltrosSource}" 
+                                    SelectedItem="{Binding CurrentFilter, Mode=TwoWay}"
+                                    ItemDisplayBinding="{Binding FilDescripcion}">
+                <controls:BorderlessPicker.WidthRequest>
+                    <OnIdiom x:TypeArguments="x:Double" Phone="95" Tablet="125" />
+                </controls:BorderlessPicker.WidthRequest>
+            </controls:BorderlessPicker>
+
+            <BoxView VerticalOptions="Center" HeightRequest="30" Color="Black" Opacity="0.3" Margin="5,7" WidthRequest="1" />
+
+            <controls:BorderlessEntry Placeholder="{x:Static resources:AppResource.FilterSearch}" IsVisible="{Binding ShowSecondFilter, Converter={StaticResource boolInverter}}" android:Entry.ImeOptions="Search" FontSize="15" PlaceholderColor="#616161" Text="{Binding SearchValue, Mode=TwoWay}" 
+                               HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="0" Command="{Binding SearchCommand}" />
+            <!-- "ic_search_black_24dp" -->
+
+            <ContentView VerticalOptions="Center" Opacity="0.6" WidthRequest="45" Margin="0" IsVisible="{Binding ShowSecondFilter, Converter={StaticResource boolInverter}}">
+                <Image Source="{Binding BtnSearchLogo, Mode=TwoWay}" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SearchCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </ContentView>
+            <controls:BorderlessPicker Title="{x:Static resources:AppResource.Select}" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowSecondFilter}" TextColor="Gray" FontSize="14" ItemsSource="{Binding SecondFiltroSource}" SelectedItem="{Binding CurrentSecondFiltro, Mode=TwoWay}"/>
+        </StackLayout>
+    </Frame>
+</ContentView>

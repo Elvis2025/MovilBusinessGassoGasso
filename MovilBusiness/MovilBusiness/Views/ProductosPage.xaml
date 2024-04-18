@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.ProductosPage"
+                  xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Products}"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:converters="clr-namespace:MovilBusiness.viewmodel.converters"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+                xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             iOS:Page.UseSafeArea="true">
+
+    <MasterDetailPage.Master>
+        <ContentPage Icon="ic_menu_white_24dp" Title="Menu"
+                 BackgroundColor="#e8e8e8">
+            <controls:DrawerLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+    <MasterDetailPage.Detail>
+        <NavigationPage BarTextColor="White" BarBackgroundColor="#1976D2">
+            <x:Arguments>
+                <ContentPage Title="{x:Static resources:AppResource.Products}" BackgroundColor="{StaticResource WindowBackground}">
+                    <ContentPage.Resources>
+                        <ResourceDictionary>
+                            <converters:InverseBoolConverter x:Key="boolInverter" />
+                        </ResourceDictionary>
+                    </ContentPage.Resources>
+
+                    <ContentPage.Content>
+                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0">
+                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Padding="10,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.ColumnSpan="2" Grid.Row="0" IsVisible="{Binding UseClient}">
+                                        <Label Text="{x:Static resources:AppResource.CustomerLabel}">
+                                            <Label.WidthRequest>
+                                                <OnPlatform x:TypeArguments="x:Double" Android="68" iOS="65" />
+                                            </Label.WidthRequest>
+                                            <Label.MinimumWidthRequest>
+                                                <OnPlatform x:TypeArguments="x:Double" Android="68" iOS="65" />
+                                            </Label.MinimumWidthRequest>
+                                        </Label>
+                                        <Label Text="{Binding CurrentClient.ClicodigoNombre}" HorizontalOptions="FillAndExpand" />
+                                    </StackLayout>
+
+                                    <Frame HorizontalOptions="FillAndExpand" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Padding="10,0" HasShadow="False" HeightRequest="45" IsVisible="{Binding ShowListaPrecios}">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                            <Label Text="{x:Static resources:AppResource.PriceList}" VerticalOptions="Center" WidthRequest="95" TextColor="Gray" />
+                                            <BoxView VerticalOptions="FillAndExpand" Margin="3,7,0,7" WidthRequest="0.7" Color="Black" Opacity="0.3" />
+                                            <controls:BorderlessPicker HorizontalOptions="FillAndExpand" FontSize="14" VerticalOptions="FillAndExpand" Title="{x:Static resources:AppResource.Select}" ItemsSource="{Binding ListasPrecios}" SelectedItem="{Binding CurrentListaPrecios}"/>
+                                        </StackLayout>
+                                    </Frame>
+
+                                    <Frame HorizontalOptions="FillAndExpand" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Padding="10,0" HasShadow="False" HeightRequest="45" IsVisible="{Binding UseMultiMoneda}">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                            <Label Text="{x:Static resources:AppResource.Currency}" VerticalOptions="Center" WidthRequest="95" TextColor="Gray" />
+                                            <BoxView VerticalOptions="FillAndExpand" Margin="3,7,0,7" WidthRequest="0.7" Color="Black" Opacity="0.3" />
+                                            <controls:BorderlessPicker HorizontalOptions="FillAndExpand" FontSize="14" VerticalOptions="FillAndExpand" Title="{x:Static resources:AppResource.Select}" ItemsSource="{Binding MonedasSource}" SelectedItem="{Binding CurrentMoneda}"/>
+                                        </StackLayout>
+                                    </Frame>
+
+                                    <Frame HorizontalOptions="Fill" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HasShadow="False" Padding="10,0,0,0" Margin="0,5,0,0" HeightRequest="45">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                            <controls:BorderlessPicker WidthRequest="95" ItemsSource="{Binding FiltrosSource}" ItemDisplayBinding="{Binding FilDescripcion}" SelectedItem="{Binding CurrentFilters}" Title="{x:Static resources:AppResource.Filter}" TextColor="Gray" FontSize="14" />
+                                            <BoxView VerticalOptions="FillAndExpand" Margin="0,7,0,7" WidthRequest="0.7" Color="Black" Opacity="0.3" />
+
+                                            <AbsoluteLayout HorizontalOptions="FillAndExpand">
+                                                <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding ShowSecondFilter, Converter={StaticResource boolInverter}}">
+                                                    <controls:BorderlessEntry x:Name="editSearch" HorizontalOptions="FillAndExpand" FontSize="14" Command="{Binding SearchCommand}" Placeholder="{x:Static resources:AppResource.FilterSearch}" TextChanged="EntryBuscarTextChanged" VerticalOptions="Center" PlaceholderColor="Gray" Text="{Binding SearchValue, Mode=TwoWay}" />
+                                                    <ContentView VerticalOptions="FillAndExpand" BackgroundColor="#009688" WidthRequest="45" HorizontalOptions="End">
+                                                        <ContentView.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding BtnSearchCommand}" />
+                                                        </ContentView.GestureRecognizers>
+                                                        <Image Source="{Binding BtnSearchLogo, Mode=TwoWay}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                                    </ContentView>
+                                                </StackLayout>
+                                                <StackLayout Spacing="0" Orientation="Horizontal" IsVisible="{Binding ShowSecondFilter}" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                                                    <controls:BorderlessPicker HorizontalOptions="FillAndExpand" SelectedItem="{Binding CurrentSecondFiltro}" TextColor="Gray" FontSize="14" ItemsSource="{Binding SecondFiltroSource}" />
+                                                    <Image Source="ic_arrow_drop_down_black_24dp" VerticalOptions="Center" Opacity="0.7" Margin="0,0,3,0" />
+                                                </StackLayout>
+                                            </AbsoluteLayout>
+                                        </StackLayout>
+                                    </Frame>
+
+                                    <Label Text="{x:Static resources:AppResource.Products}" FontAttributes="Bold" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,10,0,0" />
+
+                                </Grid>
+
+                                <flv:FlowListView x:Name="ListaProductos" 
+                                  HasUnevenRows="True" 
+                                  FlowItemsSource="{Binding Productos}" 
+                                  SeparatorVisibility="None" 
+                                  FlowItemTapped="OnListItemSelected"
+			                      FlowColumnMinWidth="110" 
+                                  Margin="5,0"
+                                  BackgroundColor="Transparent"         
+                                  HorizontalOptions="FillAndExpand"
+                                  VerticalOptions="FillAndExpand"/>
+
+                                <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="End" BackgroundColor="White" Padding="10,5">
+                                    <!--<Frame HasShadow="False" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" BackgroundColor="#3F51B5" Padding="10,0">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Productos:" TextColor="White" />
+                                            <Label Text="{Binding CantidadProductos}" TextColor="White" />
+                                        </StackLayout>
+                                    </Frame>-->
+                                    <Label HorizontalOptions="FillAndExpand">
+                                        <Label.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness" iOS="15" />
+                                        </Label.Padding>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResource.ProductsLabel}" FontAttributes="Bold" />
+                                                <Span Text="{Binding CantidadProductos}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </ContentView>
+                            </StackLayout>
+                            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+                        </Grid>
+                    </ContentPage.Content>
+                </ContentPage>
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+    
+</MasterDetailPage>

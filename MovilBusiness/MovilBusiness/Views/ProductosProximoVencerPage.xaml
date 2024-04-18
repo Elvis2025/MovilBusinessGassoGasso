@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ProductosProximoVencerPage"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.ProductsSoonToExpireTwoLines}">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" HasShadow="False" Padding="0" BackgroundColor="White" Margin="10">
+                <ScrollView Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White">
+
+                        <StackLayout Orientation="Horizontal" Padding="10,5" BackgroundColor="#37474F" Spacing="0">
+                            <Label Text="{x:Static resources:AppResource.Code}" WidthRequest="100" TextColor="White"/>
+                            <Label Text="{x:Static resources:AppResource.Description}" WidthRequest="120" TextColor="White"/>
+                            <Label Text="{x:Static resources:AppResource.Quantity}" WidthRequest="70" TextColor="White"/>
+                            <Label Text="{x:Static resources:AppResource.Lot}" WidthRequest="100" TextColor="White" />
+                            <Label Text="{x:Static resources:AppResource.ExpirationDate}" WidthRequest="140" TextColor="White" />
+                        </StackLayout>
+
+                        <ListView
+                            x:Name="list"
+                            ItemsSource="{Binding Productos}"
+                            ItemSelected="OnListItemSelected"
+                            VerticalOptions="FillAndExpand"
+                            CachingStrategy="RecycleElement"
+                            SeparatorVisibility="None"
+                            BackgroundColor="Transparent">
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid Padding="10,5" ColumnSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="100" />
+                                                <ColumnDefinition Width="120" />
+                                                <ColumnDefinition Width="70" />
+                                                <ColumnDefinition Width="100" />
+                                                <ColumnDefinition Width="140" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Text="{Binding ProCodigo}" Grid.Column="0" HorizontalOptions="FillAndExpand" />
+                                            <Label Text="{Binding Descripcion}" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+                                            <Label Text="{Binding Cantidad}" Grid.Column="2" HorizontalOptions="FillAndExpand" />
+                                            <Label Text="{Binding Lote}" Grid.Column="3" HorizontalOptions="FillAndExpand" />
+                                            <Label Text="{Binding FechaVencimiento}" Grid.Column="4" HorizontalOptions="FillAndExpand" />
+
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+
+                    </StackLayout>
+                </ScrollView>
+            </Frame>
+
+            <ContentView Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#B0000000" IsVisible="{Binding ShowDetalleFactura}">
+                <Frame HorizontalOptions="FillAndExpand" HasShadow="False" Padding="0">
+                    <Frame.Margin>
+                        <OnIdiom x:TypeArguments="Thickness" Phone="20,0" Tablet="50,0" />
+                    </Frame.Margin>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                        
+                    </StackLayout>
+                    
+                </Frame>
+            </ContentView>
+            
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

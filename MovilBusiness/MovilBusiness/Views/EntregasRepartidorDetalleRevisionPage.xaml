@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.EntregasRepartidorDetalleRevisionPage"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             Title="{x:Static resources:AppResource.DeliveryDetail}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Icon="{Binding SaveIcon}" Order="Primary" Command="{Binding SaveCommand}" IsEnabled="{Binding IsUp}" x:Name="btnGuardar" />
+        <ToolbarItem Text="{x:Static resources:AppResource.Print}" Icon="baseline_print_white_24.png" Order="Primary" Command="{Binding ImprimirCommand}" IsEnabled="{Binding IsUp}" x:Name="btnImprimir" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="7">
+
+                <ListView
+                    x:Name="list"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    CachingStrategy="RecycleElement"
+                    BackgroundColor="Transparent"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="True"
+                    SelectionMode="None"
+                    ItemsSource="{Binding Productos}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame HorizontalOptions="FillAndExpand" Padding="0" BackgroundColor="{Binding RowColor}" CornerRadius="4" Margin="0,0,0,5">
+                                    <Frame.HasShadow>
+                                        <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+                                    </Frame.HasShadow>
+ 
+                                    <Grid HorizontalOptions="FillAndExpand" BackgroundColor="White" RowSpacing="0" ColumnSpacing="0" Padding="10,0" Margin="5,0,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Column="0" Spacing="0" VerticalOptions="Center">
+                                            <Label FontAttributes="Bold">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding ProCodigo}" />
+                                                        <Span Text=" - " />
+                                                        <Span Text="{Binding ProDescripcion}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <StackLayout Margin="0,3,0,0" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding UsaLote}">
+                                                <Label Text="{x:Static resources:AppResource.LotLabel}" />
+                                                <Label IsVisible="{Binding LoteIsSet}" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text=" " />
+                                                            <Span Text="{Binding Lote}" />
+                                                            <Span Text=" " />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+
+                                            <Label IsVisible="{Binding TraIndicadorOferta}" HorizontalOptions="End" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White" Margin="0,0,0,3">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="  **" />
+                                                        <Span Text="{x:Static resources:AppResource.Offer}" />
+                                                        <Span Text= "{Binding ShowProIDoferta}" />
+                                                        <Span Text="**  " />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            
+                                        </StackLayout>
+
+                                        <BoxView Grid.Column="1" VerticalOptions="FillAndExpand" Margin="5" HorizontalOptions="End" WidthRequest="1" Color="LightGray" />
+
+                                        <StackLayout Orientation="Vertical" HorizontalOptions="End" Grid.Column="2" Spacing="0" VerticalOptions="Center">
+                                            <Label Text="{x:Static resources:AppResource.Quantity}" HorizontalOptions="Center" />
+                                            <Label HorizontalOptions="Center">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Cantidad}" FontAttributes="Bold" />
+                                                        <Span Text="/" />
+                                                        <Span Text="{Binding CantidadSolicitada}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" RowSpacing="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+
+                        <RowDefinition Height="Auto" />
+
+                        <RowDefinition Height="Auto" />
+                        <!-- SubTotal -->
+                        <RowDefinition Height="Auto" />
+                        <!-- Descuento -->
+                        <RowDefinition Height="Auto" />
+
+                        <!-- Selectivo -->
+                        <RowDefinition Height="Auto" />
+                        <!-- AdValorem -->
+                        <RowDefinition Height="Auto" />
+                        <!-- Itbis -->
+                        <RowDefinition Height="Auto" />
+                        <!-- Total -->
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="{x:Static resources:AppResource.DiscountOffers}"  Grid.Column="0" Grid.Row="0" HorizontalOptions="FillAndExpand" />
+                    <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  Color="#E772D3"/>
+                    <Label Text="SubTotal" Grid.Column="0" Grid.Row="2" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="{x:Static resources:AppResource.Discount}" Grid.Column="0" Grid.Row="3" HorizontalOptions="FillAndExpand" />
+                    <Label Text="{x:Static resources:AppResource.Selective}" Grid.Column="0" Grid.Row="4" HorizontalOptions="FillAndExpand" />
+                    <Label Text="AdValorem" Grid.Column="0" Grid.Row="5" HorizontalOptions="FillAndExpand" />
+                    <Label Text="Itbis" Grid.Column="0" Grid.Row="6" HorizontalOptions="FillAndExpand" />
+                    <Label Text="Total" Grid.Column="0" Grid.Row="7" HorizontalOptions="FillAndExpand" />
+
+                    <Label Text="{Binding Totales.DescuentoOfertas, StringFormat='{0:N2}'}"  Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" />
+                    <Label Text="{Binding Totales.SubTotal, StringFormat='{0:N2}'}" Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" />
+                    <Label Text="{Binding Totales.Descuento, StringFormat='{0:N2}'}" Grid.Row="3" Grid.Column="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" />
+                    <Label Text="{Binding Totales.Selectivo, StringFormat='{0:N2}'}" Grid.Row="4" Grid.Column="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" />
+                    <Label Text="{Binding Totales.AdValorem, StringFormat='{0:N2}'}" Grid.Row="5" Grid.Column="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" />
+                    <Label Text="{Binding Totales.Itbis, StringFormat='{0:N2}'}" Grid.Row="6" Grid.Column="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" />
+                    <Label Text="{Binding Totales.Total, StringFormat='{0:N2}'}" Grid.Row="7" Grid.Column="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" />
+                    
+                </Grid>
+
+            </StackLayout>
+            
+            <controls:ProgressIndicator Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" />
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

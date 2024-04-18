@@ -1,0 +1,29 @@
+﻿<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Views.PedidosOfertasManualesView"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="FillAndExpand"
+      xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior"
+             BackgroundColor="White">
+
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <Label Text="{x:Static resources:AppResource.OfferProduct}" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+    <Label Text="{x:Static resources:AppResource.OfferQuantity}" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+
+    <Button IsEnabled="{Binding btnOfertaEnabled}" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="1" Text="{Binding ElegirProdLabel}" Command="{Binding SeleccionarProductoOfertaCommand}" />
+    <Entry HorizontalOptions="FillAndExpand" Keyboard="Numeric" Grid.Row="1" Grid.Column="1" Text="{Binding CantidadOfertaManual}" IsEnabled="{Binding btnOfertaEnabled}">
+        <Entry.Behaviors>
+            <behaviors:NumericValidation />
+        </Entry.Behaviors>
+    </Entry>
+
+</Grid>

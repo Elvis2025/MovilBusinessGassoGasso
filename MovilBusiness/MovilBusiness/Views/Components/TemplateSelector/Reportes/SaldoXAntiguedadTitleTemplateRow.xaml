@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.TemplateSelector.Reportes.SaldoXAntiguedadTitleTemplateRow">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="150" />
+        </Grid.ColumnDefinitions>
+        
+        <Label Text="{Binding Cliente}" FontAttributes="{Binding FontAttribute}" Grid.Column="0"/>
+        <Label Text="{Binding Moneda}" FontAttributes="{Binding FontAttribute}" Grid.Column="1"/>
+        <Label Text="{Binding Balance}" FontAttributes="{Binding FontAttribute}" Grid.Column="2"/>
+        <Label Text="{Binding column1}" FontAttributes="{Binding FontAttribute}" Grid.Column="3"/>
+        <Label Text="{Binding column2}" FontAttributes="{Binding FontAttribute}" Grid.Column="4"/>
+        <Label Text="{Binding column3}" FontAttributes="{Binding FontAttribute}" Grid.Column="5"/>
+        <Label Text="{Binding column4}" FontAttributes="{Binding FontAttribute}" Grid.Column="6"/>
+    </Grid>
+
+</Grid>

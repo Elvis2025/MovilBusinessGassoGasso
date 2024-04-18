@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="10dp">
+
+    <TextView android:id="@+id/lblInvArea"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Area"
+              android:textStyle="bold"
+              android:visibility="gone" />
+
+    <Spinner android:id="@+id/comboInvArea"
+             android:layout_width="match_parent"
+             android:layout_height="40dp"
+             android:layout_marginTop="5dp"
+             android:layout_marginBottom="10dp"
+             android:visibility="gone" />
+
+    <TextView android:id="@+id/lblCantidad"
+              android:layout_width="wrap_content"
+              android:textStyle="bold"
+              android:layout_height="wrap_content"
+              android:text="Cantidad" />
+
+    <EditText android:id="@+id/editCantidad"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:imeOptions="actionDone"
+              android:inputType="number"
+              android:gravity="center"
+              android:maxLines="1" />
+
+    <TextView android:id="@+id/lblUnidades"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textStyle="bold"
+              android:text="Unidades"
+              android:visibility="gone" />
+
+    <EditText android:id="@+id/editUnidades"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:imeOptions="actionDone"
+              android:maxLines="1"
+              android:inputType="number"
+              android:gravity="center"
+              android:visibility="gone" />
+
+  <TextView android:id="@+id/lblPrecio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio de venta"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+  <EditText
+    android:id="@+id/editPrecio"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="numberDecimal"
+    android:imeOptions="actionDone"
+    android:maxLines="1"
+    android:visibility="gone"/>
+
+</LinearLayout>

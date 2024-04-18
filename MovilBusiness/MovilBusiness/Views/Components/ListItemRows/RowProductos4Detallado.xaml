@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.ListItemRows.RowProductos4Detallado"
+             Orientation="Horizontal"
+             Padding="0"
+             Spacing="0"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="White"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Margin="0,0,0,5">
+
+    <ffimageloading:CachedImage Grid.Row="0" 
+                            Aspect="AspectFill"
+                            WidthRequest="110"
+                            HeightRequest="100"
+                            DownsampleUseDipUnits="False" 
+                            DownsampleToViewSize="False"
+							LoadingPlaceholder="image_loading" 
+                            ErrorPlaceholder="image_not_available"
+                            VerticalOptions="Center"
+							Source="{Binding ProImage}" />
+
+    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10,5" Spacing="0">
+        <Label Text="{Binding Descripcion}" FontAttributes="Bold" />
+        <Label Text="{Binding ProCodigo}" />
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label Text="{x:Static resources:AppResource.NetPriceLabel}" />
+            <Label Text="{Binding PrecioNeto, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand"/>
+           <!-- <Label Text="Itbis:" />
+            <Label Text="{Binding Itbis, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand"/>-->
+        </StackLayout>
+       <!-- <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label Text="Precio neto:" />
+            <Label Text="{Binding PrecioNeto, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Precio desc:" />
+            <Label Text="{Binding PrecioConDescuento, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand"/>
+        </StackLayout>-->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label Text="Desc 2:" />
+            <Label Text="{Binding ProDescripcion3}" HorizontalOptions="FillAndExpand"/>
+            <!--<Label Text="Marca:" />
+            <Label Text="{Binding ProDescripcion1}" HorizontalOptions="FillAndExpand" />-->
+        </StackLayout>
+        <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label Text="Aplicación:" />
+            <Label Text="{Binding ProDatos1}" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Referencia 2:" />
+            <Label Text="{Binding ProDescripcion2}" HorizontalOptions="FillAndExpand" />
+        </StackLayout>-->
+        <StackLayout Orientation="Horizontal" Spacing="0">
+            <Label Text="{x:Static resources:AppResource.QuantityLabel}" IsVisible="{Binding ShowCantidad}"/>
+            <Label Text="{Binding Cantidad}" HorizontalOptions="FillAndExpand"  IsVisible="{Binding ShowCantidad}"/>
+            <Label Text="{x:Static resources:AppResource.InventoryLabel}" />
+            <Label Text="{Binding InvCantidad}" HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+    </StackLayout>
+
+</StackLayout>

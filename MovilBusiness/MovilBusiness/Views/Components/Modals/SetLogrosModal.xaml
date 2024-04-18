@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.SetLogrosModal"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls">
+
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Frame HorizontalOptions="FillAndExpand" VerticalOptions="Center" HasShadow="False" Padding="0">
+                <Frame.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="20,0" Tablet="50,0" />
+                </Frame.Margin>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="0">
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}" Padding="15,0,0,0" HeightRequest="45">
+                        <Label Text="{x:Static resources:AppResource.FilterAchievements}" FontSize="16" TextColor="White" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                        <ContentView Padding="15,10" VerticalOptions="FillAndExpand">
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Dismiss" />
+                            </ContentView.GestureRecognizers>
+                            <Image VerticalOptions="Center" Source="ic_close_white" />
+                        </ContentView>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="15,0" Spacing="0">
+
+                        <Label Text="{x:Static resources:AppResource.PercentSmallerThan}" FontAttributes="Bold" Margin="3,20,0,0" />
+                        <Entry HorizontalOptions="FillAndExpand" Text="{Binding MenorValue, Mode=TwoWay}" Keyboard="Numeric" />
+
+                        <Label Text="{x:Static resources:AppResource.PercentGreaterThan}" Margin="3,10,0,0" FontAttributes="Bold" />
+                        <Entry HorizontalOptions="FillAndExpand" Text="{Binding MayorValue, Mode=TwoWay}" Keyboard="Numeric" />                        
+
+                        <Button BackgroundColor="Transparent" Text="{x:Static resources:AppResource.Aceptar}" TextColor="{StaticResource ColorPrimary}" FontAttributes="Bold" HorizontalOptions="End" Clicked="Button_Clicked">
+                            <Button.Margin>
+                                <OnPlatform x:TypeArguments="Thickness" Android="0,5" iOS="0,15,0,15" />
+                            </Button.Margin>
+                        </Button>
+
+                    </StackLayout>
+
+                </StackLayout>
+
+            </Frame>   
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

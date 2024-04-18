@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.DetalleTareasModal"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="Center" HasShadow="False" Padding="0">
+                <Frame.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="20" Tablet="50" />
+                </Frame.Margin>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Grid.Row="0" x:Name="layout">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}" Padding="15, 12">
+                        <Label Text="{x:Static resources:AppResource.TaskDetail}" FontSize="17" TextColor="White" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+                        <Image Source="ic_close_white" HorizontalOptions="End" VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Dimiss" />
+                            </Image.GestureRecognizers>
+                        </Image>
+
+
+                    </StackLayout>
+
+                    <Grid HorizontalOptions="FillAndExpand" Padding="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                         
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                                    
+
+                        </Grid.RowDefinitions>
+
+
+                        <Label Text="{x:Static resources:AppResource.SubjectLabel}" FontAttributes="Bold" FontSize="16" Grid.Row="0" Grid.Column="0" Margin="10"/>
+                        <Label Text="{Binding TareaDetalle.TarAsunto}" Grid.Row="0" Grid.Column="1"  Margin="10"  HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{x:Static resources:AppResource.DescriptionLabel}" FontAttributes="Bold" FontSize="16" Grid.Row="1" Grid.Column="0"  Margin="10" />
+                        <Label Text="{Binding TareaDetalle.TarDescripcion}" Grid.Row="1" Grid.Column="1"  Margin="10"  HorizontalOptions="FillAndExpand" />
+                        <Label Text="{x:Static resources:AppResource.StatusLabel}" FontAttributes="Bold" FontSize="16" Grid.Row="2" Grid.Column="0" Margin="10" />
+                        <Label Text="{Binding TareaDetalle.TarEstadoDescripcion}" Grid.Row="2" Grid.Column="1"  Margin="10"  />
+                        <Label Text="{x:Static resources:AppResource.DeadlineLabel}" FontAttributes="Bold" FontSize="16" Grid.Row="3" Grid.Column="0"  Margin="10" />
+                        <Label Text="{Binding TareaDetalle.FechaFormateada}" Grid.Row="3" Grid.Column="1"  Margin="10" />
+
+                   
+                    </Grid>
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                    <Grid HorizontalOptions="CenterAndExpand" Padding="0">
+                        <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />                               
+                        </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Button HorizontalOptions="FillAndExpand"  Clicked="Button_Clicked" Grid.Row="4" Grid.Column="0" TextColor="White" Text="{x:Static resources:AppResource.InProcess}" BackgroundColor="{StaticResource ColorPrimary}" BindingContext="2" Padding="5"></Button>
+                            <Button HorizontalOptions="FillAndExpand"  Clicked="Button_Clicked" Grid.Row="4" Grid.Column="1" TextColor="White" Text="{x:Static resources:AppResource.Complete}" BackgroundColor="{StaticResource ColorPrimary}" BindingContext="3" Padding="5"></Button>
+                            <Button HorizontalOptions="FillAndExpand"  Clicked="Dimiss"  Grid.Row="4" Grid.Column="2" TextColor="White" Text="{x:Static resources:AppResource.Aceptar}" BackgroundColor="{StaticResource ColorPrimary}" Padding="5"></Button>
+                    </Grid>
+                    </StackLayout>
+                </StackLayout>
+                
+            </Frame>
+          
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

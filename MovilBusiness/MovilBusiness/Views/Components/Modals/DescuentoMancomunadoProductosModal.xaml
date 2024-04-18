@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             x:Class="MovilBusiness.Views.Components.Modals.DescuentoMancomunadoProductosModal">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0" Grid.Row="0">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                    <StackLayout.Padding>
+                        <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,30,15,15" />
+                    </StackLayout.Padding>
+                    <ContentView VerticalOptions="CenterAndExpand" Padding="15,0,0,0">
+                        <Image Source="ic_close_white" VerticalOptions="Center" />
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Dismiss" />
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
+
+                    <Label x:Name="lblTitle" HorizontalTextAlignment="Center" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="18" />
+
+                </StackLayout>
+
+                <Label x:Name="lblGrpDescripcion" FontSize="14" Margin="15,5,15,10" />
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="10,5"  Margin="15,0" BackgroundColor="#37474F" Spacing="0">
+                    <Label Text="{x:Static resources:AppResource.Code}" TextColor="White" HorizontalOptions="Start" WidthRequest="90"/>
+                    <Label Text="{x:Static resources:AppResource.Description}" TextColor="White" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <Frame Padding="0" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,0,15,10">
+                    <ListView
+                        x:Name="list"
+                        HorizontalOptions="FillAndExpand" 
+                        VerticalOptions="FillAndExpand"
+                        ItemsSource="{Binding Productos}"
+                        HasUnevenRows="True"
+                        SeparatorVisibility="None"
+                        CachingStrategy="RecycleElement"
+                        BackgroundColor="Transparent"
+                        SelectionMode="None">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ContentView HorizontalOptions="FillAndExpand" Padding="0,0,0,1" BackgroundColor="LightGray">
+                                        <Grid HorizontalOptions="FillAndExpand" BackgroundColor="White" Padding="10,5" ColumnSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="90" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Text="{Binding ProCodigo}" Grid.Column="0" HorizontalOptions="FillAndExpand" />
+                                            <Label Text="{Binding ProDescripcion}" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
+                                        </Grid>
+                                    </ContentView>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+
+
+                <ContentView HorizontalOptions="FillAndExpand" BackgroundColor="#FAFAFA" Padding="15,10" VerticalOptions="End">
+                    <Button HorizontalOptions="End" WidthRequest="120" Text="{x:Static resources:AppResource.Continue}" HeightRequest="40" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White" Clicked="Dismiss" />
+                </ContentView>
+
+            </StackLayout>
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

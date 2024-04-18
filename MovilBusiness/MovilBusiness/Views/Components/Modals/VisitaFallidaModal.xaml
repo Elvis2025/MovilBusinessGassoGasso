@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.VisitaFallidaModal"
+              NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="#CFD8DC">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--<BoxView Color="Black" Opacity="0.4" Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />-->
+
+            <Frame Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="Center" HasShadow="False" Padding="0">
+                <Frame.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="20" Tablet="50" />
+                </Frame.Margin>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Grid.Row="0" x:Name="layout">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}" Padding="15, 12">
+                        <Label Text="{x:Static resources:AppResource.FailedVisit}" FontSize="17" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+                        <Image Source="ic_close_white" HorizontalOptions="End" VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Dismiss" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+
+                    <Label Text="{x:Static resources:AppResource.Reason}" FontAttributes="Bold" Margin="10,5,10,0" />
+
+                    <Picker Title="{x:Static resources:AppResource.SelectReason}" x:Name="comboMotivo" Margin="10,0" ItemsSource="{Binding Motivos}" ItemDisplayBinding="{Binding MenDescripcion}" SelectedItem="{Binding CurrentMotivo, Mode=TwoWay}" />
+
+                    <Label Text="{x:Static resources:AppResource.Detail}" FontAttributes="Bold" Margin="10,5,10,0" IsVisible="{Binding IsDetailed}" />
+
+                    <Entry x:Name="editDetalle" MaxLength="60" Placeholder="{x:Static resources:AppResource.WriteReason}"  Margin="10,0" IsVisible="{Binding IsDetailed}" />
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="10,5">
+                        <Button Text="{x:Static resources:AppResource.Cancel}" TextColor="{StaticResource ColorPrimary}" HorizontalOptions="End" BackgroundColor="Transparent" Margin="0,0,5,0" Clicked="Dismiss" />
+                        <Button HorizontalOptions="End" BackgroundColor="Transparent" TextColor="{StaticResource ColorPrimary}" Text="{x:Static resources:AppResource.Save}" Clicked="AttempSave" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

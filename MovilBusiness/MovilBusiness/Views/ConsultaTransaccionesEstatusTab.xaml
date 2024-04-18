@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ConsultaTransaccionesEstatusTab"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Status}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ListView
+                x:Name="list"
+                Grid.Row="0"
+                HasUnevenRows="True"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                BackgroundColor="Transparent"
+                CachingStrategy="RecycleElement"
+                ItemsSource="{Binding TransaccionesEstatus}"
+                ItemTapped="OnListItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="10,5" BackgroundColor="{Binding RowBg}">
+                                <Image Opacity="{Binding IconOpacity}" Source="{Binding Icon}" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" />
+                                <Label Text="{Binding Descripcion}" FontSize="16" HorizontalOptions="FillAndExpand" VerticalOptions="Center"  />
+
+                                <Frame HasShadow="False" Padding="0" CornerRadius="10" BackgroundColor="{Binding CountBg}" Opacity="0.6" WidthRequest="37" HorizontalOptions="End" VerticalOptions="Center">
+                                    <Label TextColor="White" Text="{Binding CountLabel}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                </Frame>
+
+                                <Image IsVisible="{Binding IsChild}" Source="baseline_chevron_right_black_24" Opacity="0.4" HorizontalOptions="End" VerticalOptions="Center" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

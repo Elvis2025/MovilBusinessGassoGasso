@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.QuejasServicioPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.ServiceComplaints}"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             Padding="10">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Icon="ic_done_white_24dp" Order="Primary" Command="{Binding SaveCommand}" IsEnabled="{Binding IsUp}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <Label Text="{x:Static resources:AppResource.SellerUpper}" FontAttributes="Bold" Margin="0,15,0,0"/>
+            <ContentView BackgroundColor="#B0BEC5" Padding="0.8" Margin="0,5,0,5">
+                <controls:BorderlessPicker HeightRequest="40" IsEnabled="{Binding ControlsEnabled}" HorizontalOptions="FillAndExpand" BackgroundColor="White" ItemsSource="{Binding Vendedores}" ItemDisplayBinding="{Binding RepNombre}" SelectedItem="{Binding CurrentVendedor, Mode=TwoWay}"/>
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.ReasonUpper}" FontAttributes="Bold" Margin="0,10,0,0" />
+            <ContentView BackgroundColor="#B0BEC5" Padding="0.8" Margin="0,5,0,5">
+                <controls:BorderlessPicker HeightRequest="40" IsEnabled="{Binding ControlsEnabled}" HorizontalOptions="FillAndExpand" BackgroundColor="White" ItemsSource="{Binding MotivosQuejas}" ItemDisplayBinding="{Binding MenDescripcion}" SelectedItem="{Binding CurrentMotivo, Mode=TwoWay}"/>
+            </ContentView>
+
+            <Label Text="{x:Static resources:AppResource.CommentUpper}" FontAttributes="Bold" Margin="0,10,0,0" />
+            <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#B0BEC5" Padding="1.5">
+                <Editor HorizontalOptions="FillAndExpand" IsEnabled="{Binding ControlsEnabled}" VerticalOptions="FillAndExpand" BackgroundColor="White" MaxLength="500" Text="{Binding Comentario, Mode=TwoWay}" />
+            </ContentView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

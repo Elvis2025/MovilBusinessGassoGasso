@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.AgregarProductoEntregaModal"
+             Title="Agregar producto"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" Orientation="Vertical">
+                <StackLayout.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="20,0" Tablet="50,0" />
+                </StackLayout.Margin>
+
+                <Label Text="{x:Static resources:AppResource.Editing}" HorizontalTextAlignment="Center" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="#263238" WidthRequest="100" x:Name="lblEditando" IsVisible="False" Margin="0,0,0,10" HorizontalOptions="End" />
+
+                <Label x:Name="lblDescripcion" Text="{x:Static resources:AppResource.ProductDescription}" FontAttributes="Bold" FontSize="18" />
+
+                <!--<Label Margin="0,10,0,0" x:Name="lblCantidadSolicitada" />-->
+
+                <Grid HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Text="{x:Static resources:AppResource.RequestedQuantityLabel}"  Grid.Column="0" Grid.Row="0" />
+                    <Label x:Name="lblCantidadSolicitada" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="1" />
+
+                    <Label Text="{x:Static resources:AppResource.QuantityLabel}" VerticalOptions="Center" Grid.Column="0" Grid.Row="1" HorizontalOptions="End" />
+                    
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="1" Spacing="6">
+                        <Entry HorizontalOptions="FillAndExpand" Keyboard="Numeric" x:Name="editCantidad" Grid.Row="1" Grid.Column="1" />
+                        <Image Source="ic_add_circle_outline_black_24dp" HorizontalOptions="End" VerticalOptions="Center" Opacity="0.7">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="FillCantidad" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                    
+                    <Label Text="{x:Static resources:AppResource.LotLabel}" VerticalOptions="Center" Grid.Column="0" Grid.Row="2" x:Name="lblLote" HorizontalOptions="End" />
+                    <Entry HorizontalOptions="FillAndExpand" MaxLength="20" x:Name="editLote" Grid.Row="2" Grid.Column="1" />
+
+                    <Label Text="{x:Static resources:AppResource.ExpirationDateLabel}" IsVisible="False" Grid.Column="0" Grid.Row="3" x:Name="lblFechaVencimiento" VerticalOptions="Center" HorizontalOptions="End" />
+                    <DatePicker HorizontalOptions="FillAndExpand" IsVisible="False" Grid.Column="1" Grid.Row="3" x:Name="pickerFechaVencimiento" Format="dd/MM/yyyy"/>
+
+                    <Label Text="{x:Static resources:AppResource.ReasonLabel}" Grid.Column="0" Grid.Row="4" x:Name="lblMotivo" IsVisible="False" VerticalOptions="Center" HorizontalOptions="End" />
+                    <Picker HorizontalOptions="FillAndExpand" Title="{x:Static resources:AppResource.Select}" Grid.Column="1" Grid.Row="4" x:Name="pickerMotivo" IsVisible="False" />
+
+                    <Label Text="{x:Static resources:AppResource.StatusLabel}" Grid.Column="0" Grid.Row="5" x:Name="lblEstado" IsVisible="False" VerticalOptions="Center" HorizontalOptions="End" />
+                    <Picker HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.Row="5" x:Name="comboEstado" IsVisible="False">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Buen estado</x:String>
+                                <x:String>Mal estado</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <Label Text="{x:Static resources:AppResource.InvoiceLabel}" Grid.Column="0" Grid.Row="6" x:Name="lblFactura" IsVisible="False" VerticalOptions="Center" HorizontalOptions="End"/>
+                    <Entry HorizontalOptions="FillAndExpand" Grid.Row="6" Grid.Column="1" x:Name="editFactura" IsVisible="False"/>
+                </Grid>
+
+                <!-- <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="Cantidad:" VerticalOptions="Center" />
+                <Entry HorizontalOptions="FillAndExpand" Keyboard="Numeric" x:Name="editCantidad" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" x:Name="layoutLote">
+                <Label Text="Lote:" VerticalOptions="Center"/>
+                <Entry HorizontalOptions="FillAndExpand" x:Name="editLote" />
+            </StackLayout>-->
+
+                <StackLayout Margin="0,10,0,0" Orientation="Horizontal" HorizontalOptions="End">
+                    <Button Text="{x:Static resources:AppResource.Cancel}" Clicked="Dismiss" TextColor="{StaticResource ColorPrimary}" VerticalOptions="Center" HorizontalOptions="End" BackgroundColor="Transparent" Margin="0,0,10,0" HeightRequest="36" />
+                    <Button HorizontalOptions="End" Clicked="AceptarProducto" Text="{x:Static resources:AppResource.Aceptar}" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White" WidthRequest="100" HeightRequest="36" />
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+        
+    </ContentPage.Content>
+</ContentPage>

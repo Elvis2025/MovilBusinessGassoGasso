@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.RegistrosBaseDatosPage"
+             Title="MovilBusiness"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}"
+             Padding="10">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+            <Label Text="{x:Static resources:AppResource.DatabaseTables}" FontSize="16" FontAttributes="Bold" />
+
+            <Frame Padding="0" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#37474F" Padding="5">
+                        <Label x:Name="lblnombres"  Opacity="0.4" Text="{x:Static resources:AppResource.TableName}" HorizontalOptions="FillAndExpand" TextColor="White" VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label x:Name="lblregistros" Text="{x:Static resources:AppResource.Records}" HorizontalOptions="EndAndExpand" TextColor="White" VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <ListView 
+                          x:Name="list"
+                          HorizontalOptions="FillAndExpand" 
+                          VerticalOptions="FillAndExpand"
+                          SeparatorVisibility="None"
+                          HasUnevenRows="True"
+                          SelectionMode="None"
+                          BackgroundColor="Transparent"
+                          ItemsSource="{Binding Tablas}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5">
+                                        <Label Text="{Binding TableName}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                                        <Label Text="{Binding RegistryCount}" HorizontalOptions="End" WidthRequest="60" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#37474F" Padding="5">
+                        <Label Text="{x:Static resources:AppResource.TotalRecordsLabel}" HorizontalOptions="StartAndExpand" TextColor="White" VerticalOptions="Center" />
+                        <Label Text="{Binding Cambios}" HorizontalOptions="EndAndExpand" TextColor="White" VerticalOptions="Center" />
+                    </StackLayout>
+                    
+                </StackLayout>
+            </Frame>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

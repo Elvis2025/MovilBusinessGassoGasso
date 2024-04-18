@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Dialogs.DialogImpresion"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+      HorizontalOptions="FillAndExpand"
+      VerticalOptions="FillAndExpand"
+      xmlns:resources="clr-namespace:MovilBusiness.Resx"
+      BackgroundColor="#B0000000">
+    
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />                       
+    </Grid.RowDefinitions>
+
+    <!--<BoxView Color="Black" Opacity="0.4" Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />-->
+
+    <Frame HorizontalOptions="FillAndExpand" VerticalOptions="Center" HasShadow="False" Padding="0" BackgroundColor="#ECEFF1" x:Name="Container">
+        <Frame.Margin>
+            <OnIdiom x:TypeArguments="Thickness" Phone="30" Tablet="50" />
+        </Frame.Margin>
+
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#1976D2" Padding="10">
+                <Label Text="{x:Static resources:AppResource.Printing}" FontAttributes="Bold" FontSize="16" TextColor="White" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"  VerticalOptions="Center"/>
+                <Image Source="ic_close_white" HorizontalOptions="End" VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="CancelarClicked" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+
+            <Label Text="{x:Static resources:AppResource.ChoosePrinterCopies}" Margin="10,0" />
+
+            <Frame HorizontalOptions="FillAndExpand" Padding="10,0" HasShadow="False" Margin="10">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                    <Label Text="{x:Static resources:AppResource.CopiesLabel}" VerticalOptions="Center" />
+                    <controls:BorderlessPicker HeightRequest="40" x:Name="comboCopias" Title="Seleccione" HorizontalOptions="FillAndExpand" VerticalOptions="Center" SelectedIndex="0" SelectedItem="{Binding Copias, Mode=TwoWay}">
+                        <controls:BorderlessPicker.Items>
+                            <x:String>1</x:String>
+                            <x:String>2</x:String>
+                            <x:String>3</x:String>
+                            <x:String>4</x:String>
+                            <x:String>5</x:String>
+                        </controls:BorderlessPicker.Items>
+                    </controls:BorderlessPicker>
+
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="10,8,10,5">
+                
+                <Button HorizontalOptions="End" BackgroundColor="Transparent" TextColor="#1976D2" Text="{x:Static resources:AppResource.Cancel}" Margin="0,0,10,0" Clicked="CancelarClicked" />
+                <Button HorizontalOptions="End" Margin="0" BackgroundColor="Transparent" TextColor="#1976D2" Text="{x:Static resources:AppResource.Aceptar}" Clicked="AceptarClicked" />
+
+            </StackLayout>
+            
+        </StackLayout>
+
+    </Frame>
+
+</Grid>

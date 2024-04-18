@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.ResumenVisitasModal"
+              NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="#CFD8DC">
+    <ContentPage.Content>
+        <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Spacing="0">
+                <StackLayout.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="20,0" Tablet="50,0" />
+                </StackLayout.Margin>
+
+                <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource ColorPrimary}" HorizontalOptions="FillAndExpand" Padding="10,7">
+                    <Label Text="{x:Static resources:AppResource.SummaryOfVisits}" TextColor="White" FontSize="15" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+                    <Image Source="ic_close_white" HorizontalOptions="End" VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Dismiss" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="10,5" BackgroundColor="#37474F" Spacing="0">
+                    <Label Text="{x:Static resources:AppResource.TransactionType}" TextColor="White" WidthRequest="130" />
+                    <Label Text="{x:Static resources:AppResource.Quantity}" TextColor="White" WidthRequest="90" />
+                    <Label Text="{x:Static resources:AppResource.TotalAmount}" TextColor="White" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <ListView
+                    x:Name="list"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="White"
+                    HeightRequest="300"
+                    HasUnevenRows="True"
+                    SelectionMode="None"
+                    ItemsSource="{Binding ResumenVisita}"
+                    CachingStrategy="RecycleElement"
+                    SeparatorVisibility="None">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid HorizontalOptions="FillAndExpand" Padding="10,5" ColumnSpacing="0" RowSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="130" />
+                                        <ColumnDefinition Width="90" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding TipoTransaccion}" Grid.Column="0" />
+                                    <Label Text="{Binding Cantidad}" Grid.Column="1" />
+                                    <Label Text="{Binding MontoTotal, StringFormat='{0:N2}'}" Grid.Column="2" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    
+                </ListView>
+
+            </StackLayout>
+        </ContentView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.SACDPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx" 
+             Title="{x:Static resources:AppResource.ClientAddressUpdateRequest}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:configuration="clr-namespace:MovilBusiness.Configuration"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Order="Primary" Icon="ic_done_white_24dp" Command="{Binding SaveCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10" Grid.Row="0">
+
+                <Label Text="{Binding CurrentClient.ClicodigoNombre, Source={x:Static configuration:Arguments.Values}}" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" />
+
+                <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+
+                        <Label Text="{x:Static resources:AppResource.AddressToUpdate}" HorizontalOptions="Center" FontAttributes="Bold" />
+                        <Picker HorizontalOptions="FillAndExpand" Title="{x:Static resources:AppResource.Select}" ItemsSource="{Binding Direcciones}" SelectedItem="{Binding CurrentDireccion}" />
+
+                       <!-- <Label Text="Tipo" FontAttributes="Bold" />
+                        <Picker HorizontalOptions="FillAndExpand" Title="Seleccione el tipo" ItemsSource="{Binding Tipos}" SelectedItem="{Binding CurrentTipo, Mode=TwoWay}" />
+-->
+                        <Label Text="{x:Static resources:AppResource.Street}" FontAttributes="Bold" />
+                        <Entry HorizontalOptions="FillAndExpand" MaxLength="50" Text="{Binding Calle}" />
+
+                        <Label Text="{x:Static resources:AppResource.House}" FontAttributes="Bold" />
+                        <Entry HorizontalOptions="FillAndExpand" MaxLength="50" Text="{Binding Casa}" />
+
+                        <Label Text="{x:Static resources:AppResource.Contact}" FontAttributes="Bold" />
+                        <Entry HorizontalOptions="FillAndExpand" MaxLength="50" Text="{Binding Contacto}" />
+
+                        <!-- <Label Text="Pais" FontAttributes="Bold" />
+                    <Picker HorizontalOptions="FillAndExpand" Title="Seleccione el pais" ItemsSource="{Binding Paises}" SelectedItem="{Binding CurrentPais, Mode=TwoWay}" />-->
+
+                        <Label Text="{x:Static resources:AppResource.Province}" FontAttributes="Bold" />
+                        <Picker HorizontalOptions="FillAndExpand" Title="{x:Static resources:AppResource.SelectProvince}" ItemsSource="{Binding Provincias}" SelectedItem="{Binding CurrentProvincia, Mode=TwoWay}" />
+
+                        <Label Text="{x:Static resources:AppResource.Town}" FontAttributes="Bold" />
+                        <Picker HorizontalOptions="FillAndExpand" Title="{x:Static resources:AppResource.SelectTown}" ItemsSource="{Binding Municipios}" SelectedItem="{Binding CurrentMunicipio, Mode=TwoWay}" />
+
+                        <Label Text="Sector" FontAttributes="Bold" />
+                        <Picker HorizontalOptions="FillAndExpand" Title="{x:Static resources:AppResource.SelectSectorToUse}" ItemsSource="{Binding Sectores}" SelectedItem="{Binding CurrentMunSector, Mode=TwoWay}" />
+
+                        <Label Text="{x:Static resources:AppResource.Telephone}" FontAttributes="Bold" />
+                        <Entry HorizontalOptions="FillAndExpand" Keyboard="Telephone" MaxLength="15" Text="{Binding Telefono}" />
+
+                        <Label Text="Whatsapp" FontAttributes="Bold" />
+                        <Entry HorizontalOptions="FillAndExpand" Keyboard="Telephone" MaxLength="15" Text="{Binding Whatsapp}" />
+
+                        <!--<Label Text="Lista de precios" FontAttributes="Bold" />
+                    <Picker HorizontalOptions="FillAndExpand" Title="Seleccione la lista de precios" />-->
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding ParGPS}">
+                            <Label Text="{x:Static resources:AppResource.GeoReference}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+
+                            <ActivityIndicator HorizontalOptions="End" IsVisible="{Binding ListeningGPS}" IsRunning="{Binding ListeningGPS}" />
+                        </StackLayout>
+                        
+                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding ParGPS}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Text="{x:Static resources:AppResource.Latitude}" Grid.Row="0" Grid.Column="0" LineBreakMode="WordWrap" VerticalOptions="Center" />
+                            <Label Text="{x:Static resources:AppResource.Length}" Grid.Row="1" Grid.Column="0" LineBreakMode="WordWrap" VerticalOptions="Center" />
+                            <Button Text="{x:Static resources:AppResource.SeeMap}" Grid.Row="2" Grid.Column="0" Command="{Binding OpenMapCommand}"/>
+
+                            <Entry IsEnabled="False" Text="{Binding CliLatitud, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+                            <Entry IsEnabled="False" Text="{Binding CliLongitud, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+                            <Button Text="{x:Static resources:AppResource.Refresh}" Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" Command="{Binding GeoRefreshCommand}" />
+
+                        </Grid>
+
+                    </StackLayout>
+
+                </ScrollView>
+            </StackLayout>
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" Grid.Row="0" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

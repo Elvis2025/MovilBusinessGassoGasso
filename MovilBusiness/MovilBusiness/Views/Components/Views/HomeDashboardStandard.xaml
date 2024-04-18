@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Views.HomeDashboardStandard"
+             VerticalOptions="FillAndExpand" 
+             HorizontalOptions="FillAndExpand" 
+             BackgroundColor="#ECEFF1" 
+      xmlns:resource="clr-namespace:MovilBusiness.Resx"
+             Padding="15,15,15,15">
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <StackLayout Orientation="Horizontal" Grid.Row="0" 
+                                         VerticalOptions="End" 
+                                         HorizontalOptions="FillAndExpand">
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoModuleCommand}" CommandParameter="1" />
+            </StackLayout.GestureRecognizers>
+            <Image Source="ic_ruta_visitas.png" HorizontalOptions="Center" />
+            <Label Text="{x:Static resource:AppResource.VisitsRoute}" TextColor="#1565C0" HorizontalOptions="Center" FontAttributes="Bold" />
+        </StackLayout>
+
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowBtnClientes}">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoModuleCommand}" CommandParameter="2"  />
+            </StackLayout.GestureRecognizers>
+            <Image Source="ic_cliente.png" HorizontalOptions="Center" />
+            <Label Text="{x:Static resource:AppResource.Customers}" TextColor="#1565C0" HorizontalOptions="Center" FontAttributes="Bold" />
+        </StackLayout>
+    </StackLayout>
+
+    <StackLayout Orientation="Horizontal" Grid.Row="1" 
+                                         VerticalOptions="Center" 
+                                         HorizontalOptions="FillAndExpand">
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoModuleCommand}" CommandParameter="3"  />
+            </StackLayout.GestureRecognizers>
+            <Image Source="ic_productos.png" HorizontalOptions="Center" />
+            <Label Text="{Binding ProductosModuloDescripcion}" TextColor="#1565C0" HorizontalOptions="Center" FontAttributes="Bold"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowBtnReporte}">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoModuleCommand}" CommandParameter="9"  />
+            </StackLayout.GestureRecognizers>
+            <Image Source="ic_reporte.png" HorizontalOptions="Center" WidthRequest="110" HeightRequest="100" Aspect="AspectFill" />
+            <Label Text="{x:Static resource:AppResource.Reports}" TextColor="#1565C0" HorizontalOptions="Center" FontAttributes="Bold" />
+        </StackLayout>
+    </StackLayout>
+
+    <StackLayout Orientation="Horizontal" Grid.Row="2" 
+                                         VerticalOptions="Start" 
+                                         HorizontalOptions="FillAndExpand">
+
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowBtnPresupuestos}">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoModuleCommand}" CommandParameter="4"  />
+            </StackLayout.GestureRecognizers>
+            <Image Source="btn_dashboard_cobertura.png" HorizontalOptions="Center" />
+            <Label Text="{x:Static resource:AppResource.Budgets}" TextColor="#1565C0" HorizontalOptions="Center" FontAttributes="Bold"/>
+        </StackLayout>
+        
+        <StackLayout Orientation="Vertical"  
+                     HorizontalOptions="FillAndExpand">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoModuleCommand}" CommandParameter="5"  />
+            </StackLayout.GestureRecognizers>
+            <Image Source="ic_sync.png" HorizontalOptions="Center" />
+            <Label Text="{x:Static resource:AppResource.SyncUp}" TextColor="#1565C0" HorizontalOptions="Center" FontAttributes="Bold" />
+
+        </StackLayout>
+
+    </StackLayout>
+    
+
+
+</Grid>

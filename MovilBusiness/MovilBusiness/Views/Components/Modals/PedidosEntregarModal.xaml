@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.PedidosEntregarModal"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                    <StackLayout.Padding>
+                        <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,30,15,15" />
+                    </StackLayout.Padding>
+                    <ContentView VerticalOptions="CenterAndExpand" Padding="15,0,0,0">
+                        <Image Source="ic_close_white" VerticalOptions="Center" />
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Dismiss" />
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
+
+                    <Label Text="{x:Static resources:AppResource.OrdersToDeliverUpper}"  HorizontalTextAlignment="Center" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="18" />
+
+                </StackLayout>
+
+               
+
+                <ListView
+                    x:Name="list"
+                    Margin="10"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    CachingStrategy="RecycleElement"
+                    HasUnevenRows="True"
+                    ItemsSource="{Binding Pedidos}"
+                    BackgroundColor="White">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+
+                                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" Padding="10" Margin="0,0,0,5">
+                                    <Label HorizontalOptions="FillAndExpand" FontAttributes="Bold" FontSize="16">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResource.OrderNumberLabel}" />
+                                                <Span Text="{Binding TraSecuencia}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label HorizontalOptions="FillAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResource.OrderDateLabel}" />
+                                                <Span Text="{Binding FormattedDate}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label HorizontalOptions="FillAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResource.DeliveryDateLabel}" />
+                                                <Span Text="{Binding FormattedDateEntrega}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label HorizontalOptions="FillAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResource.PreSellerLabel}" />
+                                                <Span Text="{Binding Prevendedor}"  />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label HorizontalOptions="FillAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResource.PreSellerPhoneLabel}" />
+                                                <Span Text="{Binding RepTelefono}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label HorizontalOptions="FillAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResource.PaymentwayLabel}" />
+                                                <Span Text="{Binding CondicionPago}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    
+                                </StackLayout>
+                                
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <StackLayout 
+                    Spacing="15"
+                    Orientation="Horizontal"
+                    Margin="0,0,10,10"
+                    HorizontalOptions="End"
+                    VerticalOptions="End">
+
+                    <Button Text="{x:Static resources:AppResource.Reject}" Clicked="RechazarPedido" BackgroundColor="#E53935" TextColor="White" WidthRequest="100" HeightRequest="40" />
+                    <Button Text="{x:Static resources:AppResource.Choose}" Clicked="AceptarPedido" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White" WidthRequest="120" HeightRequest="40" />
+
+                </StackLayout>
+
+            </StackLayout>
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

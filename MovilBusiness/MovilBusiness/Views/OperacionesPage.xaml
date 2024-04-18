@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.OperacionesPage"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:configuration="clr-namespace:MovilBusiness.Configuration"
+             xmlns:views="clr-namespace:MovilBusiness.Views.Components.Views"
+                xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Operations}"
+             EnableBackButtonOverride="True"
+             BackgroundColor="#ECEFF1">
+    <views:BasePage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.SyncUp}" Icon="ic_sync_white_24dp" Command="{Binding GoModuleCommand}" CommandParameter="30" Order="Primary" />
+    </views:BasePage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" Padding="7">
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                        <Label Text="{x:Static resources:AppResource.CustomerLabel}" FontAttributes="Bold">
+                            <Label.WidthRequest>
+                                <OnPlatform x:TypeArguments="x:Double" Android="68" iOS="65" />
+                            </Label.WidthRequest>
+                            <Label.MinimumWidthRequest>
+                                <OnPlatform x:TypeArguments="x:Double" Android="68" iOS="65" />
+                            </Label.MinimumWidthRequest>
+                        </Label>
+                        <Label Text="{Binding CurrentClient.ClicodigoNombre, Source={x:Static configuration:Arguments.Values}}" HorizontalOptions="FillAndExpand" LineBreakMode="WordWrap" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowMontoPedidoSugerido}">
+                        <Label Text="{x:Static resources:AppResource.SuggestedOrderAmount}" FontAttributes="Bold" />
+                        <Label Text="{Binding CurrentClient.CliMontoPedidoSugerido, StringFormat='{}{0:N2}', Source={x:Static configuration:Arguments.Values}}" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" IsVisible="{Binding VerDatosCreditoBalance}">
+                        <Label Text="{x:Static resources:AppResource.CreditLimitLabel}" HorizontalOptions="Start" FontAttributes="Bold" IsVisible="{Binding VerLimiteCredito}"/>
+                        <Label Margin="0,0,15,0" Text="{Binding CurrentClient.CliLimiteCredito, StringFormat='{0:N2}', Source={x:Static configuration:Arguments.Values}}" IsVisible="{Binding VerLimiteCredito}" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand" />
+                        <Label Text="Balance: " HorizontalOptions="Start" FontAttributes="Bold" IsVisible="{Binding ShowBalance}" />
+                        <Label Text="{Binding CurrentClientData.Balance, StringFormat='{0:N2}'}" IsVisible="{Binding ShowBalance}" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding VerDatosCredito}">
+                        <Label Text="{x:Static resources:AppResource.AvailableCreditLabel}" FontAttributes="Bold" />
+                        <Label Text="{Binding CurrentClientData.CreditoDisponible, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowlblChequeF}">
+                        <Label Text="Total CxC: " FontAttributes="Bold" />
+                        <Label Text="{Binding CurrentClientData.TotalCxc, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" IsVisible="{Binding ShowlblChequeF}">
+                        <Label Text="{x:Static resources:AppResource.DetailCxc}" FontAttributes="Bold"   />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowlblChequeF}">
+                        <Label Text="{x:Static resources:AppResource.CxcWithoutFuturistChkLabel}" FontAttributes="Bold" />
+                        <Label Text="{Binding CurrentClientData.BalanceSinChequeDif, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowlblChequeF}">
+                        <Label Text="{x:Static resources:AppResource.FutChkInPortfolioLabel}" FontAttributes="Bold" />
+                        <Label Text="{Binding CurrentClientData.BalanceSoloChequeDif, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowlblChequeF}">
+                        <Label Text="Total CxC: " FontAttributes="Bold" />
+                        <Label Text="{Binding CurrentClientData.TotalCxc, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                    </StackLayout>
+
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowListaPrecio}">
+                        <Label Text="{x:Static resources:AppResource.PriceListLabel}" FontAttributes="Bold" IsVisible="{Binding ShowListaPrecio}" HorizontalOptions="End"/>
+                        <Label Text="{Binding ListaPrecio, StringFormat='{0:N2}'}" IsVisible="{Binding ShowListaPrecio}" HorizontalOptions="End"  LineBreakMode="TailTruncation" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowCondicionPagoVisita}">
+                        <Label Text="{x:Static resources:AppResource.PaymentConditionLabel}" FontAttributes="Bold" />
+                        <Label Text="{Binding CondicionesPagoClienteVisita}" HorizontalOptions="FillAndExpand" LineBreakMode="WordWrap" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowBonoRebate}">
+                        <Label Text="Rebate: " FontAttributes="Bold" />
+                        <Label Text="{Binding CurrentRebateData.Rebate, StringFormat='{}{0:N2}'}" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" />
+                        <Label Text="{x:Static resources:AppResource.AccumulatedLabel}" FontAttributes="Bold" />
+                        <Label Text="{Binding CurrentRebateData.Acumulado, StringFormat='{}{0:N2}'}" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowBonoRebate}">
+                        <Label Text="{x:Static resources:AppResource.DifferenceLabel}" FontAttributes="Bold" />
+                        <Label Text="{Binding CurrentRebateData.Diferencia, StringFormat='{}{0:N2}'}" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" />
+                    </StackLayout>
+
+                    <Frame HorizontalOptions="FillAndExpand" Padding="10,0,10,0" IsVisible="{Binding ShowComboTipoVisita}" HasShadow="False">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="45" >
+                            <Label Text="{x:Static resources:AppResource.VisitTypeLabel}" FontAttributes="Bold" VerticalOptions="Center" />
+                            <controls:BorderlessPicker IsEnabled="{Binding EnableComboTipoVisita}" x:Name="comboTipoVisita" HorizontalOptions="FillAndExpand" Title="Elegir tipo de visita" FontSize="14" SelectedItem="{Binding CurrentTipoVisita, Mode=TwoWay}" ItemDisplayBinding="{Binding Descripcion}" ItemsSource="{Binding TiposVisita}" VerticalOptions="FillAndExpand" />
+                            <Image Source="ic_arrow_drop_down_black_24dp.png" VerticalOptions="Center" Opacity="0.7" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame HorizontalOptions="FillAndExpand" Padding="10,0,10,0" IsVisible="{Binding Params.ParSectores}" HasShadow="False">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="45">
+                            <Label Text="Sector: " FontAttributes="Bold" VerticalOptions="Center" />
+                            <controls:BorderlessPicker IsEnabled="{Binding SectoresEnabled}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding Sectores}" SelectedItem="{Binding CurrentSector, Mode=TwoWay}" ItemDisplayBinding="{Binding SecDescripcion}" Title="{x:Static resources:AppResource.ChooseSector}" FontSize="14" VerticalOptions="FillAndExpand" />
+                            <Image Source="ic_arrow_drop_down_black_24dp.png" VerticalOptions="Center" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+                <!--</Frame>-->
+
+                <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="Fill" BackgroundColor="Transparent" Margin="0,10,0,0">
+                    <controls:WrapLayout x:Name="wrapLayout" ColumnSpacing="10" HorizontalOptions="FillAndExpand">
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParPedidos}" Orientation="Vertical" WidthRequest="100" Spacing="5"  BackgroundColor="Transparent" CommandParameter="1" Command="{Binding GoModuleCommand}" >
+                            <Image Source="ic_pedidos" HorizontalOptions="Center"  WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.Orders}" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParCotizaciones}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="2">
+                            <Image Source="ic_cotizaciones" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.Quotes}" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParDevoluciones}" Orientation="Vertical" Spacing="5" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="3">
+                            <Image Source="ic_devoluciones" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.Returns}" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParCobros}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="4">
+                            <Image Source="ic_cobros" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.Collections}" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParCompras}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="5">
+                            <Image Source="ic_compras" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{Binding ComprasTitle}" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParComentarioVisitas}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="6">
+                            <Image Source="ic_comentarios" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.Comments}" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParInvFisico}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="7">
+                            <Image Source="ic_inventario_fisico" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.PhysicalInv}" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParVentas}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="8">
+                            <AbsoluteLayout HorizontalOptions="Center">
+                                <Image Source="ic_ventas" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                                <Frame Padding="0" Margin="0" BackgroundColor="Red" CornerRadius="12" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="End" VerticalOptions="Start" WidthRequest="25" HeightRequest="25" >
+                                    <Label Text="{Binding PendingVentasCount}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Frame>
+                            </AbsoluteLayout>
+                            <Label Text="{x:Static resources:AppResource.Sales}" HorizontalOptions="Center" FontAttributes="Bold" Margin="0,0,0,0" BackgroundColor="Transparent" TextColor="#1976D2" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParSAC}" Orientation="Vertical" Spacing="5" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="9">
+                            <Image Source="ic_sac" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="SAC" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                    <controls:ClickableStackLayout IsVisible="{Binding Params.ParPresupuestoClientes}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="10">
+                        <Image Source="ic_presupuesto" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                        <Label Text="{x:Static resources:AppResource.Budgets}" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                    </controls:ClickableStackLayout>
+                    <controls:ClickableStackLayout IsVisible="{Binding Params.ParProductos}" Orientation="Vertical" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="11">
+                        <Image Source="ic_productos" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFill"/>
+                        <Label Text="{Binding ProductosModuloDescripcion}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                    </controls:ClickableStackLayout>
+                    <controls:ClickableStackLayout IsVisible="{Binding Params.ParDatos}" Orientation="Vertical" Spacing="5" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="12">
+                        <Image Source="ic_datos" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                        <Label Text="{x:Static resources:AppResource.Information}" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                    </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParEncuestas}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="13">
+                            <Image Source="ic_encuestas" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit" />
+                            <Label Text="{x:Static resources:AppResource.Surveys}" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParAuditoriaMercado}" Orientation="Vertical" Spacing="5" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="15">
+                            <Image Source="ic_auditoria" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.MarketAudit}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParVisitaFoto}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="16">
+                            <Image Source="ic_foto_visita" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.VisitPhoto}" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParReclamaciones}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="17">
+                            <Image Source="ic_reclamaciones" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.Claims}" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParPedidosBackOrder}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="18">
+                            <Image Source="ic_backorder" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.BackOrders}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParProductosProximoVencer}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="19">
+                            <Image Source="ic_productos_prox_vencer" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.ProductsSoonToExpireTwoLines}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParEntregasRepartidor}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="20">
+                            <AbsoluteLayout HorizontalOptions="Center">
+                                <Image Source="ic_entrega_factura" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                                <Frame Padding="0" Margin="0" BackgroundColor="Red" CornerRadius="12" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="End" VerticalOptions="Start" WidthRequest="25" HeightRequest="25" >
+                                    <Label Text="{Binding PendingEntregaFacturaCount}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Frame>
+                            </AbsoluteLayout>
+                            <Label Text="{x:Static resources:AppResource.Delivery}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParImprimirEntregas}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="26">
+                            <Image Source="c_printer" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.PrintDeliveries}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding ShowVisitaVirtual}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="21">
+                            <Image Source="visita_virtual" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.VirtualVisit}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParTareas}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="22">
+                            <AbsoluteLayout HorizontalOptions="Center">
+                                <Image Source="task_icon" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
+                                <Frame Padding="0" Margin="0" BackgroundColor="Red" CornerRadius="12" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="End" VerticalOptions="Start" WidthRequest="25" HeightRequest="25" >
+                                    <Label Text="{Binding PendingTaskCount}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Frame>
+                            </AbsoluteLayout>
+                            <Label Text="{x:Static resources:AppResource.Tasks}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParRecepcionDevolucion}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="23">
+                            <Image Source="ic_devoluciones" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.ReturnReception}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParConduces}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="24">
+                            <Image Source="ic_encuestas" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label x:Name="lblConduce" Text="Conduces" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParCambiosMercancia}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="25">
+                            <Image Source="ic_cambiomercancia" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.MerchandiseChange}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <!-- El siguiente commandParameter es el 27 ya que el 26 se esta usando arriba pal boton de imprimir entrega-->
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParCalculadoraNegociacion}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="27">
+                            <Image Source="ic_calculator" HorizontalOptions="Center" WidthRequest="75" HeightRequest="75" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.TradingCalculator}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParHistoricoFacturas}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="28">
+                            <Image Source="ic_cuadres" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.HistoricalInvoices}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParPushMoneyPorPagar}" Orientation="Vertical" Spacing="5" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="29">
+                            <Image Source="ic_reporte" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.PushMoneyToPay}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+                        <!-- el 30 es del btn de sincronizar en el menu del page-->
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParConsultarEntregas}" Orientation="Vertical" Spacing="5" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="31">
+                            <Image Source="ic_cargas" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.CheckDeliveries}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParComprasRotacion}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="32">
+                            <Image Source="ic_reporte" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.PushMoneyRotation}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParQuejasServicio}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="33">
+                            <Image Source="ic_complaint" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.ServiceComplaints}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParCanastos}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="34">
+                            <Image Source="ic_pesar_jaulas" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.Baskets}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParPromociones}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="35">
+                            <Image Source="promocar" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.Promotions}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParEntregasMercancias}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="36">
+                            <Image Source="entregas_mercancias" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.MerchandiseDelivery}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParConsultaTransacciones}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="37">
+                            <Image Source="ic_artboard" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.CheckTransactions}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParExcluirClientes}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="38">
+                            <Image Source="ic_remove_user" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.ExcludeCustomer}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParSacd}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="39">
+                            <Image Source="ic_direction" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.CustomerAddressUpdateRequest}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParAuditoriaPrecios}" Orientation="Vertical" Spacing="5" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="40">
+                            <Image Source="task_icon" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.PriceAudit}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParConsultaInventarioFisico}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="41">
+                            <Image Source="cancelacioncarga" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.ConsultPhysicalInv}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParColocacionMercancias}" Orientation="Vertical" Spacing="5"  BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="42">
+                            <Image Source="ic_pesar_jaulas" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit"/>
+                            <Label Text="{x:Static resources:AppResource.PlacementsOfMerchandise}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+
+                        <controls:ClickableStackLayout IsVisible="{Binding Params.ParNoticiasOP}" Orientation="Vertical" Spacing="0" BackgroundColor="Transparent" WidthRequest="100" Command="{Binding GoModuleCommand}" CommandParameter="43">
+                            <AbsoluteLayout HorizontalOptions="Center">
+                                <Image Source="notice" HorizontalOptions="Center" WidthRequest="85" HeightRequest="85" Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
+                                <Frame Padding="0" Margin="0" BackgroundColor="Red" CornerRadius="12" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="End" VerticalOptions="Start" WidthRequest="25" HeightRequest="25" >
+                                    <Label Text="{Binding PendingNewsCount}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Frame>
+                            </AbsoluteLayout>
+                            <Label Text="{x:Static resources:AppResource.News}" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="#1976D2" Margin="0,0,0,0" />
+                        </controls:ClickableStackLayout>
+
+                    </controls:WrapLayout>
+                </ScrollView>
+            </StackLayout>
+
+            <ContentView HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand"
+                         BackgroundColor="#B0000000"
+                         IsVisible="false"
+                         x:Name="progressind">
+                <Frame  HasShadow="False" Padding="10" HorizontalOptions="Center" VerticalOptions="Center">
+                    <ActivityIndicator x:Name="progressindchill" Color="#1976D2"/>
+                </Frame>
+            </ContentView>
+        </Grid>
+    </ContentPage.Content>
+</views:BasePage>

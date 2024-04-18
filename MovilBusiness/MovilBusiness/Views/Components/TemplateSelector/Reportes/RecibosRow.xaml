@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.TemplateSelector.Reportes.RecibosRow"
+      HorizontalOptions="FillAndExpand"
+      Padding="10,5">
+
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+
+    <Label Text="{Binding RecSecuencia}" Grid.Column="0" FontAttributes="{Binding FontAttribute}" />
+    <Label Text="{Binding CliNombre}" Grid.Column="1" HorizontalOptions="FillAndExpand" FontAttributes="{Binding FontAttribute}" />
+    <Label Grid.Column="2" FontAttributes="{Binding FontAttribute}" Text="{Binding Descuento}" />
+    <Label Grid.Column="3" FontAttributes="{Binding FontAttribute}" Text="{Binding Monto}" />
+</Grid>

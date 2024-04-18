@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.DepositoGastosPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.ExpensesDeposit}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:dialogs="clr-namespace:MovilBusiness.Views.Components.Dialogs"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Icon="ic_done_white_24dp" Order="Primary" Command="{Binding SaveCommand}" IsEnabled="{Binding IsUp}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" Grid.Row="0">
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="15" Spacing="0" BackgroundColor="{StaticResource ColorPrimary}">
+
+                    <Label Text="{Binding NoDeposito}" TextColor="White" FontSize="16" />
+                    <Label Text="{Binding Usuario}" TextColor="White" />
+
+                    <Label Text="{Binding MontoDeposito}" FontAttributes="Bold" TextColor="White" FontSize="28" Margin="0,25,0,0" />
+                    <Label Text="{x:Static resources:AppResource.TotalDepositUpper}" TextColor="White" />
+
+                </StackLayout>
+
+                <Label Text="{x:Static resources:AppResource.ResumeUpper}" FontAttributes="Bold" Margin="10,10,0,0" />
+
+                <ScrollView Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White">
+                    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="0">
+                        <StackLayout Orientation="Horizontal" Spacing="0" BackgroundColor="#37474F" Padding="10,3">
+                            <Label Text="{x:Static resources:AppResource.Document}" TextColor="White" WidthRequest="120"  LineBreakMode="TailTruncation"/>
+                            <Label Text="{x:Static resources:AppResource.Supplier}" TextColor="White" WidthRequest="150"  LineBreakMode="TailTruncation"/>
+                            <Label Text="Total" TextColor="White" WidthRequest="90"  LineBreakMode="TailTruncation"/>
+                            <Label Text="RNC" TextColor="White" WidthRequest="110"  LineBreakMode="TailTruncation"/>
+                            <Label Text="NCF" TextColor="White" WidthRequest="180"  LineBreakMode="TailTruncation"/>
+                            <Label Text="{x:Static resources:AppResource.Comment}" TextColor="White" WidthRequest="120" LineBreakMode="TailTruncation"/>
+                        </StackLayout>
+
+                        <ListView
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="FillAndExpand"
+                            HasUnevenRows="True"
+                            CachingStrategy="RecycleElement"
+                            SeparatorVisibility="None"
+                            Margin="10,0"
+                            ItemsSource="{Binding Gastos}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid ColumnSpacing="0" Padding="0,3">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="120" />
+                                                <ColumnDefinition Width="150" />
+                                                <ColumnDefinition Width="90" />
+                                                <ColumnDefinition Width="110" />
+                                                <ColumnDefinition Width="180" />
+                                                <ColumnDefinition Width="120" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0" Text="{Binding GasNoDocumento}" />
+                                            <Label Grid.Column="1" Text="{Binding GasNombreProveedor}"/>
+                                            <Label Grid.Column="2" Text="{Binding GasMontoTotal, StringFormat='{0:N2}'}"/>
+                                            <Label Grid.Column="3" Text="{Binding GasRNC}"/>
+                                            <Label Grid.Column="4" Text="{Binding GasNCF}"/>
+                                            <Label Grid.Column="5" Text="{Binding GasComentario}"/>
+
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
+
+            </StackLayout>
+
+            <dialogs:DialogImpresion x:Name="dialogImpresion" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding ShowPrintDialog}" />
+
+            <controls:ProgressIndicator Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" />
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

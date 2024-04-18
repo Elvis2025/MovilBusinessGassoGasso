@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.RecibosGeneralTab"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="General">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" Padding="10">
+            <Label Text="{x:Static resources:AppResource.Number}" FontAttributes="Bold" />
+
+            <Entry Text="{Binding RecNumero}" HorizontalOptions="FillAndExpand" MaxLength="20" />
+
+            <Button IsVisible="{Binding ParAutorizarDescuentoGeneral}" Text="{x:Static resources:AppResource.AuthorizeDisc}" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" Command="{Binding AutorizarDescGeneralCommand}" />
+
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowChkDiferidoGeneral}">
+                 <Switch IsToggled="{Binding IsChkDiferidoGeneral}"/>
+                <Label Text="{x:Static resources:AppResource.Deferred}" VerticalOptions="Center" />
+
+                <DatePicker HorizontalOptions="FillAndExpand" Format="dd-MM-yyyy" Margin="15,0,0,0" Date="{Binding FechaChkDiferidoGeneral}" IsEnabled="{Binding IsChkDiferidoGeneral}" MinimumDate="{Binding FechaMinimaChkDiferido}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.AgregarGastosModal"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <StackLayout Orientation="Horizontal" HeightRequest="50" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,15,15,15" />
+                </StackLayout.Padding>
+                <ContentView VerticalOptions="End" Padding="15,0,0,0">
+                    <Image Source="ic_close_white" VerticalOptions="End" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+
+                <Label x:Name="lblTitle" Text="{x:Static resources:AppResource.AddExpense}" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="End" TextColor="White" FontSize="18" />
+                
+                <ContentView VerticalOptions="End" HorizontalOptions="End" IsVisible="{Binding IsNotDetailing}">
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="AgregarGasto" />
+                    </ContentView.GestureRecognizers>
+                    <Label x:Name="btnSave" Text="{x:Static resources:AppResource.SaveUpper}" VerticalOptions="Center" HorizontalOptions="End" TextColor="White" IsVisible="{Binding IsNotDetailing}" />
+                </ContentView>
+            </StackLayout>
+
+            <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+                <Grid HorizontalOptions="FillAndExpand" Padding="15,10" x:Name="viewContainer">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Text="{x:Static resources:AppResource.DateLabel}"  Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                    <Label Text="RNC:" Grid.Row="2" Grid.Column="0" VerticalOptions="Center" />
+                    <Label Text="{x:Static resources:AppResource.SupplierLabel}" Grid.Row="3" Grid.Column="0" VerticalOptions="Center"/>
+                    <Label Text="NCF:" Grid.Row="4" Grid.Column="0"  VerticalOptions="Center" />
+                    <Label Text="{x:Static resources:AppResource.InvoiceNoLabel}" Grid.Row="5" Grid.Column="0"  VerticalOptions="Center"/>
+                    <Label Text="{x:Static resources:AppResource.DateDocumentLabel}"  Grid.Row="6" Grid.Column="0" VerticalOptions="Center"/>
+                    <Label Text="{x:Static resources:AppResource.ExpenseTypeLabel}" Grid.Row="7" Grid.Column="0"  VerticalOptions="Center"/>
+                    <Label Text="{x:Static resources:AppResource.AmountSubjectToItbis}" Grid.Row="8" Grid.Column="0"  VerticalOptions="Center"/>
+                    <Label Text="{x:Static resources:AppResource.AmountWithoutItbisLabel}" Grid.Row="9" Grid.Column="0"  VerticalOptions="Center"/>
+                    <Label Text="Itbis:" Grid.Row="10" Grid.Column="0"  VerticalOptions="Center"/>
+                    <Label Text="{x:Static resources:AppResource.TipLabel}" Grid.Row="11" Grid.Column="0"  VerticalOptions="Center" />
+                    <Label Text="{x:Static resources:AppResource.TotalAmountLabel}" Grid.Row="12" Grid.Column="0"  VerticalOptions="Center" />
+                    <Label Text="{x:Static resources:AppResource.PaymentwayLabel}" Grid.Row="13" Grid.Column="0"  VerticalOptions="Center" />
+                    <Label Text="{x:Static resources:AppResource.CostCenterLabel}" Grid.Row="14" Grid.Column="0" VerticalOptions="Center" IsVisible="{Binding UseCentroDeCosto}" />
+                    <Label Text="{x:Static resources:AppResource.CommentLabel}" Grid.Row="15" Grid.Column="0"  VerticalOptions="Center"/>
+
+                    <Button Text="{x:Static resources:AppResource.AttachPhoto}" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" Clicked="GoCamera" x:Name="btnFoto" />
+                    <DatePicker Format="dd/MM/yyyy" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" x:Name="pickerFecha"/>
+                    <Entry HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.Column="1" x:Name="editRnc" />
+                    <Entry HorizontalOptions="FillAndExpand" Grid.Row="3" Grid.Column="1" x:Name="editProveedor"/>
+                    <Button Text="{x:Static resources:AppResource.SetUp}" Grid.Row="4" Grid.Column="1" HorizontalOptions="FillAndExpand" Clicked="ConfigNcf" x:Name="btnNcf" />
+                    <Entry HorizontalOptions="FillAndExpand" Grid.Row="5" Grid.Column="1"  x:Name="editNoFactura"/>
+                    <DatePicker Format="dd/MM/yyyy" Grid.Row="6" Grid.Column="1" HorizontalOptions="FillAndExpand" x:Name="pickerFechaDocumento"/>
+                    <Picker Title="{x:Static resources:AppResource.SelectExpenseType}" HorizontalOptions="FillAndExpand" Grid.Row="7" Grid.Column="1" ItemsSource="{Binding TiposGastos}" ItemDisplayBinding="{Binding Descripcion}" x:Name="comboTipoGasto"/>
+                    <Entry HorizontalOptions="FillAndExpand" Grid.Row="8" Grid.Column="1" x:Name="editBaseImponible" Keyboard="Numeric"/>
+                    <Entry HorizontalOptions="FillAndExpand" Grid.Row="9" Grid.Column="1" x:Name="editMontoSinItbis" Keyboard="Numeric"/>
+                    <Entry HorizontalOptions="FillAndExpand" Grid.Row="10" Grid.Column="1" x:Name="editItbis" Keyboard="Numeric"/>
+                    <Entry HorizontalOptions="FillAndExpand" Grid.Row="11" Grid.Column="1" x:Name="editPropina" Keyboard="Numeric"/>
+                    <Entry HorizontalOptions="FillAndExpand" Grid.Row="12" Grid.Column="1" x:Name="editMontoTotal" Keyboard="Numeric" IsEnabled="False"/>
+                    <Picker Title="{x:Static resources:AppResource.ChoosePaymentway}" HorizontalOptions="FillAndExpand" Grid.Row="13" Grid.Column="1" ItemsSource="{Binding FormasPago}" ItemDisplayBinding="{Binding Descripcion}" x:Name="comboFormaPago"/>
+                    <Picker Title="{x:Static resources:AppResource.ChooseCostCenter}" HorizontalOptions="FillAndExpand" Grid.Row="14" Grid.Column="1" ItemsSource="{Binding CentrosDeCosto}" ItemDisplayBinding="{Binding Descripcion}" IsVisible="{Binding UseCentroDeCosto}" x:Name="comboCentroDeCosto" />
+                    <Entry HorizontalOptions="FillAndExpand" Grid.Row="15" Grid.Column="1" x:Name="editComentario"/>
+
+                </Grid>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

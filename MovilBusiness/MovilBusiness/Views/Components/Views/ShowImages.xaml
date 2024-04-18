@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Views.ShowImages"
+             BackgroundColor="Black"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:pinch="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout VerticalOptions="CenterAndExpand">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                    <pinch:PinchZoom>
+                        <pinch:PinchZoom.Content>
+                                <ffimageloading:CachedImage
+                                                HeightRequest="500"
+                                                WidthRequest="450"
+                                                VerticalOptions="FillAndExpand"
+                                                HorizontalOptions="FillAndExpand"
+                                                BackgroundColor="Transparent"
+                                                DownsampleUseDipUnits="False" 
+							                    LoadingPlaceholder="image_loading" 
+                                                ErrorPlaceholder="image_not_available"
+                                                IsVisible="true" 
+                                                Source="{Binding ImageProduct}">
+                            </ffimageloading:CachedImage>
+                        </pinch:PinchZoom.Content>
+                    </pinch:PinchZoom>
+
+                </StackLayout>
+           </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

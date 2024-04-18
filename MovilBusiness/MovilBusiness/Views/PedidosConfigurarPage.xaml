@@ -1,0 +1,120 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.PedidosConfigurarPage" 
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Configuration}"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" Margin="10">
+                <Label Text="{Binding MonedaActual}" IsVisible="{Binding UseMultiMoneda}" FontAttributes="Bold" />
+
+                <Label Text="{x:Static resources:AppResource.TransferType}" IsVisible="{Binding IsTraspaso}" />
+                <Picker Title="{x:Static resources:AppResource.SelectTypeOfTransfer}" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsTraspaso}" SelectedItem="{Binding CurrentTipoTraspaso}">
+                    <Picker.Items>
+                        <x:String>Entregar productos</x:String>
+                        <x:String>Recibir productos</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Label Text="{x:Static resources:AppResource.AssignTransferToLabel}" IsVisible="{Binding IsTraspaso}" />
+                <Picker HorizontalOptions="FillAndExpand" ItemsSource="{Binding RepresentantesTraspasos}" ItemDisplayBinding="{Binding RepTitulo}" SelectedItem="{Binding CurrentRepTraspaso, Mode=TwoWay}" Title="{x:Static resources:AppResource.SelectRepresentative}" IsVisible="{Binding IsTraspaso}" />
+
+                <Label Text="{x:Static resources:AppResource.Order}" IsVisible="{Binding IsNumOrdenVisible}" FontAttributes="Bold" />
+
+                <Entry MaxLength="15" Text="{Binding PedOrdenCompra, Mode=TwoWay}" IsVisible="{Binding IsNumOrdenVisible}" HorizontalOptions="FillAndExpand" Placeholder="{x:Static resources:AppResource.EnterOrderNumber}" />
+
+                <Label Text="Area" IsVisible="{Binding UseInvArea}" FontAttributes="Bold" />
+
+                <Picker ItemsSource="{Binding InvAreas}" ItemDisplayBinding="{Binding Descripcion}" HorizontalOptions="FillAndExpand" IsVisible="{Binding UseInvArea}" SelectedItem="{Binding CurrentInvArea}" />
+
+                <Label Text="{x:Static resources:AppResource.DeliveryDate}" IsVisible="{Binding IsPedidos}" FontAttributes="Bold" x:Name="lblFechaEntrega"/>
+
+                <Grid HorizontalOptions="FillAndExpand" >
+
+                    <DatePicker x:Name="pickerFechaEntrega" Date="{Binding CurrentFechaEntrega, Mode=TwoWay}" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsPedidos}" IsEnabled="{Binding PickerEnabled}" />
+
+                    <TimePicker Time="{Binding CurrentTimeEntrega, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsHora}" IsEnabled="{Binding PickerEnabled}" />
+                </Grid>
+                
+                <Label Text="{Binding TipoTranDescripcion}" FontAttributes="Bold" IsVisible="{Binding ShowTipoPedido}" />
+                
+                <Picker IsVisible="{Binding ShowTipoPedido}" Title="{Binding ElijaTranDescripcion}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding TiposPedidos}" SelectedItem="{Binding CurrentTipoPedido, Mode=TwoWay}" TextColor="Gray"/>
+
+                <Label Text="{Binding PrioridadTranDescripcion}" FontAttributes="Bold" IsVisible="{Binding ShowPrioridad}" />
+
+                <Picker IsVisible="{Binding ShowPrioridad}" Title="{x:Static resources:AppResource.ChooseOrderType}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding Prioridades}" SelectedItem="{Binding CurrentPrioridad}" TextColor="Gray"/>
+
+                <Label Text="{x:Static resources:AppResource.PaymentCondition}" IsVisible="{Binding UsarCondicionPago}" FontAttributes="Bold"/>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Picker x:Name="comboCondicionPago" IsVisible="{Binding UsarCondicionPago}" Title="{x:Static resources:AppResource.ChoosePaymentCondition}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding CondicionesPago, Mode=TwoWay}" SelectedItem="{Binding CurrentCondicionPago, Mode=TwoWay}" TextColor="Gray" IsEnabled="{Binding EnableCondicionPago, Mode=TwoWay}" />
+                    <Button Text="{x:Static resources:AppResource.Activate}" HorizontalOptions="End" IsVisible="{Binding UseAuthorizePaymentTerm}" Command="{Binding CommandAutorizarCondicionPago}" />
+                </StackLayout>
+
+                <Label Text="{x:Static resources:AppResource.BasketQuantity}" IsVisible="{Binding MostrarCanastos}" FontAttributes="Bold" />
+                <Entry Text="{Binding VenCantidadCanastos, Mode=TwoWay}" Keyboard="Numeric" IsVisible="{Binding MostrarCanastos}" HorizontalOptions="FillAndExpand" Placeholder="{x:Static resources:AppResource.EnterBasketQuantity}"/>
+
+                <Label Text="{x:Static resources:AppResource.OnHold}" FontAttributes="Bold" IsVisible="{Binding ShowIndicadorRevision}" VerticalTextAlignment="Center"/>
+                <Switch x:Name="boolEnEspera" IsToggled="{Binding IsOnHold}" HorizontalOptions="StartAndExpand" IsVisible="{Binding ShowIndicadorRevision}"/>
+
+                <Label x:Name="lblMotivo" Text="{x:Static resources:AppResource.ReasonForReturn}" IsVisible="{Binding UseMotivoDevolucion}" FontAttributes="Bold"/>
+
+                <Picker ItemsSource="{Binding MotivosDevolucion}" ItemDisplayBinding="{Binding MotDescripcion}" SelectedItem="{Binding CurrentMotivoDevolucion}" Title="{x:Static resources:AppResource.SelectReason}" IsVisible="{Binding UseMotivoDevolucion}"/>
+
+                <Label x:Name="lblCondicion" Text="{x:Static resources:AppResource.Condition}" IsVisible="{Binding UseCondicionDevolucion}" FontAttributes="Bold"/>
+
+                <Picker ItemsSource="{Binding CondicionDevolucion}" ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding CurrentCondicionDevolucion}" Title="{x:Static resources:AppResource.SelectReturnCondition}" IsVisible="{Binding UseCondicionDevolucion}"/>
+
+
+                <Label Text="{x:Static resources:AppResource.Action}" IsVisible="{Binding UseAccion}" FontAttributes="Bold"/>
+
+                <Picker ItemsSource="{Binding AccionesDevolucion}" ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding CurrentAccionDevolucion}" Title="{x:Static resources:AppResource.SelectAction}" IsVisible="{Binding UseAccion}"/>
+
+                <Label Text="{x:Static resources:AppResource.Headband}" IsVisible="{Binding UseCintillo}" FontAttributes="Bold" />
+
+                <Entry IsVisible="{Binding UseCintillo}" MaxLength="10" Text="{Binding CurrentCintillo, Mode=TwoWay}"/>
+
+                <Label Text="{x:Static resources:AppResource.DocumentNo}" IsVisible="{Binding UseDocumento}" FontAttributes="Bold"/>
+
+                <Entry IsVisible="{Binding UseDocumento}" Text="{Binding CurrentDevDocumento, Mode=TwoWay}" Keyboard="Numeric" MaxLength="20">
+                    <Entry.Behaviors>
+                        <behaviors:NumericValidation />
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label Text="{x:Static resources:AppResource.PercentManualDiscount}" IsVisible="{Binding ShowDescuentoManual}" FontAttributes="Bold" />
+                <Entry IsVisible="{Binding ShowDescuentoManual}" Keyboard="Numeric" Text="{Binding DescuentoManual,Mode=TwoWay}" />
+
+                <Label Text="{x:Static resources:AppResource.AddressLabel}" IsVisible="{Binding UsePedDir}" FontAttributes="Bold" />
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding UsePedDir}">
+                    <Picker ItemsSource="{Binding Clientedirecciones}" ItemDisplayBinding="{Binding CldCalle}" HorizontalOptions="FillAndExpand" IsVisible="{Binding UsePedDir}" SelectedItem="{Binding CurrentCldDirTipo}" Title="{x:Static resources:AppResource.SelectAddress}"/>
+                    <Button Text="{x:Static resources:AppResource.New}" HorizontalOptions="End" Command="{Binding MenuItemCommand}" IsVisible="{Binding UsePedDirForNueva}" CommandParameter="4" />
+                </StackLayout>
+
+                <Label Text="{x:Static resources:AppResource.PaymentType}" IsVisible="{Binding UseTipoPagoCompras}" FontAttributes="Bold" />
+
+                <Picker ItemsSource="{Binding TiposPago}" ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding CurrentTipoPago}" Title="{x:Static resources:AppResource.SelectPaymentType}" IsVisible="{Binding UseTipoPagoCompras}" HorizontalOptions="FillAndExpand" />
+
+
+                <Label Text="{x:Static resources:AppResource.Currency}" IsVisible="{Binding UseMultiMoneda}" FontAttributes="Bold" />
+
+                <Picker Title="{x:Static resources:AppResource.ChooseCurrency}" ItemsSource="{Binding MonedasSource}" ItemDisplayBinding="{Binding MonNombre}" SelectedItem="{Binding CurrentMoneda, Mode=TwoWay} " IsVisible="{Binding UseMultiMoneda}" IsEnabled="{Binding IsEnableMultiMoneda}" HorizontalOptions="FillAndExpand" />
+
+                <Label Text="{x:Static resources:AppResource.DistributionCenter}" IsVisible="{Binding ShowCentrosDistribucion}" FontAttributes="Bold"/>
+                <Picker x:Name="comboCentroDistribucion" IsVisible="{Binding ShowCentrosDistribucion}" Title="{x:Static resources:AppResource.ChooseDistributionCenter}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding CentrosDistribucion}" SelectedItem="{Binding CurrentCentrosDistribucion, Mode=TwoWay}"  ItemDisplayBinding="{Binding CedDescripcion}" TextColor="Gray"  />
+
+                <Label Text="{x:Static resources:AppResource.ToNameOfLabel}" IsVisible="{Binding UseCliIDMaster}" FontAttributes="Bold" />
+                <Button  x:Name="CliNameMaster" Text="{Binding ClienteMaster.CliNombre}"  HorizontalOptions="FillAndExpand" IsVisible="{Binding UseCliIDMaster}" Clicked="Button_Clicked"  />
+
+                <Label Text="{x:Static resources:AppResource.TransportType}" IsVisible="{Binding UseTipoTrasporte}" FontAttributes="Bold"/>
+                <Picker ItemsSource="{Binding TipoTrasporte}" ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding CurrentTipoTrasporte}" Title="{x:Static resources:AppResource.SelectTransportType}" IsVisible="{Binding UseTipoTrasporte}" HorizontalOptions="FillAndExpand" />
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" x:Name="camposAdicionales" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

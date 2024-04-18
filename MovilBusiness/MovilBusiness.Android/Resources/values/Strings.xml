@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="hello">Hello World, Click Me!</string>
+	<string name="app_name">MovilBusiness.Droid</string>
+	
+	
+	<string name="create_visit">Crear visita</string>
+  <string name="visit_failed">Visita fallida</string>
+  <string name="consult_customer">Consultar cliente</string>
+  <string name="customer_data">Datos cliente</string>
+  <string name="customer_location">Ubicación\ncliente</string>
+  <string name="consult_last_visits">Consultar\nultimas visitas</string>
+	
+</resources>

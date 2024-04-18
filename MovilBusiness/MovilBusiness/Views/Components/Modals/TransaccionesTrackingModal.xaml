@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.TransaccionesTrackingModal"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}"
+             Title="Tracking">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                    <StackLayout.Padding>
+                        <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,30,15,15" />
+                    </StackLayout.Padding>
+                    <ContentView VerticalOptions="CenterAndExpand" HorizontalOptions="Start" Padding="15,0,0,0">
+                        <Image Source="ic_close_white" VerticalOptions="Center" />
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Dismiss" />
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
+
+                    <Label Text="Tracking" FontAttributes="Bold" Margin="15,0,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="18" />
+
+                </StackLayout>
+
+                <Grid HorizontalOptions="FillAndExpand" Padding="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="{x:Static resources:AppResource.TransactionLabel}" HorizontalOptions="End" Grid.Column="0" Grid.Row="0" />
+                    <Label Text="{x:Static resources:AppResource.SequenceLabel}" HorizontalOptions="End" Grid.Column="0" Grid.Row="1" />
+                    <Label Text="{x:Static resources:AppResource.CustomerLabel}" HorizontalOptions="End"  Grid.Column="0" Grid.Row="2"/>
+                    <Label Text="{x:Static resources:AppResource.TransDate}" HorizontalOptions="End"  Grid.Column="0" Grid.Row="3"/>
+                    <Label Text="{Binding DatosTransaccion.Title}" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" />
+                    <Label Text="{Binding CurrentTransaccion.TransaccionID}" HorizontalOptions="Start" Grid.Column="1" Grid.Row="1" />
+                    <Label Text="{Binding CliNombre}" HorizontalOptions="Start" Grid.Column="1" Grid.Row="2" />
+                    <Label Text="{Binding CurrentTransaccion.FechaFormateada}" HorizontalOptions="Start" Grid.Column="1" Grid.Row="3" />
+                </Grid>
+
+                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
+
+                <ListView HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand"
+                      CachingStrategy="RecycleElement"
+                      SelectionMode="None"
+                      ItemsSource="{Binding Record}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Title}" Detail="{Binding TraMensaje}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </StackLayout>
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" />
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

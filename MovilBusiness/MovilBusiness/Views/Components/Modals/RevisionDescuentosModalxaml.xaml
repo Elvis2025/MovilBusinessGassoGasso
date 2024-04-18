@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.RevisionDescuentosModalxaml"
+             BackgroundColor="{StaticResource WindowBackground}"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             Title="Revisión de descuentos">
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="0">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}">
+                        <StackLayout.Padding>
+                            <OnPlatform x:TypeArguments="Thickness" Android="15" iOS="15,30,15,15" />
+                        </StackLayout.Padding>
+                        <Label Text="{x:Static resources:AppResource.DiscountReview}" FontAttributes="Bold" FontSize="17" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="White" />
+                        <Image HorizontalOptions="End" Source="ic_close_white" VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AceptarProductos" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                    <BoxView HorizontalOptions="FillAndExpand" HeightRequest="3" BackgroundColor="Green" Opacity="0.7" VerticalOptions="End" />
+                </StackLayout>
+
+                <Label Text="{x:Static resources:AppResource.ProductsUpper}" Margin="12,10,10,0" FontAttributes="Bold" />
+
+                <Frame HasShadow="False" Margin="10,0" Padding="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <ListView
+                    x:Name="list"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    SeparatorVisibility="None"
+                    CachingStrategy="RecycleElement"
+                    ItemsSource="{Binding Productos}"
+                    ItemSelected="OnListItemSelected">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ContentView BackgroundColor="LightGray" Padding="0,0,0,1" HorizontalOptions="FillAndExpand">
+                                        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0" BackgroundColor="White" Padding="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Text="{Binding ProDescripcion}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontAttributes="Bold" FontSize="16" />
+                                            <Label Text="{x:Static resources:AppResource.DiscountLabel}" Grid.Row="1" Grid.Column="0" />
+                                            <Label Text="{Binding DescuentoFormatted}" Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+                                        </Grid>
+                                    </ContentView>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+
+                <Button Text="{x:Static resources:AppResource.Aceptar}" BackgroundColor="{StaticResource ColorPrimary}" HeightRequest="40" WidthRequest="95" Clicked="AceptarProductos" TextColor="White" VerticalOptions="End" HorizontalOptions="End" Margin="0,10,10,10" />
+
+            </StackLayout>
+
+            <ContentView x:Name="dialogCantidad" IsVisible="False" HorizontalOptions="FillAndExpand" BackgroundColor="#B0000000" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+
+                <Frame HasShadow="False" VerticalOptions="Center" Padding="10" HorizontalOptions="Center">
+                    <StackLayout Orientation="Vertical" WidthRequest="300">
+
+                        <Label Text="{x:Static resources:AppResource.ModifyDiscount}" FontAttributes="Bold" FontSize="18" />
+
+                        <Label x:Name="lblMessage" HorizontalOptions="FillAndExpand" />
+                        
+                        <controls:SegmentedControl x:Name="controlDescEditable" 
+                                    OnSegmentSelected="OnDescEditableChanged" 
+                                    BackgroundColor="{StaticResource ColorPrimary}"
+                                    SelectedColor="White"                   
+                                    Margin="0,15,0,0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2">
+                            <controls:SegmentedControl.Children>
+                                <controls:SegmentedControlOption Text="Porcentual"/>
+                                <controls:SegmentedControlOption Text="Manual"/>
+                            </controls:SegmentedControl.Children>
+                        </controls:SegmentedControl>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
+                            <Label Text="{x:Static resources:AppResource.PercentLabel}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" />
+                            <Picker BackgroundColor="White" x:Name="comboDescuento" Title="{x:Static resources:AppResource.Select}" SelectedItem="{Binding CurrentDescPorciento, Mode=OneWayToSource}" />
+                        </StackLayout>
+
+                        <Label Text="{x:Static resources:AppResource.DiscountValue}" FontAttributes="Bold" FontSize="16" Margin="0,10,0,0" />
+
+                        <Entry HorizontalOptions="FillAndExpand" x:Name="editDescValor" Keyboard="Numeric"  Margin="0" IsEnabled="False"/>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+
+                            <Button Text="{x:Static resources:AppResource.Cancel}" Clicked="OcultarDialogCantidad" />
+
+                            <Button Text="{x:Static resources:AppResource.Aceptar}" Clicked="AceptarCantidad" />
+
+                        </StackLayout>
+
+                    </StackLayout>
+                </Frame>
+
+            </ContentView>
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsWorking}" />
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

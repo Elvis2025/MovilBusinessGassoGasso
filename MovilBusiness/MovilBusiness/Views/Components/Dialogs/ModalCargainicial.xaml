@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Dialogs.ModalCargainicial"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+      <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <Frame HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="10" HasShadow="False">
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                    <Label Text="{Binding LoadingMessage}" LineBreakMode="WordWrap" />
+
+                    <ProgressBar ProgressColor="{StaticResource ColorPrimary}" Progress="{Binding CurrentProgress}" />
+
+                    <Label Text="{x:Static resources:AppResource.TotalProgress}" />
+
+                    <ProgressBar ProgressColor="{StaticResource ColorPrimary}" Progress="{Binding TotalProgress}" />
+
+                    <Label HorizontalOptions="End" Text="{Binding DetailedProgress}" />
+
+                </StackLayout>
+                
+            </Frame>
+          
+      </ContentView>
+  </ContentPage.Content>
+</ContentPage>

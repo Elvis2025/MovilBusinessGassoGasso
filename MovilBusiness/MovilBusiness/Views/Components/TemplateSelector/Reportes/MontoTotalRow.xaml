@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.TemplateSelector.Reportes.MontoTotalRow"
+             HorizontalOptions="FillAndExpand"
+             Padding="10,5">
+  <ContentView.Content>
+        <StackLayout HorizontalOptions="End" Orientation="Horizontal" Spacing="0">
+            <Label Text="Total: $"/>
+            <Label Text="{Binding Total, StringFormat='{}{0:N2}'}" FontAttributes="Bold" />
+            <Label Text="{Binding CantidadCobros, StringFormat='{}{0:N2}'}" FontAttributes="Bold" />
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

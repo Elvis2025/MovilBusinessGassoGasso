@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.CargasPage"
+             Title="{x:Static resources:AppResource.InventoryLoads}"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:dialogs="clr-namespace:MovilBusiness.Views.Components.Dialogs"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             iOS:Page.UseSafeArea="true"
+             >
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ContentView HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}" Padding="10">
+                    <Frame HorizontalOptions="FillAndExpand" HasShadow="False" Padding="10,0,5,0">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <Label WidthRequest="55" MinimumWidthRequest="55" Text="{x:Static resources:AppResource.LoadLabelUpper}" VerticalOptions="Center" HorizontalOptions="Start" />
+
+                            <BoxView VerticalOptions="FillAndExpand" Margin="10,5" Color="LightGray" WidthRequest="1" />
+
+                            <controls:BorderlessPicker ItemsSource="{Binding CargasDisponibles}" ItemDisplayBinding="{Binding CarDescripcion}" SelectedItem="{Binding CurrentCarga}" x:Name="comboCarga" HorizontalOptions="FillAndExpand" HeightRequest="40" Title="{x:Static resources:AppResource.Select}" />
+                            <Image Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" HorizontalOptions="End" VerticalOptions="Center" />
+                        </StackLayout>
+                    </Frame>
+                </ContentView>
+
+                <ListView 
+                    x:Name="list"
+                    CachingStrategy="RecycleElement"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="True"
+                    ItemsSource="{Binding ProductosCargas}"
+                    SelectionMode="None"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="FillAndExpand"      
+                    VerticalOptions="FillAndExpand"
+                    Margin="10,5,10,10">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame HorizontalOptions="FillAndExpand" Padding="0" HasShadow="False" BackgroundColor="White" Margin="0,0,0,5">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="White">
+                                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="1" Padding="10,5,0,5">
+                                            <Label Text="{Binding ProDescripcion}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" LineBreakMode="WordWrap" />
+                                            <!--<StackLayout Orientation="Horizontal" Spacing="0" HorizontalOptions="FillAndExpand">
+                                                <Label Text="Codigo: " />
+                                                <Label Text="{Binding ProCodigo}" HorizontalOptions="FillAndExpand" />
+                                            </StackLayout>-->
+                                            <Label HorizontalOptions="FillAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static resources:AppResource.CodeLabel}" />
+                                                        <Span Text="{Binding ProCodigo}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            
+                                            <Label HorizontalOptions="FillAndExpand" IsVisible="{Binding UsaLote}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static resources:AppResource.LotLabel}" />
+                                                        <Span Text="{Binding CarLote}" FontAttributes="Bold" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                        <BoxView VerticalOptions="FillAndExpand" WidthRequest="0.7" Color="LightGray" Margin="5,0" />
+                                        <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="End" Padding="5,0,10,0" VerticalOptions="Center">
+                                            <Label Text="{Binding CantidadUnidades}" FontAttributes="Bold" FontSize="16" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+                                            <Label Text="{Binding CantidadLabel}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="FillAndExpand" Padding="10" BackgroundColor="White" IsVisible="{Binding ShowButtons}">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ClickHandlerCommand}" CommandParameter="0" />
+                        </StackLayout.GestureRecognizers>
+                        <Image Source="ic_arrow_back_black_24dp" HorizontalOptions="Center" Opacity="0.6"/>
+                        <Label Text="{x:Static resources:AppResource.BackUpper}" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ClickHandlerCommand}" CommandParameter="1" />
+                        </StackLayout.GestureRecognizers>
+                        <Image Source="ic_file_download_black_24dp" HorizontalOptions="Center" Opacity="0.6"/>
+                        <Label Text="{x:Static resources:AppResource.AcceptUpper}" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" IsVisible ="{Binding EnableRechazarCarga}">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ClickHandlerCommand}" CommandParameter="2" />
+                        </StackLayout.GestureRecognizers>
+                        <Image Source="baseline_error_outline_black_24" HorizontalOptions="Center" Opacity="0.6"/>
+                        <Label Text="{x:Static resources:AppResource.RejectUpper}" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <dialogs:DialogImpresion x:Name="dialogImpresion" Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding ShowPrinter}" />
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

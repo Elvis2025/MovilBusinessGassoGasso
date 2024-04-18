@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ConsultaEntregasRepartidorPage"
+             BackgroundColor="{StaticResource WindowBackground}" 
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.ConsultationOfDeliveries}"
+             xmlns:listrows="clr-namespace:MovilBusiness.Views.Components.ListItemRows">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" Spacing="0">
+            <controls:ClientesSearchView x:Name="search1" BackgroundColor="#1976D2"  Margin="10,10,10,0"/>
+            <Label Text="{x:Static resources:AppResource.Invoices}" FontAttributes="Bold" FontSize="22" Margin="10,10,10,0"/>
+            
+            <Label HorizontalOptions="FillAndExpand" Margin="10,0,10,5">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{x:Static resources:AppResource.DeliveryNumberLabel}" FontAttributes="Bold" />
+                        <Span Text="{Binding CurrentEntrega.EnrNumeroERP}" />
+                        <Span Text="    " />
+                        <Span Text="{x:Static resources:AppResource.InvoiceQtyLabel}" FontAttributes="Bold" />
+                        <Span Text="{Binding  CantidadFacturas, Mode=OneWay}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <ListView
+                x:Name="list"
+                Margin="10"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                CachingStrategy="RecycleElement"
+                BackgroundColor="Transparent"
+                HasUnevenRows="True"
+                SeparatorVisibility="None"
+                ItemsSource="{Binding Facturas}"
+                SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <listrows:RowEntregasRepartidor2 />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Frame HorizontalOptions="FillAndExpand" VerticalOptions="End" Padding="10" BackgroundColor="{StaticResource ColorPrimary}">
+                <Label Text="{Binding EntregaTotalLabel}" TextColor="White" FontSize="16" HorizontalOptions="Start" />
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

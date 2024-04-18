@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.ListItemRows.RowProductosGrid3ColumnsDetallado"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             HorizontalOptions="FillAndExpand"
+             Padding="0,0,0,5"
+             BackgroundColor="White"
+      xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             IsClippedToBounds="True"
+             Margin="1.5,0,1.5,5"
+             RowSpacing="0">
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <Grid Grid.Row="0" HorizontalOptions="FillAndExpand">
+        <ffimageloading:CachedImage Grid.Row="0" 
+                            Aspect="AspectFit"
+                                    DownsampleToViewSize="False"
+                            DownsampleUseDipUnits="False" 
+							LoadingPlaceholder="image_loading" 
+                            ErrorPlaceholder="image_not_available"
+							Source="{Binding ProImage}">
+            <ffimageloading:CachedImage.HeightRequest>
+                <OnIdiom x:TypeArguments="x:Double" Phone="100" Tablet="150" />
+            </ffimageloading:CachedImage.HeightRequest>
+            <ffimageloading:CachedImage.DownsampleHeight>
+                <OnIdiom x:TypeArguments="x:Double" Phone="100" Tablet="150" />
+            </ffimageloading:CachedImage.DownsampleHeight>
+            <ffimageloading:CachedImage.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ShowDetalle" />
+            </ffimageloading:CachedImage.GestureRecognizers>
+        </ffimageloading:CachedImage>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End" Grid.Row="0" Margin="5" Padding="3,0" BackgroundColor="{StaticResource ColorPrimary}">
+            <Label Text="Inv:" TextColor="White"/>
+            <Label Text="{Binding InvCantidad}" TextColor="White"/>
+        </StackLayout>
+        
+    </Grid>
+
+    <Label Text="{Binding Descripcion}" Grid.Row="1" HorizontalOptions="FillAndExpand" FontAttributes="Bold" FontSize="13" LineBreakMode="TailTruncation" Margin="5,0"/>
+    <Label Text="{Binding ProCodigo}" Grid.Row="2" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" FontSize="13" Margin="5,0"/>
+
+    <StackLayout Orientation="Horizontal" Grid.Row="3" HorizontalOptions="FillAndExpand" Margin="5,0">
+        <Label Text="{x:Static resources:AppResource.PriceLabel}" />
+        <Label Text="{Binding PrecioNeto, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand" />
+    </StackLayout>
+
+    <StackLayout Orientation="Horizontal" Grid.Row="4" HorizontalOptions="FillAndExpand" Margin="5,0">
+        <Label Text="{Binding ProDescripcion3}" HorizontalOptions="FillAndExpand" />
+    </StackLayout>
+
+    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="5" Padding="5,0" Spacing="3" VerticalOptions="Center" IsVisible="{Binding ShowCantidad}">
+
+        <Label Text="-" TextColor="White" x:Name="lblMenos" BindingContext="{Binding ProID}" FontSize="18" WidthRequest="30" BackgroundColor="#546E7A" HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="RestarCantidad" />
+            </Label.GestureRecognizers>
+        </Label>
+
+        <ContentView BackgroundColor="Gray" Padding="1" HorizontalOptions="FillAndExpand">
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ShowDetalle" />
+            </ContentView.GestureRecognizers>
+            <Label Text="{Binding Cantidad}" BackgroundColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" />
+        </ContentView>
+
+        <Label Text="+" TextColor="White" FontSize="18" WidthRequest="30" BackgroundColor="#546E7A" HorizontalOptions="End" HorizontalTextAlignment="Center" VerticalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="AgregarCantidad" />
+            </Label.GestureRecognizers>
+        </Label>
+
+    </StackLayout>
+</Grid>

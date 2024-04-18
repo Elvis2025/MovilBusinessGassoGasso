@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<CarouselView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Views.CatalogoView"
+              x:Name="listaProductos"
+              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+              xmlns:controls="clr-namespace:MovilBusiness.Controls"  
+              ItemsSource="{Binding Productos}"
+              IsScrollAnimated="False">
+    <CarouselView.ItemTemplate>
+        <DataTemplate>
+            <StackLayout Orientation="Vertical">
+                <Frame HasShadow="True"
+                                       Margin="5" 
+                                       CornerRadius="5"
+                                       IsClippedToBounds="False" 
+                                       Padding="0"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand"
+                                       BorderColor="DarkGray"
+                                       HeightRequest="3000">
+
+                    <Grid>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        </Grid.GestureRecognizers>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <ContentView Margin="5" Grid.Row="0">
+
+                            <Grid>
+
+                                <ffimageloading:CachedImage
+                                                        x:Name="imgpro"
+                                                        Aspect="Fill"
+							                            LoadingPlaceholder="image_loading" 
+                                                        ErrorPlaceholder="image_not_available"
+							                            Source="{Binding ProImage}">
+                                </ffimageloading:CachedImage>
+                            </Grid>
+                        </ContentView>
+
+                        <StackLayout Orientation="Horizontal" Grid.Row="1">
+                            <Label Text="{Binding ProCodigoDescripcion}" HorizontalOptions="FillAndExpand" FontAttributes="Bold" Margin="5,3,5,5" />
+
+                            <ImageButton 
+                                                    Margin="5"  
+                                                    VerticalOptions="Start"
+                                                    HorizontalOptions="End" 
+                                                    Source="outline_zoom_in_black_24"
+                                                    Aspect="AspectFill"
+                                                    Opacity="0.8"
+                                                    WidthRequest="28"
+                                                    HeightRequest="28" 
+                                                    BackgroundColor="Transparent"
+                                                    Clicked="ImageButton_Clicked"/>
+
+                        </StackLayout>
+                    </Grid>
+
+                </Frame>
+
+                <StackLayout Margin="0,10,0,0" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="FillAndExpand" Grid.Row="3" Padding="5,0" Spacing="5" IsVisible="{Binding ShowCantidad}">
+
+                    <Label Text="-" TextColor="White" x:Name="lblRestar" FontSize="18" WidthRequest="30" BackgroundColor="#546E7A" HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="RestarCantidad" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <ContentView BackgroundColor="Gray" Padding="1" HorizontalOptions="FillAndExpand" >
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowDetalle" />
+                        </ContentView.GestureRecognizers>
+                        <Label Text="{Binding Cantidad}" BackgroundColor="White" VerticalOptions="Center" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+                    </ContentView>
+
+                    <Label Text="+" TextColor="White" FontSize="18" WidthRequest="30" BackgroundColor="#546E7A" HorizontalOptions="End" HorizontalTextAlignment="Center" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AgregarCantidad" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </StackLayout>
+
+            </StackLayout>
+
+        </DataTemplate>
+    </CarouselView.ItemTemplate>
+</CarouselView>

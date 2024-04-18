@@ -1,0 +1,1079 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetVersion">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVersionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PedidosCrear">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CliCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="detalle21" type="tns:ArrayOf_PedDetalle" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOf_PedDetalle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="_PedDetalle" type="tns:_PedDetalle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="_PedDetalle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ProCodigo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PedCantidad" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PedPrecio" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="PedidosCrearResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PedidosCrearResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PedidosCrear2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CliCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="detalle21" type="tns:ArrayOf_PedDetalle" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PedidosCrear2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PedidosCrear2Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscriptoresCrear">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepNombre" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscriptoresCrearResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SuscriptoresCrearResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerificarSuscriptor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UsuInicioSesion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UsuClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepSuscriptor" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerificarSuscriptorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerificarSuscriptorResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscriptoresCambiosCantidad">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepSuscriptor" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscriptoresCambiosCantidadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SuscriptoresCambiosCantidadResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReplicacionesTablasLeer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepNombre" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReplicacionesTablasLeerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReplicacionesTablasLeerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscriptoresCambiosLeer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepNombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepSuscriptor" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="RepCantidad" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscriptoresCambiosLeerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SuscriptoresCambiosLeerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscriptoresCambiosLeerImagenes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepNombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepSuscriptor" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="RepCantidad" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscriptoresCambiosLeerImagenesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SuscriptoresCambiosLeerImagenesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscriptoresCambiosLeer2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepNombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepSuscriptor" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="RepCantidad" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscriptoresCambiosLeer2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SuscriptoresCambiosLeer2Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerArchivosCambios">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepNombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepSuscriptor" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerArchivosCambiosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerArchivosCambiosResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="execQuery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="query" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Log" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="execQueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="execQueryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="execQuery2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepSuscriptor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Tabla" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="query" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="execQuery2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="execQuery2Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="execQueryResult">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="query" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="execQueryResultResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="execQueryResultResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="execQueryInsert">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepSuscriptor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Tabla" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="query" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RowGuid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="execQueryInsertResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="execQueryInsertResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteQuery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepSuscriptor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JsonScript" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteQueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecuteQueryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PresupuestosCombosJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Tipo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PresupuestosCombosJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PresupuestosCombosJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveBackup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RepID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepSuscriptor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UsuInicioSesion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepBaseDatos" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveBackupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveBackupResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PresupuestosCargarOnline">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CliID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PreTipo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PreAnio" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PreMes" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PresupuestosCargarOnlineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PresupuestosCargarOnlineResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecQueryWithResult">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Query" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecQueryWithResultResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecQueryWithResultResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RepresentantesParametrosActualizar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ParReferencia" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ParValor" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RepresentantesParametrosActualizarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepresentantesParametrosActualizarResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CargarEmpresaSync">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepCodigo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepClave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Fecha" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CargarEmpresaSyncResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CargarEmpresaSyncResult" type="tns:ArrayOf_EmpresasC" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOf_EmpresasC">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="_EmpresasC" type="tns:_EmpresasC" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="_EmpresasC">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="EmpID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmpNombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmpDireccion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmpDireccion2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmpDireccion3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmpRNC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmpTelefono" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmpFax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmpLogo" type="s:base64Binary" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaUltimaActualizacion" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrvCodigo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OfvCodigo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SocCodigo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="empFechaActualizacion" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Version">
+        <s:complexType />
+      </s:element>
+      <s:element name="VersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VersionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVersion" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PedidosCrearSoapIn">
+    <wsdl:part name="parameters" element="tns:PedidosCrear" />
+  </wsdl:message>
+  <wsdl:message name="PedidosCrearSoapOut">
+    <wsdl:part name="parameters" element="tns:PedidosCrearResponse" />
+  </wsdl:message>
+  <wsdl:message name="PedidosCrear2SoapIn">
+    <wsdl:part name="parameters" element="tns:PedidosCrear2" />
+  </wsdl:message>
+  <wsdl:message name="PedidosCrear2SoapOut">
+    <wsdl:part name="parameters" element="tns:PedidosCrear2Response" />
+  </wsdl:message>
+  <wsdl:message name="SuscriptoresCrearSoapIn">
+    <wsdl:part name="parameters" element="tns:SuscriptoresCrear" />
+  </wsdl:message>
+  <wsdl:message name="SuscriptoresCrearSoapOut">
+    <wsdl:part name="parameters" element="tns:SuscriptoresCrearResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerificarSuscriptorSoapIn">
+    <wsdl:part name="parameters" element="tns:VerificarSuscriptor" />
+  </wsdl:message>
+  <wsdl:message name="VerificarSuscriptorSoapOut">
+    <wsdl:part name="parameters" element="tns:VerificarSuscriptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuscriptoresCambiosCantidadSoapIn">
+    <wsdl:part name="parameters" element="tns:SuscriptoresCambiosCantidad" />
+  </wsdl:message>
+  <wsdl:message name="SuscriptoresCambiosCantidadSoapOut">
+    <wsdl:part name="parameters" element="tns:SuscriptoresCambiosCantidadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReplicacionesTablasLeerSoapIn">
+    <wsdl:part name="parameters" element="tns:ReplicacionesTablasLeer" />
+  </wsdl:message>
+  <wsdl:message name="ReplicacionesTablasLeerSoapOut">
+    <wsdl:part name="parameters" element="tns:ReplicacionesTablasLeerResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuscriptoresCambiosLeerSoapIn">
+    <wsdl:part name="parameters" element="tns:SuscriptoresCambiosLeer" />
+  </wsdl:message>
+  <wsdl:message name="SuscriptoresCambiosLeerSoapOut">
+    <wsdl:part name="parameters" element="tns:SuscriptoresCambiosLeerResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuscriptoresCambiosLeerImagenesSoapIn">
+    <wsdl:part name="parameters" element="tns:SuscriptoresCambiosLeerImagenes" />
+  </wsdl:message>
+  <wsdl:message name="SuscriptoresCambiosLeerImagenesSoapOut">
+    <wsdl:part name="parameters" element="tns:SuscriptoresCambiosLeerImagenesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuscriptoresCambiosLeer2SoapIn">
+    <wsdl:part name="parameters" element="tns:SuscriptoresCambiosLeer2" />
+  </wsdl:message>
+  <wsdl:message name="SuscriptoresCambiosLeer2SoapOut">
+    <wsdl:part name="parameters" element="tns:SuscriptoresCambiosLeer2Response" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerArchivosCambiosSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerArchivosCambios" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerArchivosCambiosSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerArchivosCambiosResponse" />
+  </wsdl:message>
+  <wsdl:message name="execQuerySoapIn">
+    <wsdl:part name="parameters" element="tns:execQuery" />
+  </wsdl:message>
+  <wsdl:message name="execQuerySoapOut">
+    <wsdl:part name="parameters" element="tns:execQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="execQuery2SoapIn">
+    <wsdl:part name="parameters" element="tns:execQuery2" />
+  </wsdl:message>
+  <wsdl:message name="execQuery2SoapOut">
+    <wsdl:part name="parameters" element="tns:execQuery2Response" />
+  </wsdl:message>
+  <wsdl:message name="execQueryResultSoapIn">
+    <wsdl:part name="parameters" element="tns:execQueryResult" />
+  </wsdl:message>
+  <wsdl:message name="execQueryResultSoapOut">
+    <wsdl:part name="parameters" element="tns:execQueryResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="execQueryInsertSoapIn">
+    <wsdl:part name="parameters" element="tns:execQueryInsert" />
+  </wsdl:message>
+  <wsdl:message name="execQueryInsertSoapOut">
+    <wsdl:part name="parameters" element="tns:execQueryInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteQuerySoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteQuery" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteQuerySoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="PresupuestosCombosJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:PresupuestosCombosJSON" />
+  </wsdl:message>
+  <wsdl:message name="PresupuestosCombosJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:PresupuestosCombosJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveBackupSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveBackup" />
+  </wsdl:message>
+  <wsdl:message name="SaveBackupSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveBackupResponse" />
+  </wsdl:message>
+  <wsdl:message name="PresupuestosCargarOnlineSoapIn">
+    <wsdl:part name="parameters" element="tns:PresupuestosCargarOnline" />
+  </wsdl:message>
+  <wsdl:message name="PresupuestosCargarOnlineSoapOut">
+    <wsdl:part name="parameters" element="tns:PresupuestosCargarOnlineResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecQueryWithResultSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecQueryWithResult" />
+  </wsdl:message>
+  <wsdl:message name="ExecQueryWithResultSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecQueryWithResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="RepresentantesParametrosActualizarSoapIn">
+    <wsdl:part name="parameters" element="tns:RepresentantesParametrosActualizar" />
+  </wsdl:message>
+  <wsdl:message name="RepresentantesParametrosActualizarSoapOut">
+    <wsdl:part name="parameters" element="tns:RepresentantesParametrosActualizarResponse" />
+  </wsdl:message>
+  <wsdl:message name="CargarEmpresaSyncSoapIn">
+    <wsdl:part name="parameters" element="tns:CargarEmpresaSync" />
+  </wsdl:message>
+  <wsdl:message name="CargarEmpresaSyncSoapOut">
+    <wsdl:part name="parameters" element="tns:CargarEmpresaSyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="VersionSoapIn">
+    <wsdl:part name="parameters" element="tns:Version" />
+  </wsdl:message>
+  <wsdl:message name="VersionSoapOut">
+    <wsdl:part name="parameters" element="tns:VersionResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiciosSoap">
+    <wsdl:operation name="GetVersion">
+      <wsdl:input message="tns:GetVersionSoapIn" />
+      <wsdl:output message="tns:GetVersionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PedidosCrear">
+      <wsdl:input message="tns:PedidosCrearSoapIn" />
+      <wsdl:output message="tns:PedidosCrearSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PedidosCrear2">
+      <wsdl:input message="tns:PedidosCrear2SoapIn" />
+      <wsdl:output message="tns:PedidosCrear2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCrear">
+      <wsdl:input message="tns:SuscriptoresCrearSoapIn" />
+      <wsdl:output message="tns:SuscriptoresCrearSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerificarSuscriptor">
+      <wsdl:input message="tns:VerificarSuscriptorSoapIn" />
+      <wsdl:output message="tns:VerificarSuscriptorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCambiosCantidad">
+      <wsdl:input message="tns:SuscriptoresCambiosCantidadSoapIn" />
+      <wsdl:output message="tns:SuscriptoresCambiosCantidadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReplicacionesTablasLeer">
+      <wsdl:input message="tns:ReplicacionesTablasLeerSoapIn" />
+      <wsdl:output message="tns:ReplicacionesTablasLeerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCambiosLeer">
+      <wsdl:input message="tns:SuscriptoresCambiosLeerSoapIn" />
+      <wsdl:output message="tns:SuscriptoresCambiosLeerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCambiosLeerImagenes">
+      <wsdl:input message="tns:SuscriptoresCambiosLeerImagenesSoapIn" />
+      <wsdl:output message="tns:SuscriptoresCambiosLeerImagenesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCambiosLeer2">
+      <wsdl:input message="tns:SuscriptoresCambiosLeer2SoapIn" />
+      <wsdl:output message="tns:SuscriptoresCambiosLeer2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerArchivosCambios">
+      <wsdl:input message="tns:ObtenerArchivosCambiosSoapIn" />
+      <wsdl:output message="tns:ObtenerArchivosCambiosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="execQuery">
+      <wsdl:input message="tns:execQuerySoapIn" />
+      <wsdl:output message="tns:execQuerySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="execQuery2">
+      <wsdl:input message="tns:execQuery2SoapIn" />
+      <wsdl:output message="tns:execQuery2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="execQueryResult">
+      <wsdl:input message="tns:execQueryResultSoapIn" />
+      <wsdl:output message="tns:execQueryResultSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="execQueryInsert">
+      <wsdl:input message="tns:execQueryInsertSoapIn" />
+      <wsdl:output message="tns:execQueryInsertSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteQuery">
+      <wsdl:input message="tns:ExecuteQuerySoapIn" />
+      <wsdl:output message="tns:ExecuteQuerySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PresupuestosCombosJSON">
+      <wsdl:input message="tns:PresupuestosCombosJSONSoapIn" />
+      <wsdl:output message="tns:PresupuestosCombosJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveBackup">
+      <wsdl:input message="tns:SaveBackupSoapIn" />
+      <wsdl:output message="tns:SaveBackupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PresupuestosCargarOnline">
+      <wsdl:input message="tns:PresupuestosCargarOnlineSoapIn" />
+      <wsdl:output message="tns:PresupuestosCargarOnlineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecQueryWithResult">
+      <wsdl:input message="tns:ExecQueryWithResultSoapIn" />
+      <wsdl:output message="tns:ExecQueryWithResultSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RepresentantesParametrosActualizar">
+      <wsdl:input message="tns:RepresentantesParametrosActualizarSoapIn" />
+      <wsdl:output message="tns:RepresentantesParametrosActualizarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CargarEmpresaSync">
+      <wsdl:input message="tns:CargarEmpresaSyncSoapIn" />
+      <wsdl:output message="tns:CargarEmpresaSyncSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Version">
+      <wsdl:input message="tns:VersionSoapIn" />
+      <wsdl:output message="tns:VersionSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiciosSoap" type="tns:ServiciosSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetVersion">
+      <soap:operation soapAction="http://tempuri.org/GetVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PedidosCrear">
+      <soap:operation soapAction="http://tempuri.org/PedidosCrear" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PedidosCrear2">
+      <soap:operation soapAction="http://tempuri.org/PedidosCrear2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCrear">
+      <soap:operation soapAction="http://tempuri.org/SuscriptoresCrear" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerificarSuscriptor">
+      <soap:operation soapAction="http://tempuri.org/VerificarSuscriptor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCambiosCantidad">
+      <soap:operation soapAction="http://tempuri.org/SuscriptoresCambiosCantidad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReplicacionesTablasLeer">
+      <soap:operation soapAction="http://tempuri.org/ReplicacionesTablasLeer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCambiosLeer">
+      <soap:operation soapAction="http://tempuri.org/SuscriptoresCambiosLeer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCambiosLeerImagenes">
+      <soap:operation soapAction="http://tempuri.org/SuscriptoresCambiosLeerImagenes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCambiosLeer2">
+      <soap:operation soapAction="http://tempuri.org/SuscriptoresCambiosLeer2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerArchivosCambios">
+      <soap:operation soapAction="http://tempuri.org/ObtenerArchivosCambios" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="execQuery">
+      <soap:operation soapAction="http://tempuri.org/execQuery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="execQuery2">
+      <soap:operation soapAction="http://tempuri.org/execQuery2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="execQueryResult">
+      <soap:operation soapAction="http://tempuri.org/execQueryResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="execQueryInsert">
+      <soap:operation soapAction="http://tempuri.org/execQueryInsert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteQuery">
+      <soap:operation soapAction="http://tempuri.org/ExecuteQuery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PresupuestosCombosJSON">
+      <soap:operation soapAction="http://tempuri.org/PresupuestosCombosJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveBackup">
+      <soap:operation soapAction="http://tempuri.org/SaveBackup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PresupuestosCargarOnline">
+      <soap:operation soapAction="http://tempuri.org/PresupuestosCargarOnline" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecQueryWithResult">
+      <soap:operation soapAction="http://tempuri.org/ExecQueryWithResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RepresentantesParametrosActualizar">
+      <soap:operation soapAction="http://tempuri.org/RepresentantesParametrosActualizar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CargarEmpresaSync">
+      <soap:operation soapAction="http://tempuri.org/CargarEmpresaSync" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Version">
+      <soap:operation soapAction="http://tempuri.org/Version" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiciosSoap12" type="tns:ServiciosSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetVersion">
+      <soap12:operation soapAction="http://tempuri.org/GetVersion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PedidosCrear">
+      <soap12:operation soapAction="http://tempuri.org/PedidosCrear" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PedidosCrear2">
+      <soap12:operation soapAction="http://tempuri.org/PedidosCrear2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCrear">
+      <soap12:operation soapAction="http://tempuri.org/SuscriptoresCrear" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerificarSuscriptor">
+      <soap12:operation soapAction="http://tempuri.org/VerificarSuscriptor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCambiosCantidad">
+      <soap12:operation soapAction="http://tempuri.org/SuscriptoresCambiosCantidad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReplicacionesTablasLeer">
+      <soap12:operation soapAction="http://tempuri.org/ReplicacionesTablasLeer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCambiosLeer">
+      <soap12:operation soapAction="http://tempuri.org/SuscriptoresCambiosLeer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCambiosLeerImagenes">
+      <soap12:operation soapAction="http://tempuri.org/SuscriptoresCambiosLeerImagenes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscriptoresCambiosLeer2">
+      <soap12:operation soapAction="http://tempuri.org/SuscriptoresCambiosLeer2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerArchivosCambios">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerArchivosCambios" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="execQuery">
+      <soap12:operation soapAction="http://tempuri.org/execQuery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="execQuery2">
+      <soap12:operation soapAction="http://tempuri.org/execQuery2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="execQueryResult">
+      <soap12:operation soapAction="http://tempuri.org/execQueryResult" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="execQueryInsert">
+      <soap12:operation soapAction="http://tempuri.org/execQueryInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteQuery">
+      <soap12:operation soapAction="http://tempuri.org/ExecuteQuery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PresupuestosCombosJSON">
+      <soap12:operation soapAction="http://tempuri.org/PresupuestosCombosJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveBackup">
+      <soap12:operation soapAction="http://tempuri.org/SaveBackup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PresupuestosCargarOnline">
+      <soap12:operation soapAction="http://tempuri.org/PresupuestosCargarOnline" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecQueryWithResult">
+      <soap12:operation soapAction="http://tempuri.org/ExecQueryWithResult" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RepresentantesParametrosActualizar">
+      <soap12:operation soapAction="http://tempuri.org/RepresentantesParametrosActualizar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CargarEmpresaSync">
+      <soap12:operation soapAction="http://tempuri.org/CargarEmpresaSync" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Version">
+      <soap12:operation soapAction="http://tempuri.org/Version" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Servicios">
+    <wsdl:port name="ServiciosSoap" binding="tns:ServiciosSoap">
+      <soap:address location="http://movilbusiness.com.do/wsMovilbusiness1076/Servicios.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiciosSoap12" binding="tns:ServiciosSoap12">
+      <soap12:address location="http://movilbusiness.com.do/wsMovilbusiness1076/Servicios.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

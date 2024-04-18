@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.HistoricoPromedioPage"  
+             xmlns:configuration="clr-namespace:MovilBusiness.Configuration"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.HistoricalAverage}">
+    <ContentPage.Content>
+
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">          
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10">
+
+                <Label Text="{Binding CurrentClient.ClicodigoNombre, Source={x:Static configuration:Arguments.Values}}" FontSize="16" />
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                    <Label Text="{x:Static resources:AppResource.OrderLabel}" VerticalOptions="Center" FontAttributes="Bold" />
+                    <Picker WidthRequest="150" x:Name="comboOrderBy" Title="{x:Static resources:AppResource.Select}" SelectedIndexChanged="comboOrderBy_SelectedIndexChanged" />
+                    <!--<Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Descripción</x:String>
+                                <x:String>Unidad de venta</x:String>
+                                <x:String>Precio</x:String>
+                                <x:String>Cant vendida</x:String>
+                                <x:String>Cant promedio</x:String>
+                                <x:String>Referencia</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>-->
+                </StackLayout>
+                
+                    <ScrollView VerticalOptions="FillAndExpand" Orientation="Horizontal">
+                        <StackLayout Orientation="Vertical" Spacing="0">
+                            <StackLayout Orientation="Horizontal" BackgroundColor="#37474F" Padding="10,5" Spacing="0">
+
+                            <Label Text="{x:Static resources:AppResource.SaleUnit}" x:Name="lblUventa" WidthRequest="110" TextColor="White"/>
+                            <Label Text="{x:Static resources:AppResource.Description}" x:Name="lblDescipcion" WidthRequest="200" TextColor="White"/>
+                            <Label Text="{x:Static resources:AppResource.Price}" WidthRequest="90" TextColor="White"/>
+                            <Label Text="{x:Static resources:AppResource.QtySold}" x:Name="lblCantidad" WidthRequest="100" TextColor="White"/>
+                            <Label Text="{x:Static resources:AppResource.AverageQty}" x:Name="lblCantidadprom" WidthRequest="100" TextColor="White"/>
+                            <Label Text="{x:Static resources:AppResource.Reference}" x:Name="lblReferencia" WidthRequest="150" TextColor="White"/>
+ 
+                        </StackLayout>
+
+                            <ListView VerticalOptions="FillAndExpand"
+                              HasUnevenRows="True"
+                              x:Name="list"
+                              CachingStrategy="RecycleElement"
+                              SeparatorVisibility="None"
+                              BackgroundColor="Transparent"
+                              ItemsSource="{Binding Documentos}"                             
+                              HeightRequest="150">
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid ColumnSpacing="0" Padding="10,5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="110" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="90" />
+                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="150" />
+                                            </Grid.ColumnDefinitions>
+
+                                                <Label Text="{Binding UnidadVenta}" Grid.Column="0"/>
+                                                <Label Text="{Binding ProDescripcion}" Grid.Column="1" WidthRequest="200" LineBreakMode="WordWrap"/>
+                                                <Label Text="{Binding HipMonto,StringFormat='{0:N2}'}" Grid.Column="2"/>
+                                                <Label Text="{Binding HiPCantidadVendida}" Grid.Column="3" />
+                                                <Label Text="{Binding HipCantidadPromedio}" Grid.Column="4" />
+                                                <Label Text="{Binding ProCodigo}" Grid.Column="5"/>
+                                        </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                            </ListView>
+
+                        </StackLayout>
+                    </ScrollView>
+           
+
+    
+            </StackLayout>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

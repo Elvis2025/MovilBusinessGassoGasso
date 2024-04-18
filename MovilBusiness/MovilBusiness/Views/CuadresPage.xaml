@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.CuadresPage"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:converters="clr-namespace:MovilBusiness.viewmodel.converters"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior"
+              xmlns:dialogs="clr-namespace:MovilBusiness.Views.Components.Dialogs">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_done_white_24dp.png" Text="{x:Static resources:AppResource.Save}" Order="Primary" Command="{Binding SaveCommand}" IsEnabled="{Binding IsUp}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="boolInverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <Grid HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.Padding>
+                        <OnPlatform x:TypeArguments="Thickness" Android="10,0,10,10" iOS="10" />
+                    </Grid.Padding>
+
+                    
+                    <Label Text="{x:Static resources:AppResource.Token}" TextColor="White" Grid.Row="0" Grid.Column="0" />
+                    <Label Text="{x:Static resources:AppResource.Vehicle}" TextColor="White" Grid.Row="0" Grid.Column="1" />
+
+                    <Frame HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="0" Padding="0" HeightRequest="40" HasShadow="False">
+                        <controls:BorderlessEntry IsEnabled="{Binding IsCerrarCuadre, Converter={StaticResource boolInverter}}" VerticalOptions="CenterAndExpand" Placeholder="{x:Static resources:AppResource.FilterSearch}" Text="{Binding FichaSearch, Mode=TwoWay}" Command="{Binding SearchCommand}" />
+                    </Frame>
+
+                    <Frame HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="1" Padding="0" HeightRequest="40"  HasShadow="False">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <controls:BorderlessPicker IsEnabled="{Binding IsCerrarCuadre, Converter={StaticResource boolInverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" FontSize="15" Title="{x:Static resources:AppResource.SelectVehicle}" ItemsSource="{Binding Vehiculos}" ItemDisplayBinding="{Binding VehiculoDetalle}" SelectedItem="{Binding CurrentVehiculo, Mode=TwoWay}" />
+                            <Image Source="ic_arrow_drop_down_black_24dp" HorizontalOptions="End" VerticalOptions="Center" Opacity="0.7" />
+                        </StackLayout>
+                    </Frame>
+
+                </Grid>
+
+                <Label Text="{Binding NumeroCuadre}" FontAttributes="Bold" />
+                <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15">
+
+                        <Label Text="{x:Static resources:AppResource.LastMileage}" FontAttributes="Bold" />
+                        <Frame Padding="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" HeightRequest="40"  HasShadow="False">
+                            <controls:BorderlessEntry Keyboard="Numeric" IsEnabled="False" Text="{Binding UltimoKilometraje}" HorizontalOptions="FillAndExpand" BackgroundColor="White" VerticalOptions="FillAndExpand"  >
+                                <controls:BorderlessEntry.Behaviors>
+                                    <behaviors:NumericValidation />
+                                </controls:BorderlessEntry.Behaviors>
+                            </controls:BorderlessEntry>
+                        </Frame>
+
+                        <Label Text="{x:Static resources:AppResource.CurrentMileage}" FontAttributes="Bold" Margin="0,10,0,0" />
+                        <Frame Padding="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" HeightRequest="40"  HasShadow="False">
+                            <controls:BorderlessEntry Keyboard="Numeric" Text="{Binding KilometrajeActual}" HorizontalOptions="FillAndExpand" BackgroundColor="White" VerticalOptions="FillAndExpand"  >
+                                <controls:BorderlessEntry.Behaviors>
+                                    <behaviors:NumericValidation />
+                                </controls:BorderlessEntry.Behaviors>
+                            </controls:BorderlessEntry>
+                        </Frame>
+
+                        <Label Text="{x:Static resources:AppResource.LogicalCounter}" FontAttributes="Bold" Margin="0,10,0,0" IsVisible="{Binding ShowContador}" />
+                        <Frame Padding="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" HeightRequest="40"  HasShadow="False" IsVisible="{Binding ShowContador}">
+                            <controls:BorderlessEntry Keyboard="Numeric" IsEnabled="False" Text="{Binding ContadorLogico}" HorizontalOptions="FillAndExpand" BackgroundColor="White" VerticalOptions="FillAndExpand"  >
+                                <controls:BorderlessEntry.Behaviors>
+                                    <behaviors:NumericValidation />
+                                </controls:BorderlessEntry.Behaviors>
+                            </controls:BorderlessEntry>
+                        </Frame>
+
+                        <Label Text="{x:Static resources:AppResource.PhysicalCounter}" FontAttributes="Bold" Margin="0,10,0,0" IsVisible="{Binding ShowContador}" />
+                        <Frame HasShadow="False" Padding="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" HeightRequest="40" IsVisible="{Binding ShowContador}">
+                            <controls:BorderlessEntry Keyboard="Numeric" Text="{Binding ContadorFisico}" HorizontalOptions="FillAndExpand" BackgroundColor="White" VerticalOptions="FillAndExpand" >
+                                <controls:BorderlessEntry.Behaviors>
+                                    <behaviors:NumericValidation />
+                                </controls:BorderlessEntry.Behaviors>
+                            </controls:BorderlessEntry>
+                        </Frame>
+
+                        <Label Text="{x:Static resources:AppResource.Helper1}" FontAttributes="Bold" Margin="0,10,0,0" IsVisible="{Binding ShowAyudantes}" />
+                        <Frame  HasShadow="False" Padding="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" HeightRequest="40" IsVisible="{Binding ShowAyudantes}">
+                            <controls:BorderlessEntry IsEnabled="{Binding AyudantesEnabled}" Text="{Binding Ayudante1}" HorizontalOptions="FillAndExpand" BackgroundColor="White" VerticalOptions="FillAndExpand" />
+                        </Frame>
+
+                        <Label Text="{x:Static resources:AppResource.Helper2}" FontAttributes="Bold" Margin="0,10,0,0"  IsVisible="{Binding ShowAyudantes}"/>
+                        <Frame  HasShadow="False" Padding="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" HeightRequest="40" IsVisible="{Binding ShowAyudantes}">
+                            <controls:BorderlessEntry IsEnabled="{Binding AyudantesEnabled}" Text="{Binding Ayudante2}" HorizontalOptions="FillAndExpand" BackgroundColor="White" VerticalOptions="FillAndExpand" />
+                        </Frame>
+
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+ 
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" />
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

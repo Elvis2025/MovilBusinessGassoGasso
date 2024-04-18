@@ -1,0 +1,709 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage
+    x:Class="MovilBusiness.views.CobrosPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:configuration="clr-namespace:MovilBusiness.Configuration"
+    xmlns:controls="clr-namespace:MovilBusiness.Controls"
+    xmlns:dialogs="clr-namespace:MovilBusiness.Views.Components.Dialogs"
+    xmlns:resources="clr-namespace:MovilBusiness.Resx"
+    Title="{x:Static resources:AppResource.Collections}"    
+    BackgroundColor="{StaticResource WindowBackground}"
+    NavigationPage.HasNavigationBar="False">
+
+    <MasterDetailPage.Master>
+        <ContentPage
+            Title="Menu"
+            BackgroundColor="#e8e8e8"
+            Icon="ic_menu_white_24dp">
+
+            <controls:DrawerLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+    <MasterDetailPage.Detail>
+        <NavigationPage BarBackgroundColor="#1976D2" BarTextColor="White">
+            <x:Arguments>
+                <ContentPage Title="{x:Static resources:AppResource.Collections}" BackgroundColor="{StaticResource WindowBackground}">
+                    <ContentPage.Content>
+                        <Grid
+                            ColumnSpacing="0"
+                            HorizontalOptions="FillAndExpand"
+                            RowSpacing="0"
+                            VerticalOptions="FillAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <StackLayout
+                                Grid.Row="0"
+                                Margin="0,0,0,10"
+                                HorizontalOptions="FillAndExpand"
+                                Orientation="Vertical"
+                                VerticalOptions="FillAndExpand">
+
+                                <StackLayout
+                                    Margin="5,0"
+                                    HorizontalOptions="FillAndExpand"
+                                    Orientation="Horizontal">
+                                    <Label FontAttributes="Bold" Text="{x:Static resources:AppResource.CustomerLabel}">
+                                        <Label.WidthRequest>
+                                            <OnPlatform
+                                                x:TypeArguments="x:Double"
+                                                Android="68"
+                                                iOS="65" />
+                                        </Label.WidthRequest>
+                                        <Label.MinimumWidthRequest>
+                                            <OnPlatform
+                                                x:TypeArguments="x:Double"
+                                                Android="68"
+                                                iOS="65" />
+                                        </Label.MinimumWidthRequest>
+                                    </Label>
+                                    <Label
+                                        HorizontalOptions="FillAndExpand"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding CurrentClient.ClicodigoNombre, Source={x:Static configuration:Arguments.Values}}" />
+                                </StackLayout>
+
+                                <Frame
+                                    Padding="5,0"
+                                    HasShadow="False"
+                                    HorizontalOptions="FillAndExpand"
+                                    IsVisible="{Binding ShowMoneda}">
+                                    <StackLayout
+                                        HeightRequest="45"
+                                        HorizontalOptions="FillAndExpand"
+                                        Orientation="Horizontal">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            Text="{x:Static resources:AppResource.CurrencyLabel}"
+                                            VerticalOptions="Center" />
+                                        <controls:BorderlessPicker
+                                            Title="{x:Static resources:AppResource.ChooseCurrency}"
+                                            FontSize="14"
+                                            HorizontalOptions="FillAndExpand"
+                                            ItemDisplayBinding="{Binding MonNombre}"
+                                            ItemsSource="{Binding Monedas}"
+                                            SelectedItem="{Binding CurrentMoneda, Mode=TwoWay}"
+                                            VerticalOptions="FillAndExpand" />
+                                        <Image
+                                            Opacity="0.6"
+                                            Source="ic_arrow_drop_down_black_24dp.png"
+                                            VerticalOptions="Center" />
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout
+                                    Margin="5,0"
+                                    HorizontalOptions="End"
+                                    Orientation="Horizontal">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="15"
+                                        HorizontalOptions="End"
+                                        Text="Balance:" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="15"
+                                        HorizontalOptions="End"
+                                        Text="{Binding CurrentClientData.Balance, StringFormat='{0:N2}'}" />
+                                </StackLayout>
+
+                                <StackLayout
+                                        Margin="5,0"
+                                        HorizontalOptions="End"
+                                        Orientation="Horizontal"
+                                        IsVisible="{Binding ShowlblChequeF}">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="15"
+                                            HorizontalOptions="End"
+                                            Text="{x:Static resources:AppResource.FuturisticsChecksLabel}" />
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="15"
+                                            HorizontalOptions="End"
+                                            Text="{Binding CurrentClientData.BalanceSoloChequeDif, StringFormat='{0:N2}'}" />
+                                    </StackLayout>
+
+              
+
+                                <Frame
+                                    Padding="0"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"
+                                    x:Name="Orden_1">
+                                    <Frame.HasShadow>
+                                        <OnPlatform
+                                            x:TypeArguments="x:Boolean"
+                                            Android="True"
+                                            iOS="False" />
+                                    </Frame.HasShadow>
+                                    
+                                    <ScrollView
+                                        HorizontalOptions="FillAndExpand"
+                                        Orientation="Horizontal"
+                                        VerticalOptions="FillAndExpand">
+                                        <StackLayout
+                                            HorizontalOptions="StartAndExpand"
+                                            Orientation="Vertical"
+                                            Spacing="0"
+                                            VerticalOptions="FillAndExpand">
+
+                                            <StackLayout
+                                                Padding="10,0"
+                                                BackgroundColor="#37474F"
+                                                HeightRequest="40"
+                                                HorizontalOptions="StartAndExpand"
+                                                Orientation="Horizontal"
+                                                Spacing="0">
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.Date}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="85" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.BroadcastDays}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="95" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.DaysPastDue}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="95" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.Document}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="105" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.Initials}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="50" />
+                                                <Label
+                                                    Text="CxcClasificacion"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="150" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.DeliveryDays}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="95" />
+                                                <Label
+                                                    Text="Balance"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="100" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.AccumulatedBalance}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="140" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.TotalAmount}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="120" />
+                                                <Label
+                                                    Text="NCF"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="110" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.Comment}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="120" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.DeliveryDate}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="105" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.ExpirationDate}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="145" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.Seller}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="100" />
+                                            </StackLayout>
+
+                                            <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
+                                                <StackLayout
+                                                    Padding="0,0"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Spacing="0"
+                                                    VerticalOptions="FillAndExpand">
+                                                    <ListView
+                                                        x:Name="cobrosList"
+                                                        Margin="8,0"
+                                                        BackgroundColor="Transparent"
+                                                        CachingStrategy="RecycleElement"
+                                                        HasUnevenRows="True"
+                                                        ItemSelected="OnListItemSelected"
+                                                        ItemsSource="{Binding Documentos}"
+                                                        SeparatorVisibility="None"
+                                                        VerticalOptions="FillAndExpand">
+
+                                                        <ListView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <ViewCell>
+                                                                    <Grid ColumnSpacing="0" BackgroundColor="{Binding CxcColorToshow}">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="85" />
+                                                                            <ColumnDefinition Width="95" />
+                                                                            <ColumnDefinition Width="95" />
+                                                                            <ColumnDefinition Width="105" />
+                                                                            <ColumnDefinition Width="50" />
+                                                                            <ColumnDefinition Width="150" />
+                                                                            <ColumnDefinition Width="95" />
+                                                                            <ColumnDefinition Width="100" />
+                                                                            <ColumnDefinition Width="140" />
+                                                                            <ColumnDefinition Width="120" />
+                                                                            <ColumnDefinition Width="110" />
+                                                                            <ColumnDefinition Width="120" />
+                                                                            <ColumnDefinition Width="105" />
+                                                                            <ColumnDefinition Width="145" />
+                                                                            <ColumnDefinition Width="100" />
+                                                                        </Grid.ColumnDefinitions>
+
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition Height="30" />
+                                                                        </Grid.RowDefinitions>
+
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="0"
+                                                                            Text="{Binding CxcFecha}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="1"
+                                                                            Text="{Binding CxcDias}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="2"
+                                                                            Text="{Binding CxcDiasVencido}"
+                                                                            VerticalOptions="Center" />
+
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="3"
+                                                                            Text="{Binding CxcDocumento}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="4"
+                                                                            Text="{Binding CxcSIGLA}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="5"
+                                                                            Text="{Binding CxcClasificacion}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="6"
+                                                                            Text="{Binding CxcDiasEntrega}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="7"
+                                                                            Text="{Binding CxcBalanceRecibos, StringFormat='{0:N2}'}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="8"
+                                                                            Text="{Binding CxcBalanceAcumulado, StringFormat='{0:N2}'}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="9"
+                                                                            Text="{Binding CxcMontoTotalRecibos, StringFormat='{0:N2}'}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="10"
+                                                                            Text="{Binding CXCNCF}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="11"
+                                                                            Text="{Binding cxcComentario}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="12"
+                                                                            Text="{Binding CxcFechaEntrega}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="13"
+                                                                            Text="{Binding cxcFechaVencimiento}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="14"
+                                                                            Text="{Binding RepCodigo}"
+                                                                            VerticalOptions="Center" />
+                                                                    </Grid>
+
+                                                                </ViewCell>
+                                                            </DataTemplate>
+                                                        </ListView.ItemTemplate>
+
+                                                    </ListView>
+                                                </StackLayout>
+                                            </ScrollView>
+                                        </StackLayout>
+
+                                    </ScrollView>
+
+                                    <!--</StackLayout>
+                                    </ScrollView>-->
+                                </Frame>
+
+                                <Frame
+                                    Padding="0"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"
+                                    x:Name="Orden_2">
+                                    <Frame.HasShadow>
+                                        <OnPlatform
+                                            x:TypeArguments="x:Boolean"
+                                            Android="True"
+                                            iOS="False" />
+                                    </Frame.HasShadow>
+
+                                    <ScrollView
+                                        HorizontalOptions="FillAndExpand"
+                                        Orientation="Horizontal"
+                                        VerticalOptions="FillAndExpand">
+                                        <StackLayout
+                                            HorizontalOptions="StartAndExpand"
+                                            Orientation="Vertical"
+                                            Spacing="0"
+                                            VerticalOptions="FillAndExpand">
+
+                                            <StackLayout
+                                                Padding="10,0"
+                                                BackgroundColor="#37474F"
+                                                HeightRequest="40"
+                                                HorizontalOptions="StartAndExpand"
+                                                Orientation="Horizontal"
+                                                Spacing="0">
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.Seller}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="85" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.Date}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="100" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.BroadcastDays}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="95" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.DaysPastDue}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="95" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.Document}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="105" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.Initials}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="50" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.DeliveryDays}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="95" />
+                                                <Label
+                                                    Text="Balance"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="100" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.AccumulatedBalance}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="140" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.TotalAmount}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="120" />
+                                                <Label
+                                                    Text="NCF"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="110" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.Comment}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="120" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.DeliveryDate}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="105" />
+                                                <Label
+                                                    Text="{x:Static resources:AppResource.ExpirationDate}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="145" />
+                                                
+                                            </StackLayout>
+
+                                            <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
+                                                <StackLayout
+                                                    Padding="0,0"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Spacing="0"
+                                                    VerticalOptions="FillAndExpand">
+                                                    <ListView
+                                                        x:Name="cobrosList2"
+                                                        Margin="8,0"
+                                                        BackgroundColor="Transparent"
+                                                        CachingStrategy="RecycleElement"
+                                                        HasUnevenRows="True"
+                                                        ItemSelected="OnListItemSelected"
+                                                        ItemsSource="{Binding Documentos}"
+                                                        SeparatorVisibility="None"
+                                                        VerticalOptions="FillAndExpand">
+
+                                                        <ListView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <ViewCell>
+                                                                    <Grid ColumnSpacing="0">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="90" />
+                                                                            <ColumnDefinition Width="95" />
+                                                                            <ColumnDefinition Width="95" />
+                                                                            <ColumnDefinition Width="95" />
+                                                                            <ColumnDefinition Width="105" />
+                                                                            <ColumnDefinition Width="50" />
+                                                                            <ColumnDefinition Width="95" />
+                                                                            <ColumnDefinition Width="100" />
+                                                                            <ColumnDefinition Width="140" />
+                                                                            <ColumnDefinition Width="120" />
+                                                                            <ColumnDefinition Width="110" />
+                                                                            <ColumnDefinition Width="120" />
+                                                                            <ColumnDefinition Width="105" />
+                                                                            <ColumnDefinition Width="145" />
+                                                                        </Grid.ColumnDefinitions>
+
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition Height="30" />
+                                                                        </Grid.RowDefinitions>
+
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="0"
+                                                                            Text="{Binding RepCodigo}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="1"
+                                                                            Text="{Binding CxcFecha}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="2"
+                                                                            Text="{Binding CxcDias}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="3"
+                                                                            Text="{Binding CxcDiasVencido}"
+                                                                            VerticalOptions="Center" />
+
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="4"
+                                                                            Text="{Binding CxcDocumento}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="5"
+                                                                            Text="{Binding CxcSIGLA}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="6"
+                                                                            Text="{Binding CxcDiasEntrega}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="7"
+                                                                            Text="{Binding CxcBalanceRecibos, StringFormat='{0:N2}'}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="8"
+                                                                            Text="{Binding CxcBalanceAcumulado, StringFormat='{0:N2}'}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="9"
+                                                                            Text="{Binding CxcMontoTotalRecibos, StringFormat='{0:N2}'}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="10"
+                                                                            Text="{Binding CXCNCF}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="11"
+                                                                            Text="{Binding cxcComentario}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="12"
+                                                                            Text="{Binding CxcFechaEntrega}"
+                                                                            VerticalOptions="Center" />
+                                                                        <Label
+                                                                            Grid.Row="0"
+                                                                            Grid.Column="13"
+                                                                            Text="{Binding cxcFechaVencimiento}"
+                                                                            VerticalOptions="Center" />
+                                                                    </Grid>
+
+                                                                </ViewCell>
+                                                            </DataTemplate>
+                                                        </ListView.ItemTemplate>
+
+                                                    </ListView>
+                                                </StackLayout>
+                                            </ScrollView>
+                                        </StackLayout>
+
+                                    </ScrollView>
+
+                                    <!--</StackLayout>
+                                    </ScrollView>-->
+                                </Frame>
+
+                                <Grid
+                                    BackgroundColor="White"
+                                    ColumnSpacing="0"
+                                    IsVisible="{Binding MENUCOBRO}"
+                                    RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <controls:ClickableStackLayout
+                                        Grid.Column="0"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding ButtonCommand}"
+                                        CommandParameter="1"
+                                        Orientation="Vertical"
+                                        Spacing="5"
+                                        WidthRequest="85">
+                                        <Image
+                                            Aspect="AspectFit"
+                                            HeightRequest="50"
+                                            HorizontalOptions="Center"
+                                            Source="cxcrecibo"
+                                            WidthRequest="50" />
+                                        <Label
+                                            Margin="0,0,0,0"
+                                            BackgroundColor="Transparent"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="Center"
+                                            Text="{x:Static resources:AppResource.NewReceipt}"
+                                            TextColor="#1976D2" />
+                                    </controls:ClickableStackLayout>
+                                    <controls:ClickableStackLayout
+                                        Grid.Column="1"
+                                        BackgroundColor="Transparent"
+                                        IsVisible="{Binding IsVisibleEstCuentas}"
+                                        Command="{Binding ButtonCommand}"
+                                        CommandParameter="2"
+                                        Orientation="Vertical"
+                                        Spacing="5"
+                                        WidthRequest="85">
+                                        <Image
+                                            Aspect="AspectFit"
+                                            HeightRequest="50"
+                                            HorizontalOptions="Center"
+                                            Source="cxcestadodecuenta"
+                                            WidthRequest="50" />
+                                        <Label
+                                            Margin="0,0,0,0"
+                                            BackgroundColor="Transparent"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="Center"
+                                            Text="{x:Static resources:AppResource.AccountStatus}"
+                                            TextColor="#1976D2" />
+                                    </controls:ClickableStackLayout>
+                                    <controls:ClickableStackLayout
+                                        Grid.Column="2"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding ButtonCommand}"
+                                        CommandParameter="3"
+                                        Orientation="Vertical"
+                                        Spacing="5"
+                                        WidthRequest="85"
+                                        x:Name="entregaDocumento">
+                                        <Image
+                                            Aspect="AspectFit"
+                                            HeightRequest="50"
+                                            HorizontalOptions="Center"
+                                            Source="cxcentregadefactura"
+                                            WidthRequest="50" />
+                                        <Label
+                                            Margin="0,0,0,0"
+                                            BackgroundColor="Transparent"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="Center"
+                                            Text="{x:Static resources:AppResource.InvoiceDelivery}"
+                                            TextColor="#1976D2" />
+                                    </controls:ClickableStackLayout>
+
+                                </Grid>
+                            </StackLayout>
+
+                            <dialogs:DialogImpresion
+                                x:Name="dialogImpresion"
+                                Grid.Row="0"
+                                HorizontalOptions="FillAndExpand"
+                                IsVisible="{Binding ShowPrinter}"
+                                VerticalOptions="FillAndExpand" />
+                            <controls:ProgressIndicator
+                                Grid.Row="0"
+                                HorizontalOptions="FillAndExpand"
+                                IsVisible="{Binding IsBusy}"
+                                VerticalOptions="FillAndExpand" />
+
+                        </Grid>
+
+                    </ContentPage.Content>
+
+                </ContentPage>
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+
+</MasterDetailPage>

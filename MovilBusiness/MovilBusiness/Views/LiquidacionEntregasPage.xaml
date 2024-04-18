@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.LiquidacionEntregasPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.DeliveryClearance}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="10,0,10,10" BackgroundColor="{StaticResource ColorPrimary}">
+                    <!--<Label Text="Liquidación de la entrega" TextColor="White" />-->
+                    <Frame BackgroundColor="White" VerticalOptions="Start" HorizontalOptions="FillAndExpand" HasShadow="False" Padding="0">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <controls:BorderlessPicker HorizontalOptions="FillAndExpand" HeightRequest="40" Margin="0" Title="{x:Static resources:AppResource.Select}" />
+                            <Image Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,10,0" />
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+
+                <Frame HorizontalOptions="FillAndExpand" Margin="5,10" BackgroundColor="White" HasShadow="False" Padding="0">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="0">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#37474F" Padding="5" Spacing="0">
+                            <Label Text="{x:Static resources:AppResource.Customer}" TextColor="White" HorizontalOptions="FillAndExpand" />
+                            <Label Text="{x:Static resources:AppResource.Document}" TextColor="White" WidthRequest="80" />
+                            <Label Text="{x:Static resources:AppResource.Amount}" WidthRequest="70" TextColor="White"/>
+                            <Label Text="{x:Static resources:AppResource.Delivered}" WidthRequest="70" TextColor="White" />
+                        </StackLayout>
+
+                        <ListView
+                            x:Name="listEntregas"
+                            HorizontalOptions="FillAndExpand"
+                            HeightRequest="170"
+                            CachingStrategy="RecycleElement"
+                            SeparatorVisibility="None"
+                            BackgroundColor="Transparent">
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="0" Padding="5" BackgroundColor="White">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="80" />
+                                                <ColumnDefinition Width="70" />
+                                                <ColumnDefinition Width="70" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="Agua planea azul" Grid.Column="0" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" />
+                                            <Label Text="754128652" LineBreakMode="TailTruncation" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+                                            <Label Text="17,825.91" Grid.Column="2" HorizontalOptions="FillAndExpand" />
+                                            <Label Text="7,520.00" Grid.Column="3" HorizontalOptions="FillAndExpand" />
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            
+                        </ListView>
+                        
+                    </StackLayout>
+                </Frame>
+
+                <Frame Margin="5,0,5,10" HasShadow="False" BackgroundColor="White" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                        <Label Text="PRODUCTOS NO ENTREGADOS O A DEVOLVER" FontAttributes="Bold" Margin="10,5" />
+                    </StackLayout>
+                </Frame>
+                
+            </StackLayout>
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

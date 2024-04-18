@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.LoginAuditorModal"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}" >
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="15" iOS="15,30,15,15" />
+                </StackLayout.Padding>
+
+                <Image HorizontalOptions="Start" Source="ic_close_white" VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="{x:Static resources:AppResource.AuditorLogin}" Margin="10,0" FontAttributes="Bold" FontSize="17" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="White" />
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="{x:OnIdiom Phone=15, Tablet=25}">
+
+                <Label Text="{x:Static resources:AppResource.EnterUserAndPasswordToLogin}" FontAttributes="Bold" TextColor="{StaticResource ColorPrimary}" />
+
+                <Label Text="{x:Static resources:AppResource.User}" FontAttributes="Bold" Margin="0,15,0,0" />
+                <Entry HorizontalOptions="FillAndExpand" x:Name="editUser" ReturnType="Next" Completed="FocusPass" />
+
+                <Label Text="{x:Static resources:AppResource.Password}" FontAttributes="Bold" Margin="0,10,0,0" />
+                <Entry HorizontalOptions="FillAndExpand" x:Name="editPass" IsPassword="True" ReturnType="Done" />
+
+                <Button Text="{x:Static resources:AppResource.LoginMessage}" BackgroundColor="#1976D2" TextColor="White" Margin="0, 15, 0, 0" Clicked="AttempLogin" HeightRequest="40" />
+
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

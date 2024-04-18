@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.DetalleProductosModal"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:views="clr-namespace:MovilBusiness.Views.Components.Views"
+             xmlns:modals="clr-namespace:MovilBusiness.Views.Components.Views"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+
+    <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Spacing="0">
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="15" iOS="15,40,15,15" />
+                </StackLayout.Padding>
+                <Label Text="{x:Static resources:AppResource.ProductDetail}" FontAttributes="Bold" FontSize="18" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="White" />
+                <Image HorizontalOptions="End" Source="ic_close_white" VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+
+            <ffimageloading:CachedImage 
+                            HorizontalOptions="FillAndExpand"
+                            Aspect="AspectFit"
+                            BackgroundColor="Black"
+                            DownsampleUseDipUnits="False" 
+							LoadingPlaceholder="image_loading" 
+                            ErrorPlaceholder="image_not_available"
+                            Source="{Binding CurrentProduct.ProImage}">
+
+                <ffimageloading:CachedImage.HeightRequest>
+                    <OnIdiom x:TypeArguments="x:Double" Phone="220" Tablet="350" />
+                </ffimageloading:CachedImage.HeightRequest>
+            </ffimageloading:CachedImage>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15,0" Margin="0,5,0,5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" x:Name="tabLayout" Spacing="0" IsVisible="False" HeightRequest="50" BackgroundColor="{StaticResource ColorPrimary}">
+                    <StackLayout Spacing="0" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" x:Name="tabGeneral">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChangeTabCommand}" CommandParameter="2" />
+                        </StackLayout.GestureRecognizers>
+                        <Label x:Name="tabGeneralTitle" Text="GENERAL" FontAttributes="Bold" TextColor="White"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"  HorizontalTextAlignment="Center" />
+                        <BoxView x:Name="indicatorGeneral" HorizontalOptions="FillAndExpand" HeightRequest="4" Color="White" />
+                    </StackLayout>
+
+                    <StackLayout Spacing="0" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" x:Name="tabOfertas">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChangeTabCommand}" CommandParameter="0" />
+                        </StackLayout.GestureRecognizers>
+                        <Label x:Name="tabOfertasTitle" Text="OFERTAS" FontAttributes="Bold" TextColor="White"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"  HorizontalTextAlignment="Center" />
+                        <BoxView x:Name="indicatorOfertas" HorizontalOptions="FillAndExpand" HeightRequest="4" Color="White" />
+                    </StackLayout>
+
+                    <StackLayout Spacing="0" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" x:Name="tabDescuentos">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChangeTabCommand}" CommandParameter="1" />
+                        </StackLayout.GestureRecognizers>
+                        <Label x:Name="tabDescuentosTitle" Text="DESCUENTOS" FontAttributes="Bold" TextColor="LightGray" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"  HorizontalTextAlignment="Center" />
+                        <BoxView x:Name="indicatorDescuentos" HorizontalOptions="FillAndExpand" HeightRequest="4" Color="White" IsVisible="False" />
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout x:Name="tabBodyContainer" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <modals:OfertasInfoView HorizontalOptions="FillAndExpand" x:Name="detalleOfertasView" IsVisible="False" VerticalOptions="Start">
+                        <modals:OfertasInfoView.Margin>
+                            <OnIdiom x:TypeArguments="Thickness" Phone="10,0" Tablet="40,0" />
+                        </modals:OfertasInfoView.Margin>
+                    </modals:OfertasInfoView>
+
+                    <views:DescuentosInfoView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False" x:Name="descuentosView">
+                        <views:DescuentosInfoView.Margin>
+                            <OnIdiom x:TypeArguments="Thickness" Phone="10,0" Tablet="40,0" />
+                        </views:DescuentosInfoView.Margin>
+                    </views:DescuentosInfoView>
+
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False" x:Name="tabGeneralDetalle">
+                        <Label Text="{Binding CurrentProduct.Descripcion}" FontAttributes="Bold" FontSize="20" />
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,5" IsVisible="{Binding NotUseClient}">
+                            <Label Text="{x:Static resources:AppResource.PriceListLabel}" VerticalOptions="Center" />
+                            <Picker Title="{x:Static resources:AppResource.Select}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ListasPrecios}" ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding CurrentListaPrecios}" TextColor="Gray"/>
+                        </StackLayout>
+
+                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Text="{x:Static resources:AppResource.CodeLabel}" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" />
+                            <Label Text="{Binding CurrentProduct.ProCodigo}" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+                            <Label Text="{x:Static resources:AppResource.PriceLabel}" FontAttributes="Bold" Grid.Row="0" Grid.Column="2" />
+                            <Label Text="{Binding CurrentProduct.Precio, StringFormat='{0:N2}'}" Grid.Row="0" Grid.Column="3" HorizontalOptions="FillAndExpand"/>
+
+                            <Label Text="Itbis:" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" />
+                            <Label Text="{Binding CurrentProduct.Itbis, StringFormat='{0:N2}'}" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
+                            <Label Text="{x:Static resources:AppResource.NetPriceLabel}" FontAttributes="Bold" Grid.Row="1" Grid.Column="2" />
+                            <Label Text="{Binding CurrentProduct.PrecioNeto, StringFormat='{0:N2}'}" Grid.Row="1" Grid.Column="3" HorizontalOptions="FillAndExpand"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4">
+                                <Label Text="{x:Static resources:AppResource.WarehouseInventory}" FontAttributes="Bold" />
+                                <Label Text="{Binding CurrentProduct.InvCantidad}" HorizontalOptions="FillAndExpand" />
+                                <Label Text="{x:Static resources:AppResource.UnitMeasureLabel}" FontAttributes="Bold" />
+                                <Label Text="{Binding CurrentProduct.UnmCodigo}" HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" IsVisible="{Binding ShowProDescripcion3}">
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Equivalencia: " FontAttributes="Bold"></Span>
+                                            <Span Text="{Binding CurrentProduct.ProDescripcion3}"></Span>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+
+                            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="End" Text="{x:Static resources:AppResource.SeePresentation}" TextColor="{StaticResource ColorPrimary}" BackgroundColor="White" Margin="10" Clicked="OpenPresentation" />
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+    
+</ContentPage>

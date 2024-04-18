@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.ConsultaDescuentosModal"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#CFD8DC"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:views="clr-namespace:MovilBusiness.Views.Components.Views">
+    <ContentPage.Content>
+        <Frame HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="0">
+            <Frame.Margin>
+                <OnIdiom x:TypeArguments="Thickness" Phone="20" Tablet="50" />
+            </Frame.Margin>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <StackLayout Orientation="Horizontal" Padding="15" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}">
+                    <Label Text="{x:Static resources:AppResource.CheckDiscounts}" FontAttributes="Bold" FontSize="17" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="White" />
+                    <Image HorizontalOptions="End" Source="ic_close_white" VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Dismiss" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+
+                <views:DescuentosInfoView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+
+                <Button Text="{x:Static resources:AppResource.Close}" Clicked="Dismiss" HorizontalOptions="FillAndExpand" Margin="10,15,10,5" />
+            </StackLayout>
+
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

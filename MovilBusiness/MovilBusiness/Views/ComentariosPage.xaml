@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ComentariosPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Comments}"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Icon="ic_done_white_24dp" Order="Primary" Command="{Binding SaveCommand}" CommandParameter="1" IsEnabled="{Binding IsUp}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0" Grid.Row="0">
+
+                <ContentView BackgroundColor="White" Padding="10, 60" IsVisible="False">
+                    <Label Text="{x:Static resources:AppResource.CommentUpper}" FontAttributes="Bold" TextColor="Black" Opacity="0.8" FontSize="18" HorizontalOptions="FillAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                </ContentView>
+
+                <BoxView Color="Black" Opacity="0.3" HorizontalOptions="FillAndExpand" HeightRequest="0.7" />
+
+                <Label Text="{x:Static resources:AppResource.DepartmentUpper}" FontAttributes="Bold" Margin="10,25,10,0" IsVisible="{Binding ShowDepartamento}" />
+                <ContentView HorizontalOptions="FillAndExpand" BackgroundColor="#B0BEC5" Padding="0.8" Margin="10,10,10,5" IsVisible="{Binding ShowDepartamento}">
+                    <controls:BorderlessPicker HeightRequest="46" HorizontalOptions="FillAndExpand" BackgroundColor="White" ItemsSource="{Binding Departamentos}" ItemDisplayBinding="{Binding DepDescripcion}" SelectedItem="{Binding CurrentDepartamento, Mode=TwoWay}"/>
+                </ContentView>
+
+                <Label Text="{x:Static resources:AppResource.DefaultUpper}" FontAttributes="Bold" Margin="10, 10, 10, 0" />
+
+                <ContentView BackgroundColor="#B0BEC5" Padding="0.8" Margin="10,10,10,5">
+                    <controls:BorderlessPicker HeightRequest="46" HorizontalOptions="FillAndExpand" BackgroundColor="White" ItemsSource="{Binding Predeterminados}" ItemDisplayBinding="{Binding MenDescripcion}" SelectedItem="{Binding CurrentMensaje}"/>
+                </ContentView>
+
+                <Label Text="{x:Static resources:AppResource.DetailUpper}" FontAttributes="Bold" Margin="10,20,10,10" />
+
+                <ContentView HorizontalOptions="FillAndExpand" Margin="10,0" VerticalOptions="FillAndExpand" Padding="1.5" BackgroundColor="#B0BEC5">
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15" BackgroundColor="White">
+                        <Editor IsEnabled="{Binding IsDetail}" Keyboard="Default" Text="{Binding CurrentDetalle, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" MaxLength="{Binding ComentLenght}"/>
+                        <Label Text="{Binding CharactersInfo}" IsVisible="{Binding IsDetail}" HorizontalOptions="End" Margin="0" />
+                    </StackLayout>
+
+                </ContentView>
+
+                <Button Text="{x:Static resources:AppResource.Save}" Command="{Binding SaveCommand}" WidthRequest="95" HeightRequest="40" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White" HorizontalOptions="End" Margin="12" IsEnabled="{Binding IsUp}"/>
+
+            </StackLayout>
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

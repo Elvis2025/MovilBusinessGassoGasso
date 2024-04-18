@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.ClientesPage"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Customers}" BackgroundColor="#ECEFF1">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem Text="Ver clientes en el mapa" Icon="baseline_map_white_24" Order="Primary" Command="{Binding MenuCommand}" CommandParameter="0" />
+
+        <ToolbarItem Text="Sincronizar" Command="{Binding MenuCommand}" CommandParameter="1" Icon="ic_sync_white_24dp" Order="Primary" />
+
+        <ToolbarItem Text="Productos no Vendido" Command="{Binding MenuCommand}" CommandParameter="2" Icon="products_Not_Sold" Order="Primary"   />
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0" RowSpacing="0" x:Name="container">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Row="0" x:Name="containerSearch1" BackgroundColor="{StaticResource ColorPrimary}">
+                    <Frame x:Name="comboSup1" IsVisible="{Binding IsSupervisor}" BackgroundColor="White" HorizontalOptions="FillAndExpand" HasShadow="False" Margin="5,5,5,0" Padding="5,0,10,0">
+                        <StackLayout Orientation="Horizontal" Padding="0" VerticalOptions="FillAndExpand" Margin="0">
+                            <Label Text="{x:Static resources:AppResource.Representative}" VerticalOptions="Center" HorizontalOptions="Start" />
+                            <BoxView VerticalOptions="Center" HeightRequest="30" Color="Black" Opacity="0.3" Margin="5,7" WidthRequest="1" />
+                            <controls:BorderlessPicker Title="{x:Static resources:AppResource.Select}" HorizontalOptions="FillAndExpand" TextColor="Gray" FontSize="14" ItemsSource="{Binding Representantes}" SelectedItem="{Binding CurrentRepresentante, Mode=TwoWay}"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <controls:ClientesSearchView x:Name="search1" BackgroundColor="#1976D2" />
+                </StackLayout>
+                
+                <!-- tab layout and filters-->
+                <StackLayout x:Name="container2" Orientation="Vertical" Spacing="0" Padding="0" Margin="0" HorizontalOptions="FillAndExpand" Grid.Row="1">
+                    <Grid BackgroundColor="#1976D2" Margin="0,0,0,0" ColumnSpacing="0" x:Name="filterContainer">
+                        <Grid.Padding>
+                            <OnPlatform x:TypeArguments="Thickness" Android="0,0,0,0" iOS="0,5,0,0" />
+                        </Grid.Padding>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition>
+                                <RowDefinition.Height>
+                                    <OnPlatform x:TypeArguments="GridLength" iOS="50" Android="45" />
+                                </RowDefinition.Height>
+                            </RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Button IsVisible="{Binding ShowTodosFilter}" Clicked="SetFirstPage" x:Name="btnTodos" Text="{x:Static resources:AppResource.All}" TextColor="White" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="0" Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                        <BoxView IsVisible="{Binding ShowTodosFilter}" x:Name="todosIndicador" Color="White" HeightRequest="4" Margin="0" Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="Fill" VerticalOptions="End" />
+
+                        <Button Clicked="SetSecondPage" x:Name="btnPendientes" Text="{x:Static resources:AppResource.Pendings}" TextColor="#BDBDBD" BackgroundColor="Transparent" Grid.Column="1" Margin="0,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  />
+                        <BoxView x:Name="pendientesIndicador" Color="White" HeightRequest="4" Margin="0" Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="Fill" VerticalOptions="End" IsVisible="False" />
+
+                        <Button Clicked="SetThirdPage" x:Name="btnVisitados" Text="{x:Static resources:AppResource.Visited}" TextColor="#BDBDBD" BackgroundColor="Transparent" Grid.Column="2" Grid.Row="0" Margin="0,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  />
+                        <BoxView x:Name="visitadosIndicador" Color="White" HeightRequest="4" Margin="0" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" HorizontalOptions="Fill" VerticalOptions="End" IsVisible="False" />
+                    </Grid>
+
+                    <Frame x:Name="comboSup2" IsVisible="{Binding IsSupervisor}" BackgroundColor="White" HorizontalOptions="FillAndExpand" HasShadow="False" Margin="5,5,5,0" Padding="5,0,10,0">
+                        <StackLayout Orientation="Horizontal" Padding="0" VerticalOptions="FillAndExpand" Margin="0">
+                            <Label Text="{x:Static resources:AppResource.Representative}" VerticalOptions="Center" HorizontalOptions="Start" />
+                            <BoxView VerticalOptions="Center" HeightRequest="30" Color="Black" Opacity="0.3" Margin="5,7" WidthRequest="1" />
+                            <controls:BorderlessPicker Title="{x:Static resources:AppResource.Select}" HorizontalOptions="FillAndExpand" TextColor="Gray" FontSize="14" ItemsSource="{Binding Representantes}" SelectedItem="{Binding CurrentRepresentante, Mode=TwoWay}"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <controls:ClientesSearchView x:Name="search2" Margin="0,5,0,0" BackgroundColor="Transparent" IsVisible="{Binding ShowSecondSearch}" />
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="8,5,5,0" Spacing="0" IsVisible="{Binding IsRutaVisita}">
+                        <Label HorizontalOptions="FillAndExpand" FontAttributes="Bold" VerticalOptions="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{x:Static resources:AppResource.WeekLabel}" FontAttributes="Bold" />
+                                    <Span Text="{Binding RutaVisitaData.NumeroSemana, Mode=TwoWay}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <DatePicker Date="{Binding CurrentFecha, Mode=TwoWay}" IsEnabled="{Binding ShowTodosFilter}" Format="{Binding DateFormat}" VerticalOptions="Center" />
+                        <Image Source="ic_event_black" Opacity="0.6" VerticalOptions="Center" />
+
+                    </StackLayout>
+
+                </StackLayout>
+
+                <ListView HorizontalOptions="FillAndExpand" 
+                      VerticalOptions="FillAndExpand" 
+                      Grid.Row="2"
+                      CachingStrategy="RecycleElement"
+                      HasUnevenRows="True"
+                      BackgroundColor="Transparent"
+                      Margin="4,5"    
+                      SeparatorVisibility="None"
+                      x:Name="clientList"
+                      ItemsSource="{Binding ClientSource}"
+                      ItemSelected="ListItemSelected">
+                    
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Padding="10" HorizontalOptions="FillAndExpand" Margin="3" BackgroundColor="White" HasShadow="{OnPlatform iOS=False, Android=True}">
+
+                                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" ColumnSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Grid.Column="0" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Spacing="5">
+                                            <Label Text="{Binding CliNombreCompleto}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" />
+                                            <Label Text="{Binding CliNombreComercial}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" IsVisible="{Binding ShowCliNombreComercial}"/>
+                                            <Label Text="{Binding CliCalle}" IsVisible="{Binding ShowDireccion}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" FontSize="12" />
+                                            <Label Text="{Binding CliNombreIndicar}" IsVisible="{Binding ShowDireccion}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" FontSize="12" />
+                                            <Label Text="{Binding CliDatosOtrosLabel}" HorizontalOptions="FillAndExpand" TextColor="{StaticResource ColorPrimary}" IsVisible="{Binding ShowDatosOtros}" />
+                                            
+                                            <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent" x:Name="BtnStartCall" Margin="0,0,0,0" IsVisible="{Binding ShowTelefono}">
+                                                <ContentView.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="StartCall" />
+                                                </ContentView.GestureRecognizers>
+                                                <Label Text="{Binding CliTelefono}" TextColor="{StaticResource ColorPrimary}" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                                            </ContentView>
+
+                                            <StackLayout Orientation="Vertical" IsVisible="{Binding ShowCliCats}" HorizontalOptions="FillAndExpand">
+                                                <Label Text="{Binding CliCat1}" IsVisible="{Binding ShowCliCat1}"  HorizontalOptions="FillAndExpand" FontAttributes="Bold"/>
+                                                <Label Text="{Binding CliCat2}" IsVisible="{Binding ShowCliCat2}"  HorizontalOptions="FillAndExpand" FontAttributes="Bold"/>
+                                                <Label Text="{Binding CliCat3}" IsVisible="{Binding ShowCliCat3}" HorizontalOptions="FillAndExpand" FontAttributes="Bold"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Vertical" IsVisible="{Binding ShowCliTipoCliente}" HorizontalOptions="FillAndExpand">
+                                                <Label Text="{Binding CliTipoCliente1}" IsVisible="{Binding ShowCliTipo1}"  HorizontalOptions="FillAndExpand" FontAttributes="Bold"/>
+                                                <Label Text="{Binding CliTipoCliente2}" IsVisible="{Binding ShowCliTipo2}"  HorizontalOptions="FillAndExpand" FontAttributes="Bold"/>
+                                                <Label Text="{Binding CliTipoCliente3}" IsVisible="{Binding ShowCliTipo3}" HorizontalOptions="FillAndExpand" FontAttributes="Bold"/>
+                                            </StackLayout>
+                                           
+                                        </StackLayout>
+
+                                        <Image Source="ic_location_on_black_24dp" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Transparent" Margin="0,0,10,0" IsVisible="{Binding ShowLocation}" Opacity="0.6">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnClientLocationClicked" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        
+                                        <Image Grid.Column="2" WidthRequest="15" HeightRequest="15" VerticalOptions="Center" 
+                                            HorizontalOptions="End" Source="{Binding CliEstadoVisitaIcon}" />
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="3" VerticalOptions="End" HorizontalOptions="Fill" Padding="8,5,5,5" Spacing="5" BackgroundColor="White">
+                    <Label Text="{x:Static resources:AppResource.NumberOfClientsLabel}" FontAttributes="Bold" />
+                    <Label Text="{Binding CantidadClientes}" />
+                </StackLayout>
+            </Grid>
+
+            <controls:ProgressIndicator IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

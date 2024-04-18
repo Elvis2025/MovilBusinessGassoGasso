@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.UpdaterPage"
+             Title="MovilBusiness"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" Spacing="15" Grid.Row="0" Margin="15">
+
+                <Frame HasShadow="False" Padding="15" BackgroundColor="White" IsVisible="{Binding IsUpdateAvailable}">
+                    <Grid HorizontalOptions="FillAndExpand" RowSpacing="15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="Nueva versión disponible" Margin="0,0,0,10" FontSize="15" TextColor="{StaticResource ColorPrimary}" FontAttributes="Bold" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" />
+
+                        <Image Source="baseline_error_outline_black_24" Grid.Row="1" Grid.Column="0" Opacity="0.6" />
+                        <Label Text="Versión" VerticalOptions="Center" Margin="5,0,0,0" Grid.Row="1" Grid.Column="1" />
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="2" Margin="10,0,0,0" VerticalOptions="Center">
+                            <Label Text="7.0.15" FontAttributes="Bold" />
+                            <Label Text="(New)" TextColor="Red" />
+                        </StackLayout>
+
+                        <Image Grid.Row="2" Grid.Column="0" Opacity="0.6">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="FileImageSource" Android="ic_android_black_24dp" iOS="baseline_stay_current_portrait_black_24" />
+                            </Image.Source>
+                        </Image>
+                        <Label Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" VerticalOptions="Center">
+                            <Label.Text>
+                                <OnPlatform x:TypeArguments="x:String" Android="Android" iOS="iOS" />
+                            </Label.Text>
+                        </Label>
+                        <Label Grid.Row="2" Grid.Column="2" Margin="10,0,0,0" FontAttributes="Bold" VerticalOptions="Center" >
+                            <Label.Text>
+                                <OnPlatform x:TypeArguments="x:String" Android="4.2" iOS="10" />
+                            </Label.Text>
+                        </Label>
+
+                        <Image Source="ic_folder_black_24dp" Opacity="0.6" Grid.Row="3" Grid.Column="0" />
+                        <Label Text="Destino" Grid.Row="3" Grid.Column="1" Margin="5,0,0,0" VerticalOptions="Center" />
+                        <Label Text="/external_sd/archivos/" FontAttributes="Bold" Grid.Row="3" Grid.Column="2" Margin="10,0,0,0" VerticalOptions="Center" />
+
+
+                        <Button Text="Descargar" Margin="0" TextColor="{StaticResource ColorPrimary}" Grid.Row="4" Grid.Column="2" HorizontalOptions="End" BackgroundColor="Transparent" />
+                    </Grid>
+                </Frame>
+
+                <Frame HasShadow="False" Padding="15" BackgroundColor="White" IsVisible="{Binding IsUpdateAvailable}">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                        <Label Text="Versión actual" FontAttributes="Bold" TextColor="{StaticResource ColorPrimary}" FontSize="15" />
+                        <Label Text="Su versión actualmente instalada es 7.0.15" />
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+
+            <ContentView Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsDownloading}" BackgroundColor="#B0000000">
+                <Frame HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="10" BackgroundColor="White" HasShadow="False">
+                    <Frame.Margin>
+                        <OnIdiom x:TypeArguments="Thickness" Phone="20,0" Tablet="50,0" />
+                    </Frame.Margin>
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="Descargando actualización de la aplicacion, por favor espere." HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                            <ActivityIndicator Color="{StaticResource ColorPrimary}" HorizontalOptions="End" IsRunning="{Binding IsDownloading}" />
+                        </StackLayout>
+
+                        <ProgressBar HorizontalOptions="FillAndExpand" Progress="{Binding CurrentProgress, Mode=TwoWay}" ProgressColor="{StaticResource ColorPrimary}">
+                            <ProgressBar.IsVisible>
+                                <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+                            </ProgressBar.IsVisible>
+                        </ProgressBar>
+                    </StackLayout>
+                </Frame>
+            </ContentView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

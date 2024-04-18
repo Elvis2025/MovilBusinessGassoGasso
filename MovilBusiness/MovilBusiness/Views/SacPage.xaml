@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.SacPage" 
+            xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior"
+             xmlns:fastEntry="clr-namespace:XamarinFastEntrySample.FastEntry;assembly=XamarinFastEntry.Behaviors"
+             BackgroundColor="{StaticResource WindowBackground}"
+             Title="SAC">
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Icon="ic_done_white_24dp" Order="Primary" Command="{Binding SaveCommand}"  IsEnabled="{Binding IsUp}"/>
+    </TabbedPage.ToolbarItems>
+
+    <ContentPage Title="{x:Static resources:AppResource.Generals}" Padding="10">
+        <ContentPage.Icon>
+            <OnPlatform x:TypeArguments="FileImageSource" Android="" iOS="ic_assignment_ind_black_24dp" />
+        </ContentPage.Icon>
+        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Text="{x:Static resources:AppResource.Name}" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="{x:Static resources:AppResource.Owner}" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"  />
+                <Label Text="{x:Static resources:AppResource.IdCard}" Grid.Row="2" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="Sitio web" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="Email" Grid.Row="4" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="{x:Static resources:AppResource.Contact}" Grid.Row="5" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="{x:Static resources:AppResource.Province}" Grid.Row="6" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="{x:Static resources:AppResource.Town}" Grid.Row="7" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="Sector" Grid.Row="8" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="Urbanizacion/Barrio" Grid.Row="9" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="{x:Static resources:AppResource.Address}" Grid.Row="10" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="Local #" Grid.Row="11" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="Fecha nac. contacto" Grid.Row="12" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="{x:Static resources:AppResource.Telephone}" Grid.Row="13" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="Whatsapp" Grid.Row="14" Grid.Column="0" VerticalOptions="Center" />
+                <Label Text="Encargado de pago" Grid.Row="15" Grid.Column="0" VerticalOptions="Center" />
+
+
+                <Entry MaxLength="60" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="1" Text="{Binding CurrentClient.CliNombre, Mode=TwoWay}" IsEnabled="{Binding NombreEnabled}" />
+                <Entry MaxLength="50" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="1" Text="{Binding CurrentClient.CliPropietario, Mode=TwoWay}" IsEnabled="{Binding PropietarioEnabled}" />
+                <Entry HorizontalOptions="FillAndExpand" Grid.Row="2" Keyboard="Numeric" Grid.Column="1" Text="{Binding CurrentClient.CliCedulaPropietario, Mode=TwoWay}" IsEnabled="{Binding CedulaEnabled}">
+                    <Entry.Behaviors>
+                        <fastEntry:XamarinFastEntryBehaviour Mask="###-#######-#" MaxLength="19"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Entry MaxLength="150" HorizontalOptions="FillAndExpand" Grid.Row="3" Grid.Column="1" Text="{Binding CurrentClient.CliPaginaWeb, Mode=TwoWay}" IsEnabled="{Binding WebEnabled}"/>
+                <Entry MaxLength="50" HorizontalOptions="FillAndExpand" Grid.Row="4" Grid.Column="1" Text="{Binding CurrentClient.CliCorreoElectronico, Mode=TwoWay}" IsEnabled="{Binding EmailEnabled}"/>
+                <Entry MaxLength="50" HorizontalOptions="FillAndExpand" Grid.Row="5" Grid.Column="1" Text="{Binding CurrentClient.CliContacto, Mode=TwoWay}" IsEnabled="{Binding ContactoEnabled}"/>
+                <Picker Title="Seleccione la provincia" HorizontalOptions="FillAndExpand" Grid.Row="6" Grid.Column="1" IsEnabled="{Binding ProvinciaEnabled}" ItemsSource="{Binding Provincias}" ItemDisplayBinding="{Binding ProNombre, Mode=TwoWay}" SelectedItem="{Binding CurrentProvincia, Mode=TwoWay}" />
+                <Picker Title="Seleccione el municipio" HorizontalOptions="FillAndExpand" Grid.Row="7" Grid.Column="1" IsEnabled="{Binding MunicipioEnabled}" ItemsSource="{Binding Municipios}" ItemDisplayBinding="{Binding MunDescripcion, Mode=TwoWay}" SelectedItem="{Binding CurrentMunicipio}" />
+                <Picker Title="Seleccione el sector" HorizontalOptions="FillAndExpand" Grid.Row="8" Grid.Column="1" IsVisible="{Binding IsVisiblePickerSector}" ItemsSource="{Binding Sectores}" ItemDisplayBinding="{Binding SecNombre}" SelectedItem="{Binding CurrentMunSector, Mode=TwoWay}" IsEnabled="{Binding SectorEnabled}"/>
+                <Entry MaxLength="50" HorizontalOptions="FillAndExpand" Grid.Row="8" Grid.Column="1" IsVisible="{Binding IsVisibleEntrySector}" Text="{Binding CliSector, Mode=TwoWay}" IsEnabled="{Binding SectorEnabled}"/>
+                <Entry MaxLength="50" HorizontalOptions="FillAndExpand" Grid.Row="9" Grid.Column="1" Text="{Binding CliUrbanizacion, Mode=TwoWay}" IsEnabled="{Binding BarrioEnabled}"/>
+                <Entry MaxLength="50" HorizontalOptions="FillAndExpand" Grid.Row="10" Grid.Column="1" Text="{Binding CurrentClient.CliCalle, Mode=TwoWay}" IsEnabled="{Binding DireccionEnabled}"/>
+                <Entry MaxLength="50" HorizontalOptions="FillAndExpand" Grid.Row="11" Grid.Column="1" Text="{Binding CurrentClient.CliCasa, Mode=TwoWay}" IsEnabled="{Binding DirEnabled}"/>
+                <DatePicker HorizontalOptions="FillAndExpand" Grid.Row="12" Grid.Column="1" Date="{Binding ContactoFechaNac, Mode=TwoWay}" IsEnabled="{Binding FechaNacContEnabled}" Format="dd-MM-yyyy"/>
+                <Entry MaxLength="50" HorizontalOptions="FillAndExpand" Grid.Row="13" Grid.Column="1" Text="{Binding CurrentClient.CliTelefono, Mode=TwoWay}" Keyboard="Numeric" IsEnabled="{Binding TelefonoEnabled}">
+                    <Entry.Behaviors>
+                        <fastEntry:XamarinFastEntryBehaviour Mask="###-###-####" MaxLength="19"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Entry MaxLength="50" HorizontalOptions="FillAndExpand" Grid.Row="14" Grid.Column="1" Text="{Binding CurrentClient.CliFax, Mode=TwoWay}" Keyboard="Numeric" IsEnabled="{Binding FaxEnabled}">
+                    <Entry.Behaviors>
+                        <fastEntry:XamarinFastEntryBehaviour Mask="###-###-####" MaxLength="19"/>
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Entry MaxLength="50" HorizontalOptions="FillAndExpand" Grid.Row="15" Grid.Column="1" Text="{Binding CurrentClient.CliEncargadoPago, Mode=TwoWay}" IsEnabled="{Binding EncPagoEnabled}"/>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand">
+                    <Switch  IsToggled="{Binding CurrentClient.CliIndicadorDeposito, Mode=TwoWay}"  IsEnabled="{Binding DepositosEnabled}"/>
+                    <Label Text="Depositos" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="17" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand">
+                    <Switch IsToggled="{Binding CurrentClient.CliIndicadorDepositaFactura, Mode=TwoWay}" IsEnabled="{Binding DepFacturaEnabled}"/>
+                    <Label Text="Deposita facturas" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="18" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand">
+                    <Switch IsToggled="{Binding CurrentClient.CliIndicadorOrdenCompra, Mode=TwoWay}" IsEnabled="{Binding OrdenCompraEnabled}"/>
+                    <Label Text="Orden de compra" />
+                </StackLayout>
+
+                <Label Text="Clasificación" Grid.Row="19" Grid.Column="0" VerticalOptions="Center" IsEnabled="{Binding Clasifica}" />
+                <Picker Title="Seleccione la clasificacion" HorizontalOptions="FillAndExpand" Grid.Row="19" Grid.Column="1" ItemsSource="{Binding Clasificacion}" ItemDisplayBinding="{Binding ClaDescripcion}" SelectedItem="{Binding CurrentClasificacion, Mode=TwoWay}" IsEnabled="{Binding Clasifica}" />
+
+                <Label Text="Registro Mercantil" Grid.Row="20" Grid.Column="0" VerticalOptions="Center" IsEnabled="{Binding CliRegMercantilEnabled}"/>
+                <Entry MaxLength="80" HorizontalOptions="FillAndExpand" Grid.Row="20" Grid.Column="1" Text="{Binding CurrentClient.CliRegMercantil, Mode=TwoWay}" IsEnabled="{Binding CliRegMercantilEnabled}"/>
+
+                <Label Text="Tipo negocio" Grid.Row="21" Grid.Column="0" VerticalOptions="Center" IsEnabled="{Binding TipoNegocioEnabled}"/>
+                <Picker HorizontalOptions="FillAndExpand" Grid.Row="21" Grid.Column="1" ItemsSource="{Binding TipNegocio}" ItemDisplayBinding="{Binding TinDescripcion}"  SelectedItem="{Binding CurrentTipNegocio, Mode=TwoWay}"  Title="Seleccione"  IsEnabled="{Binding TipoNegocioEnabled}"/>
+
+                <Label Text="Canal de Venta" Grid.Row="22" Grid.Column="0" VerticalOptions="Center" IsEnabled="{Binding CanalDeVentaEnabled}"/>
+                <Picker Title="Seleccione" HorizontalOptions="FillAndExpand" Grid.Row="22" Grid.Column="1" ItemsSource="{Binding TiposDeCanales}" ItemDisplayBinding="{Binding CanDescripcion}" SelectedItem="{Binding CurrentCanalVenta, Mode=TwoWay}" IsEnabled="{Binding CanalDeVentaEnabled}"/>
+
+                <Label Text="Tipo local" Grid.Row="23" Grid.Column="0" VerticalOptions="Center" IsEnabled="{Binding TipoLocalEnabled}"/>
+                <Picker Title="Seleccione" HorizontalOptions="FillAndExpand" Grid.Row="23" Grid.Column="1" ItemsSource="{Binding TiposLocales}" ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding CurrentTipoLocal, Mode=TwoWay}" IsEnabled="{Binding TipoLocalEnabled}"/>
+
+                <Label Text="Tipo cliente" Grid.Row="24" Grid.Column="0" VerticalOptions="Center" IsEnabled="{Binding TipoClienteEnabled}"/>
+                <Picker Title="Seleccione" HorizontalOptions="FillAndExpand" Grid.Row="24" Grid.Column="1" ItemsSource="{Binding TiposClientes}" ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding CurrentTipoCliente, Mode=TwoWay}" IsEnabled="{Binding TipoClienteEnabled}"/>
+
+                <Label Text="Tipo comprobante" Grid.Row="25" Grid.Column="0" VerticalOptions="Center" IsEnabled="{Binding TipoComprobanteEnabled}"/>
+                <Picker HorizontalOptions="FillAndExpand" Grid.Row="25" Grid.Column="1" ItemsSource="{Binding TiposComprobante}" ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding CurrentTipoComprobante, Mode=TwoWay}"  Title="Seleccione" IsEnabled="{Binding TipoComprobanteEnabled}"/>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="26" Grid.ColumnSpan="2" IsVisible="{Binding OrdenAVisitarEsVisible}">
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="lblantes" Text="Visitar antes de:" IsEnabled="{Binding IsAntesEnabled}" FontAttributes="Bold"/>
+                        <Switch IsToggled="{Binding IsToggledVisitar}"></Switch>
+                        <Label Text="Visitar después de:" IsEnabled="{Binding IsDespuesEnabled}" FontAttributes="Bold"/>
+                    </StackLayout>
+                    <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <Label  HeightRequest="28" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Text="{Binding CurrenClienteAVisitarDespuesDe.CliNombre}" TextColor="Black" FontSize="18"/>
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Label Text="Secuencia Visita" FontAttributes="Bold" VerticalOptions="Center"/>
+                    <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessEntry Text="{Binding CliRutPosiciones, Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="28" Grid.ColumnSpan="2" IsVisible="{Binding OrdenRutaEsVisible}">
+                    <Label Text="Orden Ruta Seleccion:" FontAttributes="Bold"/>
+                    <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <Label  HeightRequest="28" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Text="{Binding CurrenClienteAOrdenarDespuesDe.CliNombre}" TextColor="Black" FontSize="18"/>
+                            <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Label Text="Orden Ruta" FontAttributes="Bold" VerticalOptions="Center"/>
+                    <Frame HasShadow="False" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <controls:BorderlessEntry Text="{Binding CliOrdenRutas, Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+
+                <Label Text="Frecuencia De Visita" FontAttributes="Bold"  Grid.ColumnSpan="2" Grid.Row="29" VerticalOptions="Center"/>
+                <Frame HasShadow="False"  Grid.ColumnSpan="2" Grid.Row="30" Padding="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                    <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                        <controls:BorderlessPicker x:Name="pickercheck" SelectedIndexChanged="BorderlessPicker_SelectedIndexChanged" ItemsSource="{Binding Frecuencias}" SelectedItem="{Binding CurrentFrecuencias, Mode=TwoWay}" Title="(Seleccione)"  HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" />
+                        <Image BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" Source="ic_arrow_drop_down_black_24dp" Opacity="0.6" />
+                    </StackLayout>
+                </Frame>
+
+                <StackLayout Grid.Row="31" Grid.ColumnSpan="2" x:Name="checkboxContainer"></StackLayout>
+            </Grid>
+        </ScrollView>
+        
+    </ContentPage>
+
+    <ContentPage Title="{Static resources:AppResource.Schedule}" Padding="15">
+        <ContentPage.IconImageSource>
+            <OnPlatform x:TypeArguments="FileImageSource" Android="" iOS="ic_event_black" />
+        </ContentPage.IconImageSource>
+
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <Label Text="Horario actual:" FontAttributes="Bold" HorizontalOptions="Start" />
+
+                <Frame HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="White" IsVisible="{Binding ShowCurrentHorario}" HasShadow="False" Margin="5,0,0,0" Padding="10">
+                    <Label Text="{Binding CurrentHorario}" HorizontalOptions="FillAndExpand" />
+                </Frame>
+            </StackLayout>
+            
+
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="10" Margin="0,20,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{Static resources:AppResource.VisitDay}" Grid.Row="0" Grid.Column="0" FontAttributes="Bold" />
+                <Picker HorizontalOptions="FillAndExpand" ItemsSource="{Binding DiasVisita}" SelectedItem="{Binding CurrentDiaVisita, Mode=TwoWay}" ItemDisplayBinding="{Binding Descripcion}" Title="{Static resources:AppResource.Select}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+
+                <Label Text="{Static resources:AppResource.OpeningHour}" Grid.Row="2" Grid.Column="0" FontAttributes="Bold" />
+                <TimePicker HorizontalOptions="FillAndExpand" Time="{Binding HoraApertura}" Format="hh:mm tt" Grid.Column="0" Grid.Row="3" />
+
+                <Label Text="{Static resources:AppResource.ClosingHour}" Grid.Row="2" Grid.Column="1" FontAttributes="Bold" />
+                <TimePicker HorizontalOptions="FillAndExpand" Time="{Binding HoraCierre}" Format="hh:mm tt" Grid.Column="1" Grid.Row="3" />
+
+                <Button Text="{Static resources:AppResource.Add}" Command="{Binding AddHorarioCommand}" HorizontalOptions="FillAndExpand" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" />
+
+                <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0" HasShadow="False" Padding="10" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+                    <ListView
+                        x:Name="listSchedule"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        CachingStrategy="RecycleElement"
+                        HasUnevenRows="True"
+                        SeparatorVisibility="Default"
+                        ItemsSource="{Binding HorariosAgregados}"
+                        ItemSelected="horarioListItemSelected">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="10,15">
+                                        <Label Text="{Binding ClhDiaDescripcion}" FontSize="16" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                                        <Label FontSize="16" HorizontalOptions="End" VerticalOptions="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding ClhHorarioAperturaAMPM}" />
+                                                    <Span Text=" - " />
+                                                    <Span Text="{Binding ClhHorarioCierreAMPM}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Image Source="ic_delete_black_24dp" HorizontalOptions="End" Margin="10,0,0,0" VerticalOptions="Center" Opacity="0.6" />
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        
+                    </ListView>
+                </Frame>
+            </Grid>
+        </StackLayout>
+
+    </ContentPage>
+
+    <ContentPage Title="{Static resources:AppResource.Geolocation}" Padding="10">
+        <ContentPage.Icon>
+            <OnPlatform x:TypeArguments="FileImageSource" Android="" iOS="ic_location_on_black_24dp" />
+        </ContentPage.Icon>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Text="{Static resources:AppResource.Latitude}" Grid.Row="0" Grid.Column="0" LineBreakMode="WordWrap" VerticalOptions="Center" />
+            <Label Text="{Static resources:AppResource.Length}" Grid.Row="1" Grid.Column="0" LineBreakMode="WordWrap" VerticalOptions="Center" />
+            <Label Text="{Static resources:AppResource.Precision}" Grid.Row="2" Grid.Column="0" LineBreakMode="WordWrap" VerticalOptions="Center" />
+            <Button Text="{Static resources:AppResource.SeeMap}" Grid.Row="3" Grid.Column="0" Command="{Binding OpenMapCommand}"/>
+
+            <Entry IsEnabled="False" Text="{Binding CliLatitud, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+            <Entry IsEnabled="False" Text="{Binding CliLongitud, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+            <Entry IsEnabled="False" Text="{Binding UpdateDistance}" FontAttributes="Bold" Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+            <Button Text="{Static resources:AppResource.Refresh}" Grid.Row="3" Grid.Column="1" HorizontalOptions="FillAndExpand" Command="{Binding GeoRefreshCommand}" />
+
+        </Grid>
+    </ContentPage>
+    
+</TabbedPage>

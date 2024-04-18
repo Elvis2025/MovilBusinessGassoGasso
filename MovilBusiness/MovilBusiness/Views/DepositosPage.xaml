@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.DepositosPage"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:dialogs="clr-namespace:MovilBusiness.Views.Components.Dialogs"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             iOS:Page.UseSafeArea="true"
+             Title="{x:Static resources:AppResource.Deposits}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Guardar" Icon="ic_done_white_24dp" Order="Primary" Command="{Binding SaveDepositoCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0">
+
+                <Label HorizontalOptions="End" IsVisible="{Binding ShowMoneda}" Margin="10,5,10,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static resources:AppResource.CurrencyLabel}" FontAttributes="Bold" />
+                            <Span Text="{Binding CurrentMonedaSigla}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Frame HorizontalOptions="FillAndExpand" Padding="15,10,15,10" Margin="10,5,10,3" HasShadow="False">
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{x:Static resources:AppResource.TypeLabel}" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
+                        <Picker SelectedIndexChanged="comboTipo_SelectedIndexChanged" x:Name="comboTipo" Grid.Row="0" Grid.Column="1" Title="Seleccione" HorizontalOptions="FillAndExpand" ItemsSource="{Binding TiposDepositos}" SelectedItem="{Binding CurrentTipoDeposito}" ItemDisplayBinding="{Binding Descripcion}" />
+
+                        <Label Text="{x:Static resources:AppResource.DepositNumberLabel}" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" />
+                        <Entry x:Name="numerodep" Grid.Row="1" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="FillAndExpand" Text="{Binding NumeroDeposito, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:NumericValidation />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Switch Toggled="IncludeOrdenPagoButton_Toggled" OnColor="LightGray" x:Name="includeOrdenPagoButton" IsVisible="False" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+                        <Label x:Name="includeOrdenPagoLabel" IsVisible="False" Text="{x:Static resources:AppResource.IncludePaymentOrdersInDeposit}" Grid.Row="2" Grid.Column="1"/>
+                    </Grid>
+                </Frame>
+
+                <Frame HorizontalOptions="FillAndExpand" Padding="15,10,15,10" Margin="10,3,10,3" HasShadow="False">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                        <Label Text="{x:Static resources:AppResource.BankAccount}" TextColor="{StaticResource ColorPrimary}" />
+                        <Picker Title="{x:Static resources:AppResource.Select}" IsEnabled="{Binding EnabledBanco}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding CuentasBancarias}" SelectedItem="{Binding CurrentCuenta}"  ItemDisplayBinding="{Binding CuBNombre}" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" Margin="10,3,10,5" HasShadow="False">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Grid HorizontalOptions="FillAndExpand" Padding="15,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Label Text="{x:Static resources:AppResource.Totals}" TextColor="{StaticResource ColorPrimary}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5" />
+
+                                <Label Text="{x:Static resources:AppResource.TotalCashLabel}" Grid.Row="1" Grid.Column="0" FontSize="15" />
+                                <Label Text="{Binding Args.MontoEfectivo, StringFormat='{0:N2}'}" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" FontSize="15"/>
+
+                                <Label x:Name="MontoChknormallabel" Text="{x:Static resources:AppResource.RegularCheckLabel}" Grid.Row="2" Grid.Column="0" FontSize="15"/>
+                                <Label x:Name="MontoChknormal" Text="{Binding Args.MontoChk, StringFormat='{0:N2}'}" Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" FontSize="15"/>
+
+                                <Label x:Name="MontoChkfuturistalabel" Text="{x:Static resources:AppResource.FuturisticsChecksLabel}" Grid.Row="3" Grid.Column="0" FontSize="15"/>
+                                <Label x:Name="MontoChkfuturista" Text="{Binding Args.MontoChkFut, StringFormat='{0:N2}'}" Grid.Row="3" Grid.Column="1" HorizontalOptions="FillAndExpand" FontSize="15"/>
+
+                                <Label x:Name="Montotarjcreditolabel" Text="{x:Static resources:AppResource.CreditCardLabel}" Grid.Row="4" Grid.Column="0" FontSize="15"/>
+                                <Label x:Name="Montotarjcredito" Text="{Binding Args.MontoTarjeta, StringFormat='{0:N2}'}" Grid.Row="4" Grid.Column="1" HorizontalOptions="FillAndExpand" FontSize="15"/>
+
+                                <Label x:Name="Montotransbancarialabel" Text="{x:Static resources:AppResource.BankTransferLabel}" Grid.Row="5" Grid.Column="0" FontSize="15"/>
+                                <Label x:Name="Montotransbancaria" Text="{Binding Args.MontoTransferencia, StringFormat='{0:N2}'}" Grid.Row="5" Grid.Column="1" HorizontalOptions="FillAndExpand" FontSize="15"/>
+
+                                <Label x:Name="Montoretencionlabel" Text="{x:Static resources:AppResource.RetentionLabel}" Grid.Row="6" Grid.Column="0" FontSize="15"/>
+                                <Label x:Name="Montoretencion" Text="{Binding Args.MontoRetencion, StringFormat='{0:N2}'}" Grid.Row="6" Grid.Column="1" HorizontalOptions="FillAndExpand" FontSize="15"/>
+
+                                <Label x:Name="Montopushmoneylabel" Text="{x:Static resources:AppResource.PushMoneyAmountLabel}" Grid.Row="7" Grid.Column="0" FontSize="15"/>
+                                <Label x:Name="Montopushmoney" Text="0.00" Grid.Row="7" Grid.Column="1" HorizontalOptions="FillAndExpand" FontSize="15"/>
+
+                                <Label x:Name="MontoOrdenPagoLabel" IsVisible="False" Text="{x:Static resources:AppResource.PaymentOrderAmountLabel}" Grid.Row="8" Grid.Column="0" FontSize="15"/>
+                                <Label x:Name="MontoOrdenPago" IsVisible="False" Text="{Binding Args.MontoOrdenPago, StringFormat='{0:N2}'}" Grid.Row="8" Grid.Column="1" HorizontalOptions="FillAndExpand" FontSize="15"/>
+                            </Grid>
+                        </ScrollView>
+
+                        <Button Text="{x:Static resources:AppResource.SeeReceiptsUpperLabel}" Command="{Binding VerRecibosCommand}" Margin="0,0,15,10" BackgroundColor="Transparent" TextColor="{StaticResource ColorPrimary}" HorizontalOptions="End" VerticalOptions="End" />
+                    </StackLayout>
+                </Frame>
+
+                <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                    <StackLayout.Padding>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android" Value="15,7" />
+                            <On Platform="iOS" Value="15,12" />
+                        </OnPlatform>
+                    </StackLayout.Padding>
+                    <Label Text="{x:Static resources:AppResource.TotalDepositLabel}" FontAttributes="Bold" />
+                    <Label x:Name="TotalDepositoLabel" Text="{Binding TotalDepositoLabel}"/>
+                </StackLayout>
+
+            </StackLayout>
+            <dialogs:DialogImpresion x:Name="dialogImpresion" Grid.Row="0" IsVisible="{Binding ShowPrinter}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+            <controls:ProgressIndicator IsVisible="{Binding IsBusy}" Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

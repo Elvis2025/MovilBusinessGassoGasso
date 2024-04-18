@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.ProductosCombosModal"
+             Title="Productos combo"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,30,15,15" />
+                </StackLayout.Padding>
+                <ContentView VerticalOptions="CenterAndExpand" Padding="15,0,0,0">
+                    <Image Source="ic_close_white" VerticalOptions="Center" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+
+                <Label Text="{x:Static resources:AppResource.ComboProducts}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="18" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="12,10,12,3">
+                <Label Text="{x:Static resources:AppResource.CodeDescription}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                <Label Text="{x:Static resources:AppResource.Quantity}" FontAttributes="Bold" HorizontalOptions="End" />
+            </StackLayout>
+
+            <ListView
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Margin="12,0,12,12"
+                BackgroundColor="Transparent"
+                HasUnevenRows="True"
+                SeparatorVisibility="None"
+                SelectionMode="None"
+                ItemsSource="{Binding Productos}"
+                CachingStrategy="RecycleElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Padding="10" HasShadow="{OnPlatform Android=True, iOS=False}" Margin="3">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding ProDescripcion}" HorizontalOptions="FillAndExpand" FontAttributes="Bold" />
+                                    <Label Text="{Binding PrcCantidad, StringFormat='{0:N2}'}" HorizontalOptions="End" />
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="{x:Static resources:AppResource.Close}" BackgroundColor="Transparent" Margin="15,0,15,15" TextColor="{StaticResource ColorPrimary}" Clicked="Dismiss" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

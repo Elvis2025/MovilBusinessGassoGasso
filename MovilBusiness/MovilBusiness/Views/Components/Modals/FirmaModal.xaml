@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.FirmaModal"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:tt="clr-namespace:TouchTracking"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Horizontal" Grid.Row="0" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="15" iOS="15,40,15,15" />
+                </StackLayout.Padding>
+                <Image HorizontalOptions="Start" Source="ic_close_white" VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Margin="15,0,0,0" Text="{x:Static resources:AppResource.Sign}" FontAttributes="Bold" FontSize="17" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="White" />
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="AttempSave" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Source="ic_done_white_24dp" />
+                    <Label Text="{x:Static resources:AppResource.AcceptUpper}" TextColor="White" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+                </StackLayout>
+            </StackLayout>
+
+            <Grid BackgroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1">
+                <skia:SKCanvasView x:Name="canvasView"
+                           PaintSurface="OnCanvasViewPaintSurface"/>
+                <Grid.Effects>
+                    <tt:TouchEffect Capture="True"
+                            TouchAction="OnTouchEffectAction" />
+                </Grid.Effects>
+            </Grid>
+
+            <ContentView HorizontalOptions="End" VerticalOptions="Start" Padding="15,10" Grid.Row="1">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ClearDraw" />
+                </ContentView.GestureRecognizers>
+                <Image Source="ic_close_black_24dp" Opacity="0.6" />
+            </ContentView>
+
+            <Label HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="{x:Static resources:AppResource.SignUsingFingersMessage}" Grid.Row="2" Margin="30,0,30,30" />
+
+        </Grid>
+
+        <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="False" x:Name="progressIndicator" />
+    </Grid>
+    
+</ContentPage>

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Views.DescuentosInfoView"
+             VerticalOptions="FillAndExpand"
+             Padding="10"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             HorizontalOptions="FillAndExpand">
+  <ContentView.Content>
+        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+            <Grid HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Grid.Row="0" Grid.Column="0">
+                    <Label Text="{x:Static resources:AppResource.DiscountLabel}"
+                       FontAttributes="Bold" />
+                    <Label Text="{Binding CantidadDescuentosShow}"
+                       FontAttributes="Bold" 
+                       Margin="5,0,0,0" />
+                </StackLayout>
+
+                <Picker x:Name="comboDescuento" HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding CanSelectDescuento}"
+                    ItemDisplayBinding="{Binding DesDescripcion}" 
+                    ItemsSource="{Binding Descuentos}" 
+                    SelectedItem="{Binding CurrentDescuento, Mode=TwoWay}"
+                    Grid.Row="0" Grid.Column="1" Title="{x:Static resources:AppResource.SelectTheDiscount}" />
+
+                <!--<Label Text="{x:Static resources:AppResource.DiscountLabel}" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />-->
+                <!--<Picker HorizontalOptions="FillAndExpand" ItemDisplayBinding="{Binding DesDescripcion}" ItemsSource="{Binding Descuentos}" SelectedItem="{Binding CurrentDescuento, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Title="{x:Static resources:AppResource.SelectTheDiscount}" />-->
+
+                <Label Text="{x:Static resources:AppResource.TypeLabel}" Grid.Row="1" Grid.Column="0" />
+                <Label Text="{Binding CurrentDescuento.DesTipoDescripcion}" Grid.Row="1" Grid.Column="1" />
+                <Label Text="{x:Static resources:AppResource.PaymentCondLabel}" Grid.Row="2" Grid.Column="0" />
+                <Label Text="{Binding CurrentDescuento.ConIdDescripcion}" Grid.Row="2" Grid.Column="1" />
+
+                <Label Text="{x:Static resources:AppResource.SeeProductsUpper}" Margin="0,10,0,0" TextColor="{StaticResource ColorPrimary}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" IsVisible="{Binding CurrentDescuento.IsMancomunado}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding VerProductosDescuentoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Text="{x:Static resources:AppResource.SeeCustomers}" Margin="0,10,0,0" TextColor="{StaticResource ColorPrimary}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" IsVisible="{Binding CurrentDescuento.IsConsultaGeneral}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding VerClientesCommandByDescuento}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Text="TODOS LOS CLIENTES APLICAN PARA ESTE DESCUENTO" Margin="0,10,0,0" TextColor="{StaticResource ColorPrimary}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" IsVisible="{Binding NotIsConsultaGeneralByDescuento}"/>
+
+                <Label Text="{x:Static resources:AppResource.Validity}"  FontAttributes="Bold" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Label Text="{x:Static resources:AppResource.SinceLabel}" />
+                    <Label HorizontalOptions="FillAndExpand" Text="{Binding CurrentDescuento.DesFechaInicio}"/>
+                    <Label Text="{x:Static resources:AppResource.UntilLabel}" />
+                    <Label HorizontalOptions="FillAndExpand" Text="{Binding CurrentDescuento.DesFechaFin}" />
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
+                    <StackLayout Padding="10,5" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#37474F">
+                        <Label Text="{x:Static resources:AppResource.MinQuantity}" TextColor="White" WidthRequest="80" LineBreakMode="TailTruncation" VerticalOptions="Center" />
+                        <Label Text="{x:Static resources:AppResource.MaxQuantity}" TextColor="White" WidthRequest="80" LineBreakMode="TailTruncation" VerticalOptions="Center" />
+                        <Label Text="{x:Static resources:AppResource.DiscPercent}" TextColor="White" WidthRequest="60" LineBreakMode="TailTruncation" VerticalOptions="Center"/>
+                        <Label Text="{x:Static resources:AppResource.DiscValue}" TextColor="White" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" VerticalOptions="Center"/>
+                    </StackLayout>
+
+                    <ListView HorizontalOptions="FillAndExpand"
+                          HasUnevenRows="True"
+                          x:Name="list"
+                          SeparatorVisibility="None"
+                          ItemsSource="{Binding DescuentoDetalles}"
+                          CachingStrategy="RecycleElement"
+                          BackgroundColor="White"
+                          SelectionMode="None">
+
+                        <ListView.HeightRequest>
+                            <OnIdiom x:TypeArguments="x:Double" Phone="75" Tablet="200" />
+                        </ListView.HeightRequest>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid HorizontalOptions="FillAndExpand" Padding="10,5" ColumnSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="60" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Text="{Binding DRDCantidadInicial, StringFormat='{0:N2}'}" Grid.Column="0" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding DRDCantidadFinal, StringFormat='{0:N2}'}" Grid.Column="1" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding DRDPorciento, StringFormat='{0:N2}'}" Grid.Column="2" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding DRDValor, StringFormat='{0:N2}'}" Grid.Column="3" LineBreakMode="TailTruncation"/>
+
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+
+            </Grid>
+
+        </ScrollView>
+
+    </ContentView.Content>
+</ContentView>

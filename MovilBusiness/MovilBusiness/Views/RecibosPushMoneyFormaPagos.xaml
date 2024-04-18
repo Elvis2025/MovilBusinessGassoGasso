@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.RecibosPushMoneyFormaPagos"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Paymentway}"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,0,0,15" Grid.Row="0">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End" x:Name="layoutTotalPagar">
+                    <!--<Label Text="{Binding MonSiglaCliente}" HorizontalOptions="End" FontAttributes="Bold" FontSize="15" Margin="7,5,0,0" />-->
+                    <Label Text="{Binding TotalAPagar, StringFormat='{0:N2}'}" FontAttributes="Bold" HorizontalOptions="End" FontSize="15" Margin="0,5,15,0" />
+                </StackLayout>
+
+                <Frame HorizontalOptions="FillAndExpand" Padding="0" VerticalOptions="FillAndExpand" Margin="0">
+                    <Frame.HasShadow>
+                        <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+                    </Frame.HasShadow>
+
+                    <ScrollView Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="0">
+
+                            <StackLayout Orientation="Horizontal" BackgroundColor="#37474F" Spacing="0" Padding="10,0" HeightRequest="30">
+                                <Label Text="{x:Static resources:AppResource.Paymentway}" TextColor="White" VerticalOptions="Center" WidthRequest="120" />
+                                <Label Text="{x:Static resources:AppResource.Bank}" TextColor="White" VerticalOptions="Center" WidthRequest="130" />
+                                <Label Text="{x:Static resources:AppResource.CheckNo}" TextColor="White" VerticalOptions="Center"  WidthRequest="85" />
+                                <Label Text="{x:Static resources:AppResource.Futuristic}" TextColor="White" VerticalOptions="Center" WidthRequest="80" />
+                                <Label Text="{x:Static resources:AppResource.Date}" TextColor="White" VerticalOptions="Center" WidthRequest="80" />
+                                <Label Text="{x:Static resources:AppResource.Value}" TextColor="White" VerticalOptions="Center" WidthRequest="80" />
+                                <Label Text="{x:Static resources:AppResource.Rate}" TextColor="White" VerticalOptions="Center" WidthRequest="60" />
+                                <Label Text="{x:Static resources:AppResource.Premium}" TextColor="White" VerticalOptions="Center"  WidthRequest="80" />
+                            </StackLayout>
+
+                            <ListView
+                                      x:Name="listaFormasPago"
+                                      VerticalOptions="FillAndExpand" 
+                                      Margin="0,0,0,5"
+                                      ItemsSource="{Binding FormasPagoAgregadas}" 
+                                      SeparatorVisibility="None"
+                                      HasUnevenRows="True"
+                                      ItemSelected="OnListItemSelected"
+                                      CachingStrategy="RecycleElement"
+                                      BackgroundColor="Transparent">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid HeightRequest="30" Padding="9,0" ColumnSpacing="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="120" />
+                                                    <ColumnDefinition Width="130" />
+                                                    <ColumnDefinition Width="85" />
+                                                    <ColumnDefinition Width="80" />
+                                                    <ColumnDefinition Width="80" />
+                                                    <ColumnDefinition Width="80" />
+                                                    <ColumnDefinition Width="60" />
+                                                    <ColumnDefinition Width="80" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Text="{Binding FormaPago}" VerticalOptions="Center" Grid.Column="0" />
+                                                <Label Text="{Binding Banco}" VerticalOptions="Center" Grid.Column="1" LineBreakMode="TailTruncation" />
+                                                <Label Text="{Binding NoCheque}" VerticalOptions="Center" Grid.Column="2" />
+                                                <Label Text="{Binding Futurista}" VerticalOptions="Center" Grid.Column="3" />
+                                                <Label Text="{Binding FormattedDate}" VerticalOptions="Center" Grid.Column="4" />
+                                                <Label Text="{Binding Valor, StringFormat='{0:N2}'}" VerticalOptions="Center" Grid.Column="5" />
+                                                <Label Text="{Binding Tasa, StringFormat='{0:N2}'}" VerticalOptions="Center" Grid.Column="6" />
+                                                <Label Text="{Binding Prima, StringFormat='{0:N2}'}" VerticalOptions="Center" Grid.Column="7" />
+
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                        </StackLayout>
+
+                    </ScrollView>
+                </Frame>
+
+            </StackLayout>
+
+            <Button Margin="0,0,20,25" Grid.Row="0" HorizontalOptions="End" WidthRequest="50" HeightRequest="50" VerticalOptions="End" CornerRadius="25" Image="ic_add_white_24dp" BackgroundColor="{StaticResource ColorPrimary}" Command="{Binding AddFormaPagoCommand}" />
+
+            <controls:ProgressIndicator Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

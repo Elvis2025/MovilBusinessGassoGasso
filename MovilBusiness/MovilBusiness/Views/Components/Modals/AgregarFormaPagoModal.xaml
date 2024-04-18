@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.AgregarFormaPagoModal"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior"
+             xmlns:fastEntry="clr-namespace:XamarinFastEntrySample.FastEntry;assembly=XamarinFastEntry.Behaviors"
+             BackgroundColor="#CFD8DC"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             iOS:Page.UseSafeArea="true"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsClippedToBounds="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="20,50,20,20" Tablet="50" />
+                </StackLayout.Margin>
+
+                <Label Text="{x:Static resources:AppResource.TotalToPayUpper}" HorizontalOptions="End" HorizontalTextAlignment="End" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                    <Label Text="{Binding MonSiglaCliente}" HorizontalOptions="End" FontAttributes="Bold" FontSize="25" />
+                    <Label Text="{Binding MontoAPagar, StringFormat='{0:N2}'}" HorizontalOptions="End" FontSize="25" FontAttributes="Bold"/>
+                </StackLayout>
+
+                <Frame HorizontalOptions="FillAndExpand" Padding="0" HasShadow="False" IsClippedToBounds="True">
+                    <Frame.Margin>
+                        <OnIdiom x:TypeArguments="Thickness" Phone="0,50,0,0" Tablet="0,100,0,0" />
+                    </Frame.Margin>
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}" Padding="10">
+                            <Image Source="ic_close_white" VerticalOptions="Center" HorizontalOptions="Start">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Dismiss" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label x:Name="labelTitle" Text="{x:Static resources:AppResource.CheckUpper}" TextColor="White" FontSize="15" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" />
+
+                            <Label Text="{x:Static resources:AppResource.AddUpper}" TextColor="White" HorizontalOptions="End" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="AddFormaPago" />
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                        </StackLayout>
+
+                        <Grid HorizontalOptions="Fill" Padding="15,0,15,15" x:Name="Container" ColumnSpacing="5" IsClippedToBounds="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Frame Padding="10,0" BorderColor="LightGray" HorizontalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding ShowMoneda}" Grid.Column="0" Grid.ColumnSpan="3" HasShadow="False">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="45">
+                                    <Label Text="{x:Static resources:AppResource.CurrencyLabel}" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <controls:BorderlessPicker HorizontalOptions="FillAndExpand" ItemsSource="{Binding Monedas}" SelectedItem="{Binding CurrentMoneda, Mode=TwoWay}" ItemDisplayBinding="{Binding MonNombre}" Title="{x:Static resources:AppResource.ChooseCurrency}" FontSize="14" VerticalOptions="FillAndExpand" />
+                                    <Image Source="ic_arrow_drop_down_black_24dp.png" VerticalOptions="Center" Opacity="0.6" />
+                                </StackLayout>
+                            </Frame>
+
+                            <Label Text="{x:Static resources:AppResource.OperatorLabel}" x:Name="lblTarjeta" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                            <Picker Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding PickerTarjeta}" SelectedItem="{Binding CurrentPickerTarjeta}" SelectedIndex="0" x:Name="pickertarjeta"  HorizontalOptions="Fill" Title="{x:Static resources:AppResource.Select}" />
+
+                            <Label Text="{x:Static resources:AppResource.BankLabel}" x:Name="lblBanco" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+
+                            <Picker Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding PickerSource}" SelectedItem="{Binding CurrentPickerItem}" SelectedIndex="0" x:Name="comboBancos"  HorizontalOptions="Fill" Title="{x:Static resources:AppResource.Select}" />
+
+                            <Label Text="{x:Static resources:AppResource.NumberLabelAbreviated}" x:Name="labelNumero" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" />
+                            <Entry Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" x:Name="editNumero" Keyboard="Numeric"/>
+
+                            <Label Text="{x:Static resources:AppResource.NumberLabelAbreviated}" x:Name="labelTarjeta" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" />
+                            <Entry Grid.Row="3"  Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" x:Name="editTarjeta" Keyboard="Numeric" >
+                                <Entry.Behaviors>
+                                    <fastEntry:XamarinFastEntryBehaviour Mask="#### #### #### ####"  MaxLength="19"/> 
+                                </Entry.Behaviors>
+                            </Entry>
+
+                            <Label Text="{x:Static resources:AppResource.LastFourNo}" x:Name="labelTarjetaUlt" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" />
+                            <Entry Grid.Row="3"  Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" x:Name="editTarjetaUlt" Keyboard="Numeric" >
+                                <Entry.Behaviors>
+                                    <fastEntry:XamarinFastEntryBehaviour Mask="####"  MaxLength="4"/>
+                                </Entry.Behaviors>
+                            </Entry>
+
+                            <StackLayout Orientation="Horizontal" Grid.Row="5" Grid.Column="2" Spacing="5" x:Name="layoutDiferido">
+                                <Switch IsToggled="{Binding IsFuturista, Mode=TwoWay}" x:Name="checkDiferido" />
+                                <Label Text="{x:Static resources:AppResource.Deferred}" VerticalOptions="Center" />
+                            </StackLayout>
+
+                            <Label Text="{x:Static resources:AppResource.AmountLabel}" Grid.Row="4" Grid.Column="0" VerticalOptions="Center" x:Name="lblMonto"/>
+                            <StackLayout x:Name="stackgeneric" Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalOptions="FillAndExpand" Spacing="0">
+                               <!-- <Entry Keyboard="Numeric" HorizontalOptions="FillAndExpand" Text="{Binding Monto, Mode=TwoWay, StringFormat='{0:0.##}'}" />-->
+                                <Entry Keyboard="Numeric" HorizontalOptions="FillAndExpand" Text="{Binding Monto, Mode=TwoWay, StringFormat= '{0:N2}'}" />
+                                <Image Source="p_icon" WidthRequest="24" HeightRequest="24" HorizontalOptions="End" Aspect="AspectFit" x:Name="fillIcon">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="FillMontoFormaPago" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </StackLayout>
+
+                            <Picker Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding BonoSource}" SelectedItem="{Binding CurrentBonoItem}" ItemDisplayBinding="{Binding DenDescripcion}" x:Name="comboBonos"  HorizontalOptions="Fill" Title="{x:Static resources:AppResource.Select}" />
+
+                            <Label Text="{x:Static resources:AppResource.BonusAmountLabel}" x:Name="lblCantidad" IsVisible="False" Grid.Row="5" Grid.Column="0" VerticalOptions="Center"/>
+                            <Entry Keyboard="Numeric" x:Name="editCantidad" IsVisible="False" Grid.Row="5" Grid.Column="1" HorizontalOptions="FillAndExpand" Text="{Binding Cantidad, Mode=TwoWay, StringFormat='{0:0.##}'}">
+                                <Entry.Behaviors>
+                                    <behaviors:NumericValidation />
+                                </Entry.Behaviors>
+                            </Entry>
+
+                            <DatePicker Format="dd-MM-yyyy" Grid.Row="4" Grid.Column="2" x:Name="pickerFecha" IsEnabled="{Binding IsEnabledFecha, Mode=TwoWay}" HorizontalOptions="Start" />
+
+                            <ContentView Grid.Row="5" Grid.Column="0" Padding="5" x:Name="btnFoto" IsVisible="False">
+                                <ContentView.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="GoPhoto"/>
+                                </ContentView.GestureRecognizers>
+                                <Image Source="ic_photo_camera_black_24dp" Opacity="0.6" />
+                            </ContentView>
+
+                            <StackLayout Orientation="Horizontal" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,15,0,0">
+                                <StackLayout.HorizontalOptions>
+                                    <OnPlatform x:TypeArguments="LayoutOptions" Android="End" iOS="Start" />
+                                </StackLayout.HorizontalOptions>
+                                <StackLayout.IsVisible>
+                                    <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+                                </StackLayout.IsVisible>
+                                <!--<BoxView HorizontalOptions="FillAndExpand" Color="Transparent" />-->
+                                <Label Text="{x:Static resources:AppResource.CancelUpper}" TextColor="{StaticResource ColorPrimary}" Margin="0,0,10,0">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Dismiss" />
+                                    </Label.GestureRecognizers>
+                                    <Label.HorizontalOptions>
+                                        <OnPlatform x:TypeArguments="LayoutOptions" Android="End" iOS="Start" />
+                                    </Label.HorizontalOptions>
+                                </Label>
+                                <Label Text="{x:Static resources:AppResource.AddUpper}" TextColor="{StaticResource ColorPrimary}">
+                                    <Label.HorizontalOptions>
+                                        <OnPlatform x:TypeArguments="LayoutOptions" Android="End" iOS="Start" />
+                                    </Label.HorizontalOptions>
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="AddFormaPago" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                            </StackLayout>
+
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+           
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

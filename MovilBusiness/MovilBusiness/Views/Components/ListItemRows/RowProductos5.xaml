@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Frame xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.ListItemRows.RowProductos5"
+       xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             HorizontalOptions="FillAndExpand" Padding="0" Margin="2,2,2,5">
+
+    <!--<Frame Padding="0" HorizontalOptions="FillAndExpand" Margin="2,2,2,5">-->
+    <Frame.HasShadow>
+        <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+    </Frame.HasShadow>
+
+    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="7" Spacing="0">
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+            <Label Text="{Binding Descripcion}" HorizontalOptions="FillAndExpand" LineBreakMode="WordWrap" FontAttributes="Bold"/>
+            <Label Text="{x:Static resources:AppResource.CodeLabel}" HorizontalOptions="End" Margin="5,0,0,0" WidthRequest="51" MinimumWidthRequest="51"/>
+            <Label Text="{Binding ProCodigo}" HorizontalOptions="End" Margin="2,0,0,0"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+            <Label Text="{x:Static resources:AppResource.PriceLabel}" />
+            <Label Text="{Binding PrecioBruto, StringFormat='{}{0:N2}'}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" TextColor="Black" Opacity="0.9"/>
+            <Label Text="Itbis: " Margin="5,0,0,0" IsVisible="{Binding isnotCompra}"/>
+            <Label Text="{Binding Itbis, StringFormat='{}{0:N2}'}" IsVisible="{Binding isnotCompra}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" TextColor="Black" Opacity="0.9"/>
+            <Label Text="{x:Static resources:AppResource.QuantityLabel}" Margin="0,0,0,0" IsVisible="{Binding ShowCantidad}" FontSize="Micro" FontAttributes="Bold"/>
+            <Label Text="{Binding CantidadConUnidades}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" x:Name="lblCantidad" IsVisible="{Binding ShowCantidad}" FontSize="Micro" FontAttributes="Bold"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+            <Label Text="{x:Static resources:AppResource.DiscLabel}" Margin="5,0,0,0" IsVisible="{Binding ShowDescuento}"/>
+            <Label Text="{Binding DescuentoFormatted}" HorizontalOptions="FillAndExpand"  Margin="2,0,0,0" IsVisible="{Binding ShowDescuento}"/>
+            <Label Text="{x:Static resources:AppResource.UntMeasureLabel}" />
+            <Label Text="{Binding UnmCodigo}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+           
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+            <Label Text="{Binding LabelInventario}" />
+            <Label Text="{Binding InvCantidad}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" IsVisible="{Binding NoShowUnidades}"/>
+            <Label Text="{Binding InvCantidadUnidades}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" IsVisible="{Binding ShowUnidades}"/>
+            <Label Text="{x:Static resources:AppResource.NetPriceLabel}" Margin="5,0,0,0" />
+            <Label Text="{Binding PrecioNeto, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" FontSize="15" TextColor="Black" Opacity="0.9"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+            <Label Text="{Static resources:AppResource.InvoicedQuantityLabel}" IsVisible="{Binding ShowCantidadConfirmada}" Margin="0,0,0,0" />
+            <Label Text="{Binding CantidadConfirmada}" IsVisible="{Binding ShowCantidadConfirmada}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="0,5,0,0" IsVisible="{Binding ShowLayoutExtras}" Spacing="15">
+            <ContentView HorizontalOptions="End" VerticalOptions="End" IsVisible="{Binding ShowProductosComboBtn}" BackgroundColor="Transparent" x:Name="btnShowCombo">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </ContentView.GestureRecognizers>
+                <Label BindingContext="{Binding ProID}" Text="{x:Static resources:AppResource.SeeComboUpper}" TextColor="{StaticResource ColorPrimary}" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center" />
+            </ContentView>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="15">
+                <Label HorizontalOptions="End" BackgroundColor="{StaticResource ColorPrimary}" IsVisible="{Binding IndicadorPromocion}" TextColor="White">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="  **" />
+                            <Span Text="{x:Static resources:AppResource.Promotion}" />
+                            <Span Text="**  " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                
+                <Label HorizontalOptions="End" BackgroundColor="{StaticResource ColorPrimary}" IsVisible="{Binding IndicadorDescuento}" TextColor="White">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="  **" />
+                            <Span Text="{x:Static resources:AppResource.Discount}" />
+                            <Span Text="**  " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="End" BackgroundColor="{StaticResource ColorPrimary}" IsVisible="{Binding IndicadorOferta}" TextColor="White">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="  **" />
+                            <Span Text="{x:Static resources:AppResource.Offer}" />
+                            <Span Text="**  " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+            <ContentView HorizontalOptions="End" VerticalOptions="End" BackgroundColor="Transparent" x:Name="BtnInventarios" IsVisible="{Binding ShowBtnInventarios}">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ShowInventario" />
+                </ContentView.GestureRecognizers>
+                <Label BindingContext="{Binding ProID}" Text="{x:Static resources:AppResource.Inventory}" TextColor="{StaticResource ColorPrimary}" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center" />
+            </ContentView>
+        </StackLayout>
+
+    </StackLayout>
+    <!--</Frame>-->
+</Frame>

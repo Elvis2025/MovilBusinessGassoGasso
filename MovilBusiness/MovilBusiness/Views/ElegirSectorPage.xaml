@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ElegirSectorPage"
+                xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Sectors}"
+             xmlns:views="clr-namespace:MovilBusiness.Views.Components.Views"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                <StackLayout.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="20" Tablet="50" />
+                </StackLayout.Margin>
+
+                <Label Text="{x:Static resources:AppResource.SelectSectorToUse}" />
+
+                <Frame HorizontalOptions="FillAndExpand" Padding="0" HasShadow="False" BackgroundColor="White">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <controls:BorderlessPicker HorizontalOptions="FillAndExpand" HeightRequest="45" x:Name="comboSector" ItemDisplayBinding="{Binding SecDescripcion}" SelectedItem="{Binding CurrentSector, Mode=TwoWay}" Title="{x:Static resources:AppResource.Select}" />
+                        <Image Source="ic_arrow_drop_down_black_24dp" HorizontalOptions="End" VerticalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="10" Margin="0,15,0,0">
+                    <Button Clicked="ButtonSalirClicked" IsVisible="False" Text="{x:Static resources:AppResource.Leave}" x:Name="btnSalir" BackgroundColor="Transparent" TextColor="{StaticResource ColorPrimary}" HorizontalOptions="End" />
+                    <Button Clicked="BtnAceptar_Clicked" Text="{x:Static resources:AppResource.EnterVisit}" x:Name="btnAceptar" BackgroundColor="Transparent" TextColor="{StaticResource ColorPrimary}" HorizontalOptions="End" />
+                </StackLayout>
+
+            </StackLayout>
+            <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Color="{StaticResource WindowBackground}" Grid.Row="0" x:Name="loader" />
+        </Grid>
+        
+    </ContentPage.Content>
+</views:BasePage>

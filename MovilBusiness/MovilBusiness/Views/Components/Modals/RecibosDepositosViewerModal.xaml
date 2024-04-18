@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.RecibosDepositosViewerModal"
+             Title="Recibos a depositar"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <ListView
+                x:Name="list"
+                ItemSelected="List_ItemSelected"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                BackgroundColor="Transparent"
+                HasUnevenRows="True"
+                CachingStrategy="RecycleElement"
+                Margin="15,10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame HorizontalOptions="FillAndExpand" Padding="10" BackgroundColor="White" Margin="0,0,0,5">
+                                <Grid HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Start" Grid.Row="0" Grid.Column="0" Spacing="2">
+                                        <Label Text="{Binding RecSecuencia}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
+                                        <Label Text="{x:Static resources:AppResource.Sequence}" HorizontalOptions="Center"  />
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                        <Label Text="{Binding CliNombre}" FontSize="16" />
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label>
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static resources:AppResource.DateLabel}" />
+                                                        <Span Text="{Binding RecFecha}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label TextColor="White" BackgroundColor="{StaticResource ColorPrimary}" IsVisible="{Binding IsVisibleAnulado}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text=" " />
+                                                        <Span Text="{x:Static resources:AppResource.CanceledUpper}" />
+                                                        <Span Text=" " />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

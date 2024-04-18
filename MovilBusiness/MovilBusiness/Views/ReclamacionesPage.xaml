@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ReclamacionesPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Claims}"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Icon="ic_done_white_24dp" Order="Primary" Command="{Binding SaveClaimCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}" Padding="10">
+                        <Frame HorizontalOptions="FillAndExpand" HasShadow="False" Padding="5,0" HeightRequest="45">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                <Label Text="{x:Static resources:AppResource.ReasonUpper}" WidthRequest="70" MinimumWidthRequest="70" VerticalOptions="Center" />
+                                <BoxView VerticalOptions="FillAndExpand"  WidthRequest="1" Color="LightGray" Margin="0,5" />
+                                <controls:BorderlessPicker TextColor="Black" Opacity="0.7" ItemsSource="{Binding Motivos}" ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding CurrentMotivo}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Title="{x:Static resources:AppResource.SelectReason}" FontSize="14"/>
+                                <Image Opacity="0.6" Source="ic_arrow_drop_down_black_24dp" VerticalOptions="Center" HorizontalOptions="End" WidthRequest="24" MinimumWidthRequest="24" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <Label Text="{x:Static resources:AppResource.Product}" Margin="10,5,0,0" FontAttributes="Bold" />
+
+                    <ContentView HorizontalOptions="FillAndExpand" Margin="10,0,10,15" HeightRequest="40" Padding="1" BackgroundColor="LightGray">
+                        <controls:BorderlessEntry Text="{Binding SearchValue, Mode=TwoWay}" BackgroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Placeholder="{x:Static resources:AppResource.FilterSearch}" />
+                    </ContentView>
+
+                    <Grid HorizontalOptions="FillAndExpand" Margin="10,0" ColumnSpacing="15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="{x:Static resources:AppResource.Quantity}" Margin="2,0,0,0" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0" />
+                        <Label Text="{x:Static resources:AppResource.Units}" Margin="2,0,0,0" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="1" />
+                        <Label Text="{x:Static resources:AppResource.Lot}" Margin="2,0,0,0" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="2" />
+
+                        <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  BackgroundColor="LightGray" Padding="1" Grid.Row="1" Grid.Column="0">
+                            <controls:BorderlessEntry HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" Keyboard="Numeric" Text="{Binding CurrentCantidad}" >
+                                <controls:BorderlessEntry.Behaviors>
+                                    <behaviors:NumericValidation />
+                                </controls:BorderlessEntry.Behaviors>
+                            </controls:BorderlessEntry>
+                        </ContentView>
+                        <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  BackgroundColor="LightGray" Padding="1" Grid.Row="1" Grid.Column="1">
+                            <controls:BorderlessEntry HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" Keyboard="Numeric" Text="{Binding CurrentUnidades}">
+                                <controls:BorderlessEntry.Behaviors>
+                                    <behaviors:NumericValidation />
+                                </controls:BorderlessEntry.Behaviors>
+                            </controls:BorderlessEntry>
+                        </ContentView>
+                        <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="LightGray" Padding="1" Grid.Row="1" Grid.Column="2">
+                            <controls:BorderlessEntry MaxLength="15" HorizontalOptions="FillAndExpand" Text="{Binding CurrentLote}" VerticalOptions="FillAndExpand" BackgroundColor="White" />
+                        </ContentView>
+                    </Grid>
+
+                    <Label Text="{x:Static resources:AppResource.Description}" FontAttributes="Bold" Margin="10,20,10,0" />
+                    <Entry HorizontalOptions="FillAndExpand" Margin="10,0" Text="{Binding Descripcion}" MaxLength="500"/>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="White" Padding="10,3" VerticalOptions="End">
+                    <Label Text="{x:Static resources:AppResource.ClaimNo}" />
+                    <Label Text="{Binding RecSecuencia}" FontAttributes="Bold" />
+                </StackLayout>
+            </StackLayout>
+
+            <ListView
+                x:Name="list"
+                CachingStrategy="RecycleElement"
+                HasUnevenRows="True"
+                BackgroundColor="Transparent"
+                SeparatorVisibility="None"
+                IsVisible="{Binding IsListVisible, Mode=TwoWay}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+                Margin="10,145,10,30"
+                ItemsSource="{Binding Productos}"
+                ItemSelected="List_ItemSelected">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="White" Padding="0" Spacing="0">
+                                <BoxView Opacity="0.6" HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray" />
+                                <Label TextColor="Black" Text="{Binding ProDescripcion}" HeightRequest="40" HorizontalOptions="FillAndExpand" VerticalOptions="Center" LineBreakMode="TailTruncation" Margin="7,3" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

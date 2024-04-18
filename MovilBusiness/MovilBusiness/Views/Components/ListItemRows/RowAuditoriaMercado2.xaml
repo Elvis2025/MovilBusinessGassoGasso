@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             x:Class="MovilBusiness.Views.Components.ListItemRows.RowAuditoriaMercado2">
+  <ViewCell.View>
+        <Frame Padding="10" HorizontalOptions="FillAndExpand" HasShadow="False" Margin="5,0,5,5">
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="0">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="{x:Static resources:AppResource.CategoryLabel}" />
+                    <Label Text="{Binding Ca1Descripcion}" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="{x:Static resources:AppResource.DescriptionLabel}"/>
+                    <Label Text="{Binding Ca2Descripcion}" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="{x:Static resources:AppResource.BrandLabel}" />
+                    <Label Text="{Binding MarDescripcion}" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="{x:Static resources:AppResource.PresentationLabel}"/>
+                    <Label Text="{Binding AudPresentacionDescripcion}" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="{x:Static resources:AppResource.VarietyLabel}"/>
+                    <Label Text="{Binding AudVariedad}" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </ViewCell.View>
+</ViewCell>

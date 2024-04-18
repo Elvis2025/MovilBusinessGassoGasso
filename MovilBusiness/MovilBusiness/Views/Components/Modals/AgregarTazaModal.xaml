@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             x:Class="MovilBusiness.Views.Components.Modals.AgregarTazaModal">
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <Frame AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="0" HasShadow="False" IsClippedToBounds="True">
+                <Frame.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="20" Tablet="50" />
+                </Frame.Margin>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                    <Label Text="{x:Static resources:AppResource.EnterRate}" FontSize="Medium"  FontAttributes="Bold" Margin="2,10,0,0"
+                    VerticalOptions="FillAndExpand" 
+                    HorizontalOptions="FillAndExpand" />
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                        <Label Text="{x:Static resources:AppResource.RateLabel}" FontAttributes="Bold" VerticalOptions="Center" />
+                        <controls:BorderlessEntry x:Name="entryTaza" HorizontalOptions="FillAndExpand" Keyboard="Numeric" android:Entry.ImeOptions="Search" Text="{Binding Taza, Mode=TwoWay}" Command="{Binding AceptarCommand}"  />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="0,15,0,0" VerticalOptions="CenterAndExpand" >
+                    <Button Text="{x:Static resources:AppResource.Cancel}" BackgroundColor="Transparent" HeightRequest="40" TextColor="{StaticResource ColorPrimary}" Margin="0,0,15,0" Clicked="Dismiss" />
+                        <Button Text="{x:Static resources:AppResource.Aceptar}" BackgroundColor="Transparent" HeightRequest="40" TextColor="{StaticResource ColorPrimary}" Margin="0,0,15,0" Clicked="AceptarTaza" />
+                </StackLayout>
+
+                </StackLayout>
+            </Frame>
+           
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

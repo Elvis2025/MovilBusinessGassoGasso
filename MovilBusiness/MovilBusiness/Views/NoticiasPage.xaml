@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.NoticiasPage"
+             Title="{x:Static resources:AppResource.News}"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ListView HorizontalOptions="Fill" 
+                  VerticalOptions="Fill" 
+                  Grid.Row="0"
+                  x:Name="noticiasList"
+                  ItemSelected="OnNoticiaSelected"
+                  Margin="10,10,10,10" 
+                  BackgroundColor="Transparent" 
+                  SeparatorVisibility="None"
+                  HasUnevenRows="True"
+                  ItemsSource="{Binding NoticiasSource}">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Padding="10" Margin="1,1,1,7" HasShadow="False" BackgroundColor="white">
+                                <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding NotTitulo}" FontAttributes="Bold" />
+                                        <Label Text="{Binding NotFechaFormateada}" />
+                                    </StackLayout>
+
+                                    <Image Source="{Binding NotIndicadorLeidoImg}" Margin="10,0,0,0" />
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <controls:ProgressIndicator IsVisible="{Binding IsBusy}" Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

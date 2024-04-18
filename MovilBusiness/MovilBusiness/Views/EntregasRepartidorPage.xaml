@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.EntregasRepartidorPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Delivery}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="10,10,10,5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" Padding="5,0,0,0" BackgroundColor="White">
+                    <Frame HorizontalOptions="FillAndExpand" Padding="0" HasShadow="False">
+                        <controls:BorderlessEntry HorizontalOptions="FillAndExpand" Placeholder="{x:Static resources:AppResource.FilterDeliveriesByNumber}" x:Name="editSearch" Text="{Binding SearchValue}" />
+                    </Frame>
+                    <ContentView HorizontalOptions="End" VerticalOptions="FillAndExpand" BackgroundColor="#009688" WidthRequest="45">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SearchCommand}" />
+                        </ContentView.GestureRecognizers>
+                        <Image Source="ic_search_white_24dp" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </ContentView>
+                </StackLayout>
+
+                <Label Text="{x:Static resources:AppResource.Deliveries}" FontAttributes="Bold" Margin="0,10,0,0" x:Name="lblEntregasList" />
+
+                <ListView
+                    x:Name="list"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    CachingStrategy="RecycleElement"
+                    BackgroundColor="Transparent"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="True"
+                    ItemsSource="{Binding Entregas}"
+                    ItemSelected="List_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="{Binding RechazarBtn}" IsDestructive="True" Clicked="MenuItem_Clicked" CommandParameter="{Binding rowguid}" />
+                                </ViewCell.ContextActions>
+                                <Frame HorizontalOptions="FillAndExpand" Padding="0,0,5,0" BackgroundColor="White" CornerRadius="4" Margin="0,0,0,5">
+                                    <Frame.HasShadow>
+                                        <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+                                    </Frame.HasShadow>
+
+                                    <Grid HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <BoxView WidthRequest="3" Color="{StaticResource ColorPrimary}" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="FillAndExpand" Grid.Row="0" Grid.RowSpan="2" />
+                                        <Label Margin="5,0,0,0" HorizontalOptions="Center" HorizontalTextAlignment="Center" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalOptions="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <!--<Span Text="{Binding EnrSecuencia}" FontAttributes="Bold" />-->
+                                                    <Span Text="{Binding venNumeroERPDocum}" FontAttributes="Bold" />
+                                                    <Span Text="&#10;" />
+                                                    <Span Text="{x:Static resources:AppResource.Number}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <BoxView VerticalOptions="FillAndExpand" HorizontalOptions="Start" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" WidthRequest="1" Color="LightGray" Margin="8,5" />
+
+                                        <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Padding="0,5" Spacing="0">
+                                            <Label Text="{Binding CliNombre}" Margin="0,5,0,0"  FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                <Label Text="{Binding FormattedDate}" HorizontalOptions="FillAndExpand" />
+                                                <Label TextColor="White" BackgroundColor="{StaticResource ColorPrimary}" HorizontalOptions="End">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text=" " />
+                                                            <Span Text="{Binding estatusDescripcion}" />
+                                                            <Span Text=" " />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <BoxView VerticalOptions="FillAndExpand" Margin="5" HorizontalOptions="End" WidthRequest="1" Color="LightGray" Grid.Row="0" Grid.RowSpan="2" Grid.Column="4"/>
+
+                                        <Image Source="baseline_chevron_right_black_24" HorizontalOptions="End" Grid.Row="0" Grid.RowSpan="2" Grid.Column="5" Opacity="0.6" />
+
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End" IsVisible="{Binding ParShowRowDetalle}">
+                    <Label Text="Total: " FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                    <Label Text="{Binding EntTotal, StringFormat='{0:N2}'}" HorizontalOptions="End" />
+                </StackLayout>
+
+            </StackLayout>
+            
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" Grid.Row="0" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

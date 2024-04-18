@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.TemplateSelector.Reportes.GastosTotalesRow"
+      HorizontalOptions="FillAndExpand"
+      Padding="10,5">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+
+    <Label Grid.Column="0" HorizontalOptions="FillAndExpand" FontSize="15">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Total: " />
+                <Span Text="$" FontAttributes="Bold" />
+                <Span Text="{Binding Total}" FontAttributes="Bold" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+
+    <Label HorizontalOptions="End" Grid.Column="1" Margin="0,0,10,0" FontSize="15">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Total itbis: " />
+                <Span Text="$" FontAttributes="Bold" />
+                <Span Text="{Binding TotalItbis}" FontAttributes="Bold" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+
+    <Label HorizontalOptions="End" Grid.Column="2" FontSize="15">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Total propina: " />
+                <Span Text="$" FontAttributes="Bold" />
+                <Span Text="{Binding TotalPropina}" FontAttributes="Bold" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+</Grid>

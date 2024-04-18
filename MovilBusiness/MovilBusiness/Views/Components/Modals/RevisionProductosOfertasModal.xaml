@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.RevisionProductosOfertasModal"
+             BackgroundColor="{StaticResource WindowBackground}"
+              NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls">
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="0">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}">
+                        <StackLayout.Padding>
+                            <OnPlatform x:TypeArguments="Thickness" Android="15" iOS="15,30,15,15" />
+                        </StackLayout.Padding>
+                        <Label Text="{x:Static resources:AppResource.OfferReview}" FontAttributes="Bold" FontSize="17" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="White" />
+                        <Image HorizontalOptions="End" Source="ic_close_white" VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AceptarProductos" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                    <BoxView HorizontalOptions="FillAndExpand" HeightRequest="3" BackgroundColor="Orange" Opacity="0.8" VerticalOptions="End" />
+                </StackLayout>
+
+                <Label Text="{x:Static resources:AppResource.ProductsUpper}" Margin="12,10,10,0" FontAttributes="Bold" />
+
+                <Frame HasShadow="False" Margin="10,0" Padding="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <ListView
+                    x:Name="list"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="True"
+                    CachingStrategy="RecycleElement"
+                    ItemsSource="{Binding Productos}"
+                    ItemSelected="OnListItemSelected">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ContentView HorizontalOptions="FillAndExpand" Padding="0,0,0,1" BackgroundColor="LightGray">
+                                        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0" BackgroundColor="White" Padding="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                                                <Label Text="{x:Static resources:AppResource.ProductLabel}" FontAttributes="Bold" WidthRequest="70" HorizontalOptions="Start" MaxLines="1"/>
+                                                <Label Text="{Binding ProDescripcionOferta}" HorizontalOptions="FillAndExpand" MaxLines="1" LineBreakMode="TailTruncation" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                                                <Label Text="{x:Static resources:AppResource.OfferLabel}" WidthRequest="50" MinimumWidthRequest="50" FontAttributes="Bold" HorizontalOptions="Start" />
+                                                <Label Text="{Binding OfeDescripcion}" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" />
+                                            </StackLayout>
+                                            <Label Text="{Binding ProCodigoDescripcion}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontAttributes="Bold" FontSize="16" />
+                                            <Label Text="{x:Static resources:AppResource.QuantityLabel}" Grid.Row="3" Grid.Column="0" />
+                                            <Label Text="{Binding CantidadOferta}" Grid.Row="3" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+                                            <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding UsaLote}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static resources:AppResource.LotLabel}" />
+                                                        <Span Text="{Binding Lote}" FontAttributes="Bold" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </Grid>
+                                    </ContentView>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+
+                <Button Text="{x:Static resources:AppResource.Aceptar}" BackgroundColor="{StaticResource ColorPrimary}" HeightRequest="40" WidthRequest="95" Clicked="AceptarProductos" TextColor="White" VerticalOptions="End" HorizontalOptions="End" Margin="0,10,10,10" />
+
+            </StackLayout>
+
+            <ContentView x:Name="dialogCantidad" IsVisible="False" HorizontalOptions="FillAndExpand" BackgroundColor="#B0000000" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+
+                <Frame HasShadow="False" VerticalOptions="Center" Padding="10" HorizontalOptions="Center">
+                    <StackLayout Orientation="Vertical" WidthRequest="300">
+
+                        <Label Text="{x:Static resources:AppResource.Quantity}" FontAttributes="Bold" FontSize="16" />
+
+                        <Label x:Name="lblMessage" HorizontalOptions="FillAndExpand" />
+
+                        <Entry HorizontalOptions="FillAndExpand" x:Name="editCantidad" Keyboard="Numeric"  Margin="0,10,0,0"/>
+
+                        <Label Text="{x:Static resources:AppResource.Lot}" x:Name="lblLote" IsVisible="False" />
+                        <Entry HorizontalOptions="FillAndExpand" x:Name="editLote" Margin="0,10,0,0" IsVisible="False" />
+                        <Picker HorizontalOptions="FillAndExpand" x:Name="comboLote" Margin="0,10,0,0" IsVisible="False" Title="{x:Static resources:AppResource.Select}" />
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+
+                            <Button Text="{x:Static resources:AppResource.Cancel}" Clicked="OcultarDialogCantidad" />
+
+                            <Button Text="{x:Static resources:AppResource.Aceptar}" Clicked="AceptarCantidad" />
+
+                        </StackLayout>
+
+                    </StackLayout>
+                </Frame>
+
+            </ContentView>
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsBusy}" />
+        </AbsoluteLayout> 
+        
+    </ContentPage.Content>
+</ContentPage>

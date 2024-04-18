@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.OperativosMedicosPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.MedicalOperatives}"
+             BackgroundColor="{StaticResource WindowBackground}"
+             Padding="10">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.FilterProducts}" Icon="baseline_filter_alt_white_24" Order="Primary" Command="{Binding OnClickCommand}" CommandParameter="3" />
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Icon="ic_done_white_24dp" Order="Primary" Command="{Binding OnClickCommand}" CommandParameter="1" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label Text="{x:Static resources:AppResource.MedicalCenter}" FontAttributes="Bold" Grid.Row="0" />
+            <Entry HorizontalOptions="FillAndExpand" Text="{Binding CMNombre, Mode=TwoWay}" Grid.Row="1" Keyboard="Default" ReturnType="Done" MaxLength="100" />
+
+            <Label Text="{x:Static resources:AppResource.AddedDetailsLabel}" Grid.Row="2" FontAttributes="Bold" Margin="0,15,0,0" />
+
+            <ListView
+                x:Name="list"
+                Grid.Row="3"
+                HasUnevenRows="True"
+                ItemsSource="{Binding Detalles}"
+                CachingStrategy="RecycleElement"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                ItemSelected="list_ItemSelected">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame HorizontalOptions="FillAndExpand" Margin="0,0,0,5" BackgroundColor="White" Padding="0">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+
+                                    <Label HorizontalOptions="FillAndExpand" Margin="5" FontSize="16">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResource.ProductsLabel}" FontAttributes="Bold" />
+                                                <Span Text="{Binding ProductosDesc}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5" BackgroundColor="#FAFAFA">
+
+                                        <Label TextColor="#1976D2" HorizontalOptions="FillAndExpand">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{x:Static resources:AppResource.PatientLabel}" />
+                                                    <Span Text="{Binding OpePacienteNombre}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Image
+                                            BindingContext="{Binding rowguid}"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Center"
+                                            Opacity="0.6"
+                                            Source="ic_delete_black_24dp"
+                                            BackgroundColor="Transparent">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnDeleteDetalle" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+
+                                    </StackLayout>
+                                    
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
+            </ListView>
+
+            <Button Margin="0,0,5,10" Grid.Row="3" HorizontalOptions="End" WidthRequest="50" HeightRequest="50" VerticalOptions="End" CornerRadius="25" Image="ic_add_white_24dp" BackgroundColor="{StaticResource ColorPrimary}" Command="{Binding OnClickCommand}" CommandParameter="2" />
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

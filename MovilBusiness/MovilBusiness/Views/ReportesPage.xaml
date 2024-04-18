@@ -1,0 +1,406 @@
+﻿
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ReportesPage"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:rows="clr-namespace:MovilBusiness.Views.Components.TemplateSelector.Reportes"
+             Title="{x:Static resources:AppResource.Reports}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Print}" 
+                     Order="Primary"
+                     Icon="baseline_print_white_24"
+                     Command="{Binding PrintCommand}" />
+        
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="descripcionCantidadTemplate">
+            <ViewCell>
+                <rows:DescripcionCantidadRow />
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="facturasVencidasTemplate">
+            <ViewCell>
+                <rows:FacturasVencidasRow />
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="totalTemplate">
+            <ViewCell>
+                <rows:MontoTotalRow />
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="gastosTemplate">
+            <ViewCell>
+                <rows:GastosRow />
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="gastosTotalesTemplate">
+            <ViewCell>
+                <rows:GastosTotalesRow />
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="inventariosTemplate">
+            <ViewCell>
+                <rows:InventarioRow />
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="subtitleTemplate">
+            <ViewCell>
+                <rows:SubTitleRow />
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="recibosTemplate">
+            <ViewCell>
+                <rows:RecibosRow />
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="lineadeProductosTemplate">
+            <ViewCell>
+                <rows:lineadeProductosRow/>
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="SubTitleXPueblos">
+            <ViewCell>
+                <rows:SubTitleXPueblosRow/>
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="breakLineTemplate">
+            <ViewCell>
+                <rows:BreakLineRow />
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="SaldoXAntiguedadTemplate">
+            <ViewCell>
+                <rows:SaldoXAntiguedadTitleTemplateRow/>
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="FacturasAVencerDelMes">
+            <ViewCell>
+                <rows:FacturasAVencerDelMesTemplateRow/>
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="NcfTemplateRow">
+            <ViewCell>
+                <rows:NcfTemplateRow/>
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="PosibleCobrosxDias">
+            <ViewCell>
+                <rows:PosibleCobrosxDiasTemplateRow/>
+            </ViewCell>
+        </DataTemplate>
+
+            <rows:ReportesTemplateSelector x:Key="templateSelector" 
+                                       PedidosClientesTemplate="{StaticResource descripcionCantidadTemplate}"
+                                       FacturasVencidasTemplate="{StaticResource facturasVencidasTemplate}"
+                                       MontoTotalTemplate="{StaticResource totalTemplate}"
+                                       GastosTemplate="{StaticResource gastosTemplate}"
+                                       GastosTotalesTemplate="{StaticResource gastosTotalesTemplate}"
+                                       InventarioTemplate="{StaticResource inventariosTemplate}"
+                                       SubTitleTemplate="{StaticResource subtitleTemplate}"
+                                       SubTitleXPueblos="{StaticResource SubTitleXPueblos}"
+                                       RecibosMontoTemplate="{StaticResource recibosTemplate }"
+                                       PreventaporLineadeProductosTemplate="{StaticResource lineadeProductosTemplate}"
+                                       BreakLineTemplate="{StaticResource breakLineTemplate}"
+                                       SaldoXAntiguedadTemplate="{StaticResource SaldoXAntiguedadTemplate}"
+                                       FacturasDelMesTemplate="{StaticResource FacturasAVencerDelMes}"
+                                       NcfTemplate="{StaticResource NcfTemplateRow}"
+                                       PosiblesCobrosxDiaTemplate="{StaticResource PosibleCobrosxDias}"/>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical"
+                         Spacing="0" 
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand">
+                
+                <Grid HorizontalOptions="FillAndExpand"
+                      Padding="10,0,10,10"
+                      BackgroundColor="{StaticResource ColorPrimary}" 
+                      RowSpacing="0">
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Row="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Padding="0"
+                           HeightRequest="45"
+                           HorizontalOptions="FillAndExpand" 
+                           HasShadow="False" 
+                           Margin="0,0,0,15">
+                        
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="FillAndExpand">
+
+                            <Label Text="{x:Static resources:AppResource.ConsultType}" 
+                                   Margin="5,0,0,0"
+                                   VerticalOptions="Center"
+                                   WidthRequest="90" />
+                            
+                            <BoxView VerticalOptions="Center"
+                                     WidthRequest="1"
+                                     Color="Gray" 
+                                     Opacity="0.8"
+                                     HeightRequest="30" />
+                            
+                            <controls:BorderlessPicker 
+                                ItemsSource="{Binding TiposReportes}"
+                                ItemDisplayBinding="{Binding Value}"
+                                SelectedItem="{Binding CurrentTipoReporte}"
+                                HorizontalOptions="FillAndExpand"
+                                Title="{x:Static resources:AppResource.Select}" 
+                                FontSize="14" />
+                            
+                        </StackLayout>
+                    </Frame>
+
+
+                    <Label Text="{x:Static resources:AppResource.DateFrom}" 
+                           TextColor="LightGray"
+                           Grid.Row="1" 
+                           Grid.Column="0"
+                           Margin="15,0,0,3"
+                           IsVisible="{Binding EsFuturista}" />
+
+                    <Label Text="{x:Static resources:AppResource.DateTo}"
+                           TextColor="LightGray" 
+                           Grid.Row="1" 
+                           Grid.Column="1" 
+                           Margin="0,0,15,3"
+                           IsVisible="{Binding EsFuturista}"/>
+
+                    <StackLayout Orientation="Vertical" 
+                                 HorizontalOptions="FillAndExpand" 
+                                 Grid.Row="2" 
+                                 Grid.Column="0"
+                                 Margin="10,0,5,0" 
+                                 Spacing="0"
+                                 IsVisible="{Binding EsFuturista}">
+                        
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SelectFechaDesde" />
+                        </StackLayout.GestureRecognizers>
+                        
+                        <Label TextColor="White" 
+                               FontSize="22" 
+                               x:Name="lblFechaDesde" 
+                               FontAttributes="Bold" />
+                        
+                        <DatePicker IsVisible="False"
+                                    x:Name="pickerFechaDesde" 
+                                    WidthRequest="1" 
+                                    MinimumWidthRequest="1"
+                                    MinimumHeightRequest="1" 
+                                    HeightRequest="1"
+                                    Margin="0" 
+                                    Date="{Binding CurrentFechaDesde, Mode=TwoWay}" 
+                                    TextColor="White"
+                                    FontSize="20"  />
+                        
+                        <BoxView HorizontalOptions="FillAndExpand" Margin="0,0,10,0" Color="White">
+                            <BoxView.HeightRequest>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="1" Tablet="2" />
+                            </BoxView.HeightRequest>
+                        </BoxView>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical"
+                                 HorizontalOptions="FillAndExpand" 
+                                 Grid.Row="2" 
+                                 Grid.Column="1"
+                                 Margin="5,0,10,0"
+                                 Spacing="0" 
+                                 IsVisible="{Binding EsFuturista}">
+                        
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SelectFechaHasta" />
+                        </StackLayout.GestureRecognizers>
+                        <Label TextColor="White" 
+                               FontSize="22"
+                               x:Name="lblFechaHasta"
+                               FontAttributes="Bold" />
+                        
+                        <DatePicker IsVisible="False" 
+                                    HeightRequest="1" 
+                                    WidthRequest="1" 
+                                    MinimumWidthRequest="1"
+                                    MinimumHeightRequest="1" 
+                                    Margin="0"
+                                    x:Name="pickerFechaHasta"
+                                    Date="{Binding CurrentFechaHasta, Mode=TwoWay}"
+                                    MaximumDate="{Binding PropertyMaximumDate}"
+                                    TextColor="White"
+                                    FontSize="20" />
+                        
+                        <BoxView Color="White" Margin="0,0,10,0" HorizontalOptions="FillAndExpand">
+                            <BoxView.HeightRequest>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="1" Tablet="2" />
+                            </BoxView.HeightRequest>
+                        </BoxView>
+                    </StackLayout>
+                 
+                </Grid>
+
+                <StackLayout Orientation="Horizontal" 
+                             HorizontalOptions="FillAndExpand"
+                             x:Name="listHeader" 
+                             IsVisible="{Binding ShowHeader}" />
+
+                <ScrollView Orientation="Horizontal" 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="FillAndExpand" Padding="20">
+
+                    <StackLayout>
+
+                        <StackLayout IsVisible="{Binding IsVisibleSaldos}" 
+                                     Spacing="0" 
+                                     HorizontalOptions="FillAndExpand" 
+                                     VerticalOptions="FillAndExpand"
+                                     HeightRequest="54"> 
+                            
+                            <Label Text="{Binding Saldo}" HorizontalOptions="Start" FontAttributes="Bold"/>
+                            <BoxView BackgroundColor="Black" HeightRequest="0.5" HorizontalOptions="FillAndExpand" />
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="147" />
+                                    <ColumnDefinition Width="130" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{x:Static resources:AppResource.Customers}" FontAttributes="Bold" Grid.Column="0"/>
+                                <Label Text="{x:Static resources:AppResource.Currency}" FontAttributes="Bold" Grid.Column="1"/>
+                                <Label Text="Balance" FontAttributes="Bold" Grid.Column="2"/>
+                                <Label Text="0 - 30" FontAttributes="Bold" Grid.Column="3"/>
+                                <Label Text="31 - 60" FontAttributes="Bold" Grid.Column="4"/>
+                                <Label Text="61 - 90" FontAttributes="Bold" Grid.Column="5"/>
+                                <Label Text="&lt;  90" FontAttributes="Bold" Grid.Column="6"/>
+                            </Grid>
+                            
+                        </StackLayout>
+
+                        <StackLayout IsVisible="{Binding IsVisibleFacturasVencidas}" 
+                                     Spacing="0" 
+                                     HorizontalOptions="FillAndExpand" 
+                                     VerticalOptions="FillAndExpand"
+                                     HeightRequest="54">
+
+                            <Label Text="{Binding FacturasVencidas}" HorizontalOptions="Start" FontAttributes="Bold"/>
+                            <BoxView BackgroundColor="Black" HeightRequest="0.5" HorizontalOptions="FillAndExpand" />
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{x:Static resources:AppResource.Invoice}" FontAttributes="Bold"/>
+                                <Label Text="{x:Static resources:AppResource.InvDate}" FontAttributes="Bold" Grid.Column="1"/>
+                                <Label Text="{x:Static resources:AppResource.DueDate}" FontAttributes="Bold" Grid.Column="2"/>
+                                <Label Text="{x:Static resources:AppResource.CreditDays}" FontAttributes="Bold" Grid.Column="3"/>
+                                <Label Text="Total" FontAttributes="Bold" Grid.Column="4" HorizontalOptions="End"/>
+                            </Grid>
+
+                        </StackLayout>
+
+                        <StackLayout IsVisible="{Binding IsVisibleNCF}" 
+                                     Spacing="0" 
+                                     HorizontalOptions="FillAndExpand" 
+                                     VerticalOptions="FillAndExpand"
+                                     HeightRequest="54">
+
+                            <Label Text="{x:Static resources:AppResource.NCFReport}" HorizontalOptions="Start" FontAttributes="Bold"/>
+                            <BoxView BackgroundColor="Black" HeightRequest="0.5" HorizontalOptions="FillAndExpand"></BoxView>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <Label Text="Serie" FontAttributes="Bold"/>
+                                <Label Text="{x:Static resources:AppResource.ReceiptType}" FontAttributes="Bold" Grid.Column="1"/>
+                                <Label Text="{x:Static resources:AppResource.CurrentNCF}" FontAttributes="Bold" Grid.Column="2"/>
+                                <Label Text="{x:Static resources:AppResource.MaxNCF}" FontAttributes="Bold" Grid.Column="3"/>
+                                <Label Text="{x:Static resources:AppResource.NextNCF}" Grid.Column="4" FontAttributes="Bold"/>
+                                <Label Text="{x:Static resources:AppResource.ExpirationDate}" Grid.Column="5"  FontAttributes="Bold" HorizontalOptions="End"/>
+                            </Grid>
+
+                        </StackLayout>
+
+                        <StackLayout IsVisible="{Binding IsVisiblePosiblesCobrosxDia}" 
+                                     Spacing="0" 
+                                     HorizontalOptions="FillAndExpand" 
+                                     VerticalOptions="FillAndExpand"
+                                     HeightRequest="54">
+
+                            <Label Text="RESUMEN POSIBLES COBROS POR DIA" HorizontalOptions="Start" FontAttributes="Bold"/>
+                            <BoxView BackgroundColor="Black" HeightRequest="0.5" HorizontalOptions="FillAndExpand" />
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Cod. Cte." FontAttributes="Bold"/>
+                                <Label Text="Nombre Cte." FontAttributes="Bold" Grid.Column="1"/>
+                                <Label Text="#FACT" FontAttributes="Bold" Grid.Column="2"/>
+                                <Label Text="FechaFact" FontAttributes="Bold" Grid.Column="3"/>
+                                <Label Text="Días" FontAttributes="Bold" Grid.Column="4"/>
+                                <Label Text="Valor a Cobrar" FontAttributes="Bold" Grid.Column="5" HorizontalOptions="End"/>
+                            </Grid>
+
+                        </StackLayout>
+
+                        <ListView
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        HasUnevenRows="True"
+                        ItemTemplate="{StaticResource templateSelector}"
+                        ItemsSource="{Binding DataReporte}"
+                        BackgroundColor="Transparent"
+                        SelectionMode="None"/>
+                    </StackLayout>
+
+                </ScrollView>
+
+            </StackLayout> 
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand"
+                                        Grid.Row="0" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

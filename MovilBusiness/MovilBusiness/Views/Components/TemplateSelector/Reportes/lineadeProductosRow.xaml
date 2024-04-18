@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.TemplateSelector.Reportes.lineadeProductosRow" HorizontalOptions="FillAndExpand"
+              Padding="10,5">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+      
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+
+
+    <Label Grid.Row="1" Grid.Column="0" Text="{Binding LinDescripcion}" HorizontalOptions="FillAndExpand" />
+    <Label Grid.Row="1" Grid.Column="2" HorizontalOptions="End">
+        <Label.FormattedText>
+            <FormattedString>              
+                <Span Text="$" />
+                <Span Text="{Binding Monto, StringFormat='{}{0:N2}'}" />
+            </FormattedString>
+        </Label.FormattedText>
+    </Label>
+</Grid>

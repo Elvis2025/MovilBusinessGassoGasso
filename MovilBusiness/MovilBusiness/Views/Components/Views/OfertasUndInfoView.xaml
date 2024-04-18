@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Views.OfertasUndInfoView"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="FillAndExpand"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Padding="10"
+             BackgroundColor="Transparent">
+  <ContentView.Content>
+      
+        <Grid HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+               
+            </Grid.RowDefinitions>
+
+            <Label Text="{x:Static resources:AppResource.OfferLabel}" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
+            <Picker x:Name="comboOferta" HorizontalOptions="FillAndExpand" IsEnabled="{Binding CanSelectOferta}" ItemDisplayBinding="{Binding OfeDescripcion}" ItemsSource="{Binding Ofertas}" SelectedItem="{Binding CurrentOferta, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Title="{x:Static resources:AppResource.SelectOffer}" />
+
+            <Label Text="{x:Static resources:AppResource.TypeLabel}" Grid.Row="1" Grid.Column="0" />
+            <Label Text="{Binding CurrentOferta.OfeTipoDescripcion}" Grid.Row="1" Grid.Column="1" />
+
+            <Label Text="{x:Static resources:AppResource.Validity}"  FontAttributes="Bold" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                <Label Text="{x:Static resources:AppResource.SinceLabel}" />
+                <Label HorizontalOptions="FillAndExpand" Text="{Binding CurrentOferta.FechaDesde}"/>
+                <Label Text="{x:Static resources:AppResource.UntilLabel}" />
+                <Label HorizontalOptions="FillAndExpand" Text="{Binding CurrentOferta.FechaHasta}" />
+            </StackLayout>
+
+            <Frame HorizontalOptions="FillAndExpand" Padding="0" HasShadow="False" VerticalOptions="FillAndExpand" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  >
+                    <StackLayout Padding="10,5" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#37474F">
+                        <Label Text="{x:Static resources:AppResource.Quantity}" TextColor="White" WidthRequest="80" LineBreakMode="TailTruncation"/>
+                        <Label Text="{x:Static resources:AppResource.Unit}" TextColor="White" WidthRequest="50" LineBreakMode="TailTruncation"/>
+                        <Label Text="{x:Static resources:AppResource.Offer}" TextColor="White" WidthRequest="50" LineBreakMode="TailTruncation"/>
+                        <Label Text="{x:Static resources:AppResource.Unit}" TextColor="White" WidthRequest="60" LineBreakMode="TailTruncation"/>
+                        <Label Text="{x:Static resources:AppResource.PercentPrice}" TextColor="White" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation"/>
+                    </StackLayout>
+
+                    <ListView HorizontalOptions="FillAndExpand"
+                          VerticalOptions="FillAndExpand"
+                          x:Name="list"
+                          HasUnevenRows="True"
+                          SeparatorVisibility="None"
+                          ItemsSource="{Binding OfertaDetalles}"
+                          CachingStrategy="RecycleElement"
+                          BackgroundColor="Transparent"
+                              SelectionMode="None">
+
+                        <ListView.HeightRequest>
+                            <OnIdiom x:TypeArguments="x:Double" Phone="75" Tablet="200" />
+                        </ListView.HeightRequest>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid HorizontalOptions="FillAndExpand" Padding="10,5" ColumnSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="50" />
+                                            <ColumnDefinition Width="50" />
+                                            <ColumnDefinition Width="50" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Text="{Binding OfeCantidad}" Grid.Column="0" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding UnmCodigoCabecera}" Grid.Column="1" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding OfeCantidadOferta}" Grid.Column="2" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding UnmCodigo}" Grid.Column="3" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding ValorOferta}" Grid.Column="4" LineBreakMode="TailTruncation"/>
+
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+
+                </StackLayout>
+            </Frame>
+        </Grid>
+  </ContentView.Content>
+</ContentView>

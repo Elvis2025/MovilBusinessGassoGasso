@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ConsultaInventarioPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.InventoryInquiry}"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Print}" Icon="baseline_print_white_24" Order="Primary" Command="{Binding PrintCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0">
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="10" IsVisible="{Binding ShowComboAlmacen}">
+                    <Label Text="{x:Static resources:AppResource.WarehouseLabel}" VerticalOptions="Center" />
+                    <Picker HorizontalOptions="FillAndExpand" Title="{x:Static resources:AppResource.Select}" ItemsSource="{Binding Almacenes}" SelectedItem="{Binding CurrentAlmacen, Mode=TwoWay}" ItemDisplayBinding="{Binding AlmDescripcion}" />
+                </StackLayout>
+
+                <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+
+                    <ListView
+                        x:Name="list"
+                        AbsoluteLayout.LayoutFlags="All"
+                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                        HorizontalOptions="FillAndExpand" 
+                        VerticalOptions="FillAndExpand"
+                        Margin="0,10,0,0"
+                        ItemsSource="{Binding Inventario}"
+                        SeparatorVisibility="None"
+                        SelectionMode="None"
+                        BackgroundColor="{StaticResource WindowBackground}"
+                        CachingStrategy="RecycleElement"
+                        HasUnevenRows="True">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ContentView HorizontalOptions="FillAndExpand" Padding="0,0,0,1" BackgroundColor="LightGray">
+                                        <Grid HorizontalOptions="FillAndExpand" BackgroundColor="White" Padding="10,12" RowSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <Frame VerticalOptions="Center" Margin="5,0,10,0" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" CornerRadius="8"
+                                                   HasShadow="False" WidthRequest="16" HeightRequest="16" Padding="0" BackgroundColor="{Binding ProIndicator}" />
+
+                                            <Label Text="{Binding ProDescripcion}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="1" />
+                                            <!--<Label Text="{Binding ProCodigo}" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="1" />-->
+                                            <Label HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="1" IsVisible="{Binding UsaLote}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static resources:AppResource.LotLabel}" />
+                                                        <Span Text="{Binding InvLote}" FontAttributes="Bold" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                            <StackLayout Spacing="0" Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="End" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2">
+                                                <Label Text="{Binding InvCantidadLabel}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="18" />
+                                                <Label Text="{Binding CantidadLabel}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+                                            </StackLayout>
+
+                                        </Grid>
+                                    </ContentView>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Label AbsoluteLayout.LayoutFlags="All"
+                   AbsoluteLayout.LayoutBounds="0,0,1,1"
+                   IsVisible="{Binding ListIsEmpty}"
+                   Text="{x:Static resources:AppResource.NoInventoryMessage}" 
+                   BackgroundColor="{StaticResource WindowBackground}"
+                   HorizontalOptions="FillAndExpand" 
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center" />
+
+                </AbsoluteLayout>
+
+            </StackLayout>
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

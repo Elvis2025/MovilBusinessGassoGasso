@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.SeleccionarClienteVisitaVirtual"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             Title="Visita virtual">
+    <ContentPage.Content>
+
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                    <StackLayout.Padding>
+                        <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,30,15,15" />
+                    </StackLayout.Padding>
+                    <ContentView VerticalOptions="CenterAndExpand" Padding="15,0,0,0">
+                        <Image Source="ic_close_white" VerticalOptions="Center" />
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Dismiss" />
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
+
+                    <Label Text="{x:Static resources:AppResource.VirtualVisit}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="18" />
+
+                </StackLayout>
+
+                <controls:ClientesSearchView x:Name="search1" Grid.Row="0" BackgroundColor="#1976D2" />
+
+                <ListView
+                    x:Name="list"
+                    CachingStrategy="RecycleElement"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="True"
+                    BackgroundColor="Transparent"
+                    ItemsSource="{Binding ClientSource}"
+                    ItemSelected="List_ItemSelected"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Margin="5,10">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Padding="10" HorizontalOptions="FillAndExpand" Margin="3" BackgroundColor="White" HasShadow="{OnPlatform iOS=False, Android=True}">
+
+                                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" ColumnSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Grid.Column="0" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Spacing="5">
+                                            <Label Text="{Binding CliNombreCompleto}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" />
+                                            <Label Text="{Binding CliCalle}" IsVisible="{Binding ShowDireccion}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" />
+                                            <Label Text="{Binding CliDatosOtrosLabel}" HorizontalOptions="FillAndExpand" TextColor="{StaticResource ColorPrimary}" IsVisible="{Binding ShowDatosOtros}" />
+                                        </StackLayout>
+
+                                        <Image Grid.Column="1" WidthRequest="15" HeightRequest="15" VerticalOptions="Center" 
+                                            HorizontalOptions="End" Source="{Binding CliEstadoVisitaIcon}" />
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+
+            </StackLayout>
+
+            <BoxView x:Name="xboxviewindicator" Color="Black" Opacity="0.5" Grid.Row="0" HorizontalOptions="Fill" VerticalOptions="Fill" IsVisible="false"/>
+            <Frame x:Name="xframeindicator"  HasShadow="False" IsVisible="false" Padding="10" HorizontalOptions="Center" VerticalOptions="Center">
+                <ActivityIndicator x:Name="xprogresindicator" Color="#1976D2"/>
+            </Frame>
+        </Grid>
+        
+        
+    </ContentPage.Content>
+</ContentPage>

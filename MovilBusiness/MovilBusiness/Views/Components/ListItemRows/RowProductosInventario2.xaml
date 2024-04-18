@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Frame xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.ListItemRows.RowProductosInventario2"
+             HorizontalOptions="FillAndExpand"
+             Margin="2,2,2,5"
+       xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Padding="0">
+
+    <!--<Frame Padding="0" HorizontalOptions="FillAndExpand" Margin="2,2,2,5">-->
+    <Frame.HasShadow>
+        <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+    </Frame.HasShadow>
+
+    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="7" Spacing="0">
+
+        <Label Text="{Binding Descripcion}" HorizontalOptions="FillAndExpand" LineBreakMode="WordWrap" FontAttributes="Bold" />
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+            <Label Text="{x:Static resources:AppResource.CodeLabel}" WidthRequest="51" MinimumWidthRequest="51"/>
+            <Label Text="{Binding ProCodigo}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0"/>
+            <Label Text="{x:Static resources:AppResource.BarcodeLabel}" Margin="2,0,0,0"/>
+            <Label Text="{Binding ProReferencia}" HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+            <Label Text="{x:Static resources:AppResource.MinimumQuantityLabel}" Margin="2,0,0,0"/>
+            <Label Text="{Binding CliCanTidadMinima}" HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+            <Label Text="{x:Static resources:AppResource.SuggestedPriceLabel}" />
+            <Label Text="{Binding ProPrecio3, StringFormat='{0:N2}'}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+            <Label Text="Itbis: " Margin="5,0,0,0" IsVisible="{Binding isnotCompra}"/>
+            <Label Text="{Binding Itbis, StringFormat='{0:N2}'}" IsVisible="{Binding isnotCompra}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+            <Label Text="{x:Static resources:AppResource.QuantityLabel}" Margin="5,0,0,0"/>
+            <Label Text="{Binding Cantidad}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" x:Name="lblCantidad" />
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+            <Label Text="{x:Static resources:AppResource.UntMeasureLabel}" />
+            <Label Text="{Binding UnmCodigo}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+            <Label Text="Inv Area: " Margin="5,0,0,0" IsVisible="{Binding UseInvArea}" />
+            <Label Text="{Binding InvAreaDescr, StringFormat='{0:N2}'}" IsVisible="{Binding UseInvArea}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+            <Label Text="{x:Static resources:AppResource.SalePriceLabel}" FontAttributes="Bold" IsVisible="{Binding UsePrecioVenta}" />
+            <Label Text="{Binding PrecioTemp, StringFormat='{0:N2}'}" IsVisible="{Binding UsePrecioVenta}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+        </StackLayout>
+    </StackLayout>
+    <!--</Frame>-->
+</Frame>

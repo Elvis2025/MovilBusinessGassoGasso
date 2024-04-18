@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.AgregarClienteDireccionModal"
+             Title="Crear dirección"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,30,15,15" />
+                </StackLayout.Padding>
+                <ContentView VerticalOptions="CenterAndExpand" Padding="15,0,0,0">
+                    <Image Source="ic_close_white" VerticalOptions="Center" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+
+                <Label x:Name="lblTitle" Text="{x:Static resources:AppResource.AddNewAddress}" HorizontalTextAlignment="Center" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="18" />
+
+                <ContentView VerticalOptions="Center" HorizontalOptions="End" IsVisible="{Binding IsNotDetailing}">
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Save" />
+                    </ContentView.GestureRecognizers>
+                    <Label x:Name="btnSave" Text="{x:Static resources:AppResource.SaveUpper}" VerticalOptions="Center" HorizontalOptions="End" TextColor="White" IsVisible="{Binding IsNotDetailing}" />
+                </ContentView>
+            </StackLayout>
+
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{x:Static resources:AppResource.StreetLabel}" FontAttributes="Bold" VerticalOptions="Center" Grid.Column="0" Grid.Row="0" />
+                <Entry HorizontalOptions="FillAndExpand" x:Name="editCalle" Grid.Column="1" Grid.Row="0" MaxLength="50" Keyboard="Default" ReturnType="Next" />
+
+                <Label Text="{x:Static resources:AppResource.HouseLabel}" FontAttributes="Bold" Grid.Column="0" Grid.Row="1" VerticalOptions="Center" />
+                <Entry HorizontalOptions="FillAndExpand" x:Name="editCasa" Grid.Column="1" Grid.Row="1" MaxLength="50" Keyboard="Default" ReturnType="Next" />
+
+                <Label Text="{x:Static resources:AppResource.ContactLabel}" FontAttributes="Bold" Grid.Column="0" Grid.Row="2" VerticalOptions="Center"/>
+                <Entry HorizontalOptions="FillAndExpand" x:Name="editContacto" Grid.Column="1" Grid.Row="2" MaxLength="50" Keyboard="Default" ReturnType="Next" />
+
+                <Label Text="Sector: " FontAttributes="Bold" Grid.Column="0" Grid.Row="3" VerticalOptions="Center" />
+                <Entry HorizontalOptions="FillAndExpand" x:Name="editSector" Grid.Column="1" Grid.Row="3" MaxLength="50" Keyboard="Default" ReturnType="Next" />
+
+                <Label Text="{x:Static resources:AppResource.TelephoneLabel}" FontAttributes="Bold" Grid.Column="0" Grid.Row="4" VerticalOptions="Center" />
+                <Entry HorizontalOptions="FillAndExpand" x:Name="editTelefono" Grid.Column="1" Grid.Row="4" MaxLength="15" Keyboard="Telephone" ReturnType="Done" />
+
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

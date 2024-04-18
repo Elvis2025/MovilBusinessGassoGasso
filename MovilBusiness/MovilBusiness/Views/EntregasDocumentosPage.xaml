@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.EntregasDocumentosPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.DocumentsDelivery}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             xmlns:dialogs="clr-namespace:MovilBusiness.Views.Components.Dialogs"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Order="Primary" Command="{Binding SaveCommand}" IsEnabled="{Binding IsUp}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0">
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="10">
+                    <Label x:Name="lblRecibido" Text="{x:Static resources:AppResource.ReceivedByLabel}" TextColor="{StaticResource ColorPrimary}" FontAttributes="Bold" />
+                    <Entry x:Name="entRecibido" Placeholder="{x:Static resources:AppResource.EnterWhoReceiving}" Text="{Binding RecibidoPor, Mode=TwoWay}" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,0,0,10" Padding="0,0,0,5">
+                    <Frame.HasShadow>
+                        <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+                    </Frame.HasShadow>
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                        <StackLayout Orientation="Horizontal" BackgroundColor="#37474F" HorizontalOptions="FillAndExpand" Spacing="0" Padding="10,0" HeightRequest="30">
+                            <Label Text="{x:Static resources:AppResource.Date}" WidthRequest="80" TextColor="White" VerticalOptions="Center"/>
+                            <Label Text="{x:Static resources:AppResource.Days}" WidthRequest="50" TextColor="White" VerticalOptions="Center" />
+                            <Label Text="{x:Static resources:AppResource.Document}" WidthRequest="90" TextColor="White" VerticalOptions="Center"  />
+                            <Label Text="{x:Static resources:AppResource.Initials}" WidthRequest="50" TextColor="White" VerticalOptions="Center" />
+                            <Label Text="{x:Static resources:AppResource.Amount}" HorizontalOptions="FillAndExpand" TextColor="White" VerticalOptions="Center" />
+                        </StackLayout>
+
+                        <ListView
+                                x:Name="listFacturas"
+                                ItemsSource="{Binding Facturas}"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                HasUnevenRows="True"
+                                ItemSelected="OnListItemSelected"
+                                CachingStrategy="RecycleElement"
+                                BackgroundColor="Transparent"
+                                SeparatorVisibility="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid Padding="8,0" ColumnSpacing="0" BackgroundColor="{Binding RowColor}" HeightRequest="30">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="80" />
+                                                <ColumnDefinition Width="50" />
+                                                <ColumnDefinition Width="90" />
+                                                <ColumnDefinition Width="50" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding formattedFecha}" Grid.Column="0" VerticalOptions="Center" />
+                                            <Label Text="{Binding Dias}" Grid.Column="1" VerticalOptions="Center" />
+                                            <Label Text="{Binding EntDocumento}"  Grid.Column="2" VerticalOptions="Center"/>
+                                            <Label Text="{Binding cxcSigla}"  Grid.Column="3" VerticalOptions="Center"/>
+                                            <Label Text="{Binding EntMonto, StringFormat='{0:N2}'}"  Grid.Column="4" VerticalOptions="Center" />
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                    </StackLayout>
+                </Frame>
+
+                <ContentView Padding="10,5" BackgroundColor="White">
+                    <Label Text="{Binding EntregaNumero}" HorizontalOptions="FillAndExpand"/>
+                </ContentView>
+
+            </StackLayout>
+
+            <dialogs:DialogImpresion x:Name="dialogImpresion" Grid.Row="0"  IsVisible="{Binding ShowPrinter}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}"/>
+
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

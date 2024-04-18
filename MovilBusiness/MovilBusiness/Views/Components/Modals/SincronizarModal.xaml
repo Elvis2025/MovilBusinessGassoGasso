@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.SincronizarModal"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}">
+    <ContentPage.Content>
+
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" iOS="20,50,20,20" Android="20,30,20,20" />
+                </StackLayout.Padding>
+                <Label Text="{x:Static resources:AppResource.Synchronization}" TextColor="White" FontSize="25" />
+                <ProgressBar HorizontalOptions="FillAndExpand" ProgressColor="White" Progress="{Binding ProgressTotal}" />
+                <Label Text="{Binding MessageTotalProgress}" TextColor="White"/>
+                <!--Progreso total: 25%-->
+            </StackLayout>
+
+            <Grid Padding="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <BoxView Margin="5,0,0,0" HorizontalOptions="Start" WidthRequest="15" HeightRequest="15" Color="{StaticResource ColorPrimary}" Grid.Row="0" Grid.Column="0">
+                    <BoxView.CornerRadius>
+                        <OnPlatform x:TypeArguments="CornerRadius" Android="15" iOS="7" />
+                    </BoxView.CornerRadius>
+                </BoxView>
+                <BoxView VerticalOptions="FillAndExpand" HorizontalOptions="Start" WidthRequest="1" Grid.Column="0" Grid.Row="1" Color="LightGray" Margin="8,5" />
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="1" VerticalOptions="FillAndExpand" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" >
+                    <StackLayout.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" Android="20,0,0,0" iOS="15,0,0,0" />
+                    </StackLayout.Margin>
+                    <Label Text="{x:Static resources:AppResource.SavingSyncData}" FontSize="15" TextColor="Black" />
+                    <ProgressBar HorizontalOptions="FillAndExpand" Progress="{Binding Step1.Progress}" />
+                </StackLayout>
+
+                <BoxView x:Name="step2Indicator" Margin="5,0,0,0" HorizontalOptions="Start" WidthRequest="15" HeightRequest="15" Color="{Binding Step2.IndicatorColor}" Grid.Row="2" Grid.Column="0">
+                    <BoxView.CornerRadius>
+                        <OnPlatform x:TypeArguments="CornerRadius" Android="15" iOS="7" />
+                    </BoxView.CornerRadius>
+                </BoxView>
+                <BoxView VerticalOptions="FillAndExpand" HorizontalOptions="Start" WidthRequest="1" Grid.Column="0" Grid.Row="3" Color="LightGray" Margin="8,5" />
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="1" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
+                    <StackLayout.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" Android="20,0,0,0" iOS="15,0,0,0" />
+                    </StackLayout.Margin>
+                    <Label Text="{x:Static resources:AppResource.SendingDataToServer}" FontSize="15" x:Name="lblTitle2" TextColor="{Binding Step2.TitleColor}"/>
+                    <ProgressBar HorizontalOptions="FillAndExpand" Progress="{Binding Step2.Progress}" IsVisible="{Binding Step2.IsVisible}"/>
+                    <Label FontSize="13" TextColor="Gray" IsVisible="{Binding Step2.IsVisible}" Text="{Binding Step2.Message}" />
+                    <!-- Text="Enviando datos de transacciones"-->
+                </StackLayout>
+
+                <BoxView x:Name="step3Indicator" Margin="5,0,0,0" HorizontalOptions="Start" WidthRequest="15" HeightRequest="15" Color="{Binding Step3.IndicatorColor}" Grid.Row="4" Grid.Column="0">
+                    <BoxView.CornerRadius>
+                        <OnPlatform x:TypeArguments="CornerRadius" Android="15" iOS="7" />
+                    </BoxView.CornerRadius>
+                </BoxView>
+                <BoxView VerticalOptions="FillAndExpand" HorizontalOptions="Start" WidthRequest="1" Grid.Column="0" Grid.Row="5" Color="LightGray" Margin="8,5" />
+                <StackLayout HorizontalOptions="FillAndExpand" Spacing="1" VerticalOptions="FillAndExpand" Grid.Column="1" Grid.Row="4" Grid.RowSpan="2" >
+                    <StackLayout.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" Android="20,0,0,0" iOS="15,0,0,0" />
+                    </StackLayout.Margin>
+                    <Label Text="{x:Static resources:AppResource.ReceivingDataFromServer}" FontSize="15" x:Name="lblTitle3" TextColor="{Binding Step3.TitleColor}"/>
+                    <ProgressBar HorizontalOptions="FillAndExpand" Progress="{Binding Step3.Progress}" IsVisible="{Binding Step3.IsVisible}"/>
+                    <Label  TextColor="Gray" FontSize="13" Text="{Binding Step3.Message}" IsVisible="{Binding Step3.IsVisible}"/>
+                </StackLayout>
+
+                <BoxView x:Name="step4Indicator" Margin="5,0,0,0" HorizontalOptions="Start" WidthRequest="15" HeightRequest="15" Color="{Binding Step4.IndicatorColor}" Grid.Row="6" Grid.Column="0">
+                    <BoxView.CornerRadius>
+                        <OnPlatform x:TypeArguments="CornerRadius" Android="15" iOS="7" />
+                    </BoxView.CornerRadius>
+                </BoxView>
+                <BoxView VerticalOptions="FillAndExpand" HorizontalOptions="Start" WidthRequest="1" Grid.Column="0" Grid.Row="7" Color="LightGray" Margin="8,5" />
+                <StackLayout  HorizontalOptions="FillAndExpand" Spacing="1" VerticalOptions="FillAndExpand" Grid.Column="1" Grid.Row="6" Grid.RowSpan="2" >
+                    <StackLayout.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" Android="20,0,0,0" iOS="15,0,0,0" />
+                    </StackLayout.Margin>
+                    <Label Text="{x:Static resources:AppResource.EndingSynchronization}" FontSize="15" x:Name="lblTitle4" TextColor="{Binding Step4.TitleColor}"/>
+                    <ProgressBar HorizontalOptions="FillAndExpand" Progress="{Binding Step4.Progress}" IsVisible="{Binding Step4.IsVisible}"/>
+                    <Label Text="{x:Static resources:AppResource.UpdatingSyncDate}" TextColor="Gray" FontSize="13" IsVisible="{Binding Step4.IsVisible}" />
+                </StackLayout>
+            </Grid>
+
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

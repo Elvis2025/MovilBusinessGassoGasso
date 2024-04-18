@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.AgregarDetalleCanastosModal"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:configuration="clr-namespace:MovilBusiness.Configuration"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="0,15,15,15" iOS="0,30,15,15" />
+                </StackLayout.Padding>
+                <ContentView VerticalOptions="CenterAndExpand" Padding="15,0,0,0">
+                    <Image Source="ic_close_white" VerticalOptions="Center" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+
+                <Label x:Name="lblTitle" Margin="5,0,0,0" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="18" />
+
+                <ContentView VerticalOptions="Center" HorizontalOptions="End">
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Save" />
+                    </ContentView.GestureRecognizers>
+                    <Image x:Name="btnSave" Source="ic_done_white_24dp" VerticalOptions="Center" HorizontalOptions="End"/>
+                </ContentView>
+                
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="{x:OnIdiom Phone=10, Tablet=20}">
+
+                <Label Text="{Binding CurrentClient.ClicodigoNombre, Source={x:Static configuration:Arguments.Values}}" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" />
+
+                <Label Text="{x:Static resources:AppResource.PendingBasketsZero}" x:Name="lblCounter" FontAttributes="Bold" />
+
+                <Frame HorizontalOptions="FillAndExpand" Padding="0" HasShadow="False">
+                    <Frame.HeightRequest>
+                        <OnIdiom x:TypeArguments="x:Double" Phone="45" Tablet="55" />
+                    </Frame.HeightRequest>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <controls:BorderlessEntry x:Name="editSearch" HorizontalOptions="FillAndExpand" Margin="0,0,3,0" FontSize="14" Completed="editSearch_Completed" ReturnType="Done" Placeholder="{x:Static resources:AppResource.EnterCode}" VerticalOptions="Center" PlaceholderColor="Gray" />
+                        <ContentView VerticalOptions="FillAndExpand" BackgroundColor="White" WidthRequest="45">
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoScanBarCode" />
+                            </ContentView.GestureRecognizers>
+                            <Image Source="barcode" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </ContentView>
+                    </StackLayout>
+                </Frame>
+
+                <Label Text="{x:Static resources:AppResource.ScannedBasketsLabel}" Margin="0,10,0,0" x:Name="lblCanastosAgregados" FontAttributes="Bold"/>
+
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

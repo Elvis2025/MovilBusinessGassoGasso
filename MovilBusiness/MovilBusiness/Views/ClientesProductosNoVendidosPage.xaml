@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ClientesProductosNoVendidosPage"
+             Padding="10"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.UnSoldProducts}"
+             BackgroundColor="Transparent"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls">
+    <ContentPage.Content>
+
+        <Grid HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+              
+              
+            </Grid.RowDefinitions>
+
+            <Label Text="{Binding lbltitle}" FontSize="Medium" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"> </Label>
+            <Label Text="{Binding SelectedLine}" FontSize="Medium" FontAttributes="Bold" Grid.Row="0" Grid.Column="1"></Label>
+            <Label Text="{x:Static resources:AppResource.TotalCustomersLabel}"  FontAttributes="Bold" Grid.Row="2" Grid.Column="0" > </Label>
+            <Label Text="{Binding cantidadClientes}" Grid.Row="2" Grid.Column="1" ></Label>
+            <Label Text="{x:Static resources:AppResource.CustomersWhoHaveNotPurchasedLabel}" FontAttributes="Bold" Grid.Row="3" Grid.Column="0" ></Label>
+            <Label Text="{Binding cantidadClientesSinComprar}" Grid.Row="3" Grid.Column="1" ></Label>
+            <Label Text="{x:Static resources:AppResource.CustomersWhoHavePurchasedLabel}" FontAttributes="Bold" Grid.Row="4" Grid.Column="0" ></Label>
+            <Label Text="{Binding cantidadClientesCompraron}" Grid.Row="4" Grid.Column="1" ></Label>
+            
+            <Frame HorizontalOptions="FillAndExpand" Padding="0" HasShadow="False" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6">
+                <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  >
+                    <StackLayout Padding="10,5" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#37474F">
+                        <Label Text="{x:Static resources:AppResource.Code} " TextColor="White" WidthRequest="80" LineBreakMode="TailTruncation" />
+                        <Label Text="{x:Static resources:AppResource.CustomerName}" TextColor="White" WidthRequest="200" LineBreakMode="TailTruncation" x:Name="Descripcion" />
+
+                    </StackLayout>
+
+                    <ListView HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand"
+                          x:Name="listProductosNovendidos"
+                          HasUnevenRows="True"
+                          SeparatorVisibility="None"                        
+                          CachingStrategy="RecycleElement"
+                          BackgroundColor="Transparent"
+                          ItemsSource="{Binding ClientesProductosNovendidos}"
+                          SelectionMode="None">
+
+                        <ListView.HeightRequest>
+                            <OnIdiom x:TypeArguments="x:Double" Phone="130" Tablet="200" />
+                        </ListView.HeightRequest>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid HorizontalOptions="FillAndExpand" Padding="10,5" ColumnSpacing="0" VerticalOptions="FillAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="300" />
+
+                                        </Grid.ColumnDefinitions>
+                                       
+
+                                        <Label Text="{Binding CliCodigo}" Grid.Column="0" LineBreakMode="TailTruncation" WidthRequest="80" />
+                                        <Label Text="{Binding CliNombre}" Grid.Column="1" LineBreakMode="TailTruncation"  WidthRequest="300" />
+
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+                 
+                </StackLayout>
+            </Frame>
+            <controls:ProgressIndicator IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="3" />
+        </Grid>
+    </ContentPage.Content>
+  
+</ContentPage>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.AsignacionRutasDetallePage"
+             Title="{x:Static resources:AppResource.RouteAssignment}"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="{StaticResource WindowBackground}"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_done_white_24dp" Text="{x:Static resources:AppResource.Save}" Order="Primary" Command="{Binding SaveCommand}"  IsEnabled="{Binding IsUp}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ListView
+                x:Name="list"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Margin="10"
+                BackgroundColor="Transparent"
+                CachingStrategy="RecycleElement"
+                HasUnevenRows="True"
+                ItemsSource="{Binding Ruta}"
+                SeparatorVisibility="None"
+                ItemSelected="List_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame HorizontalOptions="FillAndExpand" BackgroundColor="{Binding Background}" HasShadow="False" Margin="3" Padding="7,7,4,7">
+      
+                                <Grid HorizontalOptions="FillAndExpand" RowSpacing="5" BackgroundColor="Transparent">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid HorizontalOptions="FillAndExpand" Grid.Column="0" Grid.Row="0" VerticalOptions="StartAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding CliNombreCompleto}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Grid.Column="0"/>
+                                        <Label Text="{Binding FechaLabel}" Grid.Column="1" WidthRequest="95" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White" />
+                                    </Grid>
+                                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding CliCalle}" IsVisible="{Binding ShowDireccion}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" />
+                                    <Label Grid.Row="2" Grid.Column="0" Text="{Binding CliDatosOtrosLabel}" HorizontalOptions="FillAndExpand" TextColor="{StaticResource ColorPrimary}" IsVisible="{Binding ShowDatosOtros}" />
+
+                                    <ContentView Padding="2" BackgroundColor="#424242" BindingContext="{Binding rowguid}" VerticalOptions="Center" Grid.Column="1" Grid.Row="0">
+                                        <ContentView.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapUpRow" />
+                                        </ContentView.GestureRecognizers>
+                                        <Image Source="baseline_arrow_upward_black_24" BackgroundColor="White" />
+                                    </ContentView>
+
+                                    <ContentView VerticalOptions="Center" BindingContext="{Binding rowguid}" Grid.Column="1" Grid.Row="2" Padding="2" BackgroundColor="#424242">
+                                        <ContentView.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapDownRow"/>
+                                        </ContentView.GestureRecognizers>
+                                        <Image Source="baseline_arrow_downward_black_24" BackgroundColor="White" />
+                                    </ContentView>
+                                   
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

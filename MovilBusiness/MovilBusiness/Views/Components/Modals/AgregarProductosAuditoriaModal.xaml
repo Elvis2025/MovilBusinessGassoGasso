@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.AgregarProductosAuditoriaModal"
+             xmlns:behavior="clr-namespace:MovilBusiness.Controls.Behavior"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+              NavigationPage.HasNavigationBar="False"
+             BackgroundColor= "White">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+            <StackLayout Orientation="Horizontal"  HeightRequest="45" HorizontalOptions="FillAndExpand" BackgroundColor ="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="15" iOS="15,30,15,15" />
+                </StackLayout.Padding>
+                <Label Text="{x:Static resources:AppResource.AddProductAudit}" FontSize="17" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="End" TextColor="White" />
+                <Image HorizontalOptions="End" Source="ic_close_white" VerticalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ScrollView.Padding>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="10" Tablet="20" />
+                </ScrollView.Padding>
+                <Grid HorizontalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label x:Name="lblCategoria" Text="{x:Static resources:AppResource.Category}" Grid.Row="0" FontAttributes="Bold" Grid.Column="0" Grid.ColumnSpan="2" />
+                    <Picker Title="{x:Static resources:AppResource.Select}" x:Name="comboCategoria1" SelectedIndexChanged="Categoria1IndexChanged" ItemsSource="{Binding Categorias}" ItemDisplayBinding="{Binding Ca1Descripcion}" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+                    <Label x:Name="lblDescripcion" Text="{x:Static resources:AppResource.Description}" Grid.Row="2" FontAttributes="Bold" Grid.Column="0" Grid.ColumnSpan="2" />
+                    <Picker Title="{x:Static resources:AppResource.Select}" x:Name="comboDescripcion" SelectedIndexChanged="Categoria2IndexChanged" ItemsSource="{Binding Categorias2}" ItemDisplayBinding="{Binding Ca2Descripcion}"  HorizontalOptions="FillAndExpand" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" />
+                    <Label x:Name="lblMarca" Text="{x:Static resources:AppResource.Brand}" Grid.Row="4" FontAttributes="Bold" Grid.Column="0" Grid.ColumnSpan="2" />
+                    <Picker Title="{x:Static resources:AppResource.Select}" SelectedIndexChanged="MarcasIndexChanged" x:Name="comboMarca" ItemsSource="{Binding Marcas}" ItemDisplayBinding="{Binding MarDescripcion}" HorizontalOptions="FillAndExpand" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" />
+
+                    <Grid HorizontalOptions="FillAndExpand" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label x:Name="lblVariedad" Text="{x:Static resources:AppResource.Variety}" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" />
+                        <Label x:Name="lblPresentacion" Text="{x:Static resources:AppResource.Presentation}" FontAttributes="Bold" Grid.Row="0" Grid.Column="1"  HorizontalOptions="FillAndExpand"/>
+
+                        <Picker x:Name="comboVariedad" Title="{x:Static resources:AppResource.Select}" ItemsSource="{Binding Variedades}" ItemDisplayBinding="{Binding MarFragancia}"  HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="0" />
+                        <Picker x:Name="comboPresentacion" Title="{x:Static resources:AppResource.Select}" SelectedIndexChanged="PresentacionIndexChanged" ItemsSource="{Binding Presentaciones}" ItemDisplayBinding="{Binding PreDescripcion}" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="1" />
+
+                    </Grid>
+
+                    <Label x:Name="lblEmpaque" Text="{x:Static resources:AppResource.Packing}" FontAttributes="Bold" Grid.Row="8" Grid.Column="0" />
+                    <Label x:Name="lblUnidMedida" Text="{x:Static resources:AppResource.UnitMeasure}" FontAttributes="Bold" Grid.Row="8" Grid.Column="1" />
+                    <Picker x:Name="comboEmpaque" Title="{x:Static resources:AppResource.Select}" SelectedIndexChanged="EmpaqueIndexChanged" ItemsSource="{Binding Empaques}" ItemDisplayBinding="{Binding EmpDescripcion}" HorizontalOptions="FillAndExpand" Grid.Row="9" Grid.Column="0" />
+                    <Picker x:Name="comboUnidadesMedidas" Title="{x:Static resources:AppResource.Select}" ItemsSource="{Binding UnidadesMedidas}" ItemDisplayBinding="{Binding UnidDescripcion}" HorizontalOptions="FillAndExpand" Grid.Row="9" Grid.Column="1" />
+                    <Label x:Name="lblCapacidad" Text="{x:Static resources:AppResource.Capacity}" FontAttributes="Bold" Grid.Row="10" Grid.Column="0" />
+                    <Label x:Name="lblPrecioCompra" Text="{x:Static resources:AppResource.PurchasePrice}" Grid.Row="10" Grid.Column="1" FontAttributes="Bold" />
+                    <Entry x:Name="entryCapacidad" Grid.Row="11" Keyboard="Numeric" Grid.Column="0" HorizontalOptions="FillAndExpand" />
+                    <Entry x:Name="entryPrecioCompra" Grid.Row="11" Grid.Column="1" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
+                    <Label x:Name="lblPrecioVenta" Text="{x:Static resources:AppResource.SalePrice}" FontAttributes="Bold" Grid.Row="12" Grid.Column="0" />
+                    <Label x:Name="lblPrecioOferta" Text="{x:Static resources:AppResource.OfferPrice}" FontAttributes="Bold" Grid.Row="12" Grid.Column="1" />
+                    <Entry x:Name="entryPrecioVenta" Grid.Row="13" Grid.Column="0" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
+                    <Entry x:Name="entryPrecioOferta" Grid.Row="13" Grid.Column="1" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
+                    <Label x:Name="lblGondolaSuelo" Text="{x:Static resources:AppResource.GondolaFloor}" FontAttributes="Bold" Grid.Row="14" Grid.Column="0" />
+                    <Label x:Name="lblGondolaManos" Text="{x:Static resources:AppResource.GondolaHands}" FontAttributes="Bold" Grid.Row="14" Grid.Column="1" />
+                    <Entry x:Name="entryGondolaSuelo" Grid.Row="15" Grid.Column="0" HorizontalOptions="FillAndExpand" Keyboard="Numeric">
+                        <Entry.Behaviors>
+                            <behavior:NumericValidation />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry x:Name="entryGondolaManos" Grid.Row="15" Grid.Column="1" HorizontalOptions="FillAndExpand" Keyboard="Numeric">
+                        <Entry.Behaviors>
+                            <behavior:NumericValidation />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label x:Name="lblGondolaOjos" Text="{x:Static resources:AppResource.GondolaEyes}" FontAttributes="Bold" Grid.Row="16" Grid.Column="0" />
+                    <Label x:Name="lblGondolaTecho" Text="{x:Static resources:AppResource.GondolaRoof}" FontAttributes="Bold" Grid.Row="16" Grid.Column="1" />
+                    <Entry x:Name="entryGondolaOjos" Grid.Row="17" Grid.Column="0" HorizontalOptions="FillAndExpand" Keyboard="Numeric">
+                        <Entry.Behaviors>
+                            <behavior:NumericValidation />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry x:Name="entryGondolaTecho" Grid.Row="17" Grid.Column="1" HorizontalOptions="FillAndExpand" Keyboard="Numeric">
+                        <Entry.Behaviors>
+                            <behavior:NumericValidation />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label x:Name="lblEspacioCabecera" Text="{x:Static resources:AppResource.HeaderSpace}" FontAttributes="Bold" Grid.Row="18" Grid.Column="0" />
+                    <Label x:Name="lblEspacioIsla" Text="{x:Static resources:AppResource.IslandSpace}" FontAttributes="Bold" Grid.Row="18" Grid.Column="1" />
+                    <Entry x:Name="entryEspacioCabecera" Grid.Row="19" Grid.Column="0" HorizontalOptions="FillAndExpand" Keyboard="Numeric" >
+                        <Entry.Behaviors>
+                            <behavior:NumericValidation />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry x:Name="entryEspacioIsla" Grid.Row="19" Grid.Column="1" HorizontalOptions="FillAndExpand"  Keyboard="Numeric">
+                        <Entry.Behaviors>
+                            <behavior:NumericValidation />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label x:Name="lblEspacioCaja" Text="{x:Static resources:AppResource.BoxSpace}" FontAttributes="Bold" Grid.Row="20" Grid.Column="0" />
+                    <Label x:Name="lblEspacioFrio" Text="{x:Static resources:AppResource.ColdSpace}"  FontAttributes="Bold" Grid.Row="20" Grid.Column="1" />
+                    <Entry x:Name="entryEspacioCaja" Grid.Row="21" Grid.Column="0" HorizontalOptions="FillAndExpand"  Keyboard="Numeric">
+                        <Entry.Behaviors>
+                            <behavior:NumericValidation />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry x:Name="entryEspacioFrio" Grid.Row="21" Grid.Column="1" HorizontalOptions="FillAndExpand"  Keyboard="Numeric">
+                        <Entry.Behaviors>
+                            <behavior:NumericValidation />
+                        </Entry.Behaviors>
+                    </Entry>
+                </Grid>
+            </ScrollView>
+
+            <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.8" Color="#CFD8DC" Margin="0,5,0,0" />
+
+            <ContentView HorizontalOptions="FillAndExpand" BackgroundColor="#F5F5F5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                 <StackLayout.Margin>
+                    <OnPlatform x:TypeArguments="Thickness" Android="10" iOS="20" />
+                 </StackLayout.Margin>
+                    <Button Text="{x:Static resources:AppResource.Cancel}" Clicked="Dismiss" HeightRequest="40" TextColor="{StaticResource ColorPrimary}" BackgroundColor="Transparent" Margin="0,0,10,0" />
+                    <Button Text="{x:Static resources:AppResource.Add}" Clicked="AceptarProducto" WidthRequest="90" HeightRequest="40" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White"/>
+                </StackLayout>
+            </ContentView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

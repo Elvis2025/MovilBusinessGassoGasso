@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.AuditoriaMercadoPage"
+             Title="{x:Static resources:AppResource.MarketAudit}"
+            xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:behaviors="clr-namespace:MovilBusiness.Controls.Behavior"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls"
+             BackgroundColor="{StaticResource WindowBackground}">
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Icon="ic_done_white_24dp" Order="Primary" Command="{Binding SaveCommand}" IsEnabled="{Binding IsUp}"/>
+    </TabbedPage.ToolbarItems>
+
+    <ContentPage Title="Productos">
+        <ContentPage.Icon>
+            <OnPlatform x:TypeArguments="FileImageSource" Android="" iOS="ic_shopping_basket_black_24dp" />
+        </ContentPage.Icon>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5,10">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ListView 
+                x:Name="list"
+                SeparatorVisibility="None"
+                ItemsSource="{Binding ProductosAgregados}"
+                CachingStrategy="RecycleElement"
+                HasUnevenRows="True"
+                ItemSelected="OnListItemSelected"
+                BackgroundColor="Transparent"
+                Grid.Row="0" 
+                HorizontalOptions="FillAndExpand" 
+                VerticalOptions="FillAndExpand" />
+
+            <Button Grid.Row="0" Command="{Binding ShowAddDialogCommand}" HorizontalOptions="End" VerticalOptions="End" BackgroundColor="{StaticResource ColorPrimary}" Image="ic_add_white_24dp" CornerRadius="25" WidthRequest="50" HeightRequest="50" Margin="5,0" />
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+        </Grid>
+        
+    </ContentPage>
+
+    <ContentPage Title="{x:Static resources:AppResource.SetUp}">
+        <ContentPage.Icon>
+            <OnPlatform x:TypeArguments="FileImageSource" Android="" iOS="ic_build_black_24dp" />
+        </ContentPage.Icon>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid HorizontalOptions="FillAndExpand" Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{x:Static resources:AppResource.Size}" VerticalOptions="Center"  Grid.Row="0" Grid.Column="0" />
+                <Label  VerticalOptions="Center" Grid.Row="1" Grid.Column="0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static resources:AppResource.CashCashRegisters}" />
+                            <Span Text="&#10;" />
+                            <Span Text="{x:Static resources:AppResource.CashCashRegistersRegisters}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+
+                <Picker Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Tamanos}" ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding CurrentTamano}" Title="{x:Static resources:AppResource.SelectTheSize}" HorizontalOptions="FillAndExpand"/>
+
+                <Entry Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" Text="{Binding CantCajasRegistradoras, Mode=TwoWay}" Keyboard="Numeric">
+                    <Entry.Behaviors>
+                        <behaviors:NumericValidation />
+                    </Entry.Behaviors>
+                </Entry>
+
+            </Grid>
+
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" IsVisible="{Binding IsBusy}" />
+        </Grid>
+      
+    </ContentPage>
+    
+</TabbedPage>

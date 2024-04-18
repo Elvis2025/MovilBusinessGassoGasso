@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.SuccessPage"
+             BackgroundColor="{StaticResource WindowBackground}"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             xmlns:dialogs="clr-namespace:MovilBusiness.Views.Components.Dialogs"
+             xmlns:controls="clr-namespace:MovilBusiness.Controls">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" Orientation="Vertical" Spacing="0" Grid.Row="0">
+                <StackLayout.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="20" Tablet="70" />
+                </StackLayout.Margin>
+
+                <Label Text="{Binding MainTitle}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start">
+                    <Label.FontSize>
+                        <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="24" />
+                    </Label.FontSize>
+                </Label>
+                <Label Text="{x:Static resources:AppResource.SelectDesiredOption}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" />
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,20,0,0">
+                    <StackLayout.Spacing>
+                        <OnIdiom x:TypeArguments="x:Double" Phone="10" Tablet="20" />
+                    </StackLayout.Spacing>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="#CFD8DC">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AtacharImagen" />
+                        </StackLayout.GestureRecognizers>
+                        <StackLayout.Padding>
+                            <OnIdiom x:TypeArguments="Thickness" Phone="5" Tablet="10" />
+                        </StackLayout.Padding>
+                        <Image Source="c_camera" HeightRequest="80" WidthRequest="80"/>
+                        <Label Text="{x:Static resources:AppResource.Attach}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center">
+                            <Label.FontSize>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="16" />
+                            </Label.FontSize>
+                        </Label>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="#CFD8DC">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Firmar" />
+                        </StackLayout.GestureRecognizers>
+                        <StackLayout.Padding>
+                            <OnIdiom x:TypeArguments="Thickness" Phone="5" Tablet="10" />
+                        </StackLayout.Padding>
+                        <Image Source="c_sign" HeightRequest="80" WidthRequest="80"/>
+                        <Label Text="{x:Static resources:AppResource.Sign}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center">
+                            <Label.FontSize>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="16" />
+                            </Label.FontSize>
+                        </Label>
+                    </StackLayout>
+
+                    <StackLayout x:Name="Imprimirbutton" Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="#CFD8DC">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Imprimir" />
+                        </StackLayout.GestureRecognizers>
+                        <StackLayout.Padding>
+                            <OnIdiom x:TypeArguments="Thickness" Phone="5" Tablet="10" />
+                        </StackLayout.Padding>
+                        <Image Source="c_printer" HeightRequest="80" WidthRequest="80"/>
+                        <Label Text="{x:Static resources:AppResource.Print}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" >
+                            <Label.FontSize>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="16" />
+                            </Label.FontSize>
+                        </Label>
+                    </StackLayout>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <StackLayout.Margin>
+                        <OnIdiom x:TypeArguments="Thickness" Phone="0,10,0,0" Tablet="0,20,0,0" />
+                    </StackLayout.Margin>
+                    <StackLayout.Spacing>
+                        <OnIdiom x:TypeArguments="x:Double" Phone="10" Tablet="20" />
+                    </StackLayout.Spacing>
+                    <StackLayout x:Name="Compartirbutton" Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="#CFD8DC">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Compartir" />
+                        </StackLayout.GestureRecognizers>
+                        <StackLayout.Padding>
+                            <OnIdiom x:TypeArguments="Thickness" Phone="5" Tablet="10" />
+                        </StackLayout.Padding>
+                        <Image Source="c_share" HeightRequest="80" WidthRequest="80"/>
+                        <Label Text="{x:Static resources:AppResource.Share}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center">
+                            <Label.FontSize>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="16" />
+                            </Label.FontSize>
+                        </Label>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="#CFD8DC">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="PonerComentario" />
+                        </StackLayout.GestureRecognizers>
+                        <StackLayout.Padding>
+                            <OnIdiom x:TypeArguments="Thickness" Phone="5" Tablet="10" />
+                        </StackLayout.Padding>
+                        <Image Source="c_comment" HeightRequest="80" WidthRequest="80"/>
+                        <Label Text="{x:Static resources:AppResource.Comment}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center">
+                            <Label.FontSize>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="16" />
+                            </Label.FontSize>
+                        </Label>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="#CFD8DC">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Salir" />
+                        </StackLayout.GestureRecognizers>
+                        <StackLayout.Padding>
+                            <OnIdiom x:TypeArguments="Thickness" Phone="5" Tablet="10" />
+                        </StackLayout.Padding>
+                        <Image Source="c_ok" HeightRequest="80" WidthRequest="80"/>
+                        <Label Text="{x:Static resources:AppResource.EndUp}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" >
+                            <Label.FontSize>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="16" />
+                            </Label.FontSize>
+                        </Label>
+                    </StackLayout>
+
+                </StackLayout>
+
+            </StackLayout>
+
+            <dialogs:DialogImpresion x:Name="dialogImpresion" Grid.Row="0" IsVisible="{Binding ShowPrinterDialog}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+            <controls:ProgressIndicator HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}" Grid.Row="0" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

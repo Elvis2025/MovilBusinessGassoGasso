@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ConsultaInventarioFisicoPage"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.CheckPhysicalInventories}"
+             BackgroundColor="{StaticResource WindowBackground}"
+             Padding="10">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ListView
+                x:Name="list"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="True"
+                CachingStrategy="RecycleElement"
+                ItemsSource="{Binding Inventarios}"
+                ItemSelected="ListView_ItemSelected">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame HorizontalOptions="FillAndExpand" Padding="10,5" HasShadow="False" Margin="0,0,0,5">
+                                <Grid HorizontalOptions="FillAndExpand">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResource.InventoryNo}" />
+                                                <Span Text="{Binding invSecuencia}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Text="{Binding infFecha}" Grid.Row="0" Grid.Column="1" />
+
+                                    <Label Grid.Row="1" Grid.Column="0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResource.LinesLabel}" />
+                                                <Span Text="{Binding InvTotal}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Text="{Binding InvEstado}" Grid.Row="1" Grid.Column="1" FontAttributes="Bold" TextColor="{StaticResource ColorPrimary}" />
+
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

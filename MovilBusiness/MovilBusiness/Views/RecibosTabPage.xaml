@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.views.RecibosTabPage"
+             xmlns:views="clr-namespace:MovilBusiness.views"
+            xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.Receipts}">
+  <!--Pages can be added as references or inline-->
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppResource.Save}" Order="Primary" Command="{Binding SaveCommnand}" />
+    </TabbedPage.ToolbarItems>
+    
+    <!--<ContentPage Title="General" />-->
+    <views:RecibosDocumentosTabPage Title="{x:Static resources:AppResource.Documents}">    
+        <views:RecibosDocumentosTabPage.Icon>
+            <OnPlatform x:TypeArguments="FileImageSource" Android="" iOS="baseline_list_alt_black_24" />
+        </views:RecibosDocumentosTabPage.Icon>
+    </views:RecibosDocumentosTabPage>
+    <views:RecibosFormaPagoTabPage Title="{x:Static resources:AppResource.Paymentway}">
+        <views:RecibosFormaPagoTabPage.Icon>
+            <OnPlatform x:TypeArguments="FileImageSource" Android="" iOS="ic_monetization_on_black_24dp" />
+        </views:RecibosFormaPagoTabPage.Icon>
+    </views:RecibosFormaPagoTabPage>
+    <views:RecibosResumenTabPage Title="{x:Static resources:AppResource.Resume}">
+        <views:RecibosResumenTabPage.Icon>
+            <OnPlatform x:TypeArguments="FileImageSource" Android="" iOS="ic_assignment_black" />
+        </views:RecibosResumenTabPage.Icon>
+    </views:RecibosResumenTabPage>
+</TabbedPage>

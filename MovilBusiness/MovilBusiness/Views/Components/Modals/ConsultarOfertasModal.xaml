@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.ConsultarOfertasModal"
+             xmlns:views="clr-namespace:MovilBusiness.Views.Components.Views"
+              NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             BackgroundColor="#CFD8DC">
+    <ContentPage.Content>
+
+        <Frame HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="0">
+            <Frame.Margin>
+                <OnIdiom x:TypeArguments="Thickness" Phone="20" Tablet="50" />
+            </Frame.Margin>
+
+            <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="0" Padding="15" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}">
+                    <Label Text="{x:Static resources:AppResource.CheckOffers}" FontAttributes="Bold" FontSize="17" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="White" />
+                    <Image HorizontalOptions="End" Source="ic_close_white" VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Dismiss" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+
+                <views:OfertasInfoView Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+
+                <Button Grid.Row="2" Text="{x:Static resources:AppResource.Close}" Clicked="Dismiss" HorizontalOptions="FillAndExpand" Margin="10,15,10,5" />
+                
+            </Grid>
+
+        </Frame>
+
+    </ContentPage.Content>
+</ContentPage>

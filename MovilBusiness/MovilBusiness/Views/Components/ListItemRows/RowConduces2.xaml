@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             x:Class="MovilBusiness.Views.Components.ListItemRows.RowConduces2">
+
+    <Frame HorizontalOptions="FillAndExpand" Padding="10,0" BackgroundColor="White" CornerRadius="4" Margin="0,0,0,5">
+        <Frame.HasShadow>
+            <OnPlatform x:TypeArguments="x:Boolean" Android="True" iOS="False" />
+        </Frame.HasShadow>
+
+        <Grid HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="0" Grid.Column="0" VerticalOptions="Center">
+                <Label FontAttributes="Bold" HorizontalOptions="FillAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding ProCodigo}" />
+                            <Span Text=" - " />
+                            <Span Text="{Binding ProDescripcion}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label HorizontalOptions="FillAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static resources:AppResource.PriceLabel}" />
+                            <Span Text="{Binding Precio, StringFormat='{0:N2}'}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label HorizontalOptions="FillAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static resources:AppResource.InvoiceLabel}" />
+                            <Span Text="{Binding Documento}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label IsVisible="{Binding TraIndicadorOferta}" HorizontalOptions="End" BackgroundColor="{StaticResource ColorPrimary}" TextColor="White" Margin="0,0,0,3">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="  **" />
+                            <Span Text="{x:Static resources:AppResource.Offer}" />
+                            <Span Text= "{Binding ShowProIDoferta}" />
+                            <Span Text="**  " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+            <BoxView Grid.Column="1" VerticalOptions="FillAndExpand" Margin="5" HorizontalOptions="End" WidthRequest="1" Color="LightGray" />
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="End" Grid.Column="2" Spacing="0" VerticalOptions="Center">
+                <Label Text="{x:Static resources:AppResource.Quantity}" HorizontalOptions="Center" VerticalOptions="End" />
+                <Entry HorizontalOptions="FillAndExpand" ReturnType="Done" Completed="OnOkClicked" Margin="0" VerticalOptions="Center" Text="{Binding Cantidad, Mode=TwoWay}" Keyboard="Numeric" HorizontalTextAlignment="Center" />
+
+                <Label HorizontalOptions="Center" VerticalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="/" />
+                            <Span Text="{Binding CantidadSolicitada}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+        </Grid>
+    </Frame>
+
+</ViewCell>

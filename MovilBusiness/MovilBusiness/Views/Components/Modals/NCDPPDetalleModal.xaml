@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.Components.Modals.NCDPPDetalleModal"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HasShadow="False" Padding="0">
+                <Frame.Margin>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="10,50" Tablet="35,70" />
+                </Frame.Margin>
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                    <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource ColorPrimary}" HorizontalOptions="FillAndExpand" HeightRequest="55">
+                        <ContentView VerticalOptions="FillAndExpand" HorizontalOptions="Start" Padding="10,0,0,0">
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Dismiss" />
+                            </ContentView.GestureRecognizers>
+                            <Image Source="ic_close_white" VerticalOptions="Center" />
+                        </ContentView>
+                        <Label Text="{x:Static resources:AppResource.DetailAppliedCreditNote}" FontAttributes="Bold" FontSize="16" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="20,0,0,0" />
+                    </StackLayout>
+                    <ScrollView HorizontalOptions="FillAndExpand" Orientation="Horizontal" VerticalOptions="FillAndExpand">
+                        <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="10,5" BackgroundColor="#37474F" Spacing="0">
+                                <Label Text="{x:Static resources:AppResource.Invoice}" TextColor="White" HorizontalOptions="FillAndExpand" Grid.Column="0"/>
+                                <Label Text="{x:Static resources:AppResource.Amount}" TextColor="White" HorizontalOptions="FillAndExpand" Grid.Column="1" />
+                                <Label Text="NCF" TextColor="White" HorizontalOptions="CenterAndExpand" Grid.Column="2" />
+                                <Label Text="{x:Static resources:AppResource.NCFModified}" TextColor="White" HorizontalOptions="EndAndExpand" Grid.Column="3"/>
+                            </StackLayout>
+                       <ListView
+                        x:Name="list"
+                        HorizontalOptions="FillAndExpand" 
+                        VerticalOptions="FillAndExpand"
+                        ItemsSource="{Binding NCDPPSource}"
+                        HasUnevenRows="True"
+                        SeparatorVisibility="None"
+                        CachingStrategy="RecycleElement"
+                        BackgroundColor="Transparent"
+                        ItemSelected="OnList_ItemSelected">
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid HorizontalOptions="FillAndExpand" Margin="10,5" ColumnSpacing="5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Text="{Binding CxcDocumento}" Grid.Column="0" HorizontalOptions="StartAndExpand" />
+                                                <Label Text="{Binding NCDMonto}" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+                                                <Label Text="{Binding NCDNCF}" Grid.Column="2" HorizontalOptions="FillAndExpand"/>
+                                                <Label Text="{Binding CxCNCFAfectado}" Grid.Column="3" HorizontalOptions="EndAndExpand"/>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>            
+ </Frame>                  
+</Grid>
+</ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             x:Class="MovilBusiness.Views.Components.Modals.SeleccionarMotivoDevolucionModal">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" Grid.Row="0" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource ColorPrimary}">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="15" iOS="15,30,15,15" />
+                </StackLayout.Padding>
+                <Image HorizontalOptions="Start" Source="ic_close_white" VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dismiss" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Margin="15,0,0,0" Text="{x:Static resources:AppResource.ReasonForReturn}" FontAttributes="Bold" FontSize="17" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="White" />
+
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15">
+                <Label Text="{x:Static resources:AppResource.SelectReason}" />
+
+                <Picker HorizontalOptions="FillAndExpand" Title="{x:Static resources:AppResource.Select}" x:Name="comboMotivo" />
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="10" Margin="0,15,0,0">
+                    <Button Text="{x:Static resources:AppResource.Cancel}" Clicked="Dismiss" TextColor="{StaticResource ColorPrimary}" BackgroundColor="Transparent" WidthRequest="120" />
+                    <Button Text="{x:Static resources:AppResource.Aceptar}" Clicked="AceptarMotivo" TextColor="{StaticResource ColorPrimary}" BackgroundColor="Transparent" WidthRequest="120" />
+                </StackLayout>
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
