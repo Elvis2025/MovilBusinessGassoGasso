@@ -380,7 +380,7 @@ namespace MovilBusiness.DataAccess
                 "from "+(confirmado ? "DepositosConfirmados" : "Depositos") +" d " +
                 "left join CuentasBancarias c on c.CuBID = d.CuBID " +
                 "left join UsosMultiples u on ltrim(rtrim(upper(u.CodigoGrupo))) = 'DEPTIPO' and CodigoUso = d.DepTipo " +
-                "where DepSecuencia = ? and RepCodigo = ?",
+                "where d.DepSecuencia = ? and d.RepCodigo = ?",
                 new string[] { depSecuencia.ToString(), Arguments.CurrentUser.RepCodigo });
 
             if (list != null && list.Count > 0)
