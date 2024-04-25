@@ -6738,11 +6738,16 @@ namespace MovilBusiness.DataAccess
             return ReadBoolParam("DEVPRODADIC");
         }
 
+        public bool GetCodeBar()
+        {
+            return ReadBoolParam("TRACODIGOBARRA");
+        }
 
         /// <summary>
         /// no permite mas de 1 requisicion por dia
         /// </summary>
         /// <returns></returns>
+        /// 
         public bool GetParRequisicionInventarioUnaxDia()
         {
             return ReadBoolParam("REQINVDIA");

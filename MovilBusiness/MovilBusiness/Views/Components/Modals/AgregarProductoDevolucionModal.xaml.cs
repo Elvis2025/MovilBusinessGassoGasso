@@ -881,6 +881,7 @@ namespace MovilBusiness.Views.Components.Modals
             {
                 EditFactura.IsVisible = false;
                 comboFactura.IsVisible = true;
+                EditCantOferta.IsEnabled = false;
             }
             else
             {
@@ -893,6 +894,9 @@ namespace MovilBusiness.Views.Components.Modals
         {
             if(CurrentFactura == null)
             {
+
+                EditCantidad.Text = null;
+                EditCantOferta.Text = null;
                 return;
             }
 

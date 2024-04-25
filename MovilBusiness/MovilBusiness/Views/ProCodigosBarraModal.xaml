@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:resx="clr-namespace:MovilBusiness.Resx"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             x:Class="MovilBusiness.Views.ProCodigosBarraModal">
+    <ContentPage.Content>
+        <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource WindowBackground}">
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
+
+                <zxing:ZXingBarcodeImageView
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="700"
+                    BarcodeFormat="CODABAR"
+                    x:Name="barCodeView" />
+                <!-- Asegúrate de que BarcodeValue no esté vacío -->
+
+
+                <Button
+                   
+                    WidthRequest="400"
+                    CornerRadius="6"
+                    Margin="0,10,0,0"
+                    BackgroundColor="{StaticResource ColorPrimary}"
+                    TextColor="White"
+                    HorizontalOptions="Center"
+                    Text="{Static resx:AppResource.Close}"
+                    Clicked="Button_Clicked"
+                    />
+
+            </StackLayout>
+        </ContentView>
+    </ContentPage.Content>
+</ContentPage>

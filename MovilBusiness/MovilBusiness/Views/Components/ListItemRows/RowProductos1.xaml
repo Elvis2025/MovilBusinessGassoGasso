@@ -29,8 +29,13 @@
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
             <Label Text="{x:Static resources:AppResource.SuggestedPriceLabel}"/>
             <Label Text="{Binding PrecioSugerido}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
-            <Label Text="{x:Static resources:AppResource.BarcodeLabel}" HorizontalOptions="End" Margin="5,0,0,0"/>
-            <Label Text="{Binding ProReferencia}" HorizontalOptions="End" Margin="2,0,0,0"/>
+            <Label Text="{x:Static resources:AppResource.BarcodeLabel}" HorizontalOptions="End" Margin="5,0,0,0" />
+            <Label Text="{Binding ProReferencia}" HorizontalOptions="End" Margin="2,0,0,0" x:Name="lbCodeBar"/>
+            <Label Text="{Binding ProReferencia, Mode=TwoWay}" HorizontalOptions="End" Margin="2,0,0,0" TextDecorations="Underline" TextColor="blue" x:Name="lbShowCodeBar">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" />
+                </Label.GestureRecognizers>
+            </Label>
         </StackLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
             <Label Text="{Binding LabelInventario}" />
