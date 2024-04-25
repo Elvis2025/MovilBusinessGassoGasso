@@ -281,6 +281,8 @@ namespace MovilBusiness.viewmodel
                 myRec.UpdateAutSecuenciaFacturaInTemp(null, autSecuencia);
 
                 DisplayAlert(AppResource.Success, AppResource.DiscountAuthorized);
+
+                ReloadDocuments = true;
             }
             catch (Exception e)
             {
@@ -431,7 +433,7 @@ namespace MovilBusiness.viewmodel
                             return;
                         }
                     }
-                    else if (!aceptaFaltane && TotalAPagar < 0)
+                    else if (!aceptaFaltane && TotalAPagar < -1)
                     {
                         await DisplayAlert(AppResource.Warning, AppResource.CannotMakeReceiptWithMissing, AppResource.Aceptar);
                         return;

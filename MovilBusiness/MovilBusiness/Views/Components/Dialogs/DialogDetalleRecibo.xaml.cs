@@ -1279,6 +1279,8 @@ namespace MovilBusiness.Views.Components.Dialogs
                         if (CurrentFactura.AutSecuencia != 0)
                         {
                             loadDescuentoByAutSecuencia(CurrentFactura.AutSecuencia);
+                            desc = PorcientosDescuentos;
+                            descex = PorcientosDescuentosEx;
                         }
 
                     }

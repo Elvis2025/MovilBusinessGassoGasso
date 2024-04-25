@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovilBusiness.viewmodel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,20 @@ namespace MovilBusiness.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BindingContext is RecibosViewModel vm)
+            {
+                if (vm.Documentos == null || vm.ReloadDocuments)
+                {
+                    vm.IsFirstChkDiferidoGeneral = false;
+                    vm.CargarDocumentos(!vm.ReloadDocuments);
+                }
+            }
+
+        }
+    }
 }
