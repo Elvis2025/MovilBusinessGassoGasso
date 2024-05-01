@@ -555,7 +555,7 @@ namespace MovilBusiness.Views.Components.Modals
                 {
                     Lotes = new ObservableCollection<ProductosLotes>(myPrlLote.GetLotesByProId(CurrentProducto.ProID));
                 }
-
+               
                 if (CurrentProducto.Cantidad == 0 && CurrentProducto.CantidadDetalle == 0)
                 {
                     ClearValues();
@@ -606,7 +606,7 @@ namespace MovilBusiness.Views.Components.Modals
                     }
                     else
                         Descuentos = null;
-
+                 
                     return;
                 }
                 else
@@ -912,6 +912,7 @@ namespace MovilBusiness.Views.Components.Modals
             }
 
             Facturas = myPrlLote.GetFacturasProductosLotes(ParComboLote ? CurrentLote.PrlLote : EditLote.Text, CurrentProducto.ProID);
+            CurrentFactura = Facturas[0];
         }
 
         private void EditLote_TextChanged(object sender, TextChangedEventArgs e)
