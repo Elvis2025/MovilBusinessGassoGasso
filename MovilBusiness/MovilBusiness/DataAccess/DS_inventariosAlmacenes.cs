@@ -30,5 +30,17 @@ namespace MovilBusiness.DataAccess
                 return almacenes;
             }
 
-      }
+       
+
+        public double? GetInventarioProductoByAlmacen(int proId,int almId)
+        {
+            var query = $@"SELECT invCantidad FROM InventariosAlmacenes IA
+                              INNER JOIN Almacenes A ON A.AlmId = IA.AlmId
+                              WHERE ProId = {proId} AND A.AlmId = {almId}";
+
+            return SqliteManager.GetInstance().ExecuteScalar<double?>(query);
+            
+        }
+
+    }
 }

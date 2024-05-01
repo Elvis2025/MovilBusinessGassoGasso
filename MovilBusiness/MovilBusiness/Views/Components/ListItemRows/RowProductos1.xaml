@@ -37,10 +37,21 @@
                 </Label.GestureRecognizers>
             </Label>
         </StackLayout>
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" IsVisible="{Binding NoShowVariosInventariosAlmacenes}">
             <Label Text="{Binding LabelInventario}" />
             <Label Text="{Binding InvCantidad}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" IsVisible="{Binding NoShowUnidades}"/>
             <Label Text="{Binding InvCantidadUnidades}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" IsVisible="{Binding ShowUnidades}"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" IsVisible="{Binding ShowVariosInventariosAlmacenes}">
+            <Label Text="Inventario SD: " />
+            <Label Text="{Binding InvCantidadAlmSD}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" IsVisible="{Binding ShowVariosInventariosAlmacenes}">
+            <Label Text="Inventario LV: " />
+            <Label Text="{Binding InvCantidadAlmLV}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0"/>
         </StackLayout>
 
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">

@@ -324,5 +324,15 @@ namespace MovilBusiness.model.Internal
 
         public int EnrSecuencia { get; set; }
         public int TraSecuencia { get; set; }
+       public double InvCantidadAlmSD { get; set; }
+
+        public double InvCantidadAlmLV { get; set; }
+
+        [JsonIgnore] [Ignore] public bool ShowVariosInventariosAlmacenes => DS_RepresentantesParametros.GetInstance().GetParMostrarVariosInventariosEnRow();
+
+        [JsonIgnore] [Ignore] public bool NoShowVariosInventariosAlmacenes => !DS_RepresentantesParametros.GetInstance().GetParMostrarVariosInventariosEnRow();
+
+
+
     }
 }

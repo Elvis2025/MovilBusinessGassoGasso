@@ -128,8 +128,20 @@ namespace MovilBusiness.DataAccess
             }
 
             query += (string.IsNullOrWhiteSpace(orderBy) ? " order by p.ProDescripcion" : " order by " + orderBy);
+            var productosTemp = SqliteManager.GetInstance().Query<ProductosTemp>(query, new string[] { });
+            if (DS_RepresentantesParametros.GetInstance().GetParMostrarVariosInventariosEnRow())
+            {
+                var almacenesSD = SqliteManager.GetInstance().Query<Almacenes>("select AlmID, AlmDescripcion, AlmReferencia, ifnull(AlmCaracteristicas, '') as AlmCaracteristicas from Almacenes where AlmDescripcion like '%SD%'");
+                var almacenesLV = SqliteManager.GetInstance().Query<Almacenes>("select AlmID, AlmDescripcion, AlmReferencia, ifnull(AlmCaracteristicas, '') as AlmCaracteristicas from Almacenes where AlmDescripcion like '%LV%'");
 
-            return SqliteManager.GetInstance().Query<ProductosTemp>(query, new string[] { });
+                foreach (var prod in productosTemp)
+                {
+                    prod.InvCantidadAlmSD = new DS_inventariosAlmacenes().GetInventarioProductoByAlmacen(prod.ProID, almacenesSD.FirstOrDefault()?.AlmID ?? 0) ?? 0;
+                    prod.InvCantidadAlmLV = new DS_inventariosAlmacenes().GetInventarioProductoByAlmacen(prod.ProID, almacenesLV.FirstOrDefault()?.AlmID ?? 0) ?? 0;
+                }
+            }
+
+            return productosTemp;
         }
 
         public double CantidadHolgura(int proId)
@@ -832,7 +844,20 @@ namespace MovilBusiness.DataAccess
 
             query += (string.IsNullOrWhiteSpace(args.orderBy) ? " order by P.ProDescripcion" : " order by " + args.orderBy);
 
-            return SqliteManager.GetInstance().Query<ProductosTemp>(query, new string[] { });
+            var productosTemp = SqliteManager.GetInstance().Query<ProductosTemp>(query, new string[] { });
+            if (DS_RepresentantesParametros.GetInstance().GetParMostrarVariosInventariosEnRow())
+            {
+                var almacenesSD = SqliteManager.GetInstance().Query<Almacenes>("select AlmID, AlmDescripcion, AlmReferencia, ifnull(AlmCaracteristicas, '') as AlmCaracteristicas from Almacenes where AlmDescripcion like '%SD%'");
+                var almacenesLV = SqliteManager.GetInstance().Query<Almacenes>("select AlmID, AlmDescripcion, AlmReferencia, ifnull(AlmCaracteristicas, '') as AlmCaracteristicas from Almacenes where AlmDescripcion like '%LV%'");
+
+                foreach (var prod in productosTemp)
+                {
+                    prod.InvCantidadAlmSD = new DS_inventariosAlmacenes().GetInventarioProductoByAlmacen(prod.ProID, almacenesSD.FirstOrDefault()?.AlmID ?? 0) ?? 0;
+                    prod.InvCantidadAlmLV = new DS_inventariosAlmacenes().GetInventarioProductoByAlmacen(prod.ProID, almacenesLV.FirstOrDefault()?.AlmID ?? 0) ?? 0;
+                }
+            }
+            
+            return productosTemp;
         }
 
         public bool ExistsInTemp(int proId, int titId, bool indicadorPromocion, int posicion = -1)

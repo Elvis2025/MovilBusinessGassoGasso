@@ -6762,6 +6762,15 @@ namespace MovilBusiness.DataAccess
             return ReadBoolParam("NOINFOEMPRESA");
         }
 
+        /// <summary>
+        /// muestra varios inventarios SD y LV en row de productos
+        /// </summary>
+        /// <returns></returns>
+        public bool GetParMostrarVariosInventariosEnRow()
+        {
+            return ReadBoolParam("SHOWINVMULROW");
+        }
+
     }
 }
 
