@@ -19,21 +19,22 @@ namespace MovilBusiness.views
         private bool firstTime = true;
         public static bool ClearFromDetalle = false;
         private DS_Productos myProd;
-
-
+        public PedidosDetallePage()
+        {
+            InitializeComponent();
+        }
         public PedidosDetallePage(PedidosDetalleArgs args, bool fromTransacciones = false, string cxcDocumento = null, CuentasxCobrar documento = null)
         {
             BindingContext = new PedidosDetalleViewModel(this, args, fromTransacciones, documento);
             myProd = new DS_Productos();
 
-            InitializeComponent();
 
             if (!string.IsNullOrWhiteSpace(cxcDocumento))
             {
                 lblDocumento.Text = AppResource.DocumentLabel + cxcDocumento;
                 lblDocumento.IsVisible = true;
             }
-
+            InitializeComponent();
             //SetListDataTemplate(RowDesign);
             Functions.SetListViewItemTemplateById(ListaProductos, args.DisenoDelRow == 20 ? 1 : args.DisenoDelRow, false);
             ClearFromDetalle = fromTransacciones;

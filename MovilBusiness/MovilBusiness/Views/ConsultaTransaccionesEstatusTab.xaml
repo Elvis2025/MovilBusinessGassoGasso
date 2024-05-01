@@ -9,7 +9,7 @@
     <ContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="*" /> 
             </Grid.RowDefinitions>
             <ListView
                 x:Name="list"

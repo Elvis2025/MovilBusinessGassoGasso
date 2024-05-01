@@ -549,6 +549,21 @@ namespace MovilBusiness.DataAccess
                 "where d.PedSecuencia = ? and ltrim(rtrim(d.RepCodigo)) = ? order by p.ProDescripcion", new string[] { pedSecuencia.ToString(), Arguments.CurrentUser.RepCodigo.Trim() });
         }
 
+        public string GetPedidoEstadoERPBySecuencia(int pedseCuencia)
+        {
+            var query = $@"SELECT PedEstadoErp,* FROM PedidosConfirmados WHERE PedSecuencia = {pedseCuencia}";
+
+            return SqliteManager.GetInstance().ExecuteScalar<string>(query);
+        }
+
+        public string GetEstadosErpByPedidos(string estEstado,string estTabla)
+        {
+            var query = $@"SELECT EstDescripcion FROM Estados
+                              WHERE EstEstado Like '%{estEstado}%' AND EstTabla = '{estTabla}'";
+
+            return SqliteManager.GetInstance().ExecuteScalar<string>(query);
+        }
+
         public Pedidos GetBySecuencia(int pedSecuencia, bool pedidoConfirmado)
         {
             var list = SqliteManager.GetInstance().Query<Pedidos>("select p.rowguid as rowguid, PedSecuencia,VisSecuencia, c.CliIndicadorPresentacion as CliIndicadorPresentacion,p.PedTotal as PedTotal, p.rowguid as rowguid, CliNombre, CliRnc, CliCodigo, ConDescripcion as ConDescripcion, CliCalle, PedFecha, PedFechaEntrega, CliUrbanizacion, p.MonCodigo, p.PedOrdenCompra as PedFechaEntrega, p.ConID as ConID " +

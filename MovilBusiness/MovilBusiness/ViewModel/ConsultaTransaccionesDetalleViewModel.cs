@@ -1101,8 +1101,8 @@ namespace MovilBusiness.viewmodel
                         PedOrdenCompra = null,
                         IsEditing = true,
                     };
-
-                    PushAsync(new PedidosDetallePage(args, VerDetalle) { Title = title, IsDetail = true });
+                    PushAsync(new PedidosConfirmadosTap(pedido, args, VerDetalle));
+                  //  PushAsync(new PedidosDetallePage(args, VerDetalle) { Title = title, IsDetail = true });
                 }else if(transaccion == "CLIENTES" && int.TryParse(TraSecuencia, out int cliId))
                 {
                     var cliente = myCli.GetClienteById(cliId);

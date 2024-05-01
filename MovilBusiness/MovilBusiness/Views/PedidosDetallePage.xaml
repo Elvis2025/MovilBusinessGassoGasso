@@ -11,7 +11,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{x:Static resources:AppResource.Save}" Icon="ic_done_white_24dp" Order="Primary" Command="{Binding SaveCommand}" x:Name="btnGuardar" IsEnabled="{Binding IsUp}"/>
     </ContentPage.ToolbarItems>
-    <ContentPage.Content>
+     <ContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
