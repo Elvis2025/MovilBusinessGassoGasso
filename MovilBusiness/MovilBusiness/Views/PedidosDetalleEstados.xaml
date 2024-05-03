@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovilBusiness.Views.PedidosDetalleEstados"
-             Title="Estados"
+             xmlns:resources="clr-namespace:MovilBusiness.Resx"
+             Title="{x:Static resources:AppResource.State}"
              >
 
     <ContentPage.Content>
@@ -19,16 +20,16 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Label Text="Tratamiento Global:" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,0,5,0" FontAttributes="Bold"/>
+            <Label Text="{x:Static resources:AppResource.GlobalTreatment}" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,0,5,0" FontAttributes="Bold"/>
             <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" x:Name="lbTratamientoGlobal"/>
 
-            <Label Text="Estatus Rechazo:" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,0,5,0" FontAttributes="Bold"/>
+            <Label Text="{x:Static resources:AppResource.RejectionStatus}" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,0,5,0" FontAttributes="Bold"/>
             <Label Grid.Row="1" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" x:Name="lbEstatusRechazo"/>
 
-            <Label Text="Estatus Entrega:" Grid.Row="2" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,0,5,0" FontAttributes="Bold"/>
+            <Label Text="{x:Static resources:AppResource.DeliveryStatus}" Grid.Row="2" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,0,5,0" FontAttributes="Bold"/>
             <Label Grid.Row="2" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" x:Name="lbEstatusEntrega"/>
 
-            <Label Text="Tratamiento Crédito:" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,0,5,0" FontAttributes="Bold"/>
+            <Label Text="{x:Static resources:AppResource.CreditTreatment}" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,0,5,0" FontAttributes="Bold"/>
             <Label Grid.Row="3" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" x:Name="lbTratamientoCredito"/>
 
         </Grid>

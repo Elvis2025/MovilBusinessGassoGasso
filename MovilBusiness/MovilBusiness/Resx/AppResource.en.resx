@@ -1125,6 +1125,9 @@
   <data name="Credits" xml:space="preserve">
     <value>Credits</value>
   </data>
+  <data name="CreditTreatment" xml:space="preserve">
+    <value>Credit Treatment:</value>
+  </data>
   <data name="CreditWithoutItbisLabel" xml:space="preserve">
     <value>Credit without itbis: </value>
   </data>
@@ -1403,6 +1406,9 @@
   </data>
   <data name="DeliverySavedUpper" xml:space="preserve">
     <value>DELIVERY SAVED</value>
+  </data>
+  <data name="DeliveryStatus" xml:space="preserve">
+    <value>Delivery Status:</value>
   </data>
   <data name="DeliveryUpdatedSuccessfully" xml:space="preserve">
     <value>Delivery updated successfully</value>
@@ -2039,6 +2045,9 @@
   </data>
   <data name="GivingOut" xml:space="preserve">
     <value>Giving out</value>
+  </data>
+  <data name="GlobalTreatment" xml:space="preserve">
+    <value>Global Treatment:</value>
   </data>
   <data name="GoBack" xml:space="preserve">
     <value>Go Back</value>
@@ -3981,6 +3990,9 @@
   <data name="RejectedClient" xml:space="preserve">
     <value>Rejected client</value>
   </data>
+  <data name="RejectionStatus" xml:space="preserve">
+    <value>Rejection Status:</value>
+  </data>
   <data name="RejectLoadQuestion" xml:space="preserve">
     <value>Are you sure you want to reject the load?</value>
   </data>
@@ -4556,6 +4568,9 @@
   </data>
   <data name="Start" xml:space="preserve">
     <value>Start</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>State</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>

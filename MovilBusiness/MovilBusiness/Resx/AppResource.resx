@@ -5209,4 +5209,19 @@ El monto del pedido es: $@2</value>
   <data name="SubTotal" xml:space="preserve">
     <value>Sub Total: </value>
   </data>
+  <data name="CreditTreatment" xml:space="preserve">
+    <value>Tratamiento Crédito: </value>
+  </data>
+  <data name="DeliveryStatus" xml:space="preserve">
+    <value>Estatus Entrega:</value>
+  </data>
+  <data name="GlobalTreatment" xml:space="preserve">
+    <value>Tratamiento Global:</value>
+  </data>
+  <data name="RejectionStatus" xml:space="preserve">
+    <value>Estatus Rechazo:</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Estados</value>
+  </data>
 </root>

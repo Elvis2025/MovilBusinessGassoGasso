@@ -142,17 +142,10 @@ namespace MovilBusiness.DataAccess
                 }
             }
             if (DS_RepresentantesParametros.GetInstance().GetParMostrarVariosInventariosEnRow())
-            {
-                var query1 = $@"SELECT um.Descripcion,* FROM PedidosDetalleConfirmados pdc
-                                    INNER JOIN UsosMultiples um ON um.CodigoUso = pdc.idMotivo
-                                    Where pdc.PedSecuencia = 18007";
+            {               
                 foreach (var prod in productosTemp)
                 {
-
                     prod.MotivoPedidosDetalle = new DS_Pedidos().GetMotivoPedidos(prod.rowguid);
-
-
-
                 }
             }
 

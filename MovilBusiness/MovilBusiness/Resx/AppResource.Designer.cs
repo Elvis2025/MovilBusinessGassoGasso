@@ -3114,6 +3114,15 @@ namespace MovilBusiness.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tratamiento Crédito: .
+        /// </summary>
+        internal static string CreditTreatment {
+            get {
+                return ResourceManager.GetString("CreditTreatment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crédito sin itbis: .
         /// </summary>
         internal static string CreditWithoutItbisLabel {
@@ -3956,6 +3965,15 @@ namespace MovilBusiness.Resx {
         internal static string DeliverySavedUpper {
             get {
                 return ResourceManager.GetString("DeliverySavedUpper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estatus Entrega:.
+        /// </summary>
+        internal static string DeliveryStatus {
+            get {
+                return ResourceManager.GetString("DeliveryStatus", resourceCulture);
             }
         }
         
@@ -5864,6 +5882,15 @@ namespace MovilBusiness.Resx {
         internal static string GivingOut {
             get {
                 return ResourceManager.GetString("GivingOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tratamiento Global:.
+        /// </summary>
+        internal static string GlobalTreatment {
+            get {
+                return ResourceManager.GetString("GlobalTreatment", resourceCulture);
             }
         }
         
@@ -11728,6 +11755,15 @@ namespace MovilBusiness.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Estatus Rechazo:.
+        /// </summary>
+        internal static string RejectionStatus {
+            get {
+                return ResourceManager.GetString("RejectionStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Estas seguro que quieres rechazar la carga?.
         /// </summary>
         internal static string RejectLoadQuestion {
@@ -13452,6 +13488,15 @@ namespace MovilBusiness.Resx {
         internal static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estados.
+        /// </summary>
+        internal static string State {
+            get {
+                return ResourceManager.GetString("State", resourceCulture);
             }
         }
         

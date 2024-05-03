@@ -327,7 +327,6 @@ namespace MovilBusiness.model.Internal
         public int EnrSecuencia { get; set; }
         public int TraSecuencia { get; set; }
        public double InvCantidadAlmSD { get; set; }
-
         public double InvCantidadAlmLV { get; set; }
         public string MotivoPedidosDetalle { get; set; }
 
