@@ -6507,6 +6507,15 @@ namespace MovilBusiness.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cantidad Confirmada: .
+        /// </summary>
+        internal static string InvoicedQuantity {
+            get {
+                return ResourceManager.GetString("InvoicedQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cantidad facturada: .
         /// </summary>
         internal static string InvoicedQuantityLabel {
@@ -11404,6 +11413,15 @@ namespace MovilBusiness.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Motivo: .
+        /// </summary>
+        internal static string ReasonOrder {
+            get {
+                return ResourceManager.GetString("ReasonOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MOTIVO.
         /// </summary>
         internal static string ReasonUpper {
@@ -13506,6 +13524,15 @@ namespace MovilBusiness.Resx {
         internal static string SubscriberID {
             get {
                 return ResourceManager.GetString("SubscriberID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub Total: .
+        /// </summary>
+        internal static string SubTotal {
+            get {
+                return ResourceManager.GetString("SubTotal", resourceCulture);
             }
         }
         

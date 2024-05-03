@@ -16,7 +16,7 @@ using Xamarin.Forms;
 
 namespace MovilBusiness.DataAccess
 {
-    public class DS_Productos : DS_Controller 
+    public class DS_Productos : DS_Controller
     {
         private ApiManager api;
 
@@ -25,7 +25,8 @@ namespace MovilBusiness.DataAccess
             try
             {
                 api = ApiManager.GetInstance(new PreferenceManager().GetConnection().Url);
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.Write(e.Message);
             }
@@ -35,11 +36,11 @@ namespace MovilBusiness.DataAccess
         {
             var par = myParametro.GetParInventarioFisicoArea();
 
-            if(Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS)
+            if (Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS)
             {
                 par = myParametro.GetParColocacionProductosCapturarArea();
             }
-            
+
             bool UseMultiplo = myParametro.GetParProductoMultiplos();
             string useMultiplo = "";
             if (UseMultiplo)
@@ -83,31 +84,31 @@ namespace MovilBusiness.DataAccess
 
             bool IsDescuentoDevoluciones = myParametro.GetParDescuentosEnDevoluciones();
 
-            bool itbisCero = (Arguments.Values.CurrentClient != null && !string.IsNullOrEmpty(Arguments.Values.CurrentClient.CliTipoComprobanteFAC) 
-                && Arguments.Values.CurrentClient.CliTipoComprobanteFAC == "14" || Arguments.Values.CurrentClient.CliIndicadorExonerado) 
-                && (Arguments.Values.CurrentModule == Modules.VENTAS || Arguments.Values.CurrentModule == Modules.PEDIDOS 
+            bool itbisCero = (Arguments.Values.CurrentClient != null && !string.IsNullOrEmpty(Arguments.Values.CurrentClient.CliTipoComprobanteFAC)
+                && Arguments.Values.CurrentClient.CliTipoComprobanteFAC == "14" || Arguments.Values.CurrentClient.CliIndicadorExonerado)
+                && (Arguments.Values.CurrentModule == Modules.VENTAS || Arguments.Values.CurrentModule == Modules.PEDIDOS
                 || Arguments.Values.CurrentModule == Modules.COTIZACIONES || Arguments.Values.CurrentModule == Modules.DEVOLUCIONES);
 
 
-            string query = "select " + (!agrupar ? "DISTINCT" : "") + " ifnull(t.EnrSecuencia,0) as EnrSecuencia, ifnull(t.TraSecuencia,0) as TraSecuencia,  p.ProImg as ProImg, t.UseAttribute1 as UseAttribute1, t.UseAttribute2 as UseAttribute2, t.ProAtributo1 as ProAtributo1, t.ProAtributo1Desc as ProAtributo1Desc, t.ProAtributo2Desc as ProAtributo2Desc, t.ProAtributo2 as Proatributo2, t.CantidadConfirmada, t.ShowCantidadConfirmada as ShowCantidadConfirmada, t.TipoCambio as TipoCambio, t.rowguid as rowguid, ifnull(t.PedFechaEntrega,'') as PedFechaEntrega, " + (Arguments.Values.CurrentModule == Modules.PEDIDOS || Arguments.Values.CurrentModule == Modules.VENTAS ? "case when ifnull(DesPorciento, 0.0) > 0.0 then 1 else 0 end as ShowDescuentoPreview, " : "") + " t.IndicadorDocena as IndicadorDocena, t.Posicion, t.CantidadPiezas as CantidadPiezas, t.IndicadorPromocion as IndicadorPromocion, t.TitID as TitID, ifnull(p.ProDatos3, '') as ProDatos3, p.ProReferencia as ProReferencia, ifnull(P.ProCantidadMinVenta,'') as ProCantidadMinVenta,  ifnull(P.ProCantidadMaxVenta,'') as ProCantidadMaxVenta,  " + ColumnDescMax + "  1 as ShowCantidad, t.ProIDOferta as ProIDOferta, t.DesPorciento as DesPorciento, " + (showValidForOfertas ? "case when o.ProID is not null  and (ifnull(o.TieneOferta, 0) = 1 "+(isEntrega ? "" : "and IndicadorOfertaForShow = 1") +") then 1 else 0 end" : " " + (isForGuardar ? " t.IndicadorOferta " : " case when ifnull(OfeCaracteristica,'') <> '' then 1 else t.IndicadorOferta end ") + "  ") + " as IndicadorOferta, " +
-                "ifnull(t.DesIdsAplicados, '') as DesIdsAplicados, t.CantidadFacing as CantidadFacing, ifnull(trim(P.ProCodigo), '') as ProCodigo, p.ProPrecio3 as ProPrecio3, " + ((IsDescuentoDevoluciones || (showDescuentoIndicator && showValidForOfertas)) && !myParametro.GetParPedidosOfertasyDescuentosManuales() && myParametro.GetParPedidosDescuentoManualGeneral() <= 0.0 ? "case when o.ProID is not null  and  ifnull(o.TieneDescuento, 0) = 1 "+ (IsDescuentoDevoluciones ? " and o.titId = 2 " : " ")+ " then 1 else 0 end as IndicadorDescuento, " : "") + " " +
+            string query = "select " + (!agrupar ? "DISTINCT" : "") + " ifnull(t.EnrSecuencia,0) as EnrSecuencia, ifnull(t.TraSecuencia,0) as TraSecuencia,  p.ProImg as ProImg, t.UseAttribute1 as UseAttribute1, t.UseAttribute2 as UseAttribute2, t.ProAtributo1 as ProAtributo1, t.ProAtributo1Desc as ProAtributo1Desc, t.ProAtributo2Desc as ProAtributo2Desc, t.ProAtributo2 as Proatributo2, t.CantidadConfirmada, t.ShowCantidadConfirmada as ShowCantidadConfirmada, t.TipoCambio as TipoCambio, t.rowguid as rowguid, ifnull(t.PedFechaEntrega,'') as PedFechaEntrega, " + (Arguments.Values.CurrentModule == Modules.PEDIDOS || Arguments.Values.CurrentModule == Modules.VENTAS ? "case when ifnull(DesPorciento, 0.0) > 0.0 then 1 else 0 end as ShowDescuentoPreview, " : "") + " t.IndicadorDocena as IndicadorDocena, t.Posicion, t.CantidadPiezas as CantidadPiezas, t.IndicadorPromocion as IndicadorPromocion, t.TitID as TitID, ifnull(p.ProDatos3, '') as ProDatos3, p.ProReferencia as ProReferencia, ifnull(P.ProCantidadMinVenta,'') as ProCantidadMinVenta,  ifnull(P.ProCantidadMaxVenta,'') as ProCantidadMaxVenta,  " + ColumnDescMax + "  1 as ShowCantidad, t.ProIDOferta as ProIDOferta, t.DesPorciento as DesPorciento, " + (showValidForOfertas ? "case when o.ProID is not null  and (ifnull(o.TieneOferta, 0) = 1 " + (isEntrega ? "" : "and IndicadorOfertaForShow = 1") + ") then 1 else 0 end" : " " + (isForGuardar ? " t.IndicadorOferta " : " case when ifnull(OfeCaracteristica,'') <> '' then 1 else t.IndicadorOferta end ") + "  ") + " as IndicadorOferta, " +
+                "ifnull(t.DesIdsAplicados, '') as DesIdsAplicados, t.CantidadFacing as CantidadFacing, ifnull(trim(P.ProCodigo), '') as ProCodigo, p.ProPrecio3 as ProPrecio3, " + ((IsDescuentoDevoluciones || (showDescuentoIndicator && showValidForOfertas)) && !myParametro.GetParPedidosOfertasyDescuentosManuales() && myParametro.GetParPedidosDescuentoManualGeneral() <= 0.0 ? "case when o.ProID is not null  and  ifnull(o.TieneDescuento, 0) = 1 " + (IsDescuentoDevoluciones ? " and o.titId = 2 " : " ") + " then 1 else 0 end as IndicadorDescuento, " : "") + " " +
                 "t.InvAreaDescr as InvAreaDescr, InvAreaId, " + (parInvArea ? 1 : 0) + " as UseInvArea, P.ProID as ProID, ifnull(trim(P.ProDescripcion), '') as Descripcion, " +
-                "ifnull(Precio, 0.0) as Precio, ifnull(DesPorcientoOriginal,0.0) as DesPorcientoOriginal, ifnull(PrecioMoneda, 0.0) as PrecioMoneda, " + (agrupar && !VerDetalleInCont ? "sum(" : "") + (myParametro.GetParInventariosTomarCantidades() <= 0 || myParametro.GetParColocacionProductosTomarCantidades() <= 0 ? "ifnull(t.Cantidad, 0)" : " t.Cantidad ") + (agrupar && !VerDetalleInCont ? ")" : "") + " as Cantidad, "+ (myParametro.GetParInventariosTomarCantidades() > 0 || myParametro.GetParColocacionProductosTomarCantidades() > 0 ? "ifnull(CantidadDetalle, 0) as CantidadDetalle" : "CantidadDetalle") + " , ifnull(CantidadDetalleR, 0) as CantidadDetalleR, " + (Arguments.Values.CurrentModule == Modules.COMPRAS || Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.TRASPASOS || Arguments.Values.CurrentModule == Modules.REQUISICIONINVENTARIO ? "0 as Selectivo" : "ifnull(ProSelectivo, 0) as Selectivo") +
+                "ifnull(Precio, 0.0) as Precio, ifnull(DesPorcientoOriginal,0.0) as DesPorcientoOriginal, ifnull(PrecioMoneda, 0.0) as PrecioMoneda, " + (agrupar && !VerDetalleInCont ? "sum(" : "") + (myParametro.GetParInventariosTomarCantidades() <= 0 || myParametro.GetParColocacionProductosTomarCantidades() <= 0 ? "ifnull(t.Cantidad, 0)" : " t.Cantidad ") + (agrupar && !VerDetalleInCont ? ")" : "") + " as Cantidad, " + (myParametro.GetParInventariosTomarCantidades() > 0 || myParametro.GetParColocacionProductosTomarCantidades() > 0 ? "ifnull(CantidadDetalle, 0) as CantidadDetalle" : "CantidadDetalle") + " , ifnull(CantidadDetalleR, 0) as CantidadDetalleR, " + (Arguments.Values.CurrentModule == Modules.COMPRAS || Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.TRASPASOS || Arguments.Values.CurrentModule == Modules.REQUISICIONINVENTARIO ? "0 as Selectivo" : "ifnull(ProSelectivo, 0) as Selectivo") +
                 ", " + (Arguments.Values.CurrentModule == Modules.COMPRAS || Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.TRASPASOS || Arguments.Values.CurrentModule == Modules.REQUISICIONINVENTARIO ? "0 as AdValorem" : advalorem + " as AdValorem") + ", " + useMultiplo + " " +
                  (Arguments.Values.CurrentModule == Modules.COMPRAS || itbisCero ? "0" : "ifnull(ProItbis, 0)") + " as Itbis, t.IndicadorOfertaForShow as IndicadorOfertaForShow, ifnull(t.UnmCodigo, '') as UnmCodigo, ifnull(P.ProDescripcion1, '') as ProDescripcion1, ifnull(P.ProDescripcion2, '') as ProDescripcion2, " +
                  "ifnull(P.ProDescripcion3, '') as ProDescripcion3, t.PrecioCaja, t.DesPorcientoManual as DesPorcientoManual, ifnull(p.ProDatos1, '') as ProDatos1, ifnull(p.ProDatos2, '') as ProDatos2, t.InvCantidad as InvCantidad, t.InvCantidadDetalle as InvCantidadDetalle, " +
                  "Accion, Lote, ifnull(t.invLote,'') as invLote , FechaVencimiento, Documento " + (myParametro.GetFormatoVisualizacionProductosLocal() == 11 || myParametro.GetParMostrarProductosEnInventarioParaInventarios() ? ", t.LipPrecioSugerido as LipPrecioSugerido " : "") + ", t.OfeID as OfeID, case when ifnull(DesPorcientoManual, 0) > 0 or ShowDescuento = 1 then 1 else 0 end or " + (showDescuentos ? "1" : "0") + " as ShowDescuento, " +
                  "t.Descuento as Descuento, t.CantidadEntrega as CantidadEntrega, CantidadOferta, t.LipPrecioMinimo as LipPrecioMinimo, t.PrecioTemp as PrecioTemp, p.ProIndicadorDetalle as IndicadorDetalle, ifnull(MotIdDevolucion,-1) as MotIdDevolucion, ifnull(p.ProUnidades, 0) as ProUnidades " + (Arguments.Values.CurrentModule == Modules.DEVOLUCIONES ? ", m.MotDescripcion" : "") + ", t.AlmID as AlmID, ifnull(t.CedCodigo,'') as CedCodigo, ifnull(t.CedDescripcion,'') as CedDescripcion, CantidadAlm, UnidadAlm, CanTidadGond, UnidadGond, CanTidadTramo, LoteEntregado, LoteRecibido, t.ProPosicion, ifnull(p.ProPeso,0) as ProPeso,ifnull(p.LinId,0) as Linea, ifnull(t.PedFlete,0) as PedFlete " +
-                 (showValidForOfertas || showDescuentoIndicator ? ",o.TieneDescuentoEscala as TieneDescuentoEscala " : " ") + (cantidadSugerida ? ",ps.PedCantidad as PedCantidad, ps.PedCantidadDetalle as PedCantidadDetalle " : "") + (cantidadMinima ? " ,cm.CliCanTidadMinima as CliCanTidadMinima " : "") +  ((myParametro.GetParDevolucionCondicion() || myParametro.GetParDevolucionesCondicionUnico()) && Arguments.Values.CurrentModule == Modules.DEVOLUCIONES ? ",t.DevCondicion, t.DevDescripcion " : " ") + (isFromPedidoDetalle && myParametro.GetParInventariosTomarCantidades() == 3? " , CheckValueForInvFis, 1 as CheckDetailsForInvFis, RadioButtonNotEnabled " : " , CheckValueForInvFis ") +
+                 (showValidForOfertas || showDescuentoIndicator ? ",o.TieneDescuentoEscala as TieneDescuentoEscala " : " ") + (cantidadSugerida ? ",ps.PedCantidad as PedCantidad, ps.PedCantidadDetalle as PedCantidadDetalle " : "") + (cantidadMinima ? " ,cm.CliCanTidadMinima as CliCanTidadMinima " : "") + ((myParametro.GetParDevolucionCondicion() || myParametro.GetParDevolucionesCondicionUnico()) && Arguments.Values.CurrentModule == Modules.DEVOLUCIONES ? ",t.DevCondicion, t.DevDescripcion " : " ") + (isFromPedidoDetalle && myParametro.GetParInventariosTomarCantidades() == 3 ? " , CheckValueForInvFis, 1 as CheckDetailsForInvFis, RadioButtonNotEnabled " : " , CheckValueForInvFis ") + " ,t.CantidadConfirmada " +
                  "from ProductosTemp t " +
                  "inner join Productos p on p.ProID = t.ProID " +
-                 (cantidadSugerida ? "left join PedidosSugeridos ps on ps.ProID = p.ProID " : " ") + (cantidadMinima ? "left join ClientesInventariosMinimos cm on cm.ProID = p.ProID and cm.cliid = " + Arguments.Values.CurrentClient.CliID + " " : "" ) +
-                // (entrega != null ? "left join (select e.ProID as ProID, (ifnull(e.TraCantidadDetalle, 0) / case when ifnull(pp.ProUnidades, 0) = 0 then 1 else pp.ProUnidades end) + ifnull(e.TraCantidad, 0) as TraCantidad from EntregasRepartidorTransaccionesDetalle e inner join Productos pp on pp.ProID = e.ProID where e.EnrSecuencia = " + entrega.EnrSecuencia + " and e.TitID = 4 and trim(e.RepCodigo) = '" + Arguments.CurrentUser.RepCodigo.Trim() + "' and e.TraSecuencia = " + entrega.TraSecuencia + " group by e.ProID, pp.ProUnidades) e on e.ProID = p.ProID " : "") + " " +
-                 (IsDescuentoDevoluciones || showValidForOfertas || showDescuentoIndicator ? "left join ProductosValidosOfertas o on o.ProID = t.ProID "+(myParametro.GetParProdUseUnmCodigo() ? " and o.UnmCodigo = t.UnmCodigo " : " ") +" and o.CliID = " + Arguments.Values.CurrentClient.CliID + " " : " ") +
+                 (cantidadSugerida ? "left join PedidosSugeridos ps on ps.ProID = p.ProID " : " ") + (cantidadMinima ? "left join ClientesInventariosMinimos cm on cm.ProID = p.ProID and cm.cliid = " + Arguments.Values.CurrentClient.CliID + " " : "") +
+                 // (entrega != null ? "left join (select e.ProID as ProID, (ifnull(e.TraCantidadDetalle, 0) / case when ifnull(pp.ProUnidades, 0) = 0 then 1 else pp.ProUnidades end) + ifnull(e.TraCantidad, 0) as TraCantidad from EntregasRepartidorTransaccionesDetalle e inner join Productos pp on pp.ProID = e.ProID where e.EnrSecuencia = " + entrega.EnrSecuencia + " and e.TitID = 4 and trim(e.RepCodigo) = '" + Arguments.CurrentUser.RepCodigo.Trim() + "' and e.TraSecuencia = " + entrega.TraSecuencia + " group by e.ProID, pp.ProUnidades) e on e.ProID = p.ProID " : "") + " " +
+                 (IsDescuentoDevoluciones || showValidForOfertas || showDescuentoIndicator ? "left join ProductosValidosOfertas o on o.ProID = t.ProID " + (myParametro.GetParProdUseUnmCodigo() ? " and o.UnmCodigo = t.UnmCodigo " : " ") + " and o.CliID = " + Arguments.Values.CurrentClient.CliID + " " : " ") +
                  (Arguments.Values.CurrentModule == Modules.DEVOLUCIONES ? "left join MotivosDevolucion m on MotID = MotIdDevolucion " : "") +
-                 (!string.IsNullOrEmpty(joinTinIDAdValorem) ? joinTinIDAdValorem : "" )+
-                 "where t.TitID = " + titId.ToString() + " "+(!mostrarPromociones ? " and ifnull(t.IndicadorPromocion, 0) = 0 " : "") +" and p.ProID is not null " + ((validarCantidades && !myParametro.GetParInventarioFisicoAceptarProductosCantidadCero()) && Arguments.Values.CurrentModule != Modules.CONTEOSFISICOS && !VerDetalleInCont ? " and (Cantidad > 0 or CantidadDetalle > 0)" : "") +
-                 " "+(myParametro.GetParSectores() > 0 && !isVerDetalleTrans && Application.Current.Properties.ContainsKey("SecCodigo") ? "and t.SecCodigo = '"+ Application.Current.Properties["SecCodigo"] + "'" : "") +" " + (withoutOfertas && !isVerDetalleTrans ? " and ifnull(t.IndicadorOferta, 0) = 0 " : "");
+                 (!string.IsNullOrEmpty(joinTinIDAdValorem) ? joinTinIDAdValorem : "") +
+                 "where t.TitID = " + titId.ToString() + " " + (!mostrarPromociones ? " and ifnull(t.IndicadorPromocion, 0) = 0 " : "") + " and p.ProID is not null " + ((validarCantidades && !myParametro.GetParInventarioFisicoAceptarProductosCantidadCero()) && Arguments.Values.CurrentModule != Modules.CONTEOSFISICOS && !VerDetalleInCont ? " and (Cantidad > 0 or CantidadDetalle > 0)" : "") +
+                 " " + (myParametro.GetParSectores() > 0 && !isVerDetalleTrans && Application.Current.Properties.ContainsKey("SecCodigo") ? "and t.SecCodigo = '" + Application.Current.Properties["SecCodigo"] + "'" : "") + " " + (withoutOfertas && !isVerDetalleTrans ? " and ifnull(t.IndicadorOferta, 0) = 0 " : "");
 
             if (entrega != null)
             {
@@ -120,9 +121,9 @@ namespace MovilBusiness.DataAccess
 
             if ((agrupar && !AgrupaLote) || ((myParametro.GetParInventariosTomarCantidades() > 0 || myParametro.GetParColocacionProductosTomarCantidades() > 0) && !isfromsave))
             {
-                query += " group by p.ProID " + (DS_RepresentantesParametros.GetInstance().GetOfertasyDescuentosbyUnidadMedida() ? ", t.UnmCodigo " : "") +" ";
+                query += " group by p.ProID " + (DS_RepresentantesParametros.GetInstance().GetOfertasyDescuentosbyUnidadMedida() ? ", t.UnmCodigo " : "") + " ";
             }
-            else if(AgrupaLote)
+            else if (AgrupaLote)
             {
                 query += " group by p.ProID, t.Lote, ifnull(t.IndicadorOferta, 0)  " + (DS_RepresentantesParametros.GetInstance().GetOfertasyDescuentosbyUnidadMedida() ? ", t.UnmCodigo " : "") + " ";
             }
@@ -140,8 +141,22 @@ namespace MovilBusiness.DataAccess
                     prod.InvCantidadAlmLV = new DS_inventariosAlmacenes().GetInventarioProductoByAlmacen(prod.ProID, almacenesLV.FirstOrDefault()?.AlmID ?? 0) ?? 0;
                 }
             }
+            if (DS_RepresentantesParametros.GetInstance().GetParMostrarVariosInventariosEnRow())
+            {
+                var query1 = $@"SELECT um.Descripcion,* FROM PedidosDetalleConfirmados pdc
+                                    INNER JOIN UsosMultiples um ON um.CodigoUso = pdc.idMotivo
+                                    Where pdc.PedSecuencia = 18007";
+                foreach (var prod in productosTemp)
+                {
 
-            return productosTemp;
+                    prod.MotivoPedidosDetalle = new DS_Pedidos().GetMotivoPedidos(prod.rowguid);
+
+
+
+                }
+            }
+
+                return productosTemp;
         }
 
         public double CantidadHolgura(int proId)
@@ -169,11 +184,11 @@ namespace MovilBusiness.DataAccess
 
             var args = new string[] { proId.ToString() };
 
-            var list = SqliteManager.GetInstance().Query<Productos>(query,args);
+            var list = SqliteManager.GetInstance().Query<Productos>(query, args);
 
             if (list != null && list.Count > 0)
             {
-               return list.FirstOrDefault();
+                return list.FirstOrDefault();
             }
 
             return null;
@@ -200,11 +215,11 @@ namespace MovilBusiness.DataAccess
             }
         }
 
-        public double GetCantidadTotalInTemp(int titId, bool withoutOfertas = false, bool cantidadDetallada = false, int proID = 0, int posicion = -1, string UnmCodigo="")
+        public double GetCantidadTotalInTemp(int titId, bool withoutOfertas = false, bool cantidadDetallada = false, int proID = 0, int posicion = -1, string UnmCodigo = "")
         {
             List<ProductosTemp> list = SqliteManager.GetInstance().Query<ProductosTemp>("select " + (cantidadDetallada ? "SUM(ifnull(CantidadDetalle, 0)) + sum(ifnull(Cantidad, 0) * ProUnidades)" : "SUM(ifnull(Cantidad, 0))") + " as Cantidad from " +
-                "ProductosTemp t where "+(DS_RepresentantesParametros.GetInstance().GetOfertasyDescuentosbyUnidadMedida() && !string.IsNullOrWhiteSpace(UnmCodigo) ? " UnmCodigo = '" + UnmCodigo + "' and " : "") + " TitID = " + titId.ToString() + " " + (withoutOfertas ? " and ifnull(IndicadorOferta, 0) = 0 " : "") +" " +
-                "and ProID = "+ proID + (posicion != -1 ? " and Posicion = " + posicion.ToString() : "") + " " +
+                "ProductosTemp t where " + (DS_RepresentantesParametros.GetInstance().GetOfertasyDescuentosbyUnidadMedida() && !string.IsNullOrWhiteSpace(UnmCodigo) ? " UnmCodigo = '" + UnmCodigo + "' and " : "") + " TitID = " + titId.ToString() + " " + (withoutOfertas ? " and ifnull(IndicadorOferta, 0) = 0 " : "") + " " +
+                "and ProID = " + proID + (posicion != -1 ? " and Posicion = " + posicion.ToString() : "") + " " +
                 "and ((case when exists(select ProID from ProductosTemp w where w.Posicion = t.Posicion and w.TitID = t.TitID " +
                 "and w.ProID = t.ProID and ifnull(w.Lote, '') != '' and ifnull(Cantidad, 0) > 0) then Lote != '' else 1=1 end and t.ProDatos3 like '%L%') " +
                 "OR t.ProDatos3 not like '%L%')", new string[] { });
@@ -216,7 +231,7 @@ namespace MovilBusiness.DataAccess
             return 0;
         }
 
-        public ProductosTemp GetProductoById(int proID, string monCodigo = null )
+        public ProductosTemp GetProductoById(int proID, string monCodigo = null)
         {
             var args = new ProductosArgs
             {
@@ -225,7 +240,7 @@ namespace MovilBusiness.DataAccess
                 filter = null,
                 MonCodigo = string.IsNullOrWhiteSpace(monCodigo) ? Arguments.Values.CurrentClient.MonCodigo : monCodigo,
                 FiltrarProductosPorSector = myParametro.GetParSectores() > 0 && myParametro.GetParFiltrarProductosPorSector(),
-                ProID = proID,               
+                ProID = proID,
             };
 
             var result = GetProductos(args);
@@ -340,8 +355,8 @@ namespace MovilBusiness.DataAccess
             if (Arguments.Values.CurrentModule == Modules.DEVOLUCIONES)
             {
                 var unmCodigoDev = myParametro.GetParUnmCodigoEspecificaDevoluciones();
-                if(!string.IsNullOrWhiteSpace(unmCodigoDev))
-                whereCondition += " and l.UnmCodigo = '" + unmCodigoDev + "' ";
+                if (!string.IsNullOrWhiteSpace(unmCodigoDev))
+                    whereCondition += " and l.UnmCodigo = '" + unmCodigoDev + "' ";
             }
 
             if (!string.IsNullOrWhiteSpace(args.referenceSplit))
@@ -360,7 +375,7 @@ namespace MovilBusiness.DataAccess
 
             var par = myParametro.GetParInventarioFisicoArea();
 
-            if(Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS)
+            if (Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS)
             {
                 par = myParametro.GetParColocacionProductosCapturarArea();
             }
@@ -463,11 +478,11 @@ namespace MovilBusiness.DataAccess
                 joinTinIDAdValorem = " LEFT OUTER JOIN ProductosTiposNegocioAdvalorem ptna ON ptna.ProID = P.ProID and ptna.TinID = '" + Arguments.Values.CurrentClient.TiNID + "' ";
             }
 
-            var itbisCero = (Arguments.Values.CurrentClient != null 
-                && (Arguments.Values.CurrentClient.CliTipoComprobanteFAC == "14" 
+            var itbisCero = (Arguments.Values.CurrentClient != null
+                && (Arguments.Values.CurrentClient.CliTipoComprobanteFAC == "14"
                 || Arguments.Values.CurrentClient.CliIndicadorExonerado))
-                && (Arguments.Values.CurrentModule == Modules.VENTAS 
-                || Arguments.Values.CurrentModule == Modules.PEDIDOS 
+                && (Arguments.Values.CurrentModule == Modules.VENTAS
+                || Arguments.Values.CurrentModule == Modules.PEDIDOS
                 || Arguments.Values.CurrentModule == Modules.COTIZACIONES
                 || Arguments.Values.CurrentModule == Modules.DEVOLUCIONES);
 
@@ -515,7 +530,7 @@ namespace MovilBusiness.DataAccess
                 {
                     select = "select distinct " + selectPrecioCaja + " p.ProImg as ProImg, t.PedFechaEntrega as PedFechaEntrega, p.ProReferencia as ProReferencia, t.CantidadPiezas as CantidadPiezas, ifnull(t.IndicadorPromocion, 0) as IndicadorPromocion, " + ((int)Arguments.Values.CurrentModule).ToString() + " as TitID, ifnull(p.ProDatos3, '') as ProDatos3, t.Descuento, t.DesPorciento as DesPorciento, " + (useListaPrecios ? "l.LipPrecioMinimo as LipPrecioMinimo, " : "") + " t.DesPorcientoManual as DesPorcientoManual, case when ifnull(DesPorcientoManual, 0) > 0 then 1 else 0 end as ShowDescuento, " +
                     "t.rowguid as rowguid, t.IndicadorDocena as IndicadorDocena, " + (Arguments.Values.CurrentModule == Modules.PRODUCTOS ? "0" : "1") + " as ShowCantidad, ifnull(P.ProCodigo, '') as ProCodigo, " + (DS_RepresentantesParametros.GetInstance().GetParPedProAlmBySector() ? "ifnull(a.AlmDescripcion, '') as AlmDescripcion, " : "") + "P.ProPrecio3 as ProPrecio3, t.InvAreaDescr as InvAreaDescr, InvAreaId, " + (parInvArea ? 1 : 0) + " as UseInvArea, ifnull(P.ProCantidadMinVenta,'') as ProCantidadMinVenta,  ifnull(P.ProCantidadMaxVenta,'') as ProCantidadMaxVenta,  " + ColumnDescMax + "  " +
-                    "P.ProID as ProID, ifnull(P.ProDescripcion, '') as Descripcion, " + (myParametro.GetParCantInvAlmacenes() ? "ifnull(I.AlmID, 0) as AlmID," : "") + " ifnull(t.Precio, ifnull(" + (useProPrecios ? args.lipCodigo.Replace("*", "") : Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.TRASPASOS || Arguments.Values.CurrentModule == Modules.REQUISICIONINVENTARIO || Arguments.Values.CurrentModule == Modules.PROMOCIONES  || (Arguments.Values.CurrentModule == Modules.DEVOLUCIONES && !myParametro.GetParDevolucionesConPrecio()) ? "0"  : parNoListaPrecios && !myParametro.GetParProductosUnidosConUnidadConListaPrecios() ? "P.ProPrecio" : ConvertirMoneda ? QueryConvertirPrecio : (preciolistasinitbis ? (useClientesPrecios ? "IFNULL(lpc.LipPrecio / ((p.ProItbis / 100.00) + 1.00), l.LipPrecio / ((p.ProItbis / 100.00) + 1.00))" : "l.LipPrecio") : (useClientesPrecios ? "IFNULL(lpc.LipPrecio , l.LipPrecio)" : "l.LipPrecio"))) + ", 0.0)) as Precio, " +
+                    "P.ProID as ProID, ifnull(P.ProDescripcion, '') as Descripcion, " + (myParametro.GetParCantInvAlmacenes() ? "ifnull(I.AlmID, 0) as AlmID," : "") + " ifnull(t.Precio, ifnull(" + (useProPrecios ? args.lipCodigo.Replace("*", "") : Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.TRASPASOS || Arguments.Values.CurrentModule == Modules.REQUISICIONINVENTARIO || Arguments.Values.CurrentModule == Modules.PROMOCIONES || (Arguments.Values.CurrentModule == Modules.DEVOLUCIONES && !myParametro.GetParDevolucionesConPrecio()) ? "0" : parNoListaPrecios && !myParametro.GetParProductosUnidosConUnidadConListaPrecios() ? "P.ProPrecio" : ConvertirMoneda ? QueryConvertirPrecio : (preciolistasinitbis ? (useClientesPrecios ? "IFNULL(lpc.LipPrecio / ((p.ProItbis / 100.00) + 1.00), l.LipPrecio / ((p.ProItbis / 100.00) + 1.00))" : "l.LipPrecio") : (useClientesPrecios ? "IFNULL(lpc.LipPrecio , l.LipPrecio)" : "l.LipPrecio"))) + ", 0.0)) as Precio, " +
                     " ifnull(" + (useProPrecios ? args.lipCodigo.Replace("*", "") : Arguments.Values.CurrentModule == Modules.DEVOLUCIONES || Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.TRASPASOS || Arguments.Values.CurrentModule == Modules.REQUISICIONINVENTARIO || Arguments.Values.CurrentModule == Modules.PROMOCIONES ? "0" : parNoListaPrecios && !myParametro.GetParProductosUnidosConUnidadConListaPrecios() ? "P.ProPrecio" : ConvertirMoneda ? QueryConvertirPrecio : (preciolistasinitbis ? (useClientesPrecios ? "IFNULL(lpc.LipPrecio / ((p.ProItbis / 100.00) + 1.00), l.LipPrecio / ((p.ProItbis / 100.00) + 1.00))" : "l.LipPrecio") : (useClientesPrecios ? "IFNULL(lpc.LipPrecio, l.LipPrecio)" : "l.LipPrecio"))) + ", ifnull(t.Precio, 0.0)) as PrecioMoneda, " +
                     "ifnull(t.Cantidad, 0) as Cantidad, ifnull(CantidadDetalle, 0) as CantidadDetalle, " + (Arguments.Values.CurrentModule == Modules.COMPRAS || Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.TRASPASOS || Arguments.Values.CurrentModule == Modules.REQUISICIONINVENTARIO ? "0 as Selectivo" : "ifnull(ProSelectivo, 0) as Selectivo") + ", " + (Arguments.Values.CurrentModule == Modules.COMPRAS || Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.TRASPASOS || Arguments.Values.CurrentModule == Modules.REQUISICIONINVENTARIO ? "0 as AdValorem" : advalorem + " as AdValorem") + ", " + useMultiplo + " " +
                     (Arguments.Values.CurrentModule == Modules.COMPRAS || itbisCero ? "0" : "ifnull(ProItbis, 0)") + " as Itbis, " + unmSelect + " ifnull(p.ProDatos2, '') as ProDatos2, ifnull(P.ProDescripcion1, '') as ProDescripcion1, ifnull(P.ProDescripcion2, '') as ProDescripcion2, " +
@@ -524,7 +539,7 @@ namespace MovilBusiness.DataAccess
                     (cantidadSugerida ? "ps.PedCantidad as PedCantidad, ps.PedCantidadDetalle as PedCantidadDetalle, " : "") +
                     (cantidadMinima ? " cm.CliCanTidadMinima as CliCanTidadMinima, " : "") +
                     (myParametro.GetParNoMostrarProductos() ? " 0 as VerPreciosProductos, " : " 1 as VerPreciosProductos, ") +
-                    " FechaVencimiento, Documento, CantidadOferta, t.ProIDOferta as ProIDOferta, P.ProIndicadorDetalle as IndicadorDetalle , MotIdDevolucion, " + (myParametro.GetParDevolucionCondicion() && Arguments.Values.CurrentModule == Modules.DEVOLUCIONES ? "t.DevCondicion," : "") + " t.Lote as Lote " + (((parOfertaColor || showDescuentoIndicador || IsDescuentoDevoluciones)) && !myParametro.GetParPedidosOfertasyDescuentosManuales() ? ", case when o.ProID is not null and ifnull(o.TieneOferta, 0) = 1 then 1 else 0 end as IndicadorOferta, case when o.ProID is not null  and ifnull(o.TieneDescuento, 0) = 1 " + (IsDescuentoDevoluciones ? " and o.titId = 2 " : " ") + " then "+ (myParametro.GetParPedidosDescuentoManualGeneral() <= 0.0 ? "1" : "0") + " else 0 end as IndicadorDescuento " : " ");
+                    " FechaVencimiento, Documento, CantidadOferta, t.ProIDOferta as ProIDOferta, P.ProIndicadorDetalle as IndicadorDetalle , MotIdDevolucion, " + (myParametro.GetParDevolucionCondicion() && Arguments.Values.CurrentModule == Modules.DEVOLUCIONES ? "t.DevCondicion," : "") + " t.Lote as Lote " + (((parOfertaColor || showDescuentoIndicador || IsDescuentoDevoluciones)) && !myParametro.GetParPedidosOfertasyDescuentosManuales() ? ", case when o.ProID is not null and ifnull(o.TieneOferta, 0) = 1 then 1 else 0 end as IndicadorOferta, case when o.ProID is not null  and ifnull(o.TieneDescuento, 0) = 1 " + (IsDescuentoDevoluciones ? " and o.titId = 2 " : " ") + " then " + (myParametro.GetParPedidosDescuentoManualGeneral() <= 0.0 ? "1" : "0") + " else 0 end as IndicadorDescuento " : " ");
                 }
             }
             var whereProductosInactivos = "";
@@ -557,14 +572,14 @@ namespace MovilBusiness.DataAccess
                             whereCondition += " and p.ProID in (select distinct ProID from HistoricoFacturasDetalle where idReferencia = " + args.IdFactura + " and ltrim(rtrim(RepCodigo)) = '" + Arguments.CurrentUser.RepCodigo.Trim() + "')";
                         }
                     }
-                    
+
 
                 }
             }
 
             if (Arguments.Values.CurrentModule == Modules.PRODUCTOS && myParametro.GetParDescuentosProductosMostrarPreview())
             {
-                joinOfertas = $" {(args.filter.FilDescripcion.Contains("Ofertas") ? "inner" : "left" )} join ProductosValidosOfertas o on p.ProID = o.ProID and o.CliID = -1 ";
+                joinOfertas = $" {(args.filter.FilDescripcion.Contains("Ofertas") ? "inner" : "left")} join ProductosValidosOfertas o on p.ProID = o.ProID and o.CliID = -1 ";
             }
             else if (!myParametro.GetParDescuentosEnDevoluciones() && Arguments.Values.CurrentModule == Modules.DEVOLUCIONES)
             {
@@ -602,10 +617,10 @@ namespace MovilBusiness.DataAccess
             {
                 if (!myParametro.GetParPedidosIgnorarBloqueoProductos())
                 {
-                    whereProductosInactivos = " and ifnull(p.ProDatos3, '') not like '%" + (Arguments.Values.CurrentModule == Modules.PEDIDOS || Arguments.Values.CurrentModule == Modules.PRODUCTOS ? "P" : (Arguments.Values.CurrentModule == Modules.COTIZACIONES ? "G" : "V") ) + "%' ";
+                    whereProductosInactivos = " and ifnull(p.ProDatos3, '') not like '%" + (Arguments.Values.CurrentModule == Modules.PEDIDOS || Arguments.Values.CurrentModule == Modules.PRODUCTOS ? "P" : (Arguments.Values.CurrentModule == Modules.COTIZACIONES ? "G" : "V")) + "%' ";
                 }
 
-                if(args.filter != null)
+                if (args.filter != null)
                 {
                     joinOfertas = $" {(Arguments.Values.CurrentModule != Modules.PRODUCTOS && args.filter.FilDescripcion.Contains("Ofertas") ? "inner" : "left")} join ProductosValidosOfertas o on p.ProID = o.ProID and o.CliID = " + (Arguments.Values.CurrentClient == null ? -1 : Arguments.Values.CurrentClient.CliID) + "  " + (!parNoListaPrecios ? " and (o.UnmCodigo = L.UnmCodigo " + (Arguments.Values.CurrentModule == Modules.PRODUCTOS || myParametro.GetParDescuentosProductosMostrarPreview() ? " or ifnull(o.UnmCodigo,'') = '' " : "") + ")" : "") + " ";
                     if (myParametro.GetParPedidosVisualizarXClientesDetalles() || myParametro.GetParProductoNoVendido() == 1 && args.filter.FilDescripcion.ToUpper().Contains("no vendidos".ToUpper()))
@@ -617,16 +632,16 @@ namespace MovilBusiness.DataAccess
                 }
                 else
                 {
-                    joinOfertas = $" left join ProductosValidosOfertas o on p.ProID = o.ProID and o.CliID = " + (Arguments.Values.CurrentClient == null ? -1 : Arguments.Values.CurrentClient.CliID) + "  " + (!parNoListaPrecios ? " and (o.UnmCodigo = L.UnmCodigo " + (Arguments.Values.CurrentModule == Modules.PRODUCTOS || myParametro.GetParDescuentosProductosMostrarPreview() ? " or ifnull(o.UnmCodigo,'') = '' " : "") + ")" : "") + " ";                    
+                    joinOfertas = $" left join ProductosValidosOfertas o on p.ProID = o.ProID and o.CliID = " + (Arguments.Values.CurrentClient == null ? -1 : Arguments.Values.CurrentClient.CliID) + "  " + (!parNoListaPrecios ? " and (o.UnmCodigo = L.UnmCodigo " + (Arguments.Values.CurrentModule == Modules.PRODUCTOS || myParametro.GetParDescuentosProductosMostrarPreview() ? " or ifnull(o.UnmCodigo,'') = '' " : "") + ")" : "") + " ";
                     if (myParametro.GetParPedidosVisualizarXClientesDetalles())
                     {
                         joinOfertas += " inner join GrupoProductosDetalle gp on gp.ProID = p.ProID "
                                 + "inner join ClientesDetalle cd on cd.GrpCodigo = gp.GrpCodigo  and cd.CliID = " + (Arguments.Values.CurrentClient == null ? -1 : Arguments.Values.CurrentClient.CliID) + " and cd.SecCodigo = " + Arguments.Values.CurrentSector.SecCodigo + " ";
                     }
                 }
-                
 
-                
+
+
 
                 if (Arguments.Values.CurrentModule == Modules.VENTAS && !parMultiAlmacenes)
                 {
@@ -729,7 +744,7 @@ namespace MovilBusiness.DataAccess
                 whereCondition += " and (p.SecCodigo = '" + Arguments.Values.CurrentSector?.SecCodigo + "' or p.SecCodigo is NULL or p.SecCodigo = '') ";
             }
 
-            if ((myParametro.GetParProductosFromClientesProductosVendidos() && Arguments.Values.CurrentModule == Modules.INVFISICO) || 
+            if ((myParametro.GetParProductosFromClientesProductosVendidos() && Arguments.Values.CurrentModule == Modules.INVFISICO) ||
                 (myParametro.GetParColocacionProductosFromClientesProductosVendidos() && Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS))
             {
                 whereCondition += "  And  P.Proid in (select Proid from Clientesproductosvendidos where CLiid = " + Arguments.Values.CurrentClient.CliID + ")";
@@ -779,12 +794,12 @@ namespace MovilBusiness.DataAccess
                     (cantidadMinima ? " left join ClientesInventariosMinimos cm on cm.ProID = p.ProID " + (Arguments.Values.CurrentClient != null ? " and cm.cliid = " + (Arguments.Values.CurrentClient.CliID) + "" : "") + "" : "") +
                     " left join ProductosTemp t on t.ProID = P.ProID and t.TitID = " + ((int)Arguments.Values.CurrentModule).ToString() + " and ifnull(t.IndicadorOferta, 0) = 0 " + (args.NotUseTemp ? " and 1=2 " : "") + joinDevolucion + joinOfertas +
                     (!string.IsNullOrEmpty(joinTinIDAdValorem) ? joinTinIDAdValorem : "") +
-                    "where 1=1 "             
+                    "where 1=1 "
                     + whereProductosInactivos + whereCondition;
             }
             else if ((parNoListaPrecios || Arguments.Values.CurrentModule == Modules.DEVOLUCIONES || Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.TRASPASOS || Arguments.Values.CurrentModule == Modules.REQUISICIONINVENTARIO || Arguments.Values.CurrentModule == Modules.PROMOCIONES) && !myParametro.GetParProductosUnidosConUnidadConListaPrecios())
             {
-                query = select + ",ifnull(p.ProPeso,0) as ProPeso,ifnull(p.LinId,0) as Linea, l.LipPrecioSugerido as LipPrecioSugerido " + (!noShowProdInTemp ? ",CantidadAlm, UnidadAlm, CanTidadGond, UnidadGond, CanTidadTramo " : " ") +" from Productos P " +
+                query = select + ",ifnull(p.ProPeso,0) as ProPeso,ifnull(p.LinId,0) as Linea, l.LipPrecioSugerido as LipPrecioSugerido " + (!noShowProdInTemp ? ",CantidadAlm, UnidadAlm, CanTidadGond, UnidadGond, CanTidadTramo " : " ") + " from Productos P " +
                      " " + (myParametro.GetParMostrarProductosEnInventarioParaInventarios() ? " inner join InventariosAlmacenes I on I.ProID = P.ProID AND I.AlmID = '" + (myParametro.GetParAlmacenDefault()) + "' AND (I.invCantidad > 0 or I.InvCantidadDetalle > 0) " : " left join InventariosAlmacenes I on I.ProID = P.ProID AND I.AlmID = '" + (myParametro.GetParAlmacenDefault()) + "'") + " " +
                      (DS_RepresentantesParametros.GetInstance().GetParPedProAlmBySector() ? "left join Almacenes a on a.AlmID = I.AlmID " : "") +
                      (cantidadMinima ? " left join ClientesInventariosMinimos cm on cm.ProID = p.ProID " + (Arguments.Values.CurrentClient != null ? " and cm.cliid = " + (Arguments.Values.CurrentClient.CliID) + "" : "") + "" : "") +
@@ -795,7 +810,7 @@ namespace MovilBusiness.DataAccess
             }
             else
             {
-                if(args.filter != null)
+                if (args.filter != null)
                 {
                     query = select + ",ifnull(p.ProPeso,0) as ProPeso,ifnull(p.LinId,0) as Linea,t.Posicion, l.LipPrecioSugerido " + ((Arguments.Values.CurrentModule == Modules.PEDIDOS || Arguments.Values.CurrentModule == Modules.VENTAS || Arguments.Values.CurrentModule == Modules.PRODUCTOS) && myParametro.GetParDescuentosProductosMostrarPreview() ? ", case when o.ProID is not null and ifnull(o.TieneDescuentoEscala, 0) = 1 then 1 else 0 end as TieneDescuentoEscala, o.PorcientoDescuento as DesPorciento, case when ifnull(o.PorcientoDescuento, 0.0) > 0.0 then 1 else 0 end as ShowDescuentoPreview, ((o.PorcientoDescuento * " + (ConvertirMoneda ? QueryConvertirPrecio : (Arguments.Values.CurrentModule == Modules.PRODUCTOS ? "IFNULL(l.LipPrecio, 0.0)" : "IFNULL(lpc.LipPrecio , l.LipPrecio)")) + ") / 100.0) as Descuento " : "") + " from Productos P " +
                      (Arguments.Values.CurrentModule == Modules.DEVOLUCIONES || Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS || useProPrecios ? "left" : "inner") + " join ListaPrecios l on " + (!string.IsNullOrWhiteSpace(unidadesMedidasValidas) ? "ifnull(lower(l.UnmCodigo), '') in (" + unidadesMedidasValidas + ") and " : "") + " l.ProID = P.ProID and l.LipCodigo = '" + args.lipCodigo.Replace("*", "") + "' " + whereMonCodigo +
@@ -827,10 +842,10 @@ namespace MovilBusiness.DataAccess
                      (!string.IsNullOrEmpty(joinTinIDAdValorem) ? joinTinIDAdValorem : "") +
                      "where 1=1 " +
                      "" + (args.precioMayorQueCero ? " and " + (useProPrecios ? args.lipCodigo.Replace("*", "") : parNoListaPrecios ? "P.ProPrecio" : ConvertirMoneda ? QueryConvertirPrecio : (useClientesPrecios && !useProPrecios ? "IFNULL(lpc.LipPrecio, l.LipPrecio)" : "l.LipPrecio")) + " >0 " : " ") + " " + whereProductosInactivos + whereCondition;
-                     
+
                 }
-                
-            }                        
+
+            }
 
             if (myParametro.GetParInventariosTomarCantidades() > 0 || myParametro.GetParColocacionProductosTomarCantidades() > 0)
             {
@@ -856,14 +871,14 @@ namespace MovilBusiness.DataAccess
                     prod.InvCantidadAlmLV = new DS_inventariosAlmacenes().GetInventarioProductoByAlmacen(prod.ProID, almacenesLV.FirstOrDefault()?.AlmID ?? 0) ?? 0;
                 }
             }
-            
+
             return productosTemp;
         }
 
         public bool ExistsInTemp(int proId, int titId, bool indicadorPromocion, int posicion = -1)
         {
             return SqliteManager.GetInstance().Query<ProductosTemp>("select ProID from ProductosTemp " +
-                "where ProID = ? and TitID = ? and ifnull(IndicadorPromocion, 0) = " + (indicadorPromocion ? "1" : "0") + (posicion != -1 ? " and Posicion = " + posicion.ToString() : ""), 
+                "where ProID = ? and TitID = ? and ifnull(IndicadorPromocion, 0) = " + (indicadorPromocion ? "1" : "0") + (posicion != -1 ? " and Posicion = " + posicion.ToString() : ""),
                 new string[] { proId.ToString(), titId.ToString() }).Count > 0;
         }
 
@@ -871,7 +886,7 @@ namespace MovilBusiness.DataAccess
         {
             var where = " And (Cantidad > 0 or CantidadDetalle > 0)";
 
-            if(myParametro.GetParSectores() > 0 && Application.Current.Properties.ContainsKey("SecCodigo"))
+            if (myParametro.GetParSectores() > 0 && Application.Current.Properties.ContainsKey("SecCodigo"))
             {
                 where += $"And SecCodigo = '{Application.Current.Properties["SecCodigo"]}'";
             }
@@ -918,7 +933,7 @@ namespace MovilBusiness.DataAccess
 
         public void DeleteTempByProdIDAndLote(int proid, string lote)
         {
-           SqliteManager.GetInstance().Execute("delete from ProductosTemp where ProID = ? " + (string.IsNullOrEmpty(lote) ? "" : $" and Lote= '{lote}' "), new object[] { proid.ToString()});                     
+            SqliteManager.GetInstance().Execute("delete from ProductosTemp where ProID = ? " + (string.IsNullOrEmpty(lote) ? "" : $" and Lote= '{lote}' "), new object[] { proid.ToString() });
         }
 
         public void DeleteTempByRowguid(string rowguid)
@@ -933,19 +948,19 @@ namespace MovilBusiness.DataAccess
             }
         }
 
-        public void InsertInTemp(List<ProductosTemp> productos, bool byOferta = false, bool isEntrega = false,bool IsFromCont = false, bool IsMultiEntrega = false, int proID = -1, bool isOfertaUnificada = false)
+        public void InsertInTemp(List<ProductosTemp> productos, bool byOferta = false, bool isEntrega = false, bool IsFromCont = false, bool IsMultiEntrega = false, int proID = -1, bool isOfertaUnificada = false)
         {
 
             var prodtodelete = productos.Select(p => new
-            { 
-               proid = p.ProID,
-               prolote = p.Lote
+            {
+                proid = p.ProID,
+                prolote = p.Lote
             });
 
 
             foreach (var prod in productos)
             {
-                if (myParametro.GetParEliminaTempEnConteoConLote()  && Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS)
+                if (myParametro.GetParEliminaTempEnConteoConLote() && Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS)
                 {
                     DeleteTempByProdIDAndLote(prod.ProID, prod.Lote);
                 }
@@ -955,7 +970,7 @@ namespace MovilBusiness.DataAccess
                     continue;
                 }
 
-                InsertInTemp(prod, byOferta, isEntrega: isEntrega==true && Arguments.Values.CurrentModule == Modules.VENTAS, IsFromCont, IsMultiEntrega);
+                InsertInTemp(prod, byOferta, isEntrega: isEntrega == true && Arguments.Values.CurrentModule == Modules.VENTAS, IsFromCont, IsMultiEntrega);
             }
         }
         public void InsertInTemp(ProductosTemp producto, bool byOferta = false, bool isEntrega = false, bool IsFromCont = false, bool IsMultiEntrega = false, bool isfromprecios = false)
@@ -970,7 +985,8 @@ namespace MovilBusiness.DataAccess
                         , producto.ProID.ToString() + ")"))
                     {
                         return;
-                    }else if(!string.IsNullOrEmpty(str.Substring(str.LastIndexOf(")") + 1, str.Substring(str.LastIndexOf(")") + 1).Length)))
+                    }
+                    else if (!string.IsNullOrEmpty(str.Substring(str.LastIndexOf(")") + 1, str.Substring(str.LastIndexOf(")") + 1).Length)))
                     {
                         producto.Cantidad = int.Parse(str.Substring(str.LastIndexOf(")") + 1, str.Substring(str.LastIndexOf(")") + 1).Length));
                     }
@@ -981,7 +997,7 @@ namespace MovilBusiness.DataAccess
             {
                 var parArea = myParametro.GetParInventarioFisicoArea();
 
-                if(Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS)
+                if (Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS)
                 {
                     parArea = myParametro.GetParColocacionProductosCapturarArea();
                 }
@@ -1012,11 +1028,11 @@ namespace MovilBusiness.DataAccess
             {
                 producto.rowguid = Guid.NewGuid().ToString();
             }*/
-            if(myParametro.GetParSectores() > 0 && Application.Current.Properties.ContainsKey("SecCodigo"))
+            if (myParametro.GetParSectores() > 0 && Application.Current.Properties.ContainsKey("SecCodigo"))
             {
                 producto.SecCodigo = Application.Current
                     .Properties["SecCodigo"].ToString();
-            }            
+            }
 
             if (!byOferta)
             {
@@ -1024,15 +1040,16 @@ namespace MovilBusiness.DataAccess
 
                 var parVentasLotes = Arguments.Values.CurrentModule == Modules.CAMBIOSMERCANCIA ? myParametro.GetParCambiosMercanciaLotes() : Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS ? myParametro.GetParConteosFisicosLotes() : Arguments.Values.CurrentModule == Modules.INVFISICO ? myParametro.GetParInventarioFisicosLotes() : myParametro.GetParVentasLote();
 
-                if(isEntrega && myParametro.GetParVentasLotesAutomaticos() > 0  && producto.UsaLote)
+                if (isEntrega && myParametro.GetParVentasLotesAutomaticos() > 0 && producto.UsaLote)
                 {
                     where = " and Posicion = " + producto.Posicion;
-                }else if (Arguments.Values.CurrentModule == Modules.DEVOLUCIONES || ((Arguments.Values.CurrentModule == Modules.VENTAS || Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.CAMBIOSMERCANCIA) && !string.IsNullOrWhiteSpace(producto.ProDatos3) && producto.ProDatos3.ToUpper().Contains("L") && (parVentasLotes == 1 || parVentasLotes == 2)))
+                }
+                else if (Arguments.Values.CurrentModule == Modules.DEVOLUCIONES || ((Arguments.Values.CurrentModule == Modules.VENTAS || Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.CAMBIOSMERCANCIA) && !string.IsNullOrWhiteSpace(producto.ProDatos3) && producto.ProDatos3.ToUpper().Contains("L") && (parVentasLotes == 1 || parVentasLotes == 2)))
                 {
                     where = " and (ifnull(ltrim(rtrim(upper(Lote))), '') = '" + (string.IsNullOrWhiteSpace(producto.Lote) ? "" : producto.Lote.Trim().ToUpper()) + "' " + (producto.Cantidad > 0 || producto.CantidadDetalle > 0 ? " or Lote is null" : "") + ")";
                 }
 
-                if(Arguments.Values.CurrentModule == Modules.CAMBIOSMERCANCIA && (parVentasLotes == 1 || parVentasLotes == 2))
+                if (Arguments.Values.CurrentModule == Modules.CAMBIOSMERCANCIA && (parVentasLotes == 1 || parVentasLotes == 2))
                 {
                     where += " and TipoCambio = " + producto.TipoCambio + " ";
                 }
@@ -1046,19 +1063,19 @@ namespace MovilBusiness.DataAccess
 
                 if (parComprasFacturas)
                 {
-                    where += " and ifnull(trim(Documento), '') = '"+(string.IsNullOrWhiteSpace(producto.Documento) ? "" : producto.Documento.Trim())+"' ";
+                    where += " and ifnull(trim(Documento), '') = '" + (string.IsNullOrWhiteSpace(producto.Documento) ? "" : producto.Documento.Trim()) + "' ";
                 }
 
                 if (IsMultiEntrega)
                 {
-                    where += " and ifnull(PedFechaEntrega, '') = '"+producto.PedFechaEntrega+"' ";
+                    where += " and ifnull(PedFechaEntrega, '') = '" + producto.PedFechaEntrega + "' ";
                 }
 
-                if(Arguments.Values.CurrentModule == Modules.PEDIDOS)
+                if (Arguments.Values.CurrentModule == Modules.PEDIDOS)
                 {
                     if (producto.UseAttribute1)
                     {
-                        where += " and ifnull(ProAtributo1, '') = '"+producto.ProAtributo1+"' ";
+                        where += " and ifnull(ProAtributo1, '') = '" + producto.ProAtributo1 + "' ";
                     }
                     if (producto.UseAttribute2)
                     {
@@ -1069,14 +1086,14 @@ namespace MovilBusiness.DataAccess
                 int affecteds = 0;
                 if (!myParametro.GetParDevolucionCondicion())
                 {
-                     affecteds = (producto.IndicadorOferta ? 0 : SqliteManager.GetInstance().Execute("delete from ProductosTemp where " + (Arguments.Values.CurrentModule == Modules.AUDITORIAPRECIOS ? " ProCodigo = '" + producto.ProCodigo + "' and CatCodigo = '" + producto.CatCodigo + "' and MarCodigo = '" + producto.MarCodigo + "' " : " ProID = " + producto.ProID.ToString()) + " " + (parPromociones ? " and ifnull(IndicadorPromocion, 0) = " + (producto.IndicadorPromocion ? "1" : "0") : "") + " " + (parInvArea ? " and InvAreaId = " + producto.InvAreaId : "") + where, new string[] { }));
-                }                    
+                    affecteds = (producto.IndicadorOferta ? 0 : SqliteManager.GetInstance().Execute("delete from ProductosTemp where " + (Arguments.Values.CurrentModule == Modules.AUDITORIAPRECIOS ? " ProCodigo = '" + producto.ProCodigo + "' and CatCodigo = '" + producto.CatCodigo + "' and MarCodigo = '" + producto.MarCodigo + "' " : " ProID = " + producto.ProID.ToString()) + " " + (parPromociones ? " and ifnull(IndicadorPromocion, 0) = " + (producto.IndicadorPromocion ? "1" : "0") : "") + " " + (parInvArea ? " and InvAreaId = " + producto.InvAreaId : "") + where, new string[] { }));
+                }
 
                 if (producto.IndicadorOferta)
                 {
-                    SqliteManager.GetInstance().Execute("Update ProductosTemp set CantidadOferta = "+ producto.CantidadOferta + " where ProID = " + producto.ProID.ToString() + " and IndicadorOferta <> 1 ");
+                    SqliteManager.GetInstance().Execute("Update ProductosTemp set CantidadOferta = " + producto.CantidadOferta + " where ProID = " + producto.ProID.ToString() + " and IndicadorOferta <> 1 ");
                 }
-                
+
                 if ((((Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS) && parInvArea) || ((parVentasLotes == 1 || parVentasLotes == 2) && !string.IsNullOrWhiteSpace(producto.ProDatos3) && producto.ProDatos3.ToUpper().Contains("L")) || parComprasFacturas || Arguments.Values.CurrentModule == Modules.DEVOLUCIONES || IsMultiEntrega || parPromociones || producto.UseAttribute1 || producto.UseAttribute2) && (affecteds == 0 && !myParametro.GetParDevolucionCondicion()))
                 {
                     producto.rowguid = Guid.NewGuid().ToString();
@@ -1093,7 +1110,7 @@ namespace MovilBusiness.DataAccess
 
             var insertar = true;
 
-            if(isEntrega && myParametro.GetParVentasLotesAutomaticos() > 0 && producto.UsaLote && producto.Cantidad > 0 )
+            if (isEntrega && myParametro.GetParVentasLotesAutomaticos() > 0 && producto.UsaLote && producto.Cantidad > 0)
             {
                 insertar = false;
             }
@@ -1104,7 +1121,7 @@ namespace MovilBusiness.DataAccess
             {
                 var parCant = myParametro.GetParInventariosTomarCantidades();
 
-                if(Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS)
+                if (Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS)
                 {
                     parCant = myParametro.GetParColocacionProductosTomarCantidades();
                 }
@@ -1191,7 +1208,7 @@ namespace MovilBusiness.DataAccess
                     }
                 }
 
-                if(myParametro.GetParCambioMercanciaInsertarLotesParaRecivir())
+                if (myParametro.GetParCambioMercanciaInsertarLotesParaRecivir())
                 {
                     SqliteManager.GetInstance().Execute("delete from ProductosTemp where ProID = " + producto.ProID + " ");
                     producto.Lote = producto.LoteRecibido;
@@ -1208,11 +1225,11 @@ namespace MovilBusiness.DataAccess
 
                 if (myParametro.GetParDevolucionCondicion() && Arguments.Values.CurrentModule == Modules.DEVOLUCIONES)
                 {
-                    ProductosTemp productostemp = SqliteManager.GetInstance().Query<ProductosTemp>(" Select proid, DevCondicion from productosTemp t  where t.proid = ? and t.DevCondicion = ?", new string[] { producto.ProID.ToString(), producto.DevCondicion.ToString()}).FirstOrDefault();
+                    ProductosTemp productostemp = SqliteManager.GetInstance().Query<ProductosTemp>(" Select proid, DevCondicion from productosTemp t  where t.proid = ? and t.DevCondicion = ?", new string[] { producto.ProID.ToString(), producto.DevCondicion.ToString() }).FirstOrDefault();
                     UsosMultiples usosmultiple = SqliteManager.GetInstance().Query<UsosMultiples>(" Select u.Descripcion as Descripcion from  UsosMultiples u  where u.CodigoGrupo = ?  and u.CodigoUso= ? ", new string[] { "DEVCONDICION", producto.DevCondicion.ToString() }).FirstOrDefault();
                     producto.DevDescripcion = usosmultiple.Descripcion;
 
-                    if (productostemp  != null)
+                    if (productostemp != null)
                     {
                         SqliteManager.GetInstance().Execute("delete from ProductosTemp where ProID= " + producto.ProID + " and  DevCondicion = " + producto.DevCondicion.ToString(), new string[] { });
                         SqliteManager.GetInstance().InsertOrReplace(producto);
@@ -1228,10 +1245,10 @@ namespace MovilBusiness.DataAccess
 
                 if ((isEntrega || producto.Cantidad > 0 || producto.CantidadDetalle > 0 || isfromprecios || IsFromCont || myParametro.GetParInventarioFisicoAceptarProductosCantidadCero() || myParametro.GetParConteoFisicoAceptarProductosCantidadCero()) && !producto.IndicadorEliminar)
                 {
-                    if(myParametro.GetParProdUseUnmCodigo())
+                    if (myParametro.GetParProdUseUnmCodigo())
                     {
                         SqliteManager.GetInstance().Execute
-                            ("delete from ProductosTemp where ProID = " + producto.ProID + " and UnmCodigo != '"+ producto.UnmCodigo + "' ");
+                            ("delete from ProductosTemp where ProID = " + producto.ProID + " and UnmCodigo != '" + producto.UnmCodigo + "' ");
                     }
 
                     if (!producto.IndicadorOferta)
@@ -1242,29 +1259,29 @@ namespace MovilBusiness.DataAccess
                     {
                         SqliteManager.GetInstance().Insert(producto);
                     }
-                   
+
                 }
             }
 
-            if (myParametro.GetParVentasLotesAutomaticos() > 0  && producto.UsaLote)
+            if (myParametro.GetParVentasLotesAutomaticos() > 0 && producto.UsaLote)
             {
-                    InsertInTempWithAutomaticLots(producto,isEntrega);
+                InsertInTempWithAutomaticLots(producto, isEntrega);
             }
 
-            if (isEntrega && producto.UsaLote && ((!(producto.Cantidad == 0 && string.IsNullOrWhiteSpace(producto.Lote))) || myParametro.GetParVentasLotesAutomaticos() > 0 ))
+            if (isEntrega && producto.UsaLote && ((!(producto.Cantidad == 0 && string.IsNullOrWhiteSpace(producto.Lote))) || myParametro.GetParVentasLotesAutomaticos() > 0))
             {
                 HandleProductWithLoteForDelivery(producto);
             }
         }
 
-       /* private bool ExistInTempWithOtherLot(string rowguid, string lote)
-        {
-            var list = SqliteManager.GetInstance().Query<ProductosTemp>("select ProID from ProductosTemp " +
-                "where rowguid = '"+rowguid+"' and ifnull(Lote, '') != '"+lote+"'", new string[] { });
+        /* private bool ExistInTempWithOtherLot(string rowguid, string lote)
+         {
+             var list = SqliteManager.GetInstance().Query<ProductosTemp>("select ProID from ProductosTemp " +
+                 "where rowguid = '"+rowguid+"' and ifnull(Lote, '') != '"+lote+"'", new string[] { });
 
-            return list != null && list.Count > 0;
-        }
-       */
+             return list != null && list.Count > 0;
+         }
+        */
         private void HandleProductWithLoteForDelivery(ProductosTemp producto)
         {
             SqliteManager.GetInstance().Execute("Delete from ProductosTemp " +
@@ -1288,7 +1305,7 @@ namespace MovilBusiness.DataAccess
                 producto.DesPorciento.ToString(), producto.UnmCodigo, producto.IndicadorDetalle ? "1" : "0", producto.ProPrecio3.ToString(), producto.ProDescripcion2, producto.ProDescripcion3, producto.ProDatos2,
                 producto.ProDatos1, producto.ProDescripcion1, "", producto.Posicion.ToString(), producto.CantidadEntrega.ToString()});
 
-            if (myParametro.GetParVentasLotesAutomaticos() > 0  && !ExistsInTemp(producto.ProID, producto.TitID, producto.IndicadorPromocion, producto.Posicion))
+            if (myParametro.GetParVentasLotesAutomaticos() > 0 && !ExistsInTemp(producto.ProID, producto.TitID, producto.IndicadorPromocion, producto.Posicion))
             {
                 producto.Lote = "";
                 producto.Cantidad = producto.CantidadEntrega;
@@ -1312,15 +1329,15 @@ namespace MovilBusiness.DataAccess
                 almId = myParametro.GetParAlmacenVentaRanchera();
             }
 
-            if(myParametro.GetParVentasLotesAutomaticos() == 2)
+            if (myParametro.GetParVentasLotesAutomaticos() == 2)
             {
-               inventario =  dsInv.GetInventarioAlmacenTotalForLotByEntrega(producto.EnrSecuencia,producto.TraSecuencia, producto.IndicadorOferta ? 1 : 0, producto.ProID, almId);
+                inventario = dsInv.GetInventarioAlmacenTotalForLotByEntrega(producto.EnrSecuencia, producto.TraSecuencia, producto.IndicadorOferta ? 1 : 0, producto.ProID, almId);
             }
             else
             {
                 inventario = dsInv.GetInventarioAlmacenTotalForLot(producto.ProID, almId);
             }
-             
+
 
             //Se cambia el orden de toma de el lote  para que tome del que tiene menos cantidad primero.
             inventario = inventario.OrderBy(i => i.invCantidad).ToList();
@@ -1336,14 +1353,14 @@ namespace MovilBusiness.DataAccess
 
             if (inventario.Count > 0 && !producto.IndicadorOferta)
             {
-                SqliteManager.GetInstance().Execute("delete from ProductosTemp where ProID = ? and Posicion = ?", 
+                SqliteManager.GetInstance().Execute("delete from ProductosTemp where ProID = ? and Posicion = ?",
                     new string[] { producto.ProID.ToString(), producto.Posicion.ToString() });
             }
 
             //Se cambia el orden de toma de el lote cuando se calcula la oferta para que tome del que tiene mas cantidad primero
-            if (producto.IndicadorOferta) 
+            if (producto.IndicadorOferta)
             {
-                 inventario = inventario.OrderByDescending(i => i.invCantidad).ToList();
+                inventario = inventario.OrderByDescending(i => i.invCantidad).ToList();
                 //foreach (var invlote in inventario)
                 //{ if (CantidadMayor < invlote.invCantidad){ LoteUsar = invlote.InvLote;} CantidadMayor += invlote.invCantidad;}
             }
@@ -1360,10 +1377,10 @@ namespace MovilBusiness.DataAccess
                     var cantidadproductotemp = GetCantidadProductosAgregadosConLote(inv.ProID, inv.InvLote);
                     inv.invCantidad = inv.invCantidad - cantidadproductotemp;
                 }
-                
+
                 var cantidadUsar = 0.0;
 
-                if(inv.invCantidad >= cantidadRestante)
+                if (inv.invCantidad >= cantidadRestante)
                 {
                     cantidadUsar = cantidadRestante;
                 }
@@ -1395,11 +1412,11 @@ namespace MovilBusiness.DataAccess
 
         }
 
-        public Totales GetTempTotales(int titId, bool forCalculator = false, bool IsVenta = true,List<ProductosTemp> productos = null, CuentasxCobrar documento = null, bool withoferta = false, double porcDescuentoGeneral = 0)
-        {            
+        public Totales GetTempTotales(int titId, bool forCalculator = false, bool IsVenta = true, List<ProductosTemp> productos = null, CuentasxCobrar documento = null, bool withoferta = false, double porcDescuentoGeneral = 0)
+        {
             //string joinTinIDAdValorem = "";
-            List<Totales> list= null;
-            
+            List<Totales> list = null;
+
             if (IsVenta)
             {
                 list = SqliteManager.GetInstance().Query<Totales>("select /*SUM(((CAST(ifnull(CantidadDetalle, 0)AS REAL)  / case when ifnull(P.ProUnidades, 0) = 0 then 1 else ifnull(P.ProUnidades, 1) end) + Cantidad)) as CantidadTotal, " +
@@ -1408,10 +1425,10 @@ namespace MovilBusiness.DataAccess
                 " SUM(((((Precio + Selectivo + AdValorem) - Descuento) + round(((Precio + ifnull(Selectivo, 0) + ifnull(AdValorem, 0)) - Descuento)) * (Itbis / 100))) * ((CAST(ifnull(CantidadDetalle, 0) AS REAL)  / case when ifnull(CAST(P.ProUnidades AS REAL), 0) = 0 then 1 else CAST(ifnull(P.ProUnidades, 1) AS REAL) end) + Cantidad)) as Total, " +
                 " SUM(Round((Descuento * ((Cast(ifnull(t.CantidadDetalle, 0) as real)  / case when ifnull(P.ProUnidades, 1) = 0 then 1 else ifnull(P.ProUnidades, 1) end) + Cantidad)),2)) as Descuento," +
                 "  SUM((Round(((Precio + ifnull(Selectivo,0) + ifnull(AdValorem,0)) - Descuento) * (Itbis / 100),2)) *  ((CAST(ifnull(CantidadDetalle, 0)AS REAL)  / case when ifnull(P.ProUnidades, 0) = 0 then 1 else ifnull(P.ProUnidades, 1) end) + Cantidad)) as Itbis " +
-                " ,*/ Cantidad,  CantidadDetalle, "+(myParametro.GetParADVALOREMTIPO() == 1 ? " ptna.ProAdValorem as AdValoremU, " : " AdValorem as AdValoremU, ") + " Selectivo as SelectivoU, Precio, Descuento as DescuentoU, Itbis as ItbisT, p.ProUnidades, DesPorciento, ifnull(t.PedFlete, 0) as Flete " +
+                " ,*/ Cantidad,  CantidadDetalle, " + (myParametro.GetParADVALOREMTIPO() == 1 ? " ptna.ProAdValorem as AdValoremU, " : " AdValorem as AdValoremU, ") + " Selectivo as SelectivoU, Precio, Descuento as DescuentoU, Itbis as ItbisT, p.ProUnidades, DesPorciento, ifnull(t.PedFlete, 0) as Flete " +
                 " from ProductosTemp t " +
-                " inner join Productos P on P.ProID = t.ProID "+(myParametro.GetParADVALOREMTIPO() == 1? " left join ProductosTiposNegocioAdvalorem ptna on ptna.proid = p.proid and ptna.TinId = " + Arguments.Values.CurrentClient.TiNID + "" : " ") +" " +
-                " WHERE "+(!withoferta? " ifnull(IndicadorOferta, 0) = 0 and " : "") +" " + (DS_RepresentantesParametros.GetInstance().GetParVentasLote() > 0 && !forCalculator ? " t.Lote <> '' and " : "") + " TitID = ? ", new string[] { titId.ToString() });
+                " inner join Productos P on P.ProID = t.ProID " + (myParametro.GetParADVALOREMTIPO() == 1 ? " left join ProductosTiposNegocioAdvalorem ptna on ptna.proid = p.proid and ptna.TinId = " + Arguments.Values.CurrentClient.TiNID + "" : " ") + " " +
+                " WHERE " + (!withoferta ? " ifnull(IndicadorOferta, 0) = 0 and " : "") + " " + (DS_RepresentantesParametros.GetInstance().GetParVentasLote() > 0 && !forCalculator ? " t.Lote <> '' and " : "") + " TitID = ? ", new string[] { titId.ToString() });
 
             }
             else
@@ -1438,7 +1455,7 @@ namespace MovilBusiness.DataAccess
                 "where ltrim(rtrim(upper(cxc.CxcReferencia))) = ? " +
                 "Order By CxcPosicion";
 
-                    if(Arguments.Values.CurrentModule == Modules.PUSHMONEYPORPAGAR)
+                    if (Arguments.Values.CurrentModule == Modules.PUSHMONEYPORPAGAR)
                     {
                         query = "select ProCodigo, ProDescripcion, PxpCantidad as ProCantidad, PxpPrecio as ProPrecio, PxpItbis as ProItbis, PxpDescuento as ProDescuentoMaximo, UnmCodigo   " +
                 "from PushMoneyPorPagarDetalle cxc " +
@@ -1484,7 +1501,7 @@ namespace MovilBusiness.DataAccess
                 ofeDesc = SqliteManager.GetInstance().Query<Totales>("select sum( case when ifnull(OfeCaracteristica,'') <> '' then PrecioBase * PedOfeCantidad else PrecioTemp * Cantidad end ) as DescuentoOfertas from ProductosTemp " +
                 "where (ifnull(IndicadorOferta, 0) = 1 or ifnull(OfeCaracteristica,'') in ('P','O') ) and TitID = ? " + (DS_RepresentantesParametros.GetInstance().GetParVentasLote() > 0 && !forCalculator ? " and Lote <> '' " : "") + " ", new string[] { titId.ToString() });
             }
-             
+
 
             double DecuentoTotal = 0.0;
             double DecuentoTotalGeneral = 0.0;
@@ -1506,13 +1523,13 @@ namespace MovilBusiness.DataAccess
                 double Descuentos1;
                 AdValoremU = det.AdValoremU;
                 SelectivoU = det.SelectivoU;
-                
+
                 PrecioLista = (det.Precio + AdValoremU + SelectivoU);
                 if (!myParametro.GetParPrecioSinRedondeo())
                 {
                     PrecioLista = Math.Round(PrecioLista, 2, MidpointRounding.AwayFromZero);
                 }
-                
+
                 double CantidadDetalle = Convert.ToDouble(Convert.ToDecimal(det.CantidadDetalle));
                 CantidadDetalle = Math.Round(CantidadDetalle, 2, MidpointRounding.AwayFromZero);
                 double ProUnidades = Convert.ToDouble(Convert.ToDecimal(det.ProUnidades));
@@ -1522,16 +1539,17 @@ namespace MovilBusiness.DataAccess
                 {
                     CantidadReal = Math.Round(CantidadReal, 2, MidpointRounding.AwayFromZero);
                 }
-                
+
                 CantidadTotal += CantidadReal;
 
-                if(productos == null)
+                if (productos == null)
                 {
 
                     if (myParametro.GetParADVALOREMTIPO() == 1)
                     {
-                        adValorem += AdValoremU  * ((det.CantidadDetalle / det.ProUnidades) + det.Cantidad);
-                    }else
+                        adValorem += AdValoremU * ((det.CantidadDetalle / det.ProUnidades) + det.Cantidad);
+                    }
+                    else
                     {
                         adValorem += AdValoremU * CantidadReal;
                     }
@@ -1721,14 +1739,15 @@ namespace MovilBusiness.DataAccess
                     where = " and OfeID = " + ofeId.ToString();
                 }
 
-                return SqliteManager.GetInstance().Query<ProductosTemp>("select * from ProductosTemp where ProID = ? and TitID = ? and IndicadorOferta = 1 "+where+" limit 1", new string[] { proId.ToString(), titId.ToString() }).FirstOrDefault();
-            }catch(Exception e)
+                return SqliteManager.GetInstance().Query<ProductosTemp>("select * from ProductosTemp where ProID = ? and TitID = ? and IndicadorOferta = 1 " + where + " limit 1", new string[] { proId.ToString(), titId.ToString() }).FirstOrDefault();
+            }
+            catch (Exception e)
             {
                 Console.Write(e.Message);
                 return null;
             }
         }
-        public ProductosTemp ExistsProductoAgregadoPorOfertaManu(int titId,int ofeId = -1)
+        public ProductosTemp ExistsProductoAgregadoPorOfertaManu(int titId, int ofeId = -1)
         {
             try
             {
@@ -1739,7 +1758,7 @@ namespace MovilBusiness.DataAccess
                     where = " and OfeID = " + ofeId.ToString();
                 }
 
-                return SqliteManager.GetInstance().Query<ProductosTemp>("select * from ProductosTemp where TitID = ? and IndicadorOferta = 1 " + where + " limit 1", new string[] {titId.ToString() }).FirstOrDefault();
+                return SqliteManager.GetInstance().Query<ProductosTemp>("select * from ProductosTemp where TitID = ? and IndicadorOferta = 1 " + where + " limit 1", new string[] { titId.ToString() }).FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -1753,7 +1772,7 @@ namespace MovilBusiness.DataAccess
             try
             {
                 return SqliteManager.GetInstance().Query<ProductosTemp>("select Cantidad from ProductosTemp where ProID = ?  and OfeID = ? and TitID = ? limit 1",
-                       new string[] { proId.ToString(), ofeId.ToString(), titId.ToString()}).FirstOrDefault();
+                       new string[] { proId.ToString(), ofeId.ToString(), titId.ToString() }).FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -1762,13 +1781,13 @@ namespace MovilBusiness.DataAccess
             }
         }
         public void ActualizarCantidadProductoOferta(int proId, double cantidad, int titId)
-        {            
+        {
             SqliteManager.GetInstance().Execute($@"update ProductosTemp set Cantidad = Cantidad + {cantidad}, 
                               CantidadOferta = CantidadOferta + {cantidad} where ProID = {proId} and IndicadorOferta = 1
                               and TitID = {titId}");
         }
 
-        public void DeleteOfertaInTemp(int titId = -1, int ofeId = -1, int proId = -1, bool sinCantidad = false, int proIdOrigenOferta = -1, string UnmCodigo="", bool isFromMancomunada = false, string grpCodigo = "")
+        public void DeleteOfertaInTemp(int titId = -1, int ofeId = -1, int proId = -1, bool sinCantidad = false, int proIdOrigenOferta = -1, string UnmCodigo = "", bool isFromMancomunada = false, string grpCodigo = "")
         {
             try
             {
@@ -1779,8 +1798,8 @@ namespace MovilBusiness.DataAccess
                 and ProIDOferta not in (select distinct p.ProID from Productos p 
                 inner join GrupoProductosDetalle g on ltrim(rtrim(upper(g.GrpCodigo))) = upper('{grpCodigo}') and g.ProID = p.ProID)");
 
-                where += isFromMancomunada && list.Count > 0 ?  
-                " and OfeID = " + ofeId.ToString() : !isFromMancomunada && ofeId != -1? " and OfeID = " + ofeId.ToString() : "";
+                where += isFromMancomunada && list.Count > 0 ?
+                " and OfeID = " + ofeId.ToString() : !isFromMancomunada && ofeId != -1 ? " and OfeID = " + ofeId.ToString() : "";
 
                 if (proId != -1)
                 {
@@ -1799,7 +1818,8 @@ namespace MovilBusiness.DataAccess
 
                 SqliteManager.GetInstance().Execute("delete from ProductosTemp where ifnull(IndicadorOferta, 0) = 1 and TitID = ? " + where, new string[] { titId.ToString() });
 
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.Write(e.Message);
             }
@@ -1810,9 +1830,10 @@ namespace MovilBusiness.DataAccess
             try
             {
                 SqliteManager.GetInstance().Execute("update ProductosTemp set Cantidad = Cantidad + ofeCantidadRebajaVenta, ofeCantidadRebajaVenta = 0 " +
-                    "where ifnull(IndicadorOferta, 0) = 0 and ifnull(ofeCantidadRebajaVenta, 0) > 0 and TitID = ?", 
+                    "where ifnull(IndicadorOferta, 0) = 0 and ifnull(ofeCantidadRebajaVenta, 0) > 0 and TitID = ?",
                     new string[] { ((int)Arguments.Values.CurrentModule).ToString() });
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.Write(e.Message);
             }
@@ -1833,13 +1854,13 @@ namespace MovilBusiness.DataAccess
                 SqliteManager.GetInstance().Execute("update ProductosTemp set DesPorciento = ifnull(DesPorcientoManual, 0), Descuento = (DesPorcientoManual * Precio) / 100 where ifnull(DesPorcientoManual, 0) > 0", new string[] { });
             }
 
-            
+
         }
 
         public void ActualizarCantidadOferta(int proId, int ofeId, double cantidad, int titId, string lote = null)
         {
-            SqliteManager.GetInstance().Execute("update ProductosTemp set Cantidad = "+cantidad.ToString()+" " +
-                "where ProID = ? and OfeID = ? and IndicadorOferta = 1 and TitID = ? " + (!string.IsNullOrWhiteSpace(lote) ? " and upper(trim(ifnull(Lote, ''))) = '"+lote.Trim().ToUpper()+"'" : ""), 
+            SqliteManager.GetInstance().Execute("update ProductosTemp set Cantidad = " + cantidad.ToString() + " " +
+                "where ProID = ? and OfeID = ? and IndicadorOferta = 1 and TitID = ? " + (!string.IsNullOrWhiteSpace(lote) ? " and upper(trim(ifnull(Lote, ''))) = '" + lote.Trim().ToUpper() + "'" : ""),
                 new string[] { proId.ToString(), ofeId.ToString(), titId.ToString() });
         }
 
@@ -1852,22 +1873,22 @@ namespace MovilBusiness.DataAccess
 
         public int GetCantidadProductoOferta(int titId, int proId = -1, int ofeId = -1, int proIdToExclude = -1, bool fordetalle = false)
         {
-            var item = SqliteManager.GetInstance().Query<ProductosTemp>("select "+(fordetalle ? "sum(CantidadDetalle) + sum(Cantidad * ProUnidades)" : "sum(Cantidad)")+" as Cantidad from ProductosTemp " +
+            var item = SqliteManager.GetInstance().Query<ProductosTemp>("select " + (fordetalle ? "sum(CantidadDetalle) + sum(Cantidad * ProUnidades)" : "sum(Cantidad)") + " as Cantidad from ProductosTemp " +
                 "where ifnull(IndicadorOferta, 0) = 1 " +
-                "and TitID = " + titId.ToString() + " " +(proIdToExclude != -1 ? " and ProID <> " + proIdToExclude.ToString() : "") + 
-                (proId != -1 ? " and ProID = " + proId.ToString() : "")+" " + (ofeId != -1 ? " and OfeID = " + ofeId.ToString() : ""), 
+                "and TitID = " + titId.ToString() + " " + (proIdToExclude != -1 ? " and ProID <> " + proIdToExclude.ToString() : "") +
+                (proId != -1 ? " and ProID = " + proId.ToString() : "") + " " + (ofeId != -1 ? " and OfeID = " + ofeId.ToString() : ""),
                 new string[] { }).FirstOrDefault();
 
-            if(item != null)
+            if (item != null)
             {
                 return (int)item.Cantidad;
             }
 
-        return 0;
+            return 0;
         }
 
-    public void ActualizarIndicadorRebajaVenta()
-    {
+        public void ActualizarIndicadorRebajaVenta()
+        {
             try
             {
                 SqliteManager.GetInstance().Execute("update ProductosTemp set Cantidad = Cantidad + ofeCantidadRebajaVenta, ofeCantidadRebajaVenta = 0 " +
@@ -1879,7 +1900,7 @@ namespace MovilBusiness.DataAccess
                         "where ifnull(t.IndicadorOferta, 0) = 1 and t.Cantidad > 0 and t.TitID = ?",
                         new string[] { ((int)Arguments.Values.CurrentModule).ToString() });
 
-                
+
 
 
                 foreach (var p in ofertados)
@@ -1890,7 +1911,7 @@ namespace MovilBusiness.DataAccess
 
                     if (LineasProductos.Count > 1)
                     {
-                        var ProductosTemp = SqliteManager.GetInstance().Query<ProductosTemp>("select Lote from ProductosTemp where IndicadorOferta=0 and ProID = "+ p.ProIDOferta.ToString() + "  order by Cantidad desc limit 1");
+                        var ProductosTemp = SqliteManager.GetInstance().Query<ProductosTemp>("select Lote from ProductosTemp where IndicadorOferta=0 and ProID = " + p.ProIDOferta.ToString() + "  order by Cantidad desc limit 1");
 
                         SqliteManager.GetInstance().Execute("update ProductosTemp set Cantidad = Cantidad - " + p.Cantidad + ", ofeCantidadRebajaVenta = " + p.Cantidad + " " +
                         "where ProID = ? and IndicadorOferta = 0 and TitID = ? and Lote = ?",
@@ -1902,34 +1923,35 @@ namespace MovilBusiness.DataAccess
                         "where ProID = ? and IndicadorOferta = 0 and TitID = ?",
                         new string[] { p.ProIDOferta.ToString(), ((int)Arguments.Values.CurrentModule).ToString() });
                     }
-                    
+
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.Write(e.Message);
             }
 
-    }
+        }
 
         public void ActualizarDescuentoInTemp(int proId, double valor, double porciento, int titId)
         {
             SqliteManager.GetInstance().Execute("update ProductosTemp set Descuento = ?, DesPorciento = ?, DesPorcientoManual = ? " +
-                "where ProID = ? and ifnull(IndicadorOferta, 0) = 0 and TitID = ?", 
+                "where ProID = ? and ifnull(IndicadorOferta, 0) = 0 and TitID = ?",
                 new string[] { valor.ToString(), porciento.ToString(), porciento.ToString(), proId.ToString(), titId.ToString() });
         }
 
-    public List<ProductosRevisionDescuentos> GetProductosConDescuentos(int titId)
-    {
-        return SqliteManager.GetInstance().Query<ProductosRevisionDescuentos>("select 0 as DescuentoManual, Precio, Descuento as DescuentoValorOriginal, Descuento as DescuentoValorEditado, " +
-            "DesPorciento as PorcDescuentoOriginal, DesPorciento as PorcDescuentoEditado, Descripcion as ProDescripcion, ProID " +
-            "from ProductosTemp where (ifnull(Descuento, 0.0) > 0.0 OR ifnull(DesPorciento, 0.0) > 0.0) and ifnull(IndicadorOferta, 0) = 0 and TitID = ? ", new string[] { titId.ToString() });
-    }
+        public List<ProductosRevisionDescuentos> GetProductosConDescuentos(int titId)
+        {
+            return SqliteManager.GetInstance().Query<ProductosRevisionDescuentos>("select 0 as DescuentoManual, Precio, Descuento as DescuentoValorOriginal, Descuento as DescuentoValorEditado, " +
+                "DesPorciento as PorcDescuentoOriginal, DesPorciento as PorcDescuentoEditado, Descripcion as ProDescripcion, ProID " +
+                "from ProductosTemp where (ifnull(Descuento, 0.0) > 0.0 OR ifnull(DesPorciento, 0.0) > 0.0) and ifnull(IndicadorOferta, 0) = 0 and TitID = ? ", new string[] { titId.ToString() });
+        }
 
-    public bool HayProductosConDescuento(int titId)
-    {
-        return SqliteManager.GetInstance().Query<Totales>("select 1 as Total from ProductosTemp " +
-            "where (ifnull(Descuento, 0.0) > 0.0 OR ifnull(DesPorciento, 0.0) > 0.0) and ifnull(IndicadorOferta, 0) = 0 and TitID = ? ", new string[] { titId.ToString() }).Count > 0;
-    }
+        public bool HayProductosConDescuento(int titId)
+        {
+            return SqliteManager.GetInstance().Query<Totales>("select 1 as Total from ProductosTemp " +
+                "where (ifnull(Descuento, 0.0) > 0.0 OR ifnull(DesPorciento, 0.0) > 0.0) and ifnull(IndicadorOferta, 0) = 0 and TitID = ? ", new string[] { titId.ToString() }).Count > 0;
+        }
 
         public List<ProductosTemp> ValidarProductosOfertasManuales(int titId, bool dppIsActive)
         {
@@ -1938,7 +1960,7 @@ namespace MovilBusiness.DataAccess
 
             var extra = "";
 
-            if(dppIsActive && dpp > 0)
+            if (dppIsActive && dpp > 0)
             {
                 extra = " + " + dpp.ToString();
             }
@@ -1949,7 +1971,7 @@ namespace MovilBusiness.DataAccess
             {
                 var query = "select * from ProductosTemp where IndicadorOferta = 0 and ifnull(IndicadorPromocion, 0) = 0 and (ifnull(ValorOfertaManual, 0.0) > 0.0 OR ifnull(DesPorcientoManual, 0) " + extra + "  > 0) " +
                     "and ((Cantidad * Precio) - ifnull(ValorOfertaManual, 0.0) - ((Cantidad * Precio) * ((ifnull(DesPorcientoManual, 0.0) " + extra + ") / 100.0))) < ((case when ifnull(LipPrecioMinimo, 0.0) <= 0 then Precio else ifnull(LipPrecioMinimo, 0.0) end )  * ifnull(Cantidad, 0)) and TitID = ? ";
-             
+
                 return SqliteManager.GetInstance().Query<ProductosTemp>(query, new string[] { titId.ToString() }).ToList();
             }
             else
@@ -1958,16 +1980,16 @@ namespace MovilBusiness.DataAccess
                     "inner join ListaPrecios l on l.ProID = t.ProID and l.LipCodigo = ? and l.UnmCodigo = t.UnmCodigo " +
                     "where IndicadorOferta = 0 and ifnull(IndicadorPromocion, 0) = 0 and t.TitID = ?";
 
-                var list = SqliteManager.GetInstance().Query<ProductosTemp>(query, 
+                var list = SqliteManager.GetInstance().Query<ProductosTemp>(query,
                     new string[] { Arguments.Values.CurrentClient.LiPCodigo, titId.ToString() }).ToList();
 
                 var invalidos = new List<ProductosTemp>();
 
-                foreach(var prod in list)
+                foreach (var prod in list)
                 {
                     var rangos = JsonConvert.DeserializeObject<List<RangoPrecioMinimo>>(prod.LipRangoPrecioMinimo);
 
-                    if(rangos == null)
+                    if (rangos == null)
                     {
                         continue;
                     }
@@ -1978,7 +2000,7 @@ namespace MovilBusiness.DataAccess
                     {
                         var unidades = prod.ProUnidades;
 
-                        if(unidades == 0)
+                        if (unidades == 0)
                         {
                             unidades = 1;
                         }
@@ -1988,7 +2010,7 @@ namespace MovilBusiness.DataAccess
 
                     var rango = rangos.Where(x => cantidad >= x.LipCantidadInicial && cantidad <= x.LipCantidadFinal).FirstOrDefault();
 
-                    if(rango == null)
+                    if (rango == null)
                     {
                         invalidos.Add(prod);
                         continue;
@@ -2006,7 +2028,7 @@ namespace MovilBusiness.DataAccess
                     }
 
                     var valorDesc = (cantidad * prod.Precio) * ((prod.DesPorcientoManual + porcientoDpp) / 100.0);
-                   
+
                     var VarDescTotal = (cantidad * prod.Precio) - prod.ValorOfertaManual - valorDesc;
 
                     if (VarDescTotal < (rango.LipPrecioMinimo * cantidad))
@@ -2040,11 +2062,11 @@ namespace MovilBusiness.DataAccess
         public async Task<List<Productos>> GetProductosNoVendidos(string Tabla, bool isOnline)
         {
 
-           string sql;
+            string sql;
 
-           if (myParametro.GetParProductosNoVendidosNewQuery())
-           {
-                if(isOnline)
+            if (myParametro.GetParProductosNoVendidosNewQuery())
+            {
+                if (isOnline)
                 {
                     sql = $"[sp_GrupoProductos]'{Arguments.CurrentUser.RepCodigo}','{Tabla}',{(Arguments.Values.CurrentClient != null ? Arguments.Values.CurrentClient.CliID : 0)}";
                 }
@@ -2053,40 +2075,41 @@ namespace MovilBusiness.DataAccess
                     sql = "select procodigo, prodescripcion, ProID from productos where prodatos3 not like '%P%' " +
                           "order by upper(ProDescripcion)";
                 }
-             
-           }
+
+            }
             else
             {
 
-                if(myParametro.GetParProductoNoVendido() > 1)
+                if (myParametro.GetParProductoNoVendido() > 1)
                 {
                     sql = $@"select proid, procodigo, ProDescripcion
                             from Productos p 
                             where p.ProDatos3 not like '%P%' 
                             and proid not in (select proid  from {Tabla} c where c.CliID = {Arguments.Values.CurrentClient.CliID})
                             order by 2";
-                }else 
+                }
+                else
                 {
 
                     sql = "  select distinct ProDescripcion, gp.ProID as ProID, ProCodigo from GrupoProductosDetalle gp "
                                 + "inner join ClientesDetalle c on c.GrpCodigo = gp.GrpCodigo "
                                 + "inner join Productos p on gp.ProID = p.ProID "
                                 + "where " + (Arguments.Values.CurrentClient != null ? " c.cliid = " + Arguments.Values.CurrentClient.CliID + " and " : "") + " c.RepCodigo = '" + Arguments.CurrentUser.RepCodigo + "' " + (Arguments.Values.CurrentClient != null && Arguments.Values.CurrentModule != Modules.PEDIDOS ? " and c.CliID = " + Arguments.Values.CurrentClient.CliID + "" : "")
-                                + " "+ (myParametro.GetParSectores() >= 2 && Arguments.Values.CurrentSector != null ? $" and c.SecCodigo = '{Arguments.Values.CurrentSector.SecCodigo}' " : "" ) + " "
+                                + " " + (myParametro.GetParSectores() >= 2 && Arguments.Values.CurrentSector != null ? $" and c.SecCodigo = '{Arguments.Values.CurrentSector.SecCodigo}' " : "") + " "
                                 + " and p.ProDatos3 not like '%P%' "
                                 + "and p.ProID not in (select h.ProID from " + Tabla + " h where h.ProID = p.ProID " + (Arguments.Values.CurrentClient != null ? " and h.CliID = " + Arguments.Values.CurrentClient.CliID + "" : "") + ") "
                                 + "order by ProDescripcion";
                 }
             }
 
-            if (isOnline) 
+            if (isOnline)
             {
-              return await api.RawQuery<Productos>(Arguments.CurrentUser.RepCodigo, Arguments.CurrentUser.RepClave, sql);
+                return await api.RawQuery<Productos>(Arguments.CurrentUser.RepCodigo, Arguments.CurrentUser.RepClave, sql);
             }
-         
-            
-              return new List<Productos>(SqliteManager.GetInstance().Query<Productos>(sql));
-            
+
+
+            return new List<Productos>(SqliteManager.GetInstance().Query<Productos>(sql));
+
         }
 
 
@@ -2099,7 +2122,7 @@ namespace MovilBusiness.DataAccess
             {
                 if (isOnline)
                 {
-                    sql = $"[sp_ProductosVendidosMesActual]'{Arguments.CurrentUser.RepCodigo}','{tabla}',{(Arguments.Values.CurrentClient != null? Arguments.Values.CurrentClient.CliID : 0)}";
+                    sql = $"[sp_ProductosVendidosMesActual]'{Arguments.CurrentUser.RepCodigo}','{tabla}',{(Arguments.Values.CurrentClient != null ? Arguments.Values.CurrentClient.CliID : 0)}";
                 }
                 else
                 {
@@ -2115,7 +2138,8 @@ namespace MovilBusiness.DataAccess
                     sql = $@"select LinDescripcion AS ProDescripcion, L.LinID as ProCodigo from Lineas L
                              where l.LinID not in(select proid from {tabla} {(Arguments.Values.CurrentClient != null && Arguments.Values.CurrentModule != Modules.PEDIDOS ? " where CliID = " + Arguments.Values.CurrentClient.CliID + "" : "")} )
                              order by LinDescripcion";
-                }else
+                }
+                else
                 {
                     sql = "select DISTINCT LinDescripcion AS ProDescripcion, L.LinID as ProCodigo from Lineas L "
                                     + "inner join Productos P on P.LinID = L.LinID "
@@ -2133,32 +2157,32 @@ namespace MovilBusiness.DataAccess
                 return await api.RawQuery<Productos>(Arguments.CurrentUser.RepCodigo, Arguments.CurrentUser.RepClave, sql);
             }
             return new List<Productos>(SqliteManager.GetInstance().Query<Productos>(sql));
-            
+
         }
 
 
 
-    public int ExistenProductosBloqueados()
-    {
-        try
+        public int ExistenProductosBloqueados()
         {
+            try
+            {
 
-                var item = SqliteManager.GetInstance().Query<ProductosTemp>("Select Sum(Proid) as Cantidad From ClientesProductosBloqueos Where CliCodigo = ? ", new string[] { Arguments.Values.CurrentClient.CliCodigo}).FirstOrDefault();
+                var item = SqliteManager.GetInstance().Query<ProductosTemp>("Select Sum(Proid) as Cantidad From ClientesProductosBloqueos Where CliCodigo = ? ", new string[] { Arguments.Values.CurrentClient.CliCodigo }).FirstOrDefault();
                 if (item != null)
                 {
                     return (int)item.Cantidad;
                 }
 
-              
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.Write(e.Message);
             }
 
-        return 0;
+            return 0;
 
-    }
+        }
 
         public List<ProductosTemp> GetProductosMasInventario(int titId)
         {
@@ -2205,12 +2229,12 @@ namespace MovilBusiness.DataAccess
             if (/*Unidades >= proUnidades || Unidades<0*/ Unidades != 0)
             {
                 Unidades = Unidades / proUnidades;
-               
+
             }
 
             return Unidades;
         }
-       
+
 
         public bool ExitsProductoOfertaInTemp(int proid)
         {
@@ -2220,7 +2244,8 @@ namespace MovilBusiness.DataAccess
 
             if (list.Count > 0)
             {
-                if ((int)list[0].ProID == proid) {
+                if ((int)list[0].ProID == proid)
+                {
                     return true;
                 }
             }
@@ -2228,10 +2253,10 @@ namespace MovilBusiness.DataAccess
             return false;
         }
 
-       /* public void DeleteProductoOfertaInTemp(int proid)
-        {
-            SqliteManager.GetInstance().Execute("Delete from ProductosTemp where ProID = "+ proid + " and IndicadorOferta = 1 ", new string[] { });
-        }*/
+        /* public void DeleteProductoOfertaInTemp(int proid)
+         {
+             SqliteManager.GetInstance().Execute("Delete from ProductosTemp where ProID = "+ proid + " and IndicadorOferta = 1 ", new string[] { });
+         }*/
 
         public int GetProUnidades(int proid)
         {
@@ -2256,7 +2281,7 @@ namespace MovilBusiness.DataAccess
             string query = "select 10 as CantidadPiezas, 0 as IndicadorPromocion, " + ((int)Arguments.Values.CurrentModule) + " as TitID, p.ProReferencia as ProReferencia, 1 as ShowCantidad, 0 as DesPorciento, 0 as IndicadorOferta, " +
                 "ifnull(trim(P.ProCodigo), '') as ProCodigo, p.ProPrecio3 as ProPrecio3, " +
                 "P.ProID as ProID, ifnull(trim(P.ProDescripcion), '') as Descripcion, " +
-                "ifnull(ifnull(lpc.LipPrecio, l.LipPrecio), 0.0) as Precio, 10 as Cantidad, 0 as CantidadDetalle, 0 as CantidadDetalleR, " + (Arguments.Values.CurrentModule == Modules.COMPRAS || Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.TRASPASOS || Arguments.Values.CurrentModule == Modules.REQUISICIONINVENTARIO ? "0 as Selectivo" : "ifnull(ProSelectivo, 0) as Selectivo") + 
+                "ifnull(ifnull(lpc.LipPrecio, l.LipPrecio), 0.0) as Precio, 10 as Cantidad, 0 as CantidadDetalle, 0 as CantidadDetalleR, " + (Arguments.Values.CurrentModule == Modules.COMPRAS || Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.TRASPASOS || Arguments.Values.CurrentModule == Modules.REQUISICIONINVENTARIO ? "0 as Selectivo" : "ifnull(ProSelectivo, 0) as Selectivo") +
                 ", " + (Arguments.Values.CurrentModule == Modules.COMPRAS || Arguments.Values.CurrentModule == Modules.INVFISICO || Arguments.Values.CurrentModule == Modules.COLOCACIONMERCANCIAS || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS || Arguments.Values.CurrentModule == Modules.TRASPASOS || Arguments.Values.CurrentModule == Modules.REQUISICIONINVENTARIO ? "0 as AdValorem" : "ifnull(ProAdValorem, 0) as AdValorem") + ", " +
                  (Arguments.Values.CurrentModule == Modules.COMPRAS ? "0" : "ifnull(ProItbis, 0)") + " as Itbis, ifnull(ifnull(lpc.UnmCodigo, l.UnmCodigo), '') as UnmCodigo, ifnull(P.ProDescripcion1, '') as ProDescripcion1, ifnull(P.ProDescripcion2, '') as ProDescripcion2, " +
                  "ifnull(P.ProDescripcion3, '') as ProDescripcion3, ifnull(p.ProDatos1, '') as ProDatos1, ifnull(p.ProDatos2, '') as ProDatos2, " +
@@ -2271,11 +2296,11 @@ namespace MovilBusiness.DataAccess
 
 
             var start = DateTime.Now;
-            
-            foreach(var prod in list)
+
+            foreach (var prod in list)
             {
                 prod.rowguid = Guid.NewGuid().ToString();
-            }                   
+            }
 
             var end = DateTime.Now;
 
@@ -2298,7 +2323,7 @@ namespace MovilBusiness.DataAccess
 
         public bool HayOfertasConLotes()
         {
-            return Arguments.Values.CurrentModule == Modules.VENTAS 
+            return Arguments.Values.CurrentModule == Modules.VENTAS
                 && SqliteManager.GetInstance().Query<ProductosTemp>("select t.ProID from ProductosTemp t " +
                 "inner join Productos p on p.ProID = t.ProID and ifnull(p.ProDatos3, '') like '%L%' " +
                 "where ifnull(t.IndicadorOferta, 0) = 1 limit 1", new string[] { }).Count > 0;
@@ -2310,7 +2335,7 @@ namespace MovilBusiness.DataAccess
 
             var list = SqliteManager.GetInstance().Query<Productos>(query, new string[] { });
 
-            if(list != null && list.Count > 0)
+            if (list != null && list.Count > 0)
             {
                 return list[0];
             }
@@ -2325,7 +2350,7 @@ namespace MovilBusiness.DataAccess
                 var list = SqliteManager.GetInstance().Query<ProductosTemp>("select SUM((case when ifnull(CantidadDetalle, 0) > 0 then (CantidadDetalle / p.ProUnidades) + ifnull(Cantidad, 0.0) else Cantidad end) * (p.ProPeso / 100.0)) as Cantidad from ProductosTemp t " +
                     "inner join Productos p on p.ProID = t.ProID where t.Cantidad > 0 or t.CantidadDetalle > 0", new string[] { });
 
-                if(list != null && list.Count > 0)
+                if (list != null && list.Count > 0)
                 {
                     var total = list[0];
                     total.Cantidad = list[0].Cantidad;
@@ -2333,7 +2358,8 @@ namespace MovilBusiness.DataAccess
                     //return (int)list[0].Cantidad;
                 }
 
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.Write(e.Message);
             }
@@ -2344,12 +2370,12 @@ namespace MovilBusiness.DataAccess
         public bool QuantityIsValidForDelivery(int proId, int posicion, double cantidadaAgregar, string lote = null, double cantidadHolgura = 0)
         {
             var list = SqliteManager.GetInstance().Query<ProductosTemp>("select CantidadEntrega, sum(Cantidad) as Cantidad from " +
-                "ProductosTemp where ProID = ? "+(!string.IsNullOrWhiteSpace(lote) ? " and ifnull(upper(Lote), '') != '"+lote.ToUpper()+"'" : "")+" " +
+                "ProductosTemp where ProID = ? " + (!string.IsNullOrWhiteSpace(lote) ? " and ifnull(upper(Lote), '') != '" + lote.ToUpper() + "'" : "") + " " +
                 "and Posicion = ? and case when ifnull(ProDatos3, '') like '%L%' then ifnull(Lote, '') != '' else 1=1 end " +
-                "group by ProID, Posicion, CantidadEntrega", 
+                "group by ProID, Posicion, CantidadEntrega",
                 new string[] { proId.ToString(), posicion.ToString(), cantidadaAgregar.ToString() });
 
-            
+
 
             if (list != null && list.Count > 0)
             {
@@ -2362,9 +2388,9 @@ namespace MovilBusiness.DataAccess
         public bool HayProductosSinLoteAgregados()
         {
             var list = SqliteManager.GetInstance().Query<ProductosTemp>("select ProID from ProductosTemp where " +
-                "ifnull(ProDatos3, '') like '%L%' and Cantidad > 0 and ifnull(Lote, '') = '' and TitID = ? limit 1", 
+                "ifnull(ProDatos3, '') like '%L%' and Cantidad > 0 and ifnull(Lote, '') = '' and TitID = ? limit 1",
                 new string[] { ((int)Arguments.Values.CurrentModule).ToString() });
-            
+
             return list != null && list.Count > 0;
         }
 
@@ -2375,24 +2401,24 @@ namespace MovilBusiness.DataAccess
             var conOfertas = SqliteManager.GetInstance().Query<ProductosTemp>("select * from ProductosTemp where TitID = ? " +
                 "and ifnull(CantidadOferta, 0) > 0 and ifnull(IndicadorOferta, 0) = 0", new string[] { ((int)Arguments.Values.CurrentModule).ToString() });
 
-            foreach(var prod in conOfertas)
+            foreach (var prod in conOfertas)
             {
-               prod.rowguid = Guid.NewGuid().ToString();
-               prod.Cantidad = prod.CantidadOferta;
-               prod.CantidadDetalle = 0;
-               prod.IndicadorOferta = true;
+                prod.rowguid = Guid.NewGuid().ToString();
+                prod.Cantidad = prod.CantidadOferta;
+                prod.CantidadDetalle = 0;
+                prod.IndicadorOferta = true;
 
-               if (myParametro.GetParOfertasManualesConDescuento100Porciento())
-               {
-                 prod.DesPorciento = 100;
-                 prod.Descuento = prod.Precio;
-               }
-               else
-               {
-                 prod.Precio = 0;
-                 prod.DesPorciento = 0;
-                 prod.Descuento = 0;
-               }
+                if (myParametro.GetParOfertasManualesConDescuento100Porciento())
+                {
+                    prod.DesPorciento = 100;
+                    prod.Descuento = prod.Precio;
+                }
+                else
+                {
+                    prod.Precio = 0;
+                    prod.DesPorciento = 0;
+                    prod.Descuento = 0;
+                }
 
             }
 
@@ -2403,7 +2429,7 @@ namespace MovilBusiness.DataAccess
         {
             var list = SqliteManager.GetInstance().Query<ProductosTemp>("select count(ProID) + 1 as Cantidad from ProductosTemp where TitID = ?", new string[] { titId.ToString() });
 
-            if(list != null && list.Count > 0)
+            if (list != null && list.Count > 0)
             {
                 return (int)list[0].Cantidad;
             }
@@ -2448,7 +2474,7 @@ namespace MovilBusiness.DataAccess
         {
             var raw = proCodigo.Split('-');
 
-            if(raw == null || raw.Length == 0)
+            if (raw == null || raw.Length == 0)
             {
                 return -1;
             }
@@ -2457,7 +2483,7 @@ namespace MovilBusiness.DataAccess
 
             var list = SqliteManager.GetInstance().Query<Productos>("select ProID from Productos where ProCodigo = ? ", new string[] { code });
 
-            if(list != null && list.Count > 0)
+            if (list != null && list.Count > 0)
             {
                 return list[0].ProID;
             }
@@ -2468,29 +2494,29 @@ namespace MovilBusiness.DataAccess
         public bool IsAddedInTempByColor(string reference, string colorRef, double quantity)
         {
             var list = SqliteManager.GetInstance().Query<ProductosTemp>("select ProCodigo from ProductosTemp where " +
-                "ProCodigo like '"+reference+"-%-"+colorRef+"' and ifnull(Cantidad, 0.0) = "+quantity.ToString(), new string[] { });
+                "ProCodigo like '" + reference + "-%-" + colorRef + "' and ifnull(Cantidad, 0.0) = " + quantity.ToString(), new string[] { });
 
             return list != null && list.Count > 0;
         }
 
         public List<string> GetProductosSizesAndColorByReferenceSplit(string reference, bool color = false, string colorRef = null)
         {
-            var where = "ProCodigo like '"+reference+"-%'";
+            var where = "ProCodigo like '" + reference + "-%'";
 
             if (!string.IsNullOrWhiteSpace(colorRef))
             {
-                 where = "ProCodigo like '"+reference+"-%-"+colorRef+"'";
+                where = "ProCodigo like '" + reference + "-%-" + colorRef + "'";
             }
 
             var list = SqliteManager.GetInstance().Query<Productos>("select ProCodigo from Productos where " + where, new string[] { });
 
             var result = new List<string>();
-        
-            foreach(var prod in list)
+
+            foreach (var prod in list)
             {
                 var raw = prod.ProCodigo.Split('-');
-                
-                if(raw != null && raw.Length > 2)
+
+                if (raw != null && raw.Length > 2)
                 {
                     if (color)
                     {
@@ -2508,7 +2534,7 @@ namespace MovilBusiness.DataAccess
 
         public void SetCondicionPagoInTemp(int CondicionPago)
         {
-           SqliteManager.GetInstance().Execute("update ProductosTemp set ConID = " + CondicionPago, new string[] { });
+            SqliteManager.GetInstance().Execute("update ProductosTemp set ConID = " + CondicionPago, new string[] { });
         }
 
         public void ActualizarPreciosInTemp(string rowguid, double precio, double lipPrecioMinimo)
@@ -2540,10 +2566,10 @@ namespace MovilBusiness.DataAccess
 
         public ProductosTemp GetProductInTempByProCodigo(string proCodigo)
         {
-            var list = SqliteManager.GetInstance().Query<ProductosTemp>("select ProID, ProCodigo, Cantidad, IndicadorDocena from ProductosTemp where ProCodigo = '"+proCodigo+"'", 
+            var list = SqliteManager.GetInstance().Query<ProductosTemp>("select ProID, ProCodigo, Cantidad, IndicadorDocena from ProductosTemp where ProCodigo = '" + proCodigo + "'",
                 new string[] { });
 
-            if(list != null && list.Count() > 0)
+            if (list != null && list.Count() > 0)
             {
                 return list[0];
             }
@@ -2552,10 +2578,10 @@ namespace MovilBusiness.DataAccess
         }
         public List<ProductosTemp> GetProductInTempByProId(int proid)
         {
-            var list = SqliteManager.GetInstance().Query<ProductosTemp>("SELECT IndicadorDocena, Cantidad, p.UnmCodigo from ProductosTemp p inner join ListaPrecios lp on lp.Proid = p.proid where p.proid = " + proid+ "", 
+            var list = SqliteManager.GetInstance().Query<ProductosTemp>("SELECT IndicadorDocena, Cantidad, p.UnmCodigo from ProductosTemp p inner join ListaPrecios lp on lp.Proid = p.proid where p.proid = " + proid + "",
                 new string[] { });
 
-            if(list != null && list.Count() > 0)
+            if (list != null && list.Count() > 0)
             {
                 return list;
             }
@@ -2567,16 +2593,16 @@ namespace MovilBusiness.DataAccess
 
             foreach (var prod in list)
             {
-                    var lipCodigo = myParametro.GetParSectores() >= 2 && Arguments.Values.CurrentSector != null ? Arguments.Values.CurrentSector.LipCodigo : Arguments.Values.CurrentClient != null ? Arguments.Values.CurrentClient.LiPCodigo : "Default";
-                    double precio = new DS_ListaPrecios().GetLipPrecioCompl(prod.ProID, lipCodigo, prod.UnmCodigo);
-                    double precioMinimo = new DS_ListaPrecios().GetPrecioMinimo(prod.ProID, lipCodigo, prod.UnmCodigo);
-                    double lipdescuento = new DS_ListaPrecios().GetLipDescuento(prod.ProID, lipCodigo, prod.UnmCodigo);
-                    var cantidad = ExistsProductoAgregadoPorOfertaForEdit(prod.ProID,(int)Arguments.Values.CurrentModule,prod.OfeID > 0? prod.OfeID : -1);
-                    
-                    double result = precio * (cantidad != null ? cantidad.Cantidad : 0);
+                var lipCodigo = myParametro.GetParSectores() >= 2 && Arguments.Values.CurrentSector != null ? Arguments.Values.CurrentSector.LipCodigo : Arguments.Values.CurrentClient != null ? Arguments.Values.CurrentClient.LiPCodigo : "Default";
+                double precio = new DS_ListaPrecios().GetLipPrecioCompl(prod.ProID, lipCodigo, prod.UnmCodigo);
+                double precioMinimo = new DS_ListaPrecios().GetPrecioMinimo(prod.ProID, lipCodigo, prod.UnmCodigo);
+                double lipdescuento = new DS_ListaPrecios().GetLipDescuento(prod.ProID, lipCodigo, prod.UnmCodigo);
+                var cantidad = ExistsProductoAgregadoPorOfertaForEdit(prod.ProID, (int)Arguments.Values.CurrentModule, prod.OfeID > 0 ? prod.OfeID : -1);
 
-                    SqliteManager.GetInstance().Execute("update ProductosTemp set PrecioTemp = ?, LipPrecioMinimo = ?,ValorOfertaManual = ?, LipDescuento = ? " +
-                    "where proid = '" + prod.ProID + "'", new string[] { precio.ToString(),precioMinimo.ToString(),result.ToString(),lipdescuento.ToString() });
+                double result = precio * (cantidad != null ? cantidad.Cantidad : 0);
+
+                SqliteManager.GetInstance().Execute("update ProductosTemp set PrecioTemp = ?, LipPrecioMinimo = ?,ValorOfertaManual = ?, LipDescuento = ? " +
+                "where proid = '" + prod.ProID + "'", new string[] { precio.ToString(), precioMinimo.ToString(), result.ToString(), lipdescuento.ToString() });
 
             }
 
@@ -2587,7 +2613,7 @@ namespace MovilBusiness.DataAccess
                 {
                     var product = list1.Where(p => p.OfeID == prod.ProID && p.ProID != prod.ProID).FirstOrDefault();
 
-                    if(product != null)
+                    if (product != null)
                     {
                         SqliteManager.GetInstance().Execute("update ProductosTemp set ValorOfertaManual = ? " +
                         "where proid = '" + prod.ProID + "'", new string[] { product.ValorOfertaManual.ToString() });
@@ -2608,9 +2634,9 @@ namespace MovilBusiness.DataAccess
             return " ";
         }
 
-        public int GetCantidadProductosAgregadosConLote(int proid , string lote)
+        public int GetCantidadProductosAgregadosConLote(int proid, string lote)
         {
-            var list = SqliteManager.GetInstance().Query<ProductosTemp>("select SUM(Cantidad) as Cantidad from ProductosTemp where ProID=? and Lote=? ", new string[] { proid.ToString(),lote });
+            var list = SqliteManager.GetInstance().Query<ProductosTemp>("select SUM(Cantidad) as Cantidad from ProductosTemp where ProID=? and Lote=? ", new string[] { proid.ToString(), lote });
 
             if (list != null && list.Count > 0)
             {

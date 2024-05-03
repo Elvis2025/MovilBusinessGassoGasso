@@ -29,9 +29,9 @@
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
             <Label Text="{x:Static resources:AppResource.SuggestedPriceLabel}"/>
             <Label Text="{Binding PrecioSugerido}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
-            <Label Text="{x:Static resources:AppResource.BarcodeLabel}" HorizontalOptions="End" Margin="5,0,0,0" />
+            <Label Text="{x:Static resources:AppResource.BarcodeLabel}" HorizontalOptions="End" Margin="2,0,0,0" />
             <Label Text="{Binding ProReferencia}" HorizontalOptions="End" Margin="2,0,0,0" x:Name="lbCodeBar"/>
-            <Label Text="{Binding ProReferencia, Mode=TwoWay}" HorizontalOptions="End" Margin="2,0,0,0" TextDecorations="Underline" TextColor="blue" x:Name="lbShowCodeBar">
+            <Label Text="{Binding ProReferencia, Mode=TwoWay}" HorizontalOptions="End" Margin="0,0,0,0" TextDecorations="Underline" TextColor="blue" x:Name="lbShowCodeBar">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" />
                 </Label.GestureRecognizers>
@@ -62,10 +62,16 @@
             <Label Text="{x:Static resources:AppResource.QuantityLabel}" Margin="0,0,0,0" IsVisible="{Binding ShowCantidad}" FontSize="Default" FontAttributes="Bold"/>
             <Label Text="{Binding CantidadConUnidades}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" x:Name="lblCantidad" IsVisible="{Binding ShowCantidad}"  FontSize="Default" FontAttributes="Bold"/>
         </StackLayout>
-
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
-            <Label Text="{x:Static resources:AppResource.DiscLabel}" Margin="5,0,0,0" IsVisible="{Binding ShowDescuento}"/>
+            <Label Text="{x:Static resources:AppResource.DiscLabel}" Margin="2,0,0,0" IsVisible="{Binding ShowDescuento}"/>
             <Label Text="{Binding DescuentoFormatted}" HorizontalOptions="FillAndExpand"  Margin="2,0,0,0" IsVisible="{Binding ShowDescuento}"/>
+
+            <Label Text="{x:Static resources:AppResource.ReasonOrder}" Margin="2,0,0,0" IsVisible="{Binding ShowMotivoPedido}"/>
+            <Label Text="{Binding MotivoPedidosDetalle}" HorizontalOptions="FillAndExpand"  Margin="2,0,0,0" IsVisible="{Binding ShowMotivoPedido}"/>
+            
+            
+        </StackLayout>    
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">          
             <Label>
                 <Label.FormattedText>
                     <FormattedString>
@@ -102,8 +108,13 @@
             <Label Text="{x:Static resources:AppResource.RevenueLabel}" Margin="5,0,0,0" IsVisible="{Binding ShowRevenimiento}" />
             <Label Text="{Binding CantidadDetalleRevenimiento, StringFormat='{0:N2}'}" IsVisible="{Binding ShowRevenimiento}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
 
-            <Label Text="{Static resources:AppResource.InvoicedQuantityLabel}" IsVisible="{Binding ShowCantidadConfirmada}" Margin="5,0,0,0" />
+            <Label Text="{Static resources:AppResource.InvoicedQuantity}" IsVisible="{Binding ShowCantidadConfirmada}" Margin="2,0,0,0" />
             <Label Text="{Binding CantidadConfirmada}" IsVisible="{Binding ShowCantidadConfirmada}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+
+            <Label Text="{Static resources:AppResource.SubTotal}" IsVisible="{Binding ShowCantidadConfirmada}" Margin="2,0,0,0" />
+            <Label Text="{Binding SubTotalDetalle}" IsVisible="{Binding ShowCantidadConfirmada}" HorizontalOptions="FillAndExpand" Margin="2,0,0,0" />
+            
+            
         </StackLayout>
 
         <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="0,5,0,0" IsVisible="{Binding ShowLayoutExtras}" Spacing="15">

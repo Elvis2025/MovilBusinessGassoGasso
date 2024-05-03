@@ -6031,6 +6031,16 @@ namespace MovilBusiness.DataAccess
         {
             return ReadBoolParam("CARAPAUTO");
         }
+        /// <summary>
+        /// Este parametro activa el TabbedPage Estados en Pedidos Detalle
+        /// </summary>
+        /// <returns></returns>
+         public bool GetParTabbedPageEstados()
+        {
+            return ReadBoolParam("TABBEDESTADOS");
+        }
+
+
 
         public bool GetParPedidosMostrarCantidadConfirmada()
         {

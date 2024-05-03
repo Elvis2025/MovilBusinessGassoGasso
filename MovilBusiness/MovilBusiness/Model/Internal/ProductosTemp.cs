@@ -110,6 +110,8 @@ namespace MovilBusiness.model.Internal
             return (ProductosTemp)MemberwiseClone();
         }
 
+
+        [Ignore] public double SubTotalDetalle { get => (PrecioNeto * CantidadConfirmada); }
         [Ignore] public string CantidadUnidades { get => Cantidad + "/" + CantidadDetalle; }
         [Ignore] public string CantidadManualUnidades { get => CantidadManual + "/" + CantidadManualDetalle; }
         [Ignore] public bool ShowUnidades { get => (InvCantidadDetalle > 0 && Arguments.Values.CurrentModule == Enums.Modules.PEDIDOS && DS_RepresentantesParametros.GetInstance().GetShowInventarioAlmacenesEnPedidos())
@@ -327,7 +329,9 @@ namespace MovilBusiness.model.Internal
        public double InvCantidadAlmSD { get; set; }
 
         public double InvCantidadAlmLV { get; set; }
+        public string MotivoPedidosDetalle { get; set; }
 
+        [JsonIgnore] [Ignore] public bool ShowMotivoPedido => MotivoPedidosDetalle != null;
         [JsonIgnore] [Ignore] public bool ShowVariosInventariosAlmacenes => DS_RepresentantesParametros.GetInstance().GetParMostrarVariosInventariosEnRow();
 
         [JsonIgnore] [Ignore] public bool NoShowVariosInventariosAlmacenes => !DS_RepresentantesParametros.GetInstance().GetParMostrarVariosInventariosEnRow();

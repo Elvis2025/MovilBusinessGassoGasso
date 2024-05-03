@@ -563,6 +563,20 @@ namespace MovilBusiness.DataAccess
 
             return SqliteManager.GetInstance().ExecuteScalar<string>(query);
         }
+        public string GetMotivoPedidos(string rowguid)
+        {
+            var query = $@"SELECT um.Descripcion FROM PedidosDetalleConfirmados pdc
+                                    INNER JOIN UsosMultiples um ON um.CodigoUso = pdc.idMotivo
+                                    Where pdc.rowguid = '{rowguid}'";
+
+
+            var query2 = SqliteManager.GetInstance().ExecuteScalar<string>(query);
+
+            
+
+            return query2;
+        }
+
 
         public Pedidos GetBySecuencia(int pedSecuencia, bool pedidoConfirmado)
         {
@@ -581,6 +595,25 @@ namespace MovilBusiness.DataAccess
 
             return null;
         }
+         public Pedidos GetPedidosConfirmadosBySecuencia(int pedSecuencia)
+        {
+            var list = SqliteManager.GetInstance().Query<Pedidos>("select p.rowguid as rowguid,PedCantidadConfirmada, PedSecuencia,c.CliIndicadorPresentacion as CliIndicadorPresentacion,p.PedTotal as PedTotal, p.rowguid as rowguid, CliNombre, CliRnc, CliCodigo, ConDescripcion as ConDescripcion, CliCalle, PedFecha, PedFechaEntrega, CliUrbanizacion, p.MonCodigo, p.PedOrdenCompra as PedFechaEntrega, p.ConID as ConID " +
+                ",ifnull(PedTipoPedido,-1) PedTipoPedido, p.PedIndicadorRevision, p.PedEstatus " +
+                "from " + "PedidosDetalleConfirmados" + " p " +
+                "inner join Clientes c on c.CliID = p.CliID " +
+                "left join CondicionesPago cp on p.ConID = cp.ConID " +
+                "where ltrim(rtrim(p.RepCodigo)) = '"+ Arguments.CurrentUser.RepCodigo.Trim()+"' " +
+                "and p.PedSecuencia = ?", new string[] { pedSecuencia.ToString() });
+
+            if (list != null && list.Count > 0)
+            {
+                return list[0];
+            }
+
+            return null;
+        }
+
+
 
         public Pedidos GetBySecuenciaConTotales(int pedSecuencia, bool pedidoConfirmado)
         {

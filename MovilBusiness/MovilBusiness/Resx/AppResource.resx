@@ -5200,4 +5200,13 @@ El monto del pedido es: $@2</value>
   <data name="ChangeCotToVen" xml:space="preserve">
     <value>Convertir Cotizacion a Ventas</value>
   </data>
+  <data name="InvoicedQuantity" xml:space="preserve">
+    <value>Cantidad Confirmada: </value>
+  </data>
+  <data name="ReasonOrder" xml:space="preserve">
+    <value>Motivo: </value>
+  </data>
+  <data name="SubTotal" xml:space="preserve">
+    <value>Sub Total: </value>
+  </data>
 </root>
