@@ -4,6 +4,8 @@ namespace MovilBusiness.model
     public class Productos
     {
         public int ProID { get; set; }
+        public int CliID { get; set; }
+        public int Fecha { get; set; }
         public int LinID { get; set; }
         public string ProDescripcion { get; set; }
         public double ProPrecio { get; set; }

@@ -649,6 +649,15 @@ namespace MovilBusiness.DataAccess
             d.ExecuteInsert();
         }
 
+
+        public List<ClientesProductos> GetLastThreeProductsByClient(int cliid)
+        {
+            var query = $@"SELECT * FROM ClientesProductosVendidos 
+                           WHERE cliid = {cliid} 
+                           ORDER BY CliFechaActualizacion DESC LIMIT 3";
+            return SqliteManager.GetInstance().Query<ClientesProductos>(query);
+        
+        }
         public bool ExistsDependiente(int cliid, string cedula)
         {
             return SqliteManager.GetInstance().Query<ClientesDependientes>("select Cliid from ClientesDependientes where Cliid = ? and ltrim(rtrim(upper(CLDCedula))) = ltrim(rtrim(upper(?))) limit 1", new string[] { cliid.ToString(), cedula }).Count > 0;
@@ -1649,5 +1658,6 @@ namespace MovilBusiness.DataAccess
 
         }
 
+        
     }
 }

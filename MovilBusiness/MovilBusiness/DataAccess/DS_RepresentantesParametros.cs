@@ -4859,6 +4859,13 @@ namespace MovilBusiness.DataAccess
             return ReadStringParam("MULTIMONSET");
         }
 
+        public bool GetLastThreeClientesVendidos()
+        {
+            return ReadBoolParam("PEDCLIPROVEN3");
+        }
+
+
+
         /// <summary>
         /// en impresion entregas transacciones mostrar las cantidades en cajas y unidades
         /// </summary>

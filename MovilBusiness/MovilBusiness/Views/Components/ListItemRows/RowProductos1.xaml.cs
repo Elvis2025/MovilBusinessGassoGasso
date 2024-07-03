@@ -12,10 +12,10 @@ namespace MovilBusiness.Views.Components.ListItemRows
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class RowProductos1 : Frame
     {
-        
+         
 		public RowProductos1 ()
 		{
-			InitializeComponent ();
+			InitializeComponent();
             lbShowCodeBar.IsVisible = DS_RepresentantesParametros.GetInstance().GetCodeBar();
             lbCodeBar.IsVisible = !DS_RepresentantesParametros.GetInstance().GetCodeBar();         
         }

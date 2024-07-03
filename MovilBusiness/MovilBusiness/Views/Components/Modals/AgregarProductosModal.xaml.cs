@@ -172,6 +172,7 @@ namespace MovilBusiness.Views.Components.Modals
 
         private bool carasHablitada;
         public bool CarasHablitada { get => carasHablitada; set { carasHablitada = value; RaiseOnPropertyChanged(); } }
+        
         public AgregarProductosModal(DS_Productos myProd, bool isEntrega = false, CentrosDistribucion centrodistribucion = null, bool IsMultiEntrega = false)
         {  
             IsEntrega = isEntrega;           
@@ -567,7 +568,92 @@ namespace MovilBusiness.Views.Components.Modals
                 ofertaManualContainer.Content = view;
             }
 
-            
+            if (myParametro.GetLastThreeClientesVendidos())
+            {
+                var productosVendidos = myCli.GetLastThreeProductsByClient(Arguments.Values.CurrentClient.CliID);
+                fmProductosVendidos.IsVisible = productosVendidos.Count() > 0 ? true : false;
+                if(productosVendidos.Count() > 0)
+                {
+                    CargarDatosEnEntry(productosVendidos);
+                }
+               
+                //var fechaycantidad = new ClientesProductos();
+                //var lasrTreeProd = new ClientesProductos();
+
+                //for (int i = 0; i < productosVendidos.Count(); i++)
+                //{
+
+                //}
+
+            }
+            else
+            {
+                fmProductosVendidos.IsVisible = false;
+
+            }
+        }
+
+
+        private void CargarDatosEnEntry(List<ClientesProductos> data)
+        {
+            // Inicializa un contador para los Entry
+            int entryIndex = 1;
+
+            foreach (var record in data)
+            {
+                // Separar los segmentos por ';'
+                var segments = record.CliFechasYCantidades.Split(';');
+
+                foreach (var segment in segments)
+                {
+                    // Verificar si ya hemos llenado todos los Entry
+                    if (entryIndex > 3)
+                    {
+                        break; // No procesar más si ya llenamos todos los Entry
+                    }
+
+                    // Separar la fecha y el número por '|'
+                    var parts = segment.Split('|');
+                    if (parts.Length == 2)
+                    {
+                        var fechaString = parts[0];
+                        var numero = parts[1];
+
+                        // Convertir la cadena de fecha a DateTime y formatearla
+                        DateTime fecha;
+                        if (DateTime.TryParseExact(fechaString, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out fecha))
+                        {
+                            var fechaFormateada = fecha.ToString("dd/MM/yyyy"); // Formato personalizado, puedes ajustarlo según necesites
+
+                            // Asignar a los Entry correspondientes por su nombre
+                            if (entryIndex == 1)
+                            {
+                                date1.Text = fechaFormateada;
+                                cantidad1.Text = numero;
+                            }
+                            else if (entryIndex == 2)
+                            {
+                                date2.Text = fechaFormateada;
+                                cantidad2.Text = numero;
+                            }
+                            else if (entryIndex == 3)
+                            {
+                                date3.Text = fechaFormateada;
+                                cantidad3.Text = numero;
+                            }
+
+                            // Incrementar el índice de Entry
+                            entryIndex++;
+                        }
+                        else
+                        {
+                            // Manejo de error si la conversión de fecha falla
+                            Console.WriteLine($"Error al convertir la fecha: {fechaString}");
+                        }
+                    }
+                }
+            }
+
         }
 
         private void SetNumeroTransaccion()
