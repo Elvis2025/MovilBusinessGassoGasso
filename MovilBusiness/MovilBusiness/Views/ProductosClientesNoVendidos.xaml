@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilBusiness.Views.ProductosClientesNoVendidos">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     BackgroundColor="LightGray"
+                     Padding="20,100,20,250"
+            >
+            <Grid VerticalOptions="FillAndExpand"
+                   HorizontalOptions="FillAndExpand"
+                   BackgroundColor="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Text="Productos No Vendidos"
+                        TextColor="Blue"
+                        FontSize="Body"
+                        FontAttributes="Bold"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        Margin="0,10,0,10"
+                        Grid.Row="0"
+                        VerticalTextAlignment="Center"
+                        />
+                
+                <BoxView BackgroundColor="Blue"
+                         HeightRequest="2"
+                         HorizontalOptions="FillAndExpand"
+                         Grid.Row="1"
+                         />
+                <Label HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand"
+                       TextColor="DarkGray"
+                       x:Name="txtFecha"
+                       Text="Ultima Fecha Actualización: 2024/05/26"
+                       Grid.Row="2"
+                       Padding="5,10,0,5"/>
+                <Label Text="Productos"
+                       Padding="5"
+                       TextColor="White"
+                       BackgroundColor="Black"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand"
+                       Grid.Row="3"/>
+                <ScrollView Orientation="Vertical"
+                            Grid.Row="4"
+                            HorizontalOptions="FillAndExpand">
+                    
+                    <CollectionView x:Name="cvProductsNoSaled"
+                                    SelectionMode="Multiple"
+                                    SelectionChanged="OnSelectionChanged">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="10,0,0,0">
+                                    <StackLayout.Triggers>
+                                        <DataTrigger TargetType="StackLayout"
+                                                     Binding="{Binding IsSelected}"
+                                                     Value="True">
+                                            <Setter Property="BackgroundColor"
+                                                    Value="LightBlue"/>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="StackLayout"
+                                                     Binding="{Binding IsSelected}"
+                                                     Value="False">
+                                            <Setter Property="BackgroundColor"
+                                                    Value="Transparent"/>
+                                        </DataTrigger>
+                                    </StackLayout.Triggers>
+                                    <Label Text="{Binding ProDescripcion}" 
+                                           TextColor="Gray"/>
+                                </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                    
+                </ScrollView>
+                <Grid VerticalOptions="End"
+                      HorizontalOptions="CenterAndExpand"
+                      Grid.Row="5"
+                      Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Text="Volver"
+                            BackgroundColor="LightGray"
+                            Padding="8,2,8,2"
+                            Grid.Column="0"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            Clicked="Atras"/>
+                    <Button Text="Continuar"
+                            BackgroundColor="LightGray"
+                            Padding="8,2,8,2"
+                            Grid.Column="1"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            Clicked="Continuar"/>
+                    <Button Text="Cargar"
+                            BackgroundColor="LightGray"
+                            Padding="8,2,8,2"
+                            Grid.Column="2"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            Clicked="Cargar"/>
+                </Grid>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

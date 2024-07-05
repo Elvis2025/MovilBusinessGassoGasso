@@ -658,6 +658,18 @@ namespace MovilBusiness.DataAccess
             return SqliteManager.GetInstance().Query<ClientesProductos>(query);
         
         }
+
+        public List<ProductosTemp> GetProductsNoSaledByClient(int cliid)
+        {
+            var query = $@"SELECT * 
+                            FROM ClientesProductosNoVendidos cpnv
+                            INNER JOIN Productos p ON p.Proid = cpnv.Proid
+                            WHERE cliid = {cliid} AND RepCodigo = '{Arguments.CurrentUser.RepCodigo}'";
+            return SqliteManager.GetInstance().Query<ProductosTemp>(query);
+        
+        }
+
+
         public bool ExistsDependiente(int cliid, string cedula)
         {
             return SqliteManager.GetInstance().Query<ClientesDependientes>("select Cliid from ClientesDependientes where Cliid = ? and ltrim(rtrim(upper(CLDCedula))) = ltrim(rtrim(upper(?))) limit 1", new string[] { cliid.ToString(), cedula }).Count > 0;

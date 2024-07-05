@@ -596,36 +596,30 @@ namespace MovilBusiness.Views.Components.Modals
 
         private void CargarDatosEnEntry(List<ClientesProductos> data)
         {
-            // Inicializa un contador para los Entry
             int entryIndex = 1;
 
             foreach (var record in data)
             {
-                // Separar los segmentos por ';'
                 var segments = record.CliFechasYCantidades.Split(';');
 
                 foreach (var segment in segments)
                 {
-                    // Verificar si ya hemos llenado todos los Entry
                     if (entryIndex > 3)
                     {
-                        break; // No procesar más si ya llenamos todos los Entry
+                        break; 
                     }
 
-                    // Separar la fecha y el número por '|'
                     var parts = segment.Split('|');
                     if (parts.Length == 2)
                     {
                         var fechaString = parts[0];
                         var numero = parts[1];
 
-                        // Convertir la cadena de fecha a DateTime y formatearla
                         DateTime fecha;
                         if (DateTime.TryParseExact(fechaString, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out fecha))
                         {
-                            var fechaFormateada = fecha.ToString("dd/MM/yyyy"); // Formato personalizado, puedes ajustarlo según necesites
+                            var fechaFormateada = fecha.ToString("dd/MM/yyyy"); 
 
-                            // Asignar a los Entry correspondientes por su nombre
                             if (entryIndex == 1)
                             {
                                 date1.Text = fechaFormateada;
@@ -642,13 +636,7 @@ namespace MovilBusiness.Views.Components.Modals
                                 cantidad3.Text = numero;
                             }
 
-                            // Incrementar el índice de Entry
                             entryIndex++;
-                        }
-                        else
-                        {
-                            // Manejo de error si la conversión de fecha falla
-                            Console.WriteLine($"Error al convertir la fecha: {fechaString}");
                         }
                     }
                 }
@@ -1194,7 +1182,7 @@ namespace MovilBusiness.Views.Components.Modals
             IsBusy = false;
         }
 
-        public async Task AceptarProducto(ProductosTemp CurrentProduct,bool isDescuentoAuthorize= false)
+        public async Task AceptarProducto(ProductosTemp CurrentProduct,bool isDescuentoAuthorize = false)
         {
             var precioVenta = 0.0;
             var revenimiento = 0.0;

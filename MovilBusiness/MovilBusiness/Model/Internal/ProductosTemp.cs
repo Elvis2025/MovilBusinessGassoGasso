@@ -8,13 +8,38 @@ using Newtonsoft.Json;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace MovilBusiness.model.Internal
 {
-    public class ProductosTemp
+    public class ProductosTemp : INotifyPropertyChanged
     {
         [PrimaryKey] public string rowguid { get; set; }
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                if (_isSelected != value)
+                {
+                    _isSelected = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public string CliFechaActualizacion { get; set; }
+        public string ProDescripcion { get; set; }
         public int TitID { get; set; }
         public int ProID { get; set; }
         public bool IndicadorOferta { get; set; }
@@ -329,6 +354,7 @@ namespace MovilBusiness.model.Internal
        public double InvCantidadAlmSD { get; set; }
         public double InvCantidadAlmLV { get; set; }
         public string MotivoPedidosDetalle { get; set; }
+        public int IndicadorProductoNoVendido { get; set; }
 
         [JsonIgnore] [Ignore] public bool ShowMotivoPedido => MotivoPedidosDetalle != null;
         [JsonIgnore] [Ignore] public bool ShowVariosInventariosAlmacenes => DS_RepresentantesParametros.GetInstance().GetParMostrarVariosInventariosEnRow();

@@ -335,6 +335,7 @@ namespace MovilBusiness.ViewModel
         private bool IsVenAutlImcre;
 
         public bool UseMultiEntrega { get; set; }
+        public bool IsProductNoSaled { get; set; } = false;
 
         public PedidosViewModel(Page page, int EditedTranSecuencia = -1, bool isEditing = false, bool fromCopy = false, string repAuditor = null, int almId = -1, bool  isFromCot2Ven = false, int conId = -1) : base(page)
         {
@@ -1760,7 +1761,29 @@ namespace MovilBusiness.ViewModel
                 }
                 else
                 {
-                  await PushAsync(new PedidosDetallePage(args));
+                    var productosNoVendidos = myCli.GetProductsNoSaledByClient(Arguments.Values.CurrentClient.CliID);
+                    if (myParametro.GetProductosClientesNoVendidos() &&  (productosNoVendidos != null && productosNoVendidos.Count() > 0))
+                    {
+                        var productosClientesNoVendidos = new ProductosClientesNoVendidos(productosNoVendidos);
+                        productosClientesNoVendidos.next = async() =>
+                        {
+                            await PushAsync(new PedidosDetallePage(args));
+                        };
+
+                        productosClientesNoVendidos.cargar = (product) =>
+                        {
+                            IsProductNoSaled = true;
+                            OnListItemSelected(product);
+                            SearchUnAsync(true);
+                        };
+
+
+                        await PushModalAsync(productosClientesNoVendidos);
+                    }
+                    else
+                    {
+                        await PushAsync(new PedidosDetallePage(args));
+                    }
                 }
 
             }
@@ -2433,285 +2456,299 @@ namespace MovilBusiness.ViewModel
                 }
                 else
                 {
-                    dialogAgregarProducto = new AgregarProductosModal(myProd, CurrentPedidoAEntregar != null && Arguments.Values.CurrentModule == Modules.VENTAS, CurrentCentrosDistribucion ?? null, UseMultiEntrega)
+                    dialogAgregarProducto = new AgregarProductosModal(myProd, CurrentPedidoAEntregar != null && Arguments.Values.CurrentModule == Modules.VENTAS, CurrentCentrosDistribucion ?? null, UseMultiEntrega);
+
+                    //dialogAgregarProducto.;
+
+                    dialogAgregarProducto = new AgregarProductosModal(myProd, CurrentPedidoAEntregar != null && Arguments.Values.CurrentModule == Modules.VENTAS, CurrentCentrosDistribucion ?? null, UseMultiEntrega);
+                    //{
+                    IsEntregandoTraspaso = dialogAgregarProducto.IsEntregandoTraspaso;
+                    dialogAgregarProducto.CurrentProduct = producto;
+                    dialogAgregarProducto.IsDppActive = IsDpp;
+                    dialogAgregarProducto.OnCantidadAccepted = (s) =>
                     {
-                        IsEntregandoTraspaso = IsEntregandoTraspaso,
-                        OnCantidadAccepted = (s) =>
+
+                        if ((myParametro.GetParPedidosProductosColoresYTamanos() || myParametro.GetParPedidosProductosUnidades()) && s.ProductToAdd != null)
                         {
+                            CurrentProducto = s.ProductToAdd;
+                        }
 
-                            if((myParametro.GetParPedidosProductosColoresYTamanos() || myParametro.GetParPedidosProductosUnidades()) && s.ProductToAdd != null)
+                        var PrecioLista = CurrentProducto.Precio;
+                        var PrecioListaConImpuesto = PrecioLista * ((CurrentProducto.Itbis / 100) + 1);
+
+                        CurrentProducto.Cantidad = s.Cantidad;
+                        CurrentProducto.CantidadDetalle = s.Unidades;
+                        CurrentProducto.InvAreaId = s.InvArea;
+                        CurrentProducto.InvAreaDescr = s.InvAreaDescr;
+                        CurrentProducto.PrecioTemp = s.Precio;
+                        CurrentProducto.IndicadorDocena = s.IndicadorDocena;
+                        CurrentProducto.CantidadFacing = s.Facing;
+                        CurrentProducto.ProAtributo1 = s.Atributo1?.Key;
+                        CurrentProducto.ProAtributo2 = s.Atributo2?.Key;
+                        CurrentProducto.ProAtributo1Desc = s.Atributo1?.Value;
+                        CurrentProducto.ProAtributo2Desc = s.Atributo2?.Value;
+                        CurrentProducto.CedCodigo = s.CedCodigo;
+                        CurrentProducto.CedDescripcion = s.CedDescripcion;
+
+                        CurrentProducto.IndicadorOfertaForShow = CurrentProducto.IndicadorOferta;
+
+                        if (myParametro.GetParInventariosTomarCantidades() == 1 || myParametro.GetParInventariosTomarCantidades() == 3 || myParametro.GetParColocacionProductosTomarCantidades() == 1)
+                        {
+                            CurrentProducto.CanTidadGond = s.CanTidadGond;
+                            CurrentProducto.CantidadAlm = s.CantidadAlm;
+                            CurrentProducto.CanTidadTramo = s.CanTidadTramo;
+                        }
+                        else if (myParametro.GetParInventariosTomarCantidades() == 2 || myParametro.GetParColocacionProductosTomarCantidades() == 2)
+                        {
+                            CurrentProducto.CanTidadGond = s.CanTidadGond;
+                            CurrentProducto.CantidadAlm = s.CantidadAlm;
+                            CurrentProducto.UnidadGond = s.UnidadGond;
+                            CurrentProducto.UnidadAlm = s.UnidadAlm;
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(Arguments.Values.CurrentClient.CliTipoComprobanteFAC) && Arguments.Values.CurrentClient.CliTipoComprobanteFAC == "14" && (Arguments.Values.CurrentModule == Modules.VENTAS || Arguments.Values.CurrentModule == Modules.PEDIDOS || Arguments.Values.CurrentModule == Modules.COTIZACIONES))
+                        {
+                            CurrentProducto.Itbis = 0;
+                        }
+
+                        if (UseMultiEntrega)
+                        {
+                            CurrentProducto.PedFechaEntrega = s.FechaEntrega;
+                        }
+
+                        if (s.MotId != -1)
+                        {
+                            CurrentProducto.MotIdDevolucion = s.MotId;
+                        }
+
+                        //if (CurrentPedidoAEntregar != null && CurrentProducto.IndicadorOferta)
+                        //{
+                        //    CurrentProducto.IndicadorOferta = false;
+                        //}
+
+                        CurrentProducto.CantidadOferta = myParametro.GetParCotOfertasManuales() || myParametro.GetParVenOfertasManuales() || myParametro.GetParPedOfertasManuales() ? s.CantidadOfertaManual : 0;
+
+                        CurrentProducto.CantidadPiezas = s.CantidadPiezas;
+
+                        if (myParametro.GetParCambioMercanciaInsertarLotesParaRecivir())
+                        {
+                            CurrentProducto.LoteRecibido = s.LoteRecibido;
+                            CurrentProducto.LoteEntregado = s.LoteEntregado;
+                        }
+                        else
+                        {
+                            CurrentProducto.Lote = s.Lote;
+                        }
+
+                        if (myParametro.GetParRevenimiento())
+                        {
+                            CurrentProducto.CantidadDetalleR = s.CantidadDetalleR;
+                        }
+
+                        if (CurrentPedidoAEntregar != null)
+                        {
+                            if (!ValidarCantidadMultiAlmacen())
                             {
-                                CurrentProducto = s.ProductToAdd;
-                            }
-
-                            var PrecioLista = CurrentProducto.Precio;
-                            var PrecioListaConImpuesto = PrecioLista * ((CurrentProducto.Itbis / 100) + 1);
-
-                            CurrentProducto.Cantidad = s.Cantidad;
-                            CurrentProducto.CantidadDetalle = s.Unidades;
-                            CurrentProducto.InvAreaId = s.InvArea;
-                            CurrentProducto.InvAreaDescr = s.InvAreaDescr;
-                            CurrentProducto.PrecioTemp = s.Precio;
-                            CurrentProducto.IndicadorDocena = s.IndicadorDocena;
-                            CurrentProducto.CantidadFacing = s.Facing;
-                            CurrentProducto.ProAtributo1 = s.Atributo1?.Key;
-                            CurrentProducto.ProAtributo2 = s.Atributo2?.Key;
-                            CurrentProducto.ProAtributo1Desc = s.Atributo1?.Value;
-                            CurrentProducto.ProAtributo2Desc = s.Atributo2?.Value;
-                            CurrentProducto.CedCodigo = s.CedCodigo;
-                            CurrentProducto.CedDescripcion = s.CedDescripcion;
-
-                            CurrentProducto.IndicadorOfertaForShow = CurrentProducto.IndicadorOferta;
-
-                            if (myParametro.GetParInventariosTomarCantidades() == 1 || myParametro.GetParInventariosTomarCantidades() == 3 || myParametro.GetParColocacionProductosTomarCantidades() == 1)
-                            {
-                                CurrentProducto.CanTidadGond = s.CanTidadGond;
-                                CurrentProducto.CantidadAlm = s.CantidadAlm;
-                                CurrentProducto.CanTidadTramo = s.CanTidadTramo;
-                            }
-                            else if (myParametro.GetParInventariosTomarCantidades() == 2 || myParametro.GetParColocacionProductosTomarCantidades() == 2)
-                            {
-                                CurrentProducto.CanTidadGond = s.CanTidadGond;
-                                CurrentProducto.CantidadAlm = s.CantidadAlm;
-                                CurrentProducto.UnidadGond = s.UnidadGond;
-                                CurrentProducto.UnidadAlm = s.UnidadAlm;
-                            }
-
-                            if(!string.IsNullOrWhiteSpace(Arguments.Values.CurrentClient.CliTipoComprobanteFAC) && Arguments.Values.CurrentClient.CliTipoComprobanteFAC == "14" && (Arguments.Values.CurrentModule == Modules.VENTAS || Arguments.Values.CurrentModule == Modules.PEDIDOS || Arguments.Values.CurrentModule == Modules.COTIZACIONES))
-                            {
-                                CurrentProducto.Itbis = 0;
-                            }
-
-                            if (UseMultiEntrega)
-                            {
-                                CurrentProducto.PedFechaEntrega = s.FechaEntrega;
-                            }
-
-                            if(s.MotId != -1)
-                            {
-                                CurrentProducto.MotIdDevolucion = s.MotId;
-                            }
-
-                            //if (CurrentPedidoAEntregar != null && CurrentProducto.IndicadorOferta)
-                            //{
-                            //    CurrentProducto.IndicadorOferta = false;
-                            //}
-
-                            CurrentProducto.CantidadOferta = myParametro.GetParCotOfertasManuales() || myParametro.GetParVenOfertasManuales() || myParametro.GetParPedOfertasManuales() ? s.CantidadOfertaManual : 0;
-                            
-                            CurrentProducto.CantidadPiezas = s.CantidadPiezas;                            
-
-                            if (myParametro.GetParCambioMercanciaInsertarLotesParaRecivir())
-                            {
-                                CurrentProducto.LoteRecibido = s.LoteRecibido;
-                                CurrentProducto.LoteEntregado = s.LoteEntregado;
-                            }else
-                            {
-                                CurrentProducto.Lote = s.Lote;
-                            }
-
-                            if (myParametro.GetParRevenimiento())
-                            {
-                                CurrentProducto.CantidadDetalleR = s.CantidadDetalleR;
-                            }
-
-                            if (CurrentPedidoAEntregar != null)
-                            {
-                                if (!ValidarCantidadMultiAlmacen())
-                                {
-                                    return;
-                                }
-                            }
-
-                            if (ParOfertasManuales && s.ProductoOferta != null)
-                            {
-                                CurrentProducto.ProIDOferta = s.ProductoOferta.ProID;
-                            }
-                            if (s.Precio > 0 && Arguments.Values.CurrentModule != Modules.INVFISICO)
-                            {
-                                CurrentProducto.Precio = s.Precio;
-                            }
-
-                            CurrentProducto.IndicadorEliminar = s.IndicadorEliminar;
-                            CurrentProducto.DesPorcientoManual = s.DescuentoManual;
-                            CurrentProducto.ValorOfertaManual = s.ValorOfertaManual;
-
-                            if (ParOfertasManuales && s.ProductoOferta != null)
-                            {
-                                CurrentProducto.CantidadOferta = s.CantidadOfertaManual;
-                                CurrentProducto.ProIDOferta = s.ProductoOferta.ProID;
-                            }
-
-                            if (Functions.IsCompraFactura || myParametro.GetParComprasUsarFacturas())
-                            {
-                                CurrentProducto.Documento = s.ComprasNoFactura;
-                            }
-
-                            if (s.IndicadorPromocion)
-                            {
-                                CurrentProducto.ShowDescuento = false;
-                            }else if (CurrentProducto.DesPorcientoManual > 0)
-                            {
-                                CurrentProducto.Descuento = (CurrentProducto.DesPorcientoManual * CurrentProducto.Precio) / 100;
-                                CurrentProducto.DesPorciento = CurrentProducto.DesPorcientoManual;
-                                CurrentProducto.ShowDescuento = true;
-                            }
-                            else if (myParametro.GetParPedDescLip())
-                            {
-                                CurrentProducto.Descuento = s.DescuentoXLipCodigo;
-                                CurrentProducto.DesPorciento = Math.Round(((s.DescuentoXLipCodigo / CurrentProducto.Precio)) * 100, 4, MidpointRounding.AwayFromZero);
-                                CurrentProducto.ShowDescuento = true;
-                            }
-                            else if(!myParametro.GetParDescuentosProductosMostrarPreview())
-                            {                                
-                                CurrentProducto.Descuento = 0;
-                                CurrentProducto.DesPorciento = 0;
-                                CurrentProducto.ShowDescuento = false;
-                            }
-
-                            //if (myParametro.GetDescuentoxPrecioNegociado())
-                            //{
-                            //    CurrentProducto.PrecioTemp = s.Precio;
-                            //    if (PrecioLista > 0 && Arguments.Values.CurrentModule != Modules.INVFISICO)
-                            //    {
-                            //        CurrentProducto.Precio = PrecioLista;
-                            //    }
-
-                            //    CurrentProducto.Descuento = PrecioLista - s.Precio;
-                            //    CurrentProducto.DesPorciento = (PrecioLista - s.Precio) / 100;
-                            //    CurrentProducto.ShowDescuento = true;
-                            //}
-
-                            if (myParametro.GetDescuentoxPrecioNegociado())
-                            {
-                                CurrentProducto.PrecioTemp = s.Precio;
-                                if (PrecioLista > 0 && Arguments.Values.CurrentModule != Modules.INVFISICO)
-                                {
-                                    CurrentProducto.Precio = PrecioLista;
-                                }
-
-                                if (myParametro.GetParPedidosEditarPrecioNegconItebis())
-                                {
-                                    var precionegociadosinimpuesto = s.Precio;// (s.Precio / ((CurrentProducto.Itbis / 100) + 1));
-                                    CurrentProducto.Descuento = (PrecioLista) - (precionegociadosinimpuesto);
-                                    CurrentProducto.DesPorciento = (PrecioLista - precionegociadosinimpuesto) / 100;
-                                    CurrentProducto.ShowDescuento = true;
-                                }
-                                else
-                                {
-                                    CurrentProducto.Descuento = (PrecioLista) - (s.Precio);
-                                    CurrentProducto.DesPorciento = (PrecioLista - s.Precio) / 100;
-                                    CurrentProducto.ShowDescuento = true;
-                                }
-                            }
-
-                            /*if (Arguments.Values.CurrentModule == Modules.PEDIDOS && CurrentProducto.IndicadorPromocion != s.IndicadorPromocion && !string.IsNullOrWhiteSpace(CurrentProducto.rowguid))
-                            {
-                                myProd.DeleteTempByRowguid(CurrentProducto.rowguid);
-                            }*/
-
-                            if (CurrentProducto.IndicadorPromocion != s.IndicadorPromocion && !string.IsNullOrWhiteSpace(CurrentProducto.rowguid) && myProd.ExistsInTemp(CurrentProducto.ProID, (int)Arguments.Values.CurrentModule, s.IndicadorPromocion))
-                            {
-                                ReloadByPromotion = true;
-                            }
-
-                            CurrentProducto.IndicadorPromocion = s.IndicadorPromocion;
-
-                          /*  if (Arguments.Values.CurrentModule == Modules.PEDIDOS || Arguments.Values.CurrentModule == Modules.VENTAS || Arguments.Values.CurrentModule == Modules.COTIZACIONES)
-                            {
-                                CurrentProducto.ConID = CurrentCondicionPago.ConID;
-                            }*/
-
-                            AgregarProducto(CurrentProducto);  //Se inserta primero el producto seleccionado y luego la oferta manual si existe
-
-                            if (s.ProductoOferta == null && CurrentProducto.ProIDOferta > 0 && myProd.ExistsOfertaInTemp(CurrentProducto.ProID, (int)Arguments.Values.CurrentModule))
-                            {
-                                myProd.DeleteOfertaInTemp((int)Arguments.Values.CurrentModule, CurrentProducto.ProID, CurrentProducto.ProIDOferta, false, UnmCodigo: (DS_RepresentantesParametros.GetInstance().GetOfertasyDescuentosbyUnidadMedida() ? CurrentProducto.UnmCodigo : ""));
-                            }
-
-                            if (ParOfertasManuales)
-                            {
-                                if (s.ProductoOferta != null)
-                                {
-                                    CurrentProducto.PrecioTemp = 0;
-                                    CurrentProducto.CantidadOferta = 0;
-
-                                    if (myProd.ExistsOfertaInTemp(CurrentProducto.ProID, (int)Arguments.Values.CurrentModule))
-                                    {
-                                        myProd.DeleteOfertaInTemp((int)Arguments.Values.CurrentModule, CurrentProducto.ProID, -1, false, UnmCodigo: (DS_RepresentantesParametros.GetInstance().GetOfertasyDescuentosbyUnidadMedida() ? CurrentProducto.UnmCodigo : ""));
-                                    }
-                                    if (myProd.ExistsOfertaInTemp(CurrentProducto.ProIDOferta, (int)Arguments.Values.CurrentModule))
-                                    {
-                                        myProd.DeleteOfertaInTemp((int)Arguments.Values.CurrentModule, CurrentProducto.ProIDOferta, -1, false, UnmCodigo: (DS_RepresentantesParametros.GetInstance().GetOfertasyDescuentosbyUnidadMedida() ? CurrentProducto.UnmCodigo : ""));
-                                    }
-
-                                    if ((CurrentProducto.Cantidad > 0 || CurrentProducto.CantidadDetalle > 0) || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS)
-                                    {
-                                        myProd.InsertInTemp(s.ProductoOferta, true);
-                                    }
-                                }
-
-                                //CurrentProducto.CantidadOferta = s.CantidadOfertaManual;
-                            }
-
-                            var parBlockCondicionPago = DS_RepresentantesParametros.GetInstance().BloquearCondicionPago();
-                            if (parBlockCondicionPago == 1 || parBlockCondicionPago == 2)
-                            {
-                                //Deshabilita la condicion de pago del tab Configuracion de pedidos si cumple la condicion
-                                if ((DS_RepresentantesParametros.GetInstance().BloquearCondicionPago() == 1 && HasProductsInTemp()
-                                       && (Arguments.Values.CurrentModule == Modules.VENTAS || Arguments.Values.CurrentModule == Modules.PEDIDOS))
-                                       || (DS_RepresentantesParametros.GetInstance().BloquearCondicionPago() == 2 && Arguments.Values.CurrentModule == Modules.VENTAS)
-                                       || (CurrentPedidoAEntregar != null && Arguments.Values.CurrentModule == Modules.VENTAS))
-                                {
-                                    EnableCondicionPago = false;
-                                }
-                                else { EnableCondicionPago = true; }
-                            }
-
-                            if (condicionPagoAutorizada)
-                            {
-                                EnableCondicionPago = true; 
-                            }
-
-                            var usarColoresYTamanos = myParametro.GetParPedidosProductosColoresYTamanos();
-
-                            var rawCode = CurrentProducto.ProCodigo.Split('-');
-
-                            if(!(rawCode.Length > 2))
-                            {
-                                usarColoresYTamanos = false;
-                            }
-
-                            if (!usarColoresYTamanos)
-                            {
-                                CurrentProducto = null;//Se pone null aqui en vez de hacerlo en AgregarProducto(CurrentProducto)
-                            }
-                            
-                            if(myParametro.GetParPedidosSearchAutomatico())
-                            {
-                                SearchUnAsync(true);
-                            }else if(myParametro.GetParNoShowProInTemp() || myParametro.GetParProdUseUnmCodigo())
-                            {
-                                if (!string.IsNullOrWhiteSpace(LastValueSearch))
-                                {
-                                    SearchValue = LastValueSearch;
-                                }
-                                SearchUnAsync(false);
-                            }
-
-                            if (ReloadByPromotion && !usarColoresYTamanos)
-                            {
-                                ReloadByPromotion = false;
-                                SearchUnAsync(LastTimeWasResume);
+                                return;
                             }
                         }
+
+                        if (ParOfertasManuales && s.ProductoOferta != null)
+                        {
+                            CurrentProducto.ProIDOferta = s.ProductoOferta.ProID;
+                        }
+                        if (s.Precio > 0 && Arguments.Values.CurrentModule != Modules.INVFISICO)
+                        {
+                            CurrentProducto.Precio = s.Precio;
+                        }
+
+                        CurrentProducto.IndicadorEliminar = s.IndicadorEliminar;
+                        CurrentProducto.DesPorcientoManual = s.DescuentoManual;
+                        CurrentProducto.ValorOfertaManual = s.ValorOfertaManual;
+
+                        if (ParOfertasManuales && s.ProductoOferta != null)
+                        {
+                            CurrentProducto.CantidadOferta = s.CantidadOfertaManual;
+                            CurrentProducto.ProIDOferta = s.ProductoOferta.ProID;
+                        }
+
+                        if (Functions.IsCompraFactura || myParametro.GetParComprasUsarFacturas())
+                        {
+                            CurrentProducto.Documento = s.ComprasNoFactura;
+                        }
+
+                        if (s.IndicadorPromocion)
+                        {
+                            CurrentProducto.ShowDescuento = false;
+                        }
+                        else if (CurrentProducto.DesPorcientoManual > 0)
+                        {
+                            CurrentProducto.Descuento = (CurrentProducto.DesPorcientoManual * CurrentProducto.Precio) / 100;
+                            CurrentProducto.DesPorciento = CurrentProducto.DesPorcientoManual;
+                            CurrentProducto.ShowDescuento = true;
+                        }
+                        else if (myParametro.GetParPedDescLip())
+                        {
+                            CurrentProducto.Descuento = s.DescuentoXLipCodigo;
+                            CurrentProducto.DesPorciento = Math.Round(((s.DescuentoXLipCodigo / CurrentProducto.Precio)) * 100, 4, MidpointRounding.AwayFromZero);
+                            CurrentProducto.ShowDescuento = true;
+                        }
+                        else if (!myParametro.GetParDescuentosProductosMostrarPreview())
+                        {
+                            CurrentProducto.Descuento = 0;
+                            CurrentProducto.DesPorciento = 0;
+                            CurrentProducto.ShowDescuento = false;
+                        }
+
+                        //if (myParametro.GetDescuentoxPrecioNegociado())
+                        //{
+                        //    CurrentProducto.PrecioTemp = s.Precio;
+                        //    if (PrecioLista > 0 && Arguments.Values.CurrentModule != Modules.INVFISICO)
+                        //    {
+                        //        CurrentProducto.Precio = PrecioLista;
+                        //    }
+
+                        //    CurrentProducto.Descuento = PrecioLista - s.Precio;
+                        //    CurrentProducto.DesPorciento = (PrecioLista - s.Precio) / 100;
+                        //    CurrentProducto.ShowDescuento = true;
+                        //}
+
+                        if (myParametro.GetDescuentoxPrecioNegociado())
+                        {
+                            CurrentProducto.PrecioTemp = s.Precio;
+                            if (PrecioLista > 0 && Arguments.Values.CurrentModule != Modules.INVFISICO)
+                            {
+                                CurrentProducto.Precio = PrecioLista;
+                            }
+
+                            if (myParametro.GetParPedidosEditarPrecioNegconItebis())
+                            {
+                                var precionegociadosinimpuesto = s.Precio;// (s.Precio / ((CurrentProducto.Itbis / 100) + 1));
+                                CurrentProducto.Descuento = (PrecioLista) - (precionegociadosinimpuesto);
+                                CurrentProducto.DesPorciento = (PrecioLista - precionegociadosinimpuesto) / 100;
+                                CurrentProducto.ShowDescuento = true;
+                            }
+                            else
+                            {
+                                CurrentProducto.Descuento = (PrecioLista) - (s.Precio);
+                                CurrentProducto.DesPorciento = (PrecioLista - s.Precio) / 100;
+                                CurrentProducto.ShowDescuento = true;
+                            }
+                        }
+
+                        /*if (Arguments.Values.CurrentModule == Modules.PEDIDOS && CurrentProducto.IndicadorPromocion != s.IndicadorPromocion && !string.IsNullOrWhiteSpace(CurrentProducto.rowguid))
+                        {
+                            myProd.DeleteTempByRowguid(CurrentProducto.rowguid);
+                        }*/
+
+                        if (CurrentProducto.IndicadorPromocion != s.IndicadorPromocion && !string.IsNullOrWhiteSpace(CurrentProducto.rowguid) && myProd.ExistsInTemp(CurrentProducto.ProID, (int)Arguments.Values.CurrentModule, s.IndicadorPromocion))
+                        {
+                            ReloadByPromotion = true;
+                        }
+
+                        CurrentProducto.IndicadorPromocion = s.IndicadorPromocion;
+
+                        /*  if (Arguments.Values.CurrentModule == Modules.PEDIDOS || Arguments.Values.CurrentModule == Modules.VENTAS || Arguments.Values.CurrentModule == Modules.COTIZACIONES)
+                        {
+                            CurrentProducto.ConID = CurrentCondicionPago.ConID;
+                        }*/
+
+                        AgregarProducto(CurrentProducto);  //Se inserta primero el producto seleccionado y luego la oferta manual si existe
+
+                        if (s.ProductoOferta == null && CurrentProducto.ProIDOferta > 0 && myProd.ExistsOfertaInTemp(CurrentProducto.ProID, (int)Arguments.Values.CurrentModule))
+                        {
+                            myProd.DeleteOfertaInTemp((int)Arguments.Values.CurrentModule, CurrentProducto.ProID, CurrentProducto.ProIDOferta, false, UnmCodigo: (DS_RepresentantesParametros.GetInstance().GetOfertasyDescuentosbyUnidadMedida() ? CurrentProducto.UnmCodigo : ""));
+                        }
+
+                        if (ParOfertasManuales)
+                        {
+                            if (s.ProductoOferta != null)
+                            {
+                                CurrentProducto.PrecioTemp = 0;
+                                CurrentProducto.CantidadOferta = 0;
+
+                                if (myProd.ExistsOfertaInTemp(CurrentProducto.ProID, (int)Arguments.Values.CurrentModule))
+                                {
+                                    myProd.DeleteOfertaInTemp((int)Arguments.Values.CurrentModule, CurrentProducto.ProID, -1, false, UnmCodigo: (DS_RepresentantesParametros.GetInstance().GetOfertasyDescuentosbyUnidadMedida() ? CurrentProducto.UnmCodigo : ""));
+                                }
+                                if (myProd.ExistsOfertaInTemp(CurrentProducto.ProIDOferta, (int)Arguments.Values.CurrentModule))
+                                {
+                                    myProd.DeleteOfertaInTemp((int)Arguments.Values.CurrentModule, CurrentProducto.ProIDOferta, -1, false, UnmCodigo: (DS_RepresentantesParametros.GetInstance().GetOfertasyDescuentosbyUnidadMedida() ? CurrentProducto.UnmCodigo : ""));
+                                }
+
+                                if ((CurrentProducto.Cantidad > 0 || CurrentProducto.CantidadDetalle > 0) || Arguments.Values.CurrentModule == Modules.CONTEOSFISICOS)
+                                {
+                                    myProd.InsertInTemp(s.ProductoOferta, true);
+                                }
+                            }
+
+                            //CurrentProducto.CantidadOferta = s.CantidadOfertaManual;
+                        }
+
+                        var parBlockCondicionPago = DS_RepresentantesParametros.GetInstance().BloquearCondicionPago();
+                        if (parBlockCondicionPago == 1 || parBlockCondicionPago == 2)
+                        {
+                            //Deshabilita la condicion de pago del tab Configuracion de pedidos si cumple la condicion
+                            if ((DS_RepresentantesParametros.GetInstance().BloquearCondicionPago() == 1 && HasProductsInTemp()
+                                    && (Arguments.Values.CurrentModule == Modules.VENTAS || Arguments.Values.CurrentModule == Modules.PEDIDOS))
+                                    || (DS_RepresentantesParametros.GetInstance().BloquearCondicionPago() == 2 && Arguments.Values.CurrentModule == Modules.VENTAS)
+                                    || (CurrentPedidoAEntregar != null && Arguments.Values.CurrentModule == Modules.VENTAS))
+                            {
+                                EnableCondicionPago = false;
+                            }
+                            else { EnableCondicionPago = true; }
+                        }
+
+                        if (condicionPagoAutorizada)
+                        {
+                            EnableCondicionPago = true;
+                        }
+
+                        var usarColoresYTamanos = myParametro.GetParPedidosProductosColoresYTamanos();
+
+                        var rawCode = CurrentProducto.ProCodigo.Split('-');
+
+                        if (!(rawCode.Length > 2))
+                        {
+                            usarColoresYTamanos = false;
+                        }
+
+                        if (!usarColoresYTamanos)
+                        {
+                            CurrentProducto = null;//Se pone null aqui en vez de hacerlo en AgregarProducto(CurrentProducto)
+                        }
+
+                        if (myParametro.GetParPedidosSearchAutomatico())
+                        {
+                            SearchUnAsync(true);
+                        }
+                        else if (myParametro.GetParNoShowProInTemp() || myParametro.GetParProdUseUnmCodigo())
+                        {
+                            if (!string.IsNullOrWhiteSpace(LastValueSearch))
+                            {
+                                SearchValue = LastValueSearch;
+                            }
+                            SearchUnAsync(false);
+                        }
+
+                        if (ReloadByPromotion && !usarColoresYTamanos)
+                        {
+                            ReloadByPromotion = false;
+                            SearchUnAsync(LastTimeWasResume);
+                        }
                     };
+                    //};
+
+                    if (IsProductNoSaled)
+                    {
+                        IsProductNoSaled = false;
+                        await dialogAgregarProducto.AceptarProducto(CurrentProducto);
+                        dialogAgregarProducto.IsBusy = false;
+                        SearchUnAsync(true);
+                        return;
+                    }
                 }
-
-                dialogAgregarProducto.CurrentProduct = producto;
-                dialogAgregarProducto.IsDppActive = IsDpp;
                 dialogAgregarProducto.IsBusy = false;
-
                 await PushAsync(dialogAgregarProducto);
 
             }

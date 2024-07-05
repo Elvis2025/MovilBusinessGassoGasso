@@ -4859,9 +4859,22 @@ namespace MovilBusiness.DataAccess
             return ReadStringParam("MULTIMONSET");
         }
 
+        /// <summary>
+        /// Este parametro carga los ultimos tres productos vendidos por ese cliente
+        /// </summary>
+        /// <returns></returns>
         public bool GetLastThreeClientesVendidos()
         {
             return ReadBoolParam("PEDCLIPROVEN3");
+        }
+        /// <summary>
+        /// Este parametro peromite cargar los productos no vendidos por clientes, y agregarlos al pedido si asi lo 
+        /// desea.
+        /// </summary>
+        /// <returns></returns>
+        public bool GetProductosClientesNoVendidos()
+        {
+            return ReadBoolParam("PEDPROCLINOVEN");
         }
 
 
