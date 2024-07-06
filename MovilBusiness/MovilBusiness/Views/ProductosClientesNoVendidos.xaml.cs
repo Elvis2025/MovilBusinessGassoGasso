@@ -74,12 +74,19 @@ namespace MovilBusiness.Views
                 _previousSelectedProduct.IsSelected = false;
             }
 
-            var currentSelectedProduct = e.CurrentSelection.FirstOrDefault() as ProductosTemp;
+            var currentSelectedProduct = e.CurrentSelection.LastOrDefault() as ProductosTemp;
             if (currentSelectedProduct != null)
             {
                 //currentSelectedProduct.IsSelected = true;
-
                 _previousSelectedProduct = myProd.GetProductoById(currentSelectedProduct.ProID);
+                if(_previousSelectedProduct == null)
+                {
+                    cvProductsNoSaled.SelectedItems.Remove(currentSelectedProduct);
+                    currentSelectedProduct = null;
+                    await DisplayAlert("Aviso", "Este producto no está disponible", "OK");
+                    return;
+                }
+
                 _previousSelectedProduct.IsSelected = true;
 
                 var agragarCantidad = new AgregarProductosNoVendidosModal(_previousSelectedProduct);
@@ -89,7 +96,7 @@ namespace MovilBusiness.Views
                     allProducts.Add(_previousSelectedProduct);
                 };
 
-               await Navigation.PushModalAsync(agragarCantidad);
+                    await Navigation.PushModalAsync(agragarCantidad);
             }
 
         }

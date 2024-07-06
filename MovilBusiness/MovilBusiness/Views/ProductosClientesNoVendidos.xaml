@@ -59,7 +59,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Padding="10,0,0,0">
-                                    <StackLayout.Triggers>
+                                    <!--<StackLayout.Triggers>
                                         <DataTrigger TargetType="StackLayout"
                                                      Binding="{Binding IsSelected}"
                                                      Value="True">
@@ -72,7 +72,7 @@
                                             <Setter Property="BackgroundColor"
                                                     Value="Transparent"/>
                                         </DataTrigger>
-                                    </StackLayout.Triggers>
+                                    </StackLayout.Triggers>-->
                                     <Label Text="{Binding ProDescripcion}" 
                                            TextColor="Gray"/>
                                 </StackLayout>

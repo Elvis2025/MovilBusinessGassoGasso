@@ -1773,6 +1773,7 @@ namespace MovilBusiness.ViewModel
                         productosClientesNoVendidos.cargar = (product) =>
                         {
                             IsProductNoSaled = true;
+                            IsBusy = false;
                             OnListItemSelected(product);
                             SearchUnAsync(true);
                         };
@@ -2419,7 +2420,7 @@ namespace MovilBusiness.ViewModel
         private bool ReloadByPromotion = false;
         public async void OnListItemSelected(ProductosTemp producto)
         {
-            if (producto == null || IsBusy)
+            if(producto == null || IsBusy)
             {
                 return;
             }
