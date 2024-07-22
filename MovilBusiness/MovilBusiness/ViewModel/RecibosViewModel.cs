@@ -1362,7 +1362,7 @@ namespace MovilBusiness.viewmodel
             IsBusy = false;
         }
 
-        public void AgregarFormaPago(AgregarFormaPagoArgs forma)
+        public async void AgregarFormaPago(AgregarFormaPagoArgs forma)
         {
             try
             {
@@ -1493,7 +1493,9 @@ namespace MovilBusiness.viewmodel
             }
             catch (Exception e)
             {
-                DisplayAlert(AppResource.ErrorAddingPaymentway, e.Message, AppResource.Aceptar);
+               await DisplayAlert(AppResource.ErrorAddingPaymentway, e.Message, AppResource.Aceptar);
+                IsBusy = false;
+                return;
             }
 
         }

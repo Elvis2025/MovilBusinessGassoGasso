@@ -4868,8 +4868,8 @@ namespace MovilBusiness.DataAccess
             return ReadBoolParam("PEDCLIPROVEN3");
         }
         /// <summary>
-        /// Este parametro peromite cargar los productos no vendidos por clientes, y agregarlos al pedido si asi lo 
-        /// desea.
+        /// Este parametro peromite cargar los productos no vendidos por clientes, 
+        /// y agregarlos al pedido si asi lo desea.
         /// </summary>
         /// <returns></returns>
         public bool GetProductosClientesNoVendidos()
